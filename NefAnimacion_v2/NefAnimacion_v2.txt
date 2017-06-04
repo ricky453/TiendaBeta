@@ -1,0 +1,31 @@
+Actualización: la versión 2 contiene animacion para mover de izquierda a derecha, además de las ya existentes, de arriba a abajo.
+
+¿Cómo funciona?
+
+Llamada a método:
+public static void bajar(int inicio, int fin, long retardo,int salto, JComponent componente){}
+
+public static void subir(int inicio, int fin, long retardo,int salto, JComponent componente){}
+
+public static void mover_derecha(int inicio, int fin, long retardo,int salto, JComponent componente){}
+
+public static void mover_izauierda(int inicio, int fin, long retardo,int salto, JComponent componente){}
+
+Utilidad:
+mover cualquier componente en direccion X o Y de la pantalla (bajar, subir, izquierda, derecha) dependiendo del método llamado.
+
+Requiere:
+*la coordenada de inicio X o Y
+*la coordenada final X o Y
+*el valor de retardo, este detiene la animacion por sierto tiempo, se mide en long, entre mas corto sea el tiempo, la animacion avanza más rápido.
+*el valor de salto, es decir, cuantos pixeles avanzará con cada retardo, entre más alto sea el valor, la animación será mas irreal (brincos grandes).
+
+Ejemplo:
+
+Animacion.bajar(0, 50, 1, 2, miBoton);
+0 = coordenada inicial del botón
+50 = coordenada final del botón
+1 = un milisegundo de retardo
+2 = avanzará 2 pixeles cada 1 milisegundo, hasta llegar a 50
+miBoton = el componente a mover (puede ser cualquier componente)
+
