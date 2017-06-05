@@ -52,7 +52,7 @@ public final class frmHome extends javax.swing.JFrame {
         jpnSeptimo.setVisible(estado);
     }
     public void Parametro(boolean estado){
-        //jpnOctavo.setVisible(estado);
+        jpnOctavo.setVisible(estado);
     }
     public void apagado(){
         apagado = true;
@@ -162,6 +162,12 @@ public final class frmHome extends javax.swing.JFrame {
         lbl56 = new javax.swing.JLabel();
         lbl57 = new javax.swing.JLabel();
         lbl58 = new javax.swing.JLabel();
+        jpnOctavo = new javax.swing.JPanel();
+        lblMitad8 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        lbl64 = new javax.swing.JLabel();
+        lbl65 = new javax.swing.JLabel();
+        lbl66 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -212,9 +218,10 @@ public final class frmHome extends javax.swing.JFrame {
 
         lblMenu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mas32.png"))); // NOI18N
+        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
         lblMenu.setText("Menu");
-        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, 90, 50));
+        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 170, 50));
 
         jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
         jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -302,7 +309,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnParametroActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 330, 180, 40));
+        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 320, 180, 40));
 
         btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/inventario.png"))); // NOI18N
         btnInventario.setBorderPainted(false);
@@ -686,7 +693,7 @@ public final class frmHome extends javax.swing.JFrame {
         jpnSexto.setBackground(new java.awt.Color(0, 0, 0));
         jpnSexto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMitad6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad4.jpg"))); // NOI18N
+        lblMitad6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad7.JPG"))); // NOI18N
         jpnSexto.add(lblMitad6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 515, 640));
 
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
@@ -748,7 +755,7 @@ public final class frmHome extends javax.swing.JFrame {
         jpnSeptimo.setBackground(new java.awt.Color(0, 0, 0));
         jpnSeptimo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMitad7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad5.jpg"))); // NOI18N
+        lblMitad7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad8.jpg"))); // NOI18N
         jpnSeptimo.add(lblMitad7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 515, 640));
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
@@ -806,6 +813,38 @@ public final class frmHome extends javax.swing.JFrame {
         jpnSeptimo.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 210, 230));
 
         jpnPrincipal.add(jpnSeptimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1010, 650));
+
+        jpnOctavo.setBackground(new java.awt.Color(0, 0, 0));
+        jpnOctavo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMitad8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad9.jpg"))); // NOI18N
+        jpnOctavo.add(lblMitad8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 515, 640));
+
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl64.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl64.setForeground(new java.awt.Color(102, 102, 102));
+        lbl64.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl64.setText("a ser utilizado en la tienda.");
+        jPanel7.add(lbl64, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
+
+        lbl65.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl65.setForeground(new java.awt.Color(102, 102, 102));
+        lbl65.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl65.setText("Modifica el parámetro ");
+        jPanel7.add(lbl65, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
+
+        lbl66.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl66.setForeground(new java.awt.Color(255, 255, 255));
+        lbl66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Parametro.png"))); // NOI18N
+        lbl66.setText("Parámetro");
+        jPanel7.add(lbl66, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
+
+        jpnOctavo.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 210, 230));
+
+        jpnPrincipal.add(jpnOctavo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1010, 650));
 
         getContentPane().add(jpnPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 1030, 650));
 
@@ -1068,9 +1107,11 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jpnBarraMenu;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnCuarto;
+    private javax.swing.JPanel jpnOctavo;
     private javax.swing.JPanel jpnPrimero;
     private javax.swing.JPanel jpnPrincipal;
     private javax.swing.JPanel jpnQuinto;
@@ -1131,6 +1172,9 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbl57;
     private javax.swing.JLabel lbl58;
     private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lbl64;
+    private javax.swing.JLabel lbl65;
+    private javax.swing.JLabel lbl66;
     private javax.swing.JLabel lbl7;
     private javax.swing.JLabel lbl8;
     private javax.swing.JLabel lblBotonCerrar;
@@ -1143,6 +1187,7 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblMitad5;
     private javax.swing.JLabel lblMitad6;
     private javax.swing.JLabel lblMitad7;
+    private javax.swing.JLabel lblMitad8;
     private javax.swing.JPanel pnlPortada;
     // End of variables declaration//GEN-END:variables
 }
