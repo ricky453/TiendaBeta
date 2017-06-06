@@ -20,6 +20,8 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
      */
     public frmProveedoresModificar() {
         initComponents();
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
     }
 
     /**

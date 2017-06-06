@@ -20,7 +20,8 @@ public class frmCompras extends javax.swing.JFrame {
     
     public frmCompras() {
         initComponents();
-
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
         
         
     }
@@ -38,7 +39,6 @@ public class frmCompras extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jpnMenu = new javax.swing.JPanel();
         lblSucursales = new javax.swing.JLabel();
-        lblInventario = new javax.swing.JLabel();
         lblProveedores = new javax.swing.JLabel();
         lblProductos = new javax.swing.JLabel();
         lblVentas = new javax.swing.JLabel();
@@ -88,7 +88,9 @@ public class frmCompras extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
+        setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -109,17 +111,7 @@ public class frmCompras extends javax.swing.JFrame {
                 lblSucursalesMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 270, -1, 30));
-
-        lblInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Inventario.png"))); // NOI18N
-        lblInventario.setToolTipText("Inventario");
-        lblInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblInventario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblInventarioMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 230, -1, 30));
+        jpnMenu.add(lblSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 230, -1, 30));
 
         lblProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Proveedores.png"))); // NOI18N
         lblProveedores.setToolTipText("Proveedores");
@@ -176,7 +168,7 @@ public class frmCompras extends javax.swing.JFrame {
                 lblParametroMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 310, -1, 30));
+        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 270, -1, 30));
 
         lblCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Compras.png"))); // NOI18N
         lblCompras.setToolTipText("Compras");
@@ -188,7 +180,7 @@ public class frmCompras extends javax.swing.JFrame {
         });
         jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 70, -1, 30));
 
-        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 80, 358));
+        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 80, 318));
 
         jpnBarraSuperior.setBackground(new java.awt.Color(102, 0, 0));
         jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -203,7 +195,9 @@ public class frmCompras extends javax.swing.JFrame {
         });
         jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
+        menu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(255, 255, 255));
+        menu.setText("Menú");
         menu.setToolTipText("Menú");
         menu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,8 +208,7 @@ public class frmCompras extends javax.swing.JFrame {
                 menuMouseExited(evt);
             }
         });
-        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 8, 50, 40));
-        menu.getAccessibleContext().setAccessibleName("Menú");
+        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 55));
 
         home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Home.png"))); // NOI18N
         home.setToolTipText("Ir a Home");
@@ -225,7 +218,7 @@ public class frmCompras extends javax.swing.JFrame {
                 homeMouseClicked(evt);
             }
         });
-        jpnBarraSuperior.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 10, 50, 40));
+        jpnBarraSuperior.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 0, 50, 55));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator2.setToolTipText("");
@@ -620,12 +613,6 @@ public class frmCompras extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblProveedoresMouseClicked
 
-    private void lblInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInventarioMouseClicked
-        frmInventario iv = new frmInventario();
-        iv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblInventarioMouseClicked
-
     private void cmbTipoCompraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCompraItemStateChanged
         if(cmbTipoCompra.getSelectedIndex()==0){
             lblIVA.setVisible(true);
@@ -728,7 +715,6 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblIdCompra;
-    private javax.swing.JLabel lblInventario;
     private javax.swing.JLabel lblMenuCerrar;
     private javax.swing.JLabel lblNomProd;
     private javax.swing.JLabel lblParametro;

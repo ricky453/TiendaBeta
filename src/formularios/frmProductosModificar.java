@@ -20,6 +20,8 @@ public class frmProductosModificar extends javax.swing.JFrame {
      */
     public frmProductosModificar() {
         initComponents();
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
     }
 
     /**

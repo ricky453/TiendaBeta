@@ -17,6 +17,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     
     public frmVentasDetalle() {
         initComponents();
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -30,9 +32,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jpnMenu = new javax.swing.JPanel();
         lblSucursales = new javax.swing.JLabel();
-        lblInventario = new javax.swing.JLabel();
+        lblProveedores = new javax.swing.JLabel();
         lblProductos = new javax.swing.JLabel();
         lblVentas = new javax.swing.JLabel();
+        lblMenuCerrar = new javax.swing.JLabel();
+        lblParametro = new javax.swing.JLabel();
         lblCompras = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -50,11 +54,14 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
+        setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnMenu.setBackground(new java.awt.Color(102, 0, 0));
+        jpnMenu.setPreferredSize(new java.awt.Dimension(80, 304));
         jpnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jpnMenuMouseExited(evt);
@@ -70,17 +77,17 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 lblSucursalesMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 30));
+        jpnMenu.add(lblSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 230, -1, 30));
 
-        lblInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Inventario.png"))); // NOI18N
-        lblInventario.setToolTipText("Inventario");
-        lblInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblInventario.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Proveedores.png"))); // NOI18N
+        lblProveedores.setToolTipText("Proveedores");
+        lblProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblInventarioMouseClicked(evt);
+                lblProveedoresMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 30));
+        jpnMenu.add(lblProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 190, -1, 30));
 
         lblProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
         lblProductos.setToolTipText("Productos");
@@ -89,8 +96,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblProductosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblProductosMouseEntered(evt);
+            }
         });
-        jpnMenu.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
+        jpnMenu.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 150, -1, 30));
 
         lblVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Ventas.png"))); // NOI18N
         lblVentas.setToolTipText("Ventas");
@@ -100,7 +110,31 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 lblVentasMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 30));
+        jpnMenu.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 110, -1, 30));
+
+        lblMenuCerrar.setBackground(new java.awt.Color(0, 0, 0));
+        lblMenuCerrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblMenuCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenuCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMenuCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
+        lblMenuCerrar.setToolTipText("Cerrar");
+        lblMenuCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMenuCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMenuCerrarMouseClicked(evt);
+            }
+        });
+        jpnMenu.add(lblMenuCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 55));
+
+        lblParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Parametro.png"))); // NOI18N
+        lblParametro.setToolTipText("Sucursales");
+        lblParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParametro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblParametroMouseClicked(evt);
+            }
+        });
+        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 270, -1, 30));
 
         lblCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Compras.png"))); // NOI18N
         lblCompras.setToolTipText("Compras");
@@ -110,9 +144,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 lblComprasMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+        jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 70, -1, 30));
 
-        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, -215, 75, 210));
+        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 80, 318));
 
         jpnBarraSuperior.setBackground(new java.awt.Color(102, 0, 0));
         jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -216,11 +250,50 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
 
+    private void txtProveedoresBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedoresBuscarKeyTyped
+
+    }//GEN-LAST:event_txtProveedoresBuscarKeyTyped
+
+    private void lblSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSucursalesMouseClicked
+        frmSucursales sc = new frmSucursales();
+        sc.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblSucursalesMouseClicked
+
+    private void lblProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProveedoresMouseClicked
+        frmProveedores pv = new frmProveedores();
+        pv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblProveedoresMouseClicked
+
+    private void lblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseClicked
+        frmProductos pd = new frmProductos();
+        pd.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblProductosMouseClicked
+
+    private void lblProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseEntered
+
+    }//GEN-LAST:event_lblProductosMouseEntered
+
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
         frmVentas vt = new frmVentas();
         vt.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblVentasMouseClicked
+
+    private void lblMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuCerrarMouseClicked
+        if(estadoMenu==true){
+            Animacion.Animacion.subir(0, -360, 1, 2, jpnMenu);
+            estadoMenu=false;
+        }
+    }//GEN-LAST:event_lblMenuCerrarMouseClicked
+
+    private void lblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParametroMouseClicked
+        frmParametro pt = new frmParametro();
+        pt.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblParametroMouseClicked
 
     private void lblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprasMouseClicked
         frmCompras cm = new frmCompras();
@@ -231,28 +304,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private void jpnMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnMenuMouseExited
 
     }//GEN-LAST:event_jpnMenuMouseExited
-
-    private void txtProveedoresBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedoresBuscarKeyTyped
-
-    }//GEN-LAST:event_txtProveedoresBuscarKeyTyped
-
-    private void lblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseClicked
-        frmProductos pd = new frmProductos();
-        pd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblProductosMouseClicked
-
-    private void lblSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSucursalesMouseClicked
-        frmSucursales sc = new frmSucursales();
-        sc.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblSucursalesMouseClicked
-
-    private void lblInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInventarioMouseClicked
-        frmInventario iv = new frmInventario();
-        iv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblInventarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,9 +354,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JLabel lblCompras;
-    private javax.swing.JLabel lblInventario;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMenuCerrar;
+    private javax.swing.JLabel lblParametro;
     private javax.swing.JLabel lblProductos;
+    private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JTable tblVentas;

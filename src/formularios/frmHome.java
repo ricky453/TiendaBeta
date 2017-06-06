@@ -24,7 +24,6 @@ public final class frmHome extends javax.swing.JFrame {
         Ventas(false);
         Productos(false);
         Proveedores(false);
-        Inventario(false);
         Sucursales(false);
         Parametro(false);     
     }
@@ -44,9 +43,6 @@ public final class frmHome extends javax.swing.JFrame {
     }
     public void Proveedores(boolean estado){
         jpnQuinto.setVisible(estado);
-    }
-    public void Inventario(boolean estado){
-        jpnSexto.setVisible(estado);
     }
     public void Sucursales(boolean estado){
         jpnSeptimo.setVisible(estado);
@@ -75,7 +71,6 @@ public final class frmHome extends javax.swing.JFrame {
         btnVentas = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
         btnParametro = new javax.swing.JButton();
-        btnInventario = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnSucursales = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
@@ -309,23 +304,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnParametroActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 320, 180, 40));
-
-        btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/inventario.png"))); // NOI18N
-        btnInventario.setBorderPainted(false);
-        btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInventario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInventarioMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnInventarioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnInventarioMouseExited(evt);
-            }
-        });
-        jpnSubMenu.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 220, 180, 40));
+        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 270, 180, 40));
 
         btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/proveedores.png"))); // NOI18N
         btnProveedores.setBorderPainted(false);
@@ -357,9 +336,9 @@ public final class frmHome extends javax.swing.JFrame {
                 btnSucursalesMouseExited(evt);
             }
         });
-        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 270, 180, 40));
+        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 220, 180, 40));
 
-        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 390));
+        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 330));
 
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -983,26 +962,6 @@ public final class frmHome extends javax.swing.JFrame {
         Parametro(false);
     }//GEN-LAST:event_btnParametroMouseExited
 
-    private void btnInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventarioMouseClicked
-        frmInventario iv = new frmInventario();
-        iv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnInventarioMouseClicked
-
-    private void btnInventarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventarioMouseEntered
-    if(!inventario)
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnInventario);
-        Principal(false);
-        Inventario(true);
-    }//GEN-LAST:event_btnInventarioMouseEntered
-
-    private void btnInventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventarioMouseExited
-    if(!inventario)
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnInventario);
-        Principal(true);
-        Inventario(false);
-    }//GEN-LAST:event_btnInventarioMouseExited
-
     private void btnProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseClicked
         apagado();
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);
@@ -1088,7 +1047,6 @@ public final class frmHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompras;
     private javax.swing.JLabel btnHome;
-    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnParametro;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;

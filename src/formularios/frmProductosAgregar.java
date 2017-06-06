@@ -19,6 +19,8 @@ public class frmProductosAgregar extends javax.swing.JFrame {
      */
     public frmProductosAgregar() {
         initComponents();
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
     }
 
     /**

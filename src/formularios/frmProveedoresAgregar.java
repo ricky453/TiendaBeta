@@ -32,6 +32,8 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
     public frmProveedoresAgregar() {
         initComponents();
         limpiandoTxtProveedor();
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
     }
 
     public void limpiandoTxtProveedor(){
