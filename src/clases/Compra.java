@@ -9,7 +9,7 @@ public class Compra {
     private Proveedor PROVEEDOR;
     private int IdSucursal;
     private char TipoCompra;
-    private String TipoDocumento;
+    private String NumDocumento;
     private double SubTotal;
     private double IVA;
     private double percepcion;
@@ -59,12 +59,12 @@ public class Compra {
         this.TipoCompra = TipoCompra;
     }
 
-    public String getTipoDocumento() {
-        return TipoDocumento;
+    public String getNumDocumento() {
+        return NumDocumento;
     }
 
-    public void setTipoDocumento(String TipoDocumento) {
-        this.TipoDocumento = TipoDocumento;
+    public void setNumDocumento(String NumDocumento) {
+        this.NumDocumento = NumDocumento;
     }
 
     public double getSubTotal() {
@@ -135,7 +135,7 @@ public class Compra {
                 total=total+(dc.getCantidad()*dc.getCostoUnitario());
             }
             total = total * getIVA();
-            this.Total = Math.round(total*100.0)/100.0;
+            this.IVA = Math.round(total*100.0)/100.0;
             
         }catch(ArithmeticException ex){
             throw new ErrorTienda("Class Compra/CalcularTotal", ex.getMessage());  
@@ -150,7 +150,7 @@ public class Compra {
                 total=total+(dc.getCantidad()*dc.getCostoUnitario());
             }
             total = total * getPercepcion();
-            this.Total = Math.round(total*100.0)/100.0;
+            this.percepcion = Math.round(total*100.0)/100.0;
             
         }catch(ArithmeticException ex){
             throw new ErrorTienda("Class Compra/CalcularTotal", ex.getMessage());  
