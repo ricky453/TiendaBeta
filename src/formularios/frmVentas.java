@@ -5,9 +5,12 @@
  */
 package formularios;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -16,11 +19,17 @@ import javax.swing.JOptionPane;
 public class frmVentas extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    JTableHeader tHeadVentas;
     
     public frmVentas() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        tHeadVentas = tblProductosVender.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
     }
 
     /**
@@ -46,14 +55,15 @@ public class frmVentas extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         lblBotonCerrar = new javax.swing.JLabel();
-        jpnAgregarCompra = new javax.swing.JPanel();
-        jLabel33 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
         jLabel34 = new javax.swing.JLabel();
+        jpnAgregarCompra = new javax.swing.JPanel();
+        jblIDVenta = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
         cmbSucursalVenta = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel36 = new javax.swing.JLabel();
         cmbTipoVenta = new javax.swing.JComboBox<>();
+        jLabel37 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         txtNombreProductoVender = new javax.swing.JTextField();
         txtCantidadVender = new javax.swing.JTextField();
@@ -229,30 +239,30 @@ public class frmVentas extends javax.swing.JFrame {
         });
         jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
 
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel34.setText("Agregar una Venta:");
+        jpnBarraSuperior.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 30));
+
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel33.setText("Sucursal:");
-        jpnAgregarCompra.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 12, -1, 30));
+        jblIDVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jblIDVenta.setForeground(new java.awt.Color(240, 240, 240));
+        jblIDVenta.setText("ID Venta");
+        jpnAgregarCompra.add(jblIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, 40));
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 20, 50));
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Agregar una Venta:");
-        jpnAgregarCompra.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 12, -1, 30));
+        jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 20, 60));
 
         cmbSucursalVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cmbSucursalVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sucursal1", "Sucursal2", "Sucursal3" }));
-        jpnAgregarCompra.add(cmbSucursalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 12, 160, 30));
+        jpnAgregarCompra.add(cmbSucursalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 160, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jpnAgregarCompra.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 20, 50));
+        jpnAgregarCompra.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 20, 60));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(240, 240, 240));
@@ -268,7 +278,12 @@ public class frmVentas extends javax.swing.JFrame {
         });
         jpnAgregarCompra.add(cmbTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 12, 150, 30));
 
-        getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
+        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel37.setText("Sucursal:");
+        jpnAgregarCompra.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, 30));
+
+        getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 60));
 
         jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -314,7 +329,7 @@ public class frmVentas extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("NRC:");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 260, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 250, -1, -1));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -336,7 +351,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblCredito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCredito.setText("Crédito Fiscal:");
         getContentPane().add(lblCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, -1, -1));
-        getContentPane().add(txtNRCVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 250, 150, 30));
+        getContentPane().add(txtNRCVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 270, 170, 30));
         getContentPane().add(txtCreditoFiscal, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 180, 30));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -346,13 +361,13 @@ public class frmVentas extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("Dirección:");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, -1));
-        getContentPane().add(txtDireccionVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 200, 330, 30));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, -1, -1));
+        getContentPane().add(txtDireccionVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 400, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("NIT:");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, -1, -1));
-        getContentPane().add(txtNITVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 250, 150, 30));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, -1, -1));
+        getContentPane().add(txtNITVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, 180, 30));
 
         tblProductosVender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -697,10 +712,10 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -708,6 +723,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel jblIDVenta;
     private javax.swing.JPanel jpnAgregarCompra;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
