@@ -5,8 +5,13 @@
  */
 package formularios;
 
+import clases.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +25,41 @@ public class frmProductos extends javax.swing.JFrame {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+    }
+    
+    
+    //--------------------llenando tabla de productos----------------
+    
+    public void tablaBuscarProductos(){
+        String codBarra=txtProductosBuscar.getText();
+        DefaultTableModel modeloProductos = new DefaultTableModel();
+        ArrayList<Producto> productos = new ArrayList();
+        Object[] fila = new Object[4];
+        if (codBarra.equals("")) {
+            
+            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
+            
+        }else{
+            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+            try {
+                productos = ControladorProducto.Buscar(codBarra);
+                modeloProductos.setColumnIdentifiers(campos);
+                Iterator<Producto> prod = productos.iterator();
+                while (prod.hasNext()) {
+                    fila[0] = prod.next();
+                    fila[1] = prod.next();
+                    fila[2] = prod.next();
+                    fila[3] = prod.next();
+                    modeloProductos.addRow(fila);
+                    tblProductos.setModel(modeloProductos);
+                }
+                if (tblProductos.getRowCount()==0) {
+                    JOptionPane.showMessageDialog(null, "El producto buscado no existe");
+                }
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+        }
     }
 
     /**
@@ -403,7 +443,7 @@ public class frmProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoMouseExited
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-
+        tablaBuscarProductos();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnModificarProductoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarProductoMouseEntered
@@ -429,15 +469,74 @@ public class frmProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProductoMouseExited
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+        int fila=tblProductos.getSelectedRow(); 
+        if (tblProductos.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+                
+            
+            Producto eliminar=new Producto();
+            ControladorProducto controlador=new ControladorProducto();
+            DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
+            
 
+            String codBarra=tblProductos.getValueAt(fila, 0).toString();
+            String nombre=tblProductos.getValueAt(fila, 1).toString();
+            int inventario=Integer.parseInt(tblProductos.getValueAt(fila, 2).toString());
+            double costo=Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
+
+            eliminar.setCodBarra(codBarra);
+            eliminar.setNombre(nombre);
+            eliminar.setInventario(inventario);
+            eliminar.setCosto(costo);
+
+
+            try {
+                ControladorProducto.Eliminar(eliminar);
+                if (ControladorProducto.isCambio()) {
+                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                }else{
+                    modeloProductos.removeRow(fila);
+                    txtProductosBuscar.setText("");
+                    JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+                }
+                
+            } catch (ErrorTienda ex) {
+                
+            }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+        }
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void txtProductosBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyPressed
-
+        char c=evt.getKeyChar();    
+        if (c == (char) KeyEvent.VK_ENTER) {
+            tablaBuscarProductos();
+        }
     }//GEN-LAST:event_txtProductosBuscarKeyPressed
 
     private void txtProductosBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyTyped
-
+        char mayu=evt.getKeyChar();      
+         int c=(int) evt.getKeyChar();
+        int limiteCaracteres=13;
+        
+         
+         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32) || (c==8) || (c== (char)KeyEvent.VK_ENTER)) {
+             if (txtProductosBuscar.getText().length()==limiteCaracteres) {
+                 getToolkit().beep();
+                 evt.consume();
+             }else if (Character.isLowerCase(mayu)) {
+                     String cadena=(""+mayu).toUpperCase();
+                     mayu=cadena.charAt(0);
+                     evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
     }//GEN-LAST:event_txtProductosBuscarKeyTyped
 
     private void menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseClicked
@@ -585,7 +684,7 @@ public class frmProductos extends javax.swing.JFrame {
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel menu;
-    private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtProductosBuscar;
+    public javax.swing.JTable tblProductos;
+    public javax.swing.JTextField txtProductosBuscar;
     // End of variables declaration//GEN-END:variables
 }

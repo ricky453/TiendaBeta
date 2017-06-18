@@ -5,8 +5,11 @@
  */
 package formularios;
 
+import clases.*;
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +20,28 @@ public class frmProductosAgregar extends javax.swing.JFrame {
     /**
      * Creates new form frmProductosAgregar
      */
+    frmProductos formu=new frmProductos();
+    DefaultComboBoxModel modeloSucursal = new DefaultComboBoxModel();
+    
     public frmProductosAgregar() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+    }
+    
+     //-----------------limpiando cajas de texto-------------------------
+    public void limpiandoTxtProducto(){
+        txtCodBarraProductos.setText("");
+        txtNombreProductos.setText("");
+        txtInventarioProducto.setText("");
+        txtCostoProductos.setText("");
+        formu.txtProductosBuscar.setText("");
+        txtCodBarraProductos.requestFocus();
+    }
+    
+    //------------------llenandoComboSucursal-------------------------
+    public void llenandoComboSucursal(){
+        
     }
 
     /**
@@ -48,6 +69,8 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtInventarioProducto = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        cmbSucursal = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -159,8 +182,8 @@ public class frmProductosAgregar extends javax.swing.JFrame {
 
         jLabel29.setBackground(new java.awt.Color(0, 0, 0));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel29.setText("Nombre:");
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, 20));
+        jLabel29.setText("Sucursal:");
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, -1, 20));
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -182,6 +205,19 @@ public class frmProductosAgregar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 60, 30));
+
+        jLabel31.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel31.setText("Nombre:");
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, 20));
+
+        cmbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSucursalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 540, 80, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -210,7 +246,36 @@ public class frmProductosAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarNuevoProductoMouseExited
 
     private void btnAgregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoProductoActionPerformed
+        Producto agregado=new Producto();
+       
+      
+        if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+        
+        }else{
+            
+            int inven=Integer.parseInt(txtInventarioProducto.getText());
+            double cost=Double.parseDouble(txtCostoProductos.getText());
+            if(inven<=0 || cost<=0){
+                JOptionPane.showMessageDialog(null, "Los campos inventario y costo no pueden estar en cero o menor que cero");
+            }else{
+                    agregado.setCodBarra(txtCodBarraProductos.getText());
+                    agregado.setNombre(txtNombreProductos.getText());
+                    agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
+                    agregado.setCosto(Double.parseDouble(txtCostoProductos.getText()));
 
+
+                try {
+                    ControladorProducto.Agregar(agregado);
+
+                    JOptionPane.showMessageDialog(null, "El producto fue agregado correctamente");
+                    limpiandoTxtProducto();
+                } catch (ErrorTienda e) {
+
+                }
+            }
+            
+        }
     }//GEN-LAST:event_btnAgregarNuevoProductoActionPerformed
 
     private void txtCodBarraProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodBarraProductosActionPerformed
@@ -295,6 +360,10 @@ public class frmProductosAgregar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtInventarioProductoKeyTyped
 
+    private void cmbSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSucursalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSucursalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,10 +401,12 @@ public class frmProductosAgregar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarNuevoProducto;
+    private javax.swing.JComboBox<String> cmbSucursal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;

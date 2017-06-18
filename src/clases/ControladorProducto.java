@@ -33,7 +33,8 @@ public class ControladorProducto {
         
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO productos(CodBarra,Inventario,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getInventario()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
+            cn.st.executeUpdate("INSERT INTO producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
+            cn.st.executeUpdate("INSERT INTO inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getCodBarra()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Agregar",e.getMessage());
         }
@@ -43,7 +44,7 @@ public class ControladorProducto {
     public static void Modificar(Producto pr) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE productos SET Inventario='"+pr.getInventario()+"',Costo='"+pr.getCosto()+"',Nombre='"+pr.getNombre()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE producto SET Inventario='"+pr.getInventario()+"',Costo='"+pr.getCosto()+"',Nombre='"+pr.getNombre()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
@@ -77,7 +78,7 @@ public class ControladorProducto {
             if (matriz[0] != null || matriz2[1] != null) {
                 setCambio(true);
             }else{
-                cn.st.executeUpdate("DELETE FROM productos WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM producto WHERE CodBarra='"+pr.getCodBarra()+"'");
                 setCambio(false);
             }
         } catch (SQLException e) {
@@ -91,7 +92,7 @@ public class ControladorProducto {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT DISTINCT CodBarra,nombre,Inventario,Costo FROM productos WHERE nombre LIKE '%"+buscar+"%' OR CodBarra LIKE'%"+buscar+"%'");
+            rs=cn.st.executeQuery("SELECT DISTINCT producto.CodBarra,producto.nombre,inventario.Cantidad,producto.Costo FROM producto INNER JOIN inventario ON producto.CodBarra=inventario.CodBarra WHERE producto.nombre LIKE '%"+buscar+"%' OR producto.CodBarra LIKE'%"+buscar+"%'");
             
                 while (rs.next()) {
                     producto.add(rs.getString(1));
@@ -117,7 +118,7 @@ public class ControladorProducto {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM productos WHERE CodBarra='"+CodBarra+"'");
+            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM producto WHERE CodBarra='"+CodBarra+"'");
             while (rs.next()) {
                 miproducto.setCodBarra(rs.getString(1));
                 miproducto.setNombre(rs.getString(2));

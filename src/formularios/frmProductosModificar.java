@@ -5,9 +5,11 @@
  */
 package formularios;
 
+import clases.*;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +20,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
     /**
      * Creates new form frmProductosModificar
      */
+    frmProductos formu=new frmProductos();
     public frmProductosModificar() {
         initComponents();
         this.setSize(1200, 700);
@@ -209,7 +212,30 @@ public class frmProductosModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarModificarProductoMouseExited
 
     private void btnGuardarModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProductoActionPerformed
- 
+        if (txtNuevoCodBarraProducto.getText().equals("")||txtNuevoNombreProducto.getText().equals("")||txtNuevoInventarioProducto.getText().equals("")||
+                txtNuevoCostoProducto.getText().equals("")) {
+            
+            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
+           
+        }else{
+            DefaultTableModel modeloProductos=(DefaultTableModel) formu.tblProductos.getModel();
+            Producto producto = new Producto();
+            producto.setCodBarra(txtNuevoCodBarraProducto.getText());
+            producto.setNombre(txtNuevoNombreProducto.getText());
+            producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
+            producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
+            try {
+                ControladorProducto.Modificar(producto);
+                modeloProductos.setRowCount(0);
+                formu.txtProductosBuscar.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Modificado con exito");
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+            //tblProveedores.removeAll();
+            
+            
+        }
     }//GEN-LAST:event_btnGuardarModificarProductoActionPerformed
 
     private void txtNuevoInventarioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoInventarioProductoActionPerformed
