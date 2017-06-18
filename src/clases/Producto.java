@@ -1,8 +1,10 @@
 package clases;
 public class Producto {
+    
     private String CodBarra;
     private String nombre;
     private double costo;
+    public int Inventario;
 
     public Producto() {
     }
@@ -29,6 +31,14 @@ public class Producto {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+    
+    public int getInventario() {
+        return Inventario;
+    }
+
+    public void setInventario(int Inventario) {
+        this.Inventario = Inventario;
     }
     
 }
