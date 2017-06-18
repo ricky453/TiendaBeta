@@ -8,6 +8,9 @@ package formularios;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import AppPackage.AnimationClass;
+import clases.ErrorTienda;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -602,9 +605,13 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSucursalesMouseClicked
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
-        frmVentas vt = new frmVentas();
-        vt.setVisible(true);
-        this.setVisible(false);
+        try {
+            frmVentas vt = new frmVentas();
+            vt.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmCompras.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void lblProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProveedoresMouseClicked

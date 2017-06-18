@@ -5,6 +5,9 @@
  */
 package formularios;
 
+import clases.ErrorTienda;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -437,9 +440,13 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_lblProductosMouseEntered
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
-        frmVentas vt = new frmVentas();
-        vt.setVisible(true);
-        this.setVisible(false);
+        try {
+            frmVentas vt = new frmVentas();
+            vt.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmSucursales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void lblMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuCerrarMouseClicked

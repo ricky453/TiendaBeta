@@ -9,6 +9,8 @@ import clases.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -293,10 +295,10 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -594,9 +596,13 @@ public class frmProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblProductosMouseEntered
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
-        frmVentas vt = new frmVentas();
-        vt.setVisible(true);
-        this.setVisible(false);
+        try {
+            frmVentas vt = new frmVentas();
+            vt.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void lblMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuCerrarMouseClicked

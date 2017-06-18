@@ -5,11 +5,17 @@
  */
 package formularios;
 
+import clases.ControladorProducto;
+import clases.ControladorVenta;
+import clases.ErrorTienda;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -20,8 +26,14 @@ public class frmVentas extends javax.swing.JFrame {
 
     boolean estadoMenu;
     JTableHeader tHeadVentas;
+    DefaultTableModel modeloVentas;
     
-    public frmVentas() {
+    ControladorVenta cv;
+    ControladorProducto cp;
+    
+    
+    
+    public frmVentas() throws ErrorTienda {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
@@ -30,6 +42,36 @@ public class frmVentas extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
+        modeloVentas = (DefaultTableModel) tblProductosVender.getModel();
+        ObtenerIdVenta();
+    }
+    public void mensajeNotificacion(String mensaje){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        
+    }
+    public void ObtenerIdVenta() throws ErrorTienda {
+        int idVenta=0;
+        
+        try {
+            cv = new ControladorVenta();
+            idVenta = cv.ObtenerIdVenta();
+        } catch (ErrorTienda ex) {
+            throw new ErrorTienda("Formulario ventas <--> Falló al obtener el producto",ex.getMessage());
+        }
+        lblIDVenta.setText("ID Venta "+idVenta);
+    }
+    public void ObtenerProducto(String CodBarra){
+        //Comprobar que el espacio de codigo de barra no esteb vacio 
+        if(!txtCodigoBarraVender.getText().isEmpty()){
+            
+        }else{
+            mensajeNotificacion("El código de barra está vacío");
+            txtCodigoBarraVender.requestFocus();
+            
+            
+        }
     }
 
     /**
@@ -57,7 +99,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblBotonCerrar = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jpnAgregarCompra = new javax.swing.JPanel();
-        jblIDVenta = new javax.swing.JLabel();
+        lblIDVenta = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         cmbSucursalVenta = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
@@ -249,10 +291,10 @@ public class frmVentas extends javax.swing.JFrame {
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jblIDVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jblIDVenta.setForeground(new java.awt.Color(240, 240, 240));
-        jblIDVenta.setText("ID Venta");
-        jpnAgregarCompra.add(jblIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, 40));
+        lblIDVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lblIDVenta.setForeground(new java.awt.Color(240, 240, 240));
+        lblIDVenta.setText("ID Venta");
+        jpnAgregarCompra.add(lblIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, 40));
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 20, 60));
@@ -499,7 +541,7 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
 
     private void txtCodigoBarraVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyPressed
-
+        ObtenerProducto(txtCodigoBarraVender.getText());
     }//GEN-LAST:event_txtCodigoBarraVenderKeyPressed
 
     private void txtCodigoBarraVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyTyped
@@ -634,9 +676,13 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_lblProductosMouseEntered
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
-        frmVentas vt = new frmVentas();
-        vt.setVisible(true);
-        this.setVisible(false);
+        try {
+            frmVentas vt = new frmVentas();
+            vt.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void lblMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuCerrarMouseClicked
@@ -692,7 +738,11 @@ public class frmVentas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVentas().setVisible(true);
+                try {
+                    new frmVentas().setVisible(true);
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -723,13 +773,13 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JLabel jblIDVenta;
     private javax.swing.JPanel jpnAgregarCompra;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblCredito;
+    private javax.swing.JLabel lblIDVenta;
     private javax.swing.JLabel lblMenuCerrar;
     private javax.swing.JLabel lblParametro;
     private javax.swing.JLabel lblProductos;

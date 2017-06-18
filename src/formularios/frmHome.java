@@ -5,6 +5,11 @@
  */
 package formularios;
 
+import clases.Conexion;
+import clases.ErrorTienda;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,7 +21,7 @@ public final class frmHome extends javax.swing.JFrame {
     boolean apagado;
     boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro;
 
-    public frmHome() {
+    public frmHome()  {
         initComponents();
         apagado2();
         Principal(true);
@@ -26,6 +31,7 @@ public final class frmHome extends javax.swing.JFrame {
         Proveedores(false);
         Sucursales(false);
         Parametro(false);     
+        
     }
 
 /*  ---- Visualización de imágenes en Menú ----  */
@@ -886,11 +892,15 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
-        apagado();
-        apagado2();
-        frmVentas vt = new frmVentas();
-        vt.setVisible(true);
-        this.setVisible(false);
+        try {
+            apagado();
+            apagado2();
+            frmVentas vt = new frmVentas();
+            vt.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVentasMouseClicked
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
