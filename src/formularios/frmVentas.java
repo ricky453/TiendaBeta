@@ -8,6 +8,7 @@ package formularios;
 import clases.ControladorProducto;
 import clases.ControladorVenta;
 import clases.ErrorTienda;
+import clases.Producto;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -46,6 +47,7 @@ public class frmVentas extends javax.swing.JFrame {
         tHeadVentas.setFont(fuente);
         modeloVentas = (DefaultTableModel) tblProductosVender.getModel();
         ObtenerIdVenta();
+        txtCodigoBarraVender.requestFocus();
     }
     public void mensajeNotificacion(String mensaje){
         frmNotificacion not = new frmNotificacion();
@@ -64,10 +66,23 @@ public class frmVentas extends javax.swing.JFrame {
         }
         lblIDVenta.setText("ID Venta "+idVenta);
     }
-    public void ObtenerProducto(String CodBarra){
+    public void ObtenerProducto(String CodBarra) throws ErrorTienda{
         //Comprobar que el espacio de codigo de barra no esteb vacio 
         if(!txtCodigoBarraVender.getText().isEmpty()){
-            
+            Producto miProducto = null;
+            try {
+                 miProducto = ControladorProducto.Obtener(CodBarra);
+            } catch (ErrorTienda ex) {
+                throw new ErrorTienda("ObtenerProducto error", ex.getMessage());
+            }
+            // Verificar si dicho codigo de barra esta almacenado en la bd
+            if(!miProducto.getCodBarra().isEmpty()){
+                txtNombreProductoVender.setText(miProducto.getNombre());
+                     txtCantidadVender.requestFocus();
+                     txtCantidadVender.selectAll();
+            }else{
+                mensajeNotificacion("No se encontraron resultados");
+            }
         }else{
             mensajeNotificacion("El código de barra está vacío");
             txtCodigoBarraVender.requestFocus();
@@ -584,7 +599,19 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
 
     private void txtCodigoBarraVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyPressed
-        ObtenerProducto(txtCodigoBarraVender.getText());
+        char c=evt.getKeyChar();      
+         
+         
+         if (c == (char) KeyEvent.VK_ENTER) {
+            try {
+                ObtenerProducto(txtCodigoBarraVender.getText());
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+           
+        }
+        
     }//GEN-LAST:event_txtCodigoBarraVenderKeyPressed
 
     private void txtCodigoBarraVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyTyped
