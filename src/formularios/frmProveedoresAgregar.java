@@ -416,6 +416,8 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
                   agregado.setTelefono(txtTelefonoProveedor.getText());
                   agregado.setNIT(txtNITProveedor.getText());
                   agregado.setDireccion(txtDireccionProveedor.getText());
+                  agregado.setEmail(txtDireccionProveedor.getText());
+                  agregado.setNRC(txtDireccionProveedor.getText());
               try {
               ControladorProveedor.Agregar(agregado);
               JOptionPane.showMessageDialog(rootPane, "El Proveedor fue agregado correctamente.");

@@ -45,7 +45,7 @@ public class frmNotificacion extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(350, 90));
         setMinimumSize(new java.awt.Dimension(350, 90));
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setUndecorated(true);
         setOpacity(0.95F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,7 +59,6 @@ public class frmNotificacion extends javax.swing.JFrame {
         jPanel1.add(lblMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 235, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/noti.png"))); // NOI18N
-        jLabel3.setPreferredSize(new java.awt.Dimension(350, 90));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 90));
