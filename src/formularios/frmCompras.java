@@ -8,11 +8,23 @@ package formularios;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import AppPackage.AnimationClass;
+import clases.ControladorCompra;
+import clases.ControladorProducto;
+import clases.ControladorProveedor;
+import clases.ControladorSucursal;
 import clases.ErrorTienda;
+import clases.Proveedor;
+import clases.Sucursal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
@@ -23,13 +35,13 @@ import javax.swing.border.Border;
 public class frmCompras extends javax.swing.JFrame {
 
     Character s;
-    boolean estadoMenu,estadoProd;
+    boolean estadoMenu,estadoProd, exprod;
     
     public frmCompras() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
-        
+        LlenarCompras();
         
     }
 
@@ -225,7 +237,7 @@ public class frmCompras extends javax.swing.JFrame {
                 menuMouseExited(evt);
             }
         });
-        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 55));
+        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 55));
 
         home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Home.png"))); // NOI18N
@@ -369,7 +381,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblPercepcion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPercepcion.setText("Percepción:");
-        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 80, 40));
+        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 90, 40));
 
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
@@ -462,6 +474,51 @@ public class frmCompras extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void LlenarCompras(){        
+        try {
+            ArrayList<Sucursal> sucursal = ControladorSucursal.obtener();
+            cmbSucursalCompra.removeAllItems();
+            int idCompra;
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            txtIdCompra.setText(String.valueOf(idCompra+1));
+            //GENERAR FECHA 
+            Date utilDate=new Date();
+            SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
+            txtFecha.setText(fecha.format(utilDate)); 
+             //AGREGAR PROVEEDORES AL COMBO BOX
+            Object vector1[] = new Object[4];
+            if (cmbSucursalCompra.getItemCount()==0) {
+                Iterator<Sucursal>iterador= sucursal.iterator();
+                while(iterador.hasNext()){
+                    vector1[0]=iterador.next();
+                    vector1[1]=iterador.next();  
+                    vector1[2]=iterador.next();
+                    vector1[3]=iterador.next();
+                    cmbSucursalCompra.addItem((String) vector1[1]);
+                }
+            } 
+            ArrayList<Proveedor> proveedor = ControladorProveedor.Obtener();
+            cmbProveedor.removeAllItems();
+            Object vector[] = new Object[7];
+            if (cmbProveedor.getItemCount() == 0) {
+                Iterator<Proveedor> pro = proveedor.iterator();
+                while (pro.hasNext()) {
+                    vector[0] = pro.next();
+                    vector[1] = pro.next();
+                    vector[2] = pro.next();
+                    vector[3] = pro.next();
+                    vector[4] = pro.next();
+                    vector[5] = pro.next();
+                    vector[6] = pro.next();
+                    cmbProveedor.addItem((String) vector[1]);
+                }
+            }
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
 
     }//GEN-LAST:event_jpnBarraSuperiorMouseDragged
@@ -491,7 +548,55 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCompraKeyTyped
 
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
+      
+        char ch = evt.getKeyChar();
+        if(txtCodBarraProd.getText().length()>=13){
+           evt.consume();
+        }else{
+            if (ch < '0' || ch > '9') {
 
+                if (ch != (char) KeyEvent.VK_BEGIN) {
+                    if (ch != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (ch != (char) KeyEvent.VK_DELETE) {
+                            if(ch != (char) KeyEvent.VK_ENTER){
+
+                                evt.consume();
+                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+        char c = evt.getKeyChar();               
+        if (c == (char) KeyEvent.VK_ENTER) {
+            String codBarra=txtCodBarraProd.getText();
+            String producto;
+
+            try {
+                if (codBarra.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
+                } else {
+                    ControladorProducto.Obtener(codBarra);
+                    producto= ControladorProducto.Obtener(codBarra).getNombre();
+                    //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
+                    if (producto==null || producto=="") {
+                        txtNomProd.setEditable(true);
+                        txtNomProd.requestFocus();                          
+                        JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
+                        exprod=false;
+                    } else {
+                        txtNomProd.setText(producto);
+                        txtCantidad.requestFocus();
+                        exprod=true;
+                    }
+                }
+            } catch (ErrorTienda ex) {
+
+            }
+                
+        }
 
     }//GEN-LAST:event_txtCodBarraProdKeyTyped
 
