@@ -4,8 +4,8 @@ public class Producto {
     private String CodBarra="";
     private String nombre;
     private double costo;
-    public int Inventario;
-    public int IdSucursal;
+    public int Inventario=0;
+    public int IdSucursal=0;
 
     public Producto() {
     }

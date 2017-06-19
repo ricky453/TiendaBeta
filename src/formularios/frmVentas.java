@@ -103,11 +103,12 @@ public class frmVentas extends javax.swing.JFrame {
             } catch (ErrorTienda ex) {
                 throw new ErrorTienda("ObtenerProducto error", ex.getMessage());
             }
-            
-            // Verificar si dicho codigo de barra esta almacenado en la bd
-            if(miProducto.getCodBarra().isEmpty()){
+            //VERIFICAR SI LA SUCURSAL SELECCIONADA CONSTA DE ESE PRODUCTO
+            if(miProducto.getIdSucursal()!=0){
+               // Verificar si dicho codigo de barra esta almacenado en la bd
+            if(miProducto.getInventario()==0){
                 
-                mensajeNotificacion("No se encontraron resultados...", "Adv");
+                mensajeNotificacion("Producto Agotado", "Adv");
                 txtCodigoBarraVender.requestFocus();
                 txtCodigoBarraVender.selectAll();
             }else{
@@ -115,7 +116,14 @@ public class frmVentas extends javax.swing.JFrame {
                      txtCantidadVender.requestFocus();
                      txtCantidadVender.selectAll();
                 
+            } 
+            }else{
+                mensajeNotificacion("No existe en esta sucursal","Adv");
+                txtCodigoBarraVender.requestFocus();
+                txtCodigoBarraVender.selectAll();
             }
+            
+            
         }else{
             mensajeNotificacion("El código de barra está vacío.", "Error");
             txtCodigoBarraVender.requestFocus();
