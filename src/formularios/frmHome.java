@@ -997,7 +997,9 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresMouseExited
 
     private void btnSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseClicked
-        // TODO add your handling code here:
+        frmSucursales su = new frmSucursales(); 
+        su.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnSucursalesMouseClicked
 
     private void btnSucursalesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseEntered
