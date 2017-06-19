@@ -141,17 +141,6 @@ public final class frmHome extends javax.swing.JFrame {
         lbl40 = new javax.swing.JLabel();
         lbl46 = new javax.swing.JLabel();
         lbl47 = new javax.swing.JLabel();
-        jpnSexto = new javax.swing.JPanel();
-        lblMitad6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        lbl41 = new javax.swing.JLabel();
-        lbl42 = new javax.swing.JLabel();
-        lbl43 = new javax.swing.JLabel();
-        lbl44 = new javax.swing.JLabel();
-        lbl45 = new javax.swing.JLabel();
-        lbl48 = new javax.swing.JLabel();
-        lbl49 = new javax.swing.JLabel();
-        lbl50 = new javax.swing.JLabel();
         jpnSeptimo = new javax.swing.JPanel();
         lblMitad7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -675,68 +664,6 @@ public final class frmHome extends javax.swing.JFrame {
 
         jpnPrincipal.add(jpnQuinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1010, 650));
 
-        jpnSexto.setBackground(new java.awt.Color(0, 0, 0));
-        jpnSexto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblMitad6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad7.JPG"))); // NOI18N
-        jpnSexto.add(lblMitad6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 515, 640));
-
-        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl41.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl41.setForeground(new java.awt.Color(102, 102, 102));
-        lbl41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl41.setText("el sistema de Inventario.");
-        jPanel5.add(lbl41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
-
-        lbl42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl42.setForeground(new java.awt.Color(102, 102, 102));
-        lbl42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl42.setText("Usa esta opción para manejar");
-        jPanel5.add(lbl42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
-
-        lbl43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl43.setForeground(new java.awt.Color(102, 102, 102));
-        lbl43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl43.setText("cuenta la tienda.");
-        jPanel5.add(lbl43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
-
-        lbl44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl44.setForeground(new java.awt.Color(102, 102, 102));
-        lbl44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl44.setText("productos que actualmente");
-        jPanel5.add(lbl44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
-
-        lbl45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl45.setForeground(new java.awt.Color(102, 102, 102));
-        lbl45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl45.setText("En Inventario estarán todos los");
-        jPanel5.add(lbl45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
-
-        lbl48.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl48.setForeground(new java.awt.Color(102, 102, 102));
-        lbl48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl48.setText("sobre la cantidad de Productos.");
-        jPanel5.add(lbl48, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
-
-        lbl49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl49.setForeground(new java.awt.Color(102, 102, 102));
-        lbl49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl49.setText("Podrás tener una lista");
-        jPanel5.add(lbl49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
-
-        lbl50.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl50.setForeground(new java.awt.Color(255, 255, 255));
-        lbl50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Inventario.png"))); // NOI18N
-        lbl50.setText("Inventario");
-        jPanel5.add(lbl50, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
-
-        jpnSexto.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 210, 230));
-
-        jpnPrincipal.add(jpnSexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1010, 650));
-
         jpnSeptimo.setBackground(new java.awt.Color(0, 0, 0));
         jpnSeptimo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1075,7 +1002,6 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jpnBarraMenu;
@@ -1087,7 +1013,6 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jpnQuinto;
     private javax.swing.JPanel jpnSegundo;
     private javax.swing.JPanel jpnSeptimo;
-    private javax.swing.JPanel jpnSexto;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnTercero;
     private javax.swing.JLabel lbl11;
@@ -1122,17 +1047,9 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbl39;
     private javax.swing.JLabel lbl4;
     private javax.swing.JLabel lbl40;
-    private javax.swing.JLabel lbl41;
-    private javax.swing.JLabel lbl42;
-    private javax.swing.JLabel lbl43;
-    private javax.swing.JLabel lbl44;
-    private javax.swing.JLabel lbl45;
     private javax.swing.JLabel lbl46;
     private javax.swing.JLabel lbl47;
-    private javax.swing.JLabel lbl48;
-    private javax.swing.JLabel lbl49;
     private javax.swing.JLabel lbl5;
-    private javax.swing.JLabel lbl50;
     private javax.swing.JLabel lbl51;
     private javax.swing.JLabel lbl52;
     private javax.swing.JLabel lbl53;
@@ -1155,7 +1072,6 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblMitad3;
     private javax.swing.JLabel lblMitad4;
     private javax.swing.JLabel lblMitad5;
-    private javax.swing.JLabel lblMitad6;
     private javax.swing.JLabel lblMitad7;
     private javax.swing.JLabel lblMitad8;
     private javax.swing.JPanel pnlPortada;
