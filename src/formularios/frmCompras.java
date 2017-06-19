@@ -488,7 +488,7 @@ public class frmCompras extends javax.swing.JFrame {
              //AGREGAR PROVEEDORES AL COMBO BOX
             Object vector1[] = new Object[4];
             if (cmbSucursalCompra.getItemCount()==0) {
-                Iterator<Sucursal>iterador= sucursal.iterator();
+                Iterator<Sucursal> iterador= sucursal.iterator();
                 while(iterador.hasNext()){
                     vector1[0]=iterador.next();
                     vector1[1]=iterador.next();  

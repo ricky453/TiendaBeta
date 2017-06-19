@@ -7,6 +7,10 @@ package formularios;
 
 import clases.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -27,6 +31,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        llenandoComboSucursal();
     }
     
      //-----------------limpiando cajas de texto-------------------------
@@ -41,6 +46,27 @@ public class frmProductosAgregar extends javax.swing.JFrame {
     
     //------------------llenandoComboSucursal-------------------------
     public void llenandoComboSucursal(){
+        cmbSucursal.removeAll();
+        modeloSucursal.removeAllElements();
+        Object[] opcionSucursales=new Object[4];
+        
+        try {
+            ArrayList<Sucursal> sucursales=ControladorSucursal.obtener();
+            Iterator iterador=sucursales.iterator();
+            
+            while(iterador.hasNext()){
+                opcionSucursales[0]=iterador.next();
+                modeloSucursal.addElement(iterador.next());
+                opcionSucursales[2]=iterador.next();
+                opcionSucursales[3]=iterador.next();
+            }
+            
+            cmbSucursal.setModel(modeloSucursal);
+            
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -153,7 +179,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtCodBarraProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 220, 30));
+        getContentPane().add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 220, 30));
 
         txtNombreProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,34 +191,34 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtNombreProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 270, 30));
+        getContentPane().add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 270, 30));
 
         txtCostoProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostoProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, 80, 30));
+        getContentPane().add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 80, 30));
 
         jLabel27.setBackground(new java.awt.Color(0, 0, 0));
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 0, 0));
         jLabel27.setText("Código de barra:");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, 20));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, 20));
 
         jLabel29.setBackground(new java.awt.Color(0, 0, 0));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Sucursal:");
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, 20));
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, 20));
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Costo:");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, 60, 40));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 60, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inventario:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, -1, 20));
 
         txtInventarioProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,20 +230,19 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtInventarioProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 60, 30));
+        getContentPane().add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 60, 30));
 
         jLabel31.setBackground(new java.awt.Color(0, 0, 0));
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setText("Nombre:");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, -1, 20));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, 20));
 
-        cmbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 180, 30));
+        getContentPane().add(cmbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, 300, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -247,7 +272,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
 
     private void btnAgregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoProductoActionPerformed
         Producto agregado=new Producto();
-       
+        String[] sucus=new String[4]; 
       
         if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos");
@@ -261,8 +286,27 @@ public class frmProductosAgregar extends javax.swing.JFrame {
             }else{
                     agregado.setCodBarra(txtCodBarraProductos.getText());
                     agregado.setNombre(txtNombreProductos.getText());
-                    agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
                     agregado.setCosto(Double.parseDouble(txtCostoProductos.getText()));
+                    agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
+                    
+                try {
+                    ArrayList<Sucursal> opcion=ControladorSucursal.obtener();
+                    Iterator iterador=opcion.iterator();
+                    while(iterador.hasNext()){
+                        sucus[0]=iterador.next().toString();
+                        sucus[1]=iterador.next().toString();
+                        sucus[2]=iterador.next().toString();
+                        sucus[3]=iterador.next().toString();
+                        
+                        if (sucus[1].equals(cmbSucursal.getSelectedItem().toString())) {
+                            agregado.setIdSucursal(Integer.parseInt(sucus[0]));
+                            System.out.println(sucus[1]+"    "+cmbSucursal.getSelectedItem().toString());
+                        }
+                        
+                    }
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
 
                 try {
