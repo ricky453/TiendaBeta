@@ -578,8 +578,8 @@ public class frmCompras extends javax.swing.JFrame {
                 if (codBarra.equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
                 } else {
-                    ControladorProducto.Obtener(codBarra);
-                    producto= ControladorProducto.Obtener(codBarra).getNombre();
+                    ControladorProducto.Obtener(codBarra,1);
+                    producto= ControladorProducto.Obtener(codBarra,1).getNombre();
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
                     if (producto==null || producto=="") {
                         txtNomProd.setEditable(true);
