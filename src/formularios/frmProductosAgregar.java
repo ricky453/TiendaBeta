@@ -34,6 +34,27 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         llenandoComboSucursal();
     }
     
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
+    
      //-----------------limpiando cajas de texto-------------------------
     public void limpiandoTxtProducto(){
         txtCodBarraProductos.setText("");
@@ -275,14 +296,14 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         String[] sucus=new String[4]; 
       
         if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
         
         }else{
             
             int inven=Integer.parseInt(txtInventarioProducto.getText());
             double cost=Double.parseDouble(txtCostoProductos.getText());
             if(inven<=0 || cost<=0){
-                JOptionPane.showMessageDialog(null, "Los campos inventario y costo no pueden estar en cero o menor que cero");
+                mensajeNotificacion("Inventario y costo deben ser mayor a 0.", "Error");
             }else{
                     agregado.setCodBarra(txtCodBarraProductos.getText());
                     agregado.setNombre(txtNombreProductos.getText());
@@ -311,7 +332,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 try {
                     ControladorProducto.Agregar(agregado);
 
-                    JOptionPane.showMessageDialog(null, "El producto fue agregado correctamente");
+                    mensajeNotificacion("¡Producto agregado exitosamente!", "Ok");
                     limpiandoTxtProducto();
                 } catch (ErrorTienda e) {
 

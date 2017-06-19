@@ -35,6 +35,27 @@ public class frmProductosModificar extends javax.swing.JFrame {
         llenandoComboboxSucursal();
     }
     
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
+    
     //--------------llenandoComboxSucuarsal-----------------------
     public void llenandoComboboxSucursal(){
         Object[] seleccion=new Object[4];
@@ -183,19 +204,19 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoInventarioProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, 80, 30));
+        getContentPane().add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 80, 30));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Nombre:");
-        getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 20));
+        getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, 20));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel44.setText("Sucursal:");
-        getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, 20));
+        getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, -1, 20));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel45.setText("Costo:");
-        getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, 20));
+        getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, 20));
 
         txtNuevoNombreProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoNombreProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +229,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoNombreProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 410, 30));
+        getContentPane().add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 410, 30));
 
         txtNuevoCostoProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoCostoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -216,13 +237,13 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoCostoProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 90, 30));
+        getContentPane().add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, 90, 30));
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel46.setText("Inventario:");
-        getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, 20));
+        getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, 20));
 
-        getContentPane().add(cmbModificarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 340, 30));
+        getContentPane().add(cmbModificarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 340, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -254,7 +275,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
         if (txtNuevoCodBarraProducto.getText().equals("")||txtNuevoNombreProducto.getText().equals("")||txtNuevoInventarioProducto.getText().equals("")||
                 txtNuevoCostoProducto.getText().equals("")) {
             
-            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
            
         }else{
             DefaultTableModel modeloProductos=(DefaultTableModel) formu.tblProductos.getModel();
@@ -288,7 +309,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 ControladorProducto.Modificar(producto);
                 modeloProductos.setRowCount(0);
                 formu.txtProductosBuscar.setText("");
-                JOptionPane.showMessageDialog(rootPane, "Modificado con exito");
+                mensajeNotificacion("¡Producto modificado exitosamente!", "Ok");
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
@@ -311,7 +332,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                     if (c != (char) KeyEvent.VK_DELETE) {
                         if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                            mensajeNotificacion("¡Error! Solo números.", "Error");
                         }
                     }
                 }
@@ -366,7 +387,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                     if (c != (char) KeyEvent.VK_DELETE) {
                         if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                            mensajeNotificacion("¡Error! Solo números.", "Error");
                         }
                     }
                 }
