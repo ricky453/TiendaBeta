@@ -36,12 +36,34 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+    }
+    
     public void limpiandoTxtProveedor(){
         txtIDProveedor.setText("");
         txtNombreProveedor.setText("");
         txtNITProveedor.setText("");
         txtTelefonoProveedor.setText("");
         txtDireccionProveedor.setText("");
+        txtEmailProveedor.setText("");
+        txtNRCProveedor.setText("");
         txtNombreProveedor.requestFocus();
         int idProv;
         try {
@@ -83,6 +105,59 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
             
         
          }
+    }
+    public void guardarDatos(){
+        Proveedor agregado=new Proveedor();
+        int idProv;
+        encontradoProv = false;
+        if (txtDireccionProveedor.getText().equals("") || txtNombreProveedor.getText().equals("") || txtNITProveedor.getText().equals("") || txtTelefonoProveedor.getText().equals("") || txtEmailProveedor.getText().equals("") || txtNRCProveedor.getText().equals("")) {
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
+        }
+        else{
+            if(txtNITProveedor.getText().length() != 14){
+                mensajeNotificacion("El NIT debe de contener 14 digitos.", "Adv");
+                txtNITProveedor.requestFocus();
+                txtNITProveedor.selectAll();
+            }
+            else{
+            try {
+                idProv = ControladorProveedor.ObtenerIdProveedor();
+                agregado.setIdProveedor(idProv+1);
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmProveedoresAgregar.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              buscarRepetidos();
+              if (tblProveedores.getRowCount()>0) {
+                  int i = 0;
+                     while (encontradoProv==false&&i<tblProveedores.getRowCount()) {
+                     encontradoProv = tblProveedores.getValueAt(i, 1).equals(txtNombreProveedor.getText());
+                     i++;
+                  }
+              }
+              if(encontradoProv == false){
+                  agregado.setNombre(txtNombreProveedor.getText());
+                  agregado.setTelefono(txtTelefonoProveedor.getText());
+                  agregado.setNIT(txtNITProveedor.getText());
+                  agregado.setDireccion(txtDireccionProveedor.getText());
+                  agregado.setEmail(txtEmailProveedor.getText());
+                  agregado.setNRC(txtNRCProveedor.getText());
+              try {
+              ControladorProveedor.Agregar(agregado);
+              mensajeNotificacion("¡Proveedor agregado exitosamente!", "Ok");
+              limpiandoTxtProveedor();
+              //tblProveedores.removeAll();
+             //actualizarTablaProveedor();
+              
+              } catch (ErrorTienda e) {      
+           }
+        }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");}
+              encontradoProv=false;
+              txtNombreProveedor.requestFocus();
+              txtNombreProveedor.selectAll();
+                
+        }
+        }
+        //LlenarCompra();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -254,6 +329,11 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         });
         getContentPane().add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 230, 30));
 
+        txtNITProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNITProveedorActionPerformed(evt);
+            }
+        });
         txtNITProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNITProveedorKeyTyped(evt);
@@ -282,6 +362,11 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         jLabel14.setText("E-Mail:");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, -1, 20));
 
+        txtEmailProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailProveedorActionPerformed(evt);
+            }
+        });
         txtEmailProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEmailProveedorKeyTyped(evt);
@@ -293,6 +378,11 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         jLabel15.setText("NRC:");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, -1, 20));
 
+        txtNRCProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNRCProveedorActionPerformed(evt);
+            }
+        });
         txtNRCProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNRCProveedorKeyTyped(evt);
@@ -366,7 +456,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
                         if (c != (char) KeyEvent.VK_DELETE) {
                             if (c != (char) KeyEvent.VK_ENTER) {
                                 evt.consume();
-                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
                             }
                         }
                     }
@@ -384,55 +474,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarProveedorMouseExited
 
     private void btnGuardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedorActionPerformed
-        Proveedor agregado=new Proveedor();
-        int idProv;
-        encontradoProv = false;
-        if (txtDireccionProveedor.getText().equals("") || txtNombreProveedor.getText().equals("") || txtNITProveedor.getText().equals("") || txtTelefonoProveedor.getText().equals("") || txtEmailProveedor.getText().equals("") || txtNRCProveedor.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-        }
-        else{
-            if(txtNITProveedor.getText().length() != 14){
-                JOptionPane.showMessageDialog(null, "El NIT debe tener 14 digitos");
-                txtNITProveedor.requestFocus();
-                txtNITProveedor.selectAll();
-            }
-            else{
-            try {
-                idProv = ControladorProveedor.ObtenerIdProveedor();
-                agregado.setIdProveedor(idProv+1);
-            } catch (ErrorTienda ex) {
-                Logger.getLogger(frmProveedoresAgregar.class.getName()).log(Level.SEVERE, null, ex);
-              }
-              buscarRepetidos();
-              if (tblProveedores.getRowCount()>0) {
-                  int i = 0;
-                     while (encontradoProv==false&&i<tblProveedores.getRowCount()) {
-                     encontradoProv = tblProveedores.getValueAt(i, 1).equals(txtNombreProveedor.getText());
-                     i++;
-                  }
-              }
-              if(encontradoProv == false){
-                  agregado.setNombre(txtNombreProveedor.getText());
-                  agregado.setTelefono(txtTelefonoProveedor.getText());
-                  agregado.setNIT(txtNITProveedor.getText());
-                  agregado.setDireccion(txtDireccionProveedor.getText());
-              try {
-              ControladorProveedor.Agregar(agregado);
-              JOptionPane.showMessageDialog(rootPane, "El Proveedor fue agregado correctamente.");
-              limpiandoTxtProveedor();
-              //tblProveedores.removeAll();
-             //actualizarTablaProveedor();
-              
-              } catch (ErrorTienda e) {      
-           }
-        }else{JOptionPane.showMessageDialog(null, "El nombre de ese proveedor ya está registrado, cámbielo.");}
-              encontradoProv=false;
-              txtNombreProveedor.requestFocus();
-              txtNombreProveedor.selectAll();
-                
-        }
-        }
-        //LlenarCompra();
+        guardarDatos();
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
 
     private void txtIDProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDProveedorKeyTyped
@@ -447,6 +489,21 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNRCProveedorKeyTyped
 
+    private void txtNITProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNITProveedorActionPerformed
+        txtEmailProveedor.requestFocus();
+    }//GEN-LAST:event_txtNITProveedorActionPerformed
+
+    private void txtEmailProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailProveedorActionPerformed
+        txtNRCProveedor.requestFocus();
+    }//GEN-LAST:event_txtEmailProveedorActionPerformed
+
+    private void txtNRCProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNRCProveedorActionPerformed
+        int Agregar = JOptionPane.showConfirmDialog(null, "¿Desea agregar el Proveedor?", "Agregar Proveedor",JOptionPane.YES_NO_OPTION);
+        if(Agregar == 0){
+            guardarDatos();
+        }
+    }//GEN-LAST:event_txtNRCProveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,7 +515,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

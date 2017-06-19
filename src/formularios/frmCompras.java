@@ -13,12 +13,14 @@ import clases.ControladorProducto;
 import clases.ControladorProveedor;
 import clases.ControladorSucursal;
 import clases.ErrorTienda;
+import clases.Producto;
 import clases.Proveedor;
 import clases.Sucursal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +29,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,13 +38,16 @@ import javax.swing.border.Border;
 public class frmCompras extends javax.swing.JFrame {
 
     Character s;
-    boolean estadoMenu,estadoProd, exprod;
-    
+    boolean estadoMenu,estadoProd, exprod, encontrado;
+    DecimalFormat decimalProductos = new DecimalFormat("0.0000");
+    DefaultTableModel tablaModel= new DefaultTableModel();
+    DecimalFormat decimal = new DecimalFormat("0.00");
     public frmCompras() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         LlenarCompras();
+        TableModel();
         
     }
 
@@ -338,9 +344,7 @@ public class frmCompras extends javax.swing.JFrame {
         };
         tblCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id producto", "Producto", "Cantidad", "Costo", "SubTotal"
@@ -348,11 +352,11 @@ public class frmCompras extends javax.swing.JFrame {
         ));
         tblCompra.getTableHeader().setReorderingAllowed(false);
         tblCompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblCompraKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tblCompraKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblCompraKeyPressed(evt);
             }
         });
         jScrollPane6.setViewportView(tblCompra);
@@ -488,7 +492,7 @@ public class frmCompras extends javax.swing.JFrame {
              //AGREGAR PROVEEDORES AL COMBO BOX
             Object vector1[] = new Object[4];
             if (cmbSucursalCompra.getItemCount()==0) {
-                Iterator<Sucursal>iterador= sucursal.iterator();
+                Iterator<Sucursal> iterador= sucursal.iterator();
                 while(iterador.hasNext()){
                     vector1[0]=iterador.next();
                     vector1[1]=iterador.next();  
@@ -518,6 +522,94 @@ public class frmCompras extends javax.swing.JFrame {
         }
         
     }
+    public void eliminarCompras(){
+    int fila = tblCompra.getSelectedRow();
+    if (fila != -1) {
+        int opcion1=JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar el producto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/iconos/pregunta.png"));
+    
+    if (opcion1 == 0) {
+        tablaModel.removeRow(tblCompra.getSelectedRow());
+        
+    }}
+}
+    public void TableModel(){
+        String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
+        tablaModel.setColumnIdentifiers(headers);
+        tblCompra.setModel(tablaModel);
+    }
+    public void AgregarProductoCompras(){
+        Producto pr = new Producto();
+        pr.setCodBarra(txtCodBarraProd.getText());
+        pr.setNombre(txtNomProd.getText());
+        pr.setInventario(Integer.parseInt(txtCantidad.getText()));
+        pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
+        try {
+            ControladorProducto.Agregar(pr);
+        } catch (ErrorTienda ex) {
+
+        }
+        exprod=true;
+        txtNomProd.setEditable(false);
+        AgregarProductoTablaCompras();
+        JOptionPane.showMessageDialog(rootPane, "Producto Agregado");
+    }
+    public void AgregarProductoTablaCompras(){
+        if (tblCompra.getRowCount()>0) {
+            int i = 0;
+            while (encontrado==false&&i<tblCompra.getRowCount()) {
+                encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                i++;
+            }
+        }
+
+
+        if(encontrado == false){
+            String fila[]  = new String[5];
+            fila[0]=txtCodBarraProd.getText();
+            fila[1]=txtNomProd.getText();
+            fila[2]=txtCantidad.getText();
+            //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
+            fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText()));
+            fila[4]=String.valueOf(decimalProductos.format((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText()))));
+            tablaModel.addRow(fila);
+            tblCompra.setModel(tablaModel);
+        }else{
+            boolean buscar=false;
+            int j=0;
+            int nuevaCantidad;
+            double nuevoCosto;
+            while (buscar==false) {
+                buscar = tblCompra.getValueAt(j, 0).equals(txtCodBarraProd.getText());
+                j++;
+            }
+            nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(j-1, 2).toString());
+            nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(j-1, 3).toString()))/2;
+            System.out.println(j);
+            tablaModel.setValueAt(nuevaCantidad, j-1, 2);
+            tablaModel.setValueAt(decimalProductos.format(nuevoCosto), j-1, 3);
+            tablaModel.setValueAt(decimalProductos.format(nuevaCantidad*nuevoCosto), j-1, 4);
+            tblCompra.setModel(tablaModel);
+        }
+        encontrado = false;
+        //LIMPIAR LOS TXT 
+        txtCodBarraProd.setText("");
+        txtNomProd.setText("");
+        txtCantidad.setText("1");
+        txtCostoProd.setText("");
+        txtCodBarraProd.requestFocus();
+
+        int filas = tablaModel.getRowCount();
+        int iteraciones=0;
+        double total=0;
+        while(iteraciones<filas){
+            total+= Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
+            //System.out.println(tablaModel.getValueAt(iteraciones, 4));
+            iteraciones++;
+        }
+
+        double totalFinal=Double.parseDouble(decimal.format(total));
+        txtTotal.setText("$"+totalFinal);
+}
     
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
 
@@ -540,7 +632,23 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarVentaActionPerformed
 
     private void tblCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCompraKeyPressed
-
+        char c=evt.getKeyChar();      
+        int iteraciones=0;
+         
+         if (c == (char) KeyEvent.VK_DELETE) {
+             eliminarCompras();
+             int filas = tablaModel.getRowCount();
+            
+            double total=0;
+            while(iteraciones<filas){
+               total+=Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
+               iteraciones++;}
+            
+            double totalFinal=Double.parseDouble(decimal.format(total));
+            txtTotal.setText("$"+totalFinal);
+            
+            
+        }
     }//GEN-LAST:event_tblCompraKeyPressed
 
     private void tblCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCompraKeyTyped
@@ -590,6 +698,7 @@ public class frmCompras extends javax.swing.JFrame {
                     } else {
                         txtNomProd.setText(producto);
                         txtCantidad.requestFocus();
+                        txtCantidad.selectAll();
                         exprod=true;
                     }
                 }
@@ -606,6 +715,7 @@ public class frmCompras extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
 
         if (ch == (char) KeyEvent.VK_ENTER) {
+            
             txtCantidad.requestFocus();
             txtCantidad.selectAll();
 
@@ -664,6 +774,21 @@ public class frmCompras extends javax.swing.JFrame {
                     }
                 }
             }
+        }
+        if (s == KeyEvent.VK_ENTER) {
+           if (txtCodBarraProd.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Llene todos los campos");
+            }else{
+                if(Double.parseDouble(txtCostoProd.getText()) > 0){
+                    if (exprod==false){
+                        AgregarProductoCompras();
+                    }else{
+                       AgregarProductoTablaCompras();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "El Costo debe ser mayor a 0");
+                }
+            } 
         }
 
     }//GEN-LAST:event_txtCostoProdKeyTyped

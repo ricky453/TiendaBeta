@@ -6,15 +6,21 @@
 package formularios;
 
 import clases.ControladorProducto;
+import clases.ControladorSucursal;
 import clases.ControladorVenta;
 import clases.ErrorTienda;
 import clases.Producto;
+import clases.Sucursal;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -30,6 +36,9 @@ public class frmVentas extends javax.swing.JFrame {
     boolean estadoMenu;
     JTableHeader tHeadVentas;
     DefaultTableModel modeloVentas;
+    ArrayList<Sucursal> sucursales = new ArrayList();
+    Iterator<Sucursal> Iterador;
+    Object sucursal[] ;
     
     ControladorVenta cv;
     ControladorProducto cp;
@@ -46,15 +55,30 @@ public class frmVentas extends javax.swing.JFrame {
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
         modeloVentas = (DefaultTableModel) tblProductosVender.getModel();
+        
         ObtenerIdVenta();
+        CargarSucursales();
         txtCodigoBarraVender.requestFocus();
     }
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
-    public void mensajeNotificacion(String mensaje){
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
         frmNotificacion not = new frmNotificacion();
         not.Mensaje(mensaje);
         not.setVisible(true);
-        
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
     }
     //OBTENER EL NUEVO ID DE VENTA ACTUALIZADO
     public void ObtenerIdVenta() throws ErrorTienda {
@@ -74,28 +98,65 @@ public class frmVentas extends javax.swing.JFrame {
         if(!txtCodigoBarraVender.getText().isEmpty()){
             Producto miProducto = null;
             try {
-                 miProducto = ControladorProducto.Obtener(CodBarra,2);
+                int idSucursal = Integer.valueOf(String.valueOf(sucursal[cmbSucursalVenta.getSelectedIndex()]));
+                 miProducto = ControladorProducto.Obtener(CodBarra,idSucursal);
             } catch (ErrorTienda ex) {
                 throw new ErrorTienda("ObtenerProducto error", ex.getMessage());
             }
+            
             // Verificar si dicho codigo de barra esta almacenado en la bd
-            if(!miProducto.getCodBarra().isEmpty()){
+            if(miProducto.getCodBarra().isEmpty()){
+                
+                mensajeNotificacion("No se encontraron resultados...", "Adv");
+                txtCodigoBarraVender.requestFocus();
+                txtCodigoBarraVender.selectAll();
+            }else{
                 txtNombreProductoVender.setText(miProducto.getNombre());
                      txtCantidadVender.requestFocus();
                      txtCantidadVender.selectAll();
-            }else{
-                mensajeNotificacion("No se encontraron resultados");
+                
             }
         }else{
-            mensajeNotificacion("El código de barra está vacío");
+            mensajeNotificacion("El código de barra está vacío.", "Error");
             txtCodigoBarraVender.requestFocus();
             
             
         }
     }
     //OBTENER TODAS LAS SUCUARSALES
-    public void CargarSucursales(){
+    public void CargarSucursales() throws ErrorTienda{
+        sucursales = ControladorSucursal.obtener();
+        sucursal = new Object[sucursales.size()/4];
+        int contador=0,fila=0;
         
+        for(int i=0; i<sucursales.size();i++){
+            
+            if(contador==4){
+                contador=0;
+             
+            }
+            
+            if(contador==0){
+                sucursal[fila]=sucursales.get(i);
+                fila++;
+                
+            }
+            
+            if(contador==1){
+            Object dato = sucursales.get(i);
+            cmbSucursalVenta.addItem((String) dato);
+            }
+            
+            
+            contador++;
+        }
+       
+    }
+    public void limpiar(){
+        txtCantidadVender.setText("1");
+        txtNombreProductoVender.setText("");
+        txtCodigoBarraVender.setText("");
+        txtCodigoBarraVender.requestFocus();
     }
 
     /**
@@ -365,6 +426,11 @@ public class frmVentas extends javax.swing.JFrame {
         jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 20, 60));
 
         cmbSucursalVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cmbSucursalVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSucursalVentaActionPerformed(evt);
+            }
+        });
         jpnAgregarCompra.add(cmbSucursalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 17, 160, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -584,7 +650,8 @@ public class frmVentas extends javax.swing.JFrame {
                     if (c != (char) KeyEvent.VK_DELETE) {
                         if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                            
+                            mensajeNotificacion("¡Error! Solo números.", "Error");
                         }
                     }
                 }
@@ -633,7 +700,7 @@ public class frmVentas extends javax.swing.JFrame {
                         if (c != (char) KeyEvent.VK_DELETE) {
                             if (c != (char) KeyEvent.VK_ENTER) {
                                 evt.consume();
-                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
                             }
                         }
                     }
@@ -694,7 +761,7 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarVenta1MouseExited
 
     private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
-        // TODO add your handling code here:
+        System.out.println(sucursal[cmbSucursalVenta.getSelectedIndex()]);
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
@@ -796,6 +863,10 @@ public class frmVentas extends javax.swing.JFrame {
     private void jpnBarraSuperior1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperior1MousePressed
 
     }//GEN-LAST:event_jpnBarraSuperior1MousePressed
+
+    private void cmbSucursalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSucursalVentaActionPerformed
+        limpiar();
+    }//GEN-LAST:event_cmbSucursalVentaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,7 +1,7 @@
 package clases;
 public class Producto {
     
-    private String CodBarra;
+    private String CodBarra="";
     private String nombre;
     private double costo;
     public int Inventario;

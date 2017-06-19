@@ -19,6 +19,7 @@ import clases.ErrorTienda;
 import clases.Proveedor;
 import clases.ControladorProveedor;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -28,8 +29,10 @@ import javax.swing.border.Border;
 public class frmProveedores extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    //public static String tipo;
     private TableRowSorter trsFiltro;
-    DefaultTableModel modeloProveedores= new DefaultTableModel();
+    public DefaultTableModel modeloProveedores= new DefaultTableModel();
+    frmProveedoresModificar pom = new frmProveedoresModificar();
     
     public frmProveedores() {
         initComponents();
@@ -38,7 +41,26 @@ public class frmProveedores extends javax.swing.JFrame {
         actualizarTablaProveedor();
 
     }
-
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+        
+    }
    //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
             modeloProveedores.setRowCount(0);
@@ -71,6 +93,66 @@ public class frmProveedores extends javax.swing.JFrame {
         
          }
     } 
+    public void ObtenerDatos(){
+
+        pom.txtIDProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
+        pom.txtNuevoNombreProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString());
+        pom.txtNuevoTelefono.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
+        pom.txtNuevoDireccionProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
+        pom.txtNuevoNITProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
+        pom.txtNuevoEmailProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 5).toString());
+        pom.txtNuevoNRCProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 6).toString());
+        pom.txtNuevoNombreProveedor.selectAll();
+        pom.txtNuevoNombreProveedor.requestFocus();
+        pom.nombre = tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString();
+    }    
+    
+    public void EliminarProveedor(){
+        int fila = tblProveedores.getSelectedRow(); 
+        System.out.println(fila);
+        if (tblProveedores.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+            int seleccion;
+            seleccion = tblProveedores.getSelectedRow();
+            DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
+            Proveedor proveedor = new Proveedor();
+            
+            int idProve=Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString());
+            String nom=tblProveedores.getValueAt(seleccion, 1).toString();
+            String tel=tblProveedores.getValueAt(seleccion, 2).toString();
+            String dire=tblProveedores.getValueAt(seleccion, 3).toString();
+            String nit=tblProveedores.getValueAt(seleccion, 4).toString();
+            
+            
+            
+            proveedor.setIdProveedor(Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString()));
+            proveedor.setNombre(tblProveedores.getValueAt(seleccion, 1).toString());
+            proveedor.setTelefono(tblProveedores.getValueAt(seleccion, 2).toString());
+            proveedor.setDireccion(tblProveedores.getValueAt(seleccion, 3).toString());
+            proveedor.setNIT(tblProveedores.getValueAt(seleccion, 4).toString());
+            try{
+                ControladorProveedor.Eliminar(proveedor);
+                if (ControladorProveedor.isCambio()) {
+                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                    mensajeNotificacion("¡Error! Proveedor con registros vigentes.", "Error");
+                }else{
+                    modeloProveedores.removeRow(fila);
+                    txtProveedoresBuscar.setText("");
+                    mensajeNotificacion("¡Proveedor eliminado exitosamente!", "Ok");
+                }
+                
+                
+            }catch(ErrorTienda ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+           
+            
+        }
+        }else{
+            mensajeNotificacion("¡Seleccione un Proveedor de la tabla!", "Adv");
+        }
+    }
          
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -396,7 +478,7 @@ public class frmProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProveedorMouseExited
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-
+        EliminarProveedor();
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
@@ -457,9 +539,14 @@ public class frmProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProveedorActionPerformed
 
     private void btnModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProveedorActionPerformed
+    if(tblProveedores.getSelectedRow()!=-1){
         frmProveedoresModificar pm = new frmProveedoresModificar();
-        pm.setVisible(true);
-        this.setVisible(false);  
+        pm.setVisible(true); 
+        this.setVisible(false); 
+        ObtenerDatos();
+        } else {
+            mensajeNotificacion("Debe de seleccionar un proveedor.", "Adv");
+        }
     }//GEN-LAST:event_btnModificarProveedorActionPerformed
 
     private void jpnBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMousePressed
@@ -601,19 +688,15 @@ public class frmProveedores extends javax.swing.JFrame {
     private javax.swing.JPanel jpnAgregarCompra;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
-    private javax.swing.JPanel jpnMenu1;
-    private javax.swing.JPanel jpnMenu2;
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblParametro;
     private javax.swing.JLabel lblProductos;
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
-    private javax.swing.JLabel lblSucursales1;
-    private javax.swing.JLabel lblSucursales2;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel menu;
-    private javax.swing.JTable tblProveedores;
+    public static javax.swing.JTable tblProveedores;
     private javax.swing.JTextField txtProveedoresBuscar;
     // End of variables declaration//GEN-END:variables
 }

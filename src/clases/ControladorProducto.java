@@ -33,8 +33,8 @@ public class ControladorProducto {
         
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
-            cn.st.executeUpdate("INSERT INTO inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getIdSucursal()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
+            cn.st.executeUpdate("INSERT INTO Producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
+            cn.st.executeUpdate("INSERT INTO Inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getCodBarra()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Agregar",e.getMessage());
         }
@@ -56,7 +56,7 @@ public class ControladorProducto {
             
             String [] matriz=new String[4];
             String [] matriz2=new String[4];
-            rs=cn.st.executeQuery("SELECT * FROM detallecompra WHERE CodBarra='"+pr.getCodBarra()+"'");
+            rs=cn.st.executeQuery("SELECT * FROM DetalleCompra WHERE CodBarra='"+pr.getCodBarra()+"'");
             
             while (rs.next()) {
                 matriz[0]=rs.getString(1);
@@ -66,7 +66,7 @@ public class ControladorProducto {
                 
             }
             
-            rs=cn.st.executeQuery("SELECT * FROM detalleventa WHERE CodBarra='"+pr.getCodBarra()+"'");
+            rs=cn.st.executeQuery("SELECT * FROM DetalleVenta WHERE CodBarra='"+pr.getCodBarra()+"'");
             
             while (rs.next()) {
                 matriz2[0]=rs.getString(1);
@@ -79,7 +79,7 @@ public class ControladorProducto {
             if (matriz[0] != null || matriz2[1] != null) {
                 setCambio(true);
             }else{
-                cn.st.executeUpdate("DELETE FROM producto WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM Producto WHERE CodBarra='"+pr.getCodBarra()+"'");
                 setCambio(false);
             }
         } catch (SQLException e) {
@@ -122,6 +122,7 @@ public class ControladorProducto {
         try {
             rs=cn.st.executeQuery("SELECT Inventario.IdSucursal, Inventario.Cantidad, Inventario.CodBarra,Producto.Nombre,Producto.Costo FROM Inventario,Producto WHERE  Inventario.CodBarra='"+CodBarra+"' AND Inventario.IdSucursal="+idSucursal+" AND Producto.CodBarra=Inventario.CodBarra;");
             while (rs.next()) {
+                
                 miproducto.setCodBarra(rs.getString(3));
                 miproducto.setNombre(rs.getString(4));
                 miproducto.setInventario(Integer.parseInt(rs.getString(2)));
