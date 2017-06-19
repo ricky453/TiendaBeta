@@ -47,7 +47,7 @@ public class frmNotificacion extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(350, 90));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setUndecorated(true);
-        setOpacity(0.9F);
+        setOpacity(0.95F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(4, 3, 1));

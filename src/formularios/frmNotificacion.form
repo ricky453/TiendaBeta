@@ -14,7 +14,7 @@
       <Value id="APPLICATION_EXCLUDE"/>
     </Property>
     <Property name="undecorated" type="boolean" value="true"/>
-    <Property name="opacity" type="float" value="0.9"/>
+    <Property name="opacity" type="float" value="0.95"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
