@@ -2,6 +2,7 @@ package clases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ControladorCompra {
@@ -50,4 +51,64 @@ public class ControladorCompra {
             throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
         }
     }
-}
+    
+    public static void ActualizarPrecioPromedioProducto(Object[][] dc) throws ErrorTienda{
+        int CantidadActual=0;
+        DecimalFormat decimal = new DecimalFormat("#.####");
+        
+        try {
+            for (int i = 0; i < dc.length; i++) {
+                double actualizarPrecio=0.0;
+            
+                ResultSet rsCantidad = null;
+                rsCantidad = cn.st.executeQuery("SELECT Inventario FROM productos WHERE CodBarra='"+dc[i][0]+"';");
+                
+                CantidadActual=0;
+                while(rsCantidad.next()){
+                    CantidadActual = rsCantidad.getInt(1);
+                }
+
+                //Obtener el precio actual
+                double PrecioActual=0;
+
+                ResultSet rsPrecio = null;
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM Productos WHERE CodBarra='"+dc[i][0]+"';");
+
+                while(rsPrecio.next()){
+                    PrecioActual = rsPrecio.getDouble(1);
+
+
+                }
+                
+                actualizarPrecio = CantidadActual * PrecioActual;
+                actualizarPrecio = actualizarPrecio + ( Integer.parseInt(dc[i][2].toString()) * Double.parseDouble(dc[i][3].toString()) );
+                actualizarPrecio = actualizarPrecio / (Integer.parseInt(dc[i][2].toString())+CantidadActual);
+                cn.st.executeUpdate("UPDATE Productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
+                
+            }
+        
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
+        }
+    }
+    
+    public static int ObtenerIdCompra() throws ErrorTienda {
+       cn =new Conexion();
+        int IdCompra=0;
+        try {
+        ResultSet rsIdCompra = null;
+        rsIdCompra = cn.st.executeQuery("SELECT COUNT(*) FROM Compra");
+        
+        while(rsIdCompra.next()){
+            IdCompra = rsIdCompra.getInt("count(*)");
+        }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorCompra/ObtenerIdCompra", ex.getMessage());
+        } 
+        return IdCompra;
+    }
+    
+    
+    
+    }
+
