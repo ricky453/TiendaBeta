@@ -175,7 +175,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 60, 60));
 
         btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
-        btnAtras.setToolTipText("Ir a Home");
+        btnAtras.setToolTipText("Volver atrás");
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

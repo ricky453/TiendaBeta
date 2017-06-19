@@ -83,7 +83,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
         jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 60, 60));
 
         lblAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
-        lblAtras.setToolTipText("Atrás");
+        lblAtras.setToolTipText("Volver Atrás");
         lblAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

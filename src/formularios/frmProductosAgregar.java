@@ -102,7 +102,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 60, 60));
 
         lblAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
-        lblAtras.setToolTipText("Atrás");
+        lblAtras.setToolTipText("Volver Atrás");
         lblAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -153,7 +153,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtCodBarraProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 220, 30));
+        getContentPane().add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 220, 30));
 
         txtNombreProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,34 +165,34 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtNombreProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 270, 30));
+        getContentPane().add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 270, 30));
 
         txtCostoProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostoProductosKeyTyped(evt);
             }
         });
-        getContentPane().add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 80, 30));
+        getContentPane().add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, 80, 30));
 
         jLabel27.setBackground(new java.awt.Color(0, 0, 0));
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 0, 0));
         jLabel27.setText("Código de barra:");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, 20));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, 20));
 
         jLabel29.setBackground(new java.awt.Color(0, 0, 0));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Sucursal:");
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, -1, 20));
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, 20));
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Costo:");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 60, 40));
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, 60, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inventario:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, -1, 20));
 
         txtInventarioProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,12 +204,12 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 txtInventarioProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 60, 30));
+        getContentPane().add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 60, 30));
 
         jLabel31.setBackground(new java.awt.Color(0, 0, 0));
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setText("Nombre:");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, 20));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, -1, 20));
 
         cmbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbSucursal.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +217,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 cmbSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 540, 80, -1));
+        getContentPane().add(cmbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 180, 30));
 
         pack();
         setLocationRelativeTo(null);
