@@ -7,6 +7,11 @@ package formularios;
 
 import clases.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,10 +26,36 @@ public class frmProductosModificar extends javax.swing.JFrame {
      * Creates new form frmProductosModificar
      */
     frmProductos formu=new frmProductos();
+    DefaultComboBoxModel modeloModificarSucursal = new DefaultComboBoxModel();
+    
     public frmProductosModificar() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        llenandoComboboxSucursal();
+    }
+    
+    //--------------llenandoComboxSucuarsal-----------------------
+    public void llenandoComboboxSucursal(){
+        Object[] seleccion=new Object[4];
+        
+        
+        try {
+            ArrayList<Sucursal> misucu=ControladorSucursal.obtener();
+            Iterator iterador=misucu.iterator();
+            while(iterador.hasNext()){
+                seleccion[0]=iterador.next();
+                System.out.println(seleccion[0]);
+                modeloModificarSucursal.addElement(iterador.next());
+                
+                seleccion[2]=iterador.next();
+                seleccion[3]=iterador.next();
+            }
+            
+            cmbModificarSucursal.setModel(modeloModificarSucursal);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -52,6 +83,8 @@ public class frmProductosModificar extends javax.swing.JFrame {
         jLabel45 = new javax.swing.JLabel();
         txtNuevoNombreProducto = new javax.swing.JTextField();
         txtNuevoCostoProducto = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        cmbModificarSucursal = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -150,19 +183,19 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoInventarioProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 80, 30));
+        getContentPane().add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, 80, 30));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Nombre:");
-        getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, 20));
+        getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 20));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel44.setText("Inventario:");
-        getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, -1, 20));
+        jLabel44.setText("Sucursal:");
+        getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, 20));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel45.setText("Costo:");
-        getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, -1, 20));
+        getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, 20));
 
         txtNuevoNombreProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoNombreProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +208,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoNombreProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 410, 30));
+        getContentPane().add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 410, 30));
 
         txtNuevoCostoProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoCostoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -183,7 +216,13 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 txtNuevoCostoProductoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 90, 30));
+        getContentPane().add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 90, 30));
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel46.setText("Inventario:");
+        getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, 20));
+
+        getContentPane().add(cmbModificarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 340, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -220,10 +259,31 @@ public class frmProductosModificar extends javax.swing.JFrame {
         }else{
             DefaultTableModel modeloProductos=(DefaultTableModel) formu.tblProductos.getModel();
             Producto producto = new Producto();
+            String[] sucus=new String[4];
+            
             producto.setCodBarra(txtNuevoCodBarraProducto.getText());
             producto.setNombre(txtNuevoNombreProducto.getText());
-            producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
             producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
+            producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
+            
+            try {
+                    ArrayList<Sucursal> opcion=ControladorSucursal.obtener();
+                    Iterator iterador=opcion.iterator();
+                    while(iterador.hasNext()){
+                        sucus[0]=iterador.next().toString();
+                        sucus[1]=iterador.next().toString();
+                        sucus[2]=iterador.next().toString();
+                        sucus[3]=iterador.next().toString();
+                        
+                        if (sucus[1].equals(cmbModificarSucursal.getSelectedItem().toString())) {
+                            producto.setIdSucursal(Integer.parseInt(sucus[0]));
+                        }
+                        
+                    }
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             try {
                 ControladorProducto.Modificar(producto);
                 modeloProductos.setRowCount(0);
@@ -351,20 +411,22 @@ public class frmProductosModificar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardarModificarProducto;
+    public javax.swing.JComboBox<String> cmbModificarSucursal;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnCompras;
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JTextField txtNuevoCodBarraProducto;
-    private javax.swing.JTextField txtNuevoCostoProducto;
-    private javax.swing.JTextField txtNuevoInventarioProducto;
-    private javax.swing.JTextField txtNuevoNombreProducto;
+    public javax.swing.JTextField txtNuevoCodBarraProducto;
+    public javax.swing.JTextField txtNuevoCostoProducto;
+    public javax.swing.JTextField txtNuevoInventarioProducto;
+    public javax.swing.JTextField txtNuevoNombreProducto;
     // End of variables declaration//GEN-END:variables
 }

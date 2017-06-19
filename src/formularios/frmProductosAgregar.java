@@ -300,7 +300,6 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                         
                         if (sucus[1].equals(cmbSucursal.getSelectedItem().toString())) {
                             agregado.setIdSucursal(Integer.parseInt(sucus[0]));
-                            System.out.println(sucus[1]+"    "+cmbSucursal.getSelectedItem().toString());
                         }
                         
                     }

@@ -25,6 +25,7 @@ public class frmProductos extends javax.swing.JFrame {
 
     boolean estadoMenu=false; 
     
+    
     public frmProductos() {
         initComponents();
         this.setSize(1200, 700);
@@ -38,31 +39,89 @@ public class frmProductos extends javax.swing.JFrame {
         String codBarra=txtProductosBuscar.getText();
         DefaultTableModel modeloProductos = new DefaultTableModel();
         ArrayList<Producto> productos = new ArrayList();
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[5];
+        Object[] sucursales=new Object[4];
         if (codBarra.equals("")) {
             
             JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
             
         }else{
-            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo","Sucursal"};
             try {
+                ArrayList<Sucursal> opcionSucu= ControladorSucursal.obtener();
+                Iterator iterador = opcionSucu.iterator();
+                
                 productos = ControladorProducto.Buscar(codBarra);
                 modeloProductos.setColumnIdentifiers(campos);
                 Iterator<Producto> prod = productos.iterator();
+                
+                
+                
                 while (prod.hasNext()) {
                     fila[0] = prod.next();
                     fila[1] = prod.next();
                     fila[2] = prod.next();
                     fila[3] = prod.next();
+                    fila[4]=prod.next();
+                    
+                    while(iterador.hasNext()){
+                        sucursales[0]=iterador.next();
+                        sucursales[1]=iterador.next();
+                        sucursales[2]=iterador.next();
+                        sucursales[3]=iterador.next();
+                        
+                        if(fila[4].equals(sucursales[0])){
+                            fila[4]=sucursales[1];
+                            System.out.println(fila[4]);
+                            break;
+                            
+                        }
+                    }
+                    
                     modeloProductos.addRow(fila);
                     tblProductos.setModel(modeloProductos);
                 }
+                
+                
+                
+                for (int i = 0; i < fila.length; i++) {
+                    if (fila[4]==sucursales[0]) {
+                        fila[4]=sucursales[1];
+                    }
+                }
+                
+                
+                
                 if (tblProductos.getRowCount()==0) {
                     JOptionPane.showMessageDialog(null, "El producto buscado no existe");
                 }
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
+        }
+    }
+    
+    
+    //------------------------Extrayendo datos para comboboxSucursal-------------------
+    public void llenandoComboboxSucursal(){
+        Object[] seleccion=new Object[4];
+        frmProductosModificar frmPm=new frmProductosModificar();
+        
+        try {
+            ArrayList<Sucursal> misucu=ControladorSucursal.obtener();
+            Iterator iterador=misucu.iterator();
+            while(iterador.hasNext()){
+                seleccion[0]=iterador.next();
+                System.out.println(seleccion[0]);
+                frmPm.modeloModificarSucursal.addElement(iterador.next());
+                
+                seleccion[2]=iterador.next();
+                seleccion[3]=iterador.next();
+            }
+            
+            frmPm.cmbModificarSucursal.setModel(frmPm.modeloModificarSucursal);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -293,11 +352,11 @@ public class frmProductos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Barra", "Nombre", "Inventario", "Costo"
+                "Código de Barra", "Nombre", "Inventario", "Costo", "Sucursal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -324,7 +383,7 @@ public class frmProductos extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblProductos);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 840, 260));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 890, 260));
 
         btnNuevoProducto.setBackground(new java.awt.Color(0, 0, 0));
         btnNuevoProducto.setForeground(new java.awt.Color(255, 255, 255));
@@ -473,9 +532,26 @@ public class frmProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarProductoMouseExited
 
     private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
-        frmProductosModificar pm = new frmProductosModificar();
-        pm.setVisible(true);
-        this.setVisible(false);
+        
+        
+        
+        if(tblProductos.getSelectedRow()!=-1){
+            int seleccion; 
+            frmProductosModificar pm = new frmProductosModificar();
+            pm.setVisible(true);
+            this.setVisible(false);
+            seleccion = tblProductos.getSelectedRow();
+            pm.txtNuevoCodBarraProducto.setText(tblProductos.getValueAt(seleccion, 0).toString());
+            pm.txtNuevoNombreProducto.setText((tblProductos.getValueAt(seleccion, 1).toString()));
+            pm.txtNuevoCostoProducto.setText((tblProductos.getValueAt(seleccion, 3).toString()));
+            pm.txtNuevoInventarioProducto.setText((tblProductos.getValueAt(seleccion, 2).toString()));
+            
+            
+            pm.txtNuevoNombreProducto.requestFocus();
+            pm.txtNuevoNombreProducto.selectAll();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un dato de la tabla");
+        }
     }//GEN-LAST:event_btnModificarProductoActionPerformed
 
     private void btnEliminarProductoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProductoMouseEntered

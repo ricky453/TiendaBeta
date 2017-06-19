@@ -44,7 +44,8 @@ public class ControladorProducto {
     public static void Modificar(Producto pr) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE producto SET Inventario='"+pr.getInventario()+"',Costo='"+pr.getCosto()+"',Nombre='"+pr.getNombre()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE producto SET Nombre='"+pr.getNombre()+"',Costo='"+pr.getCosto()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE inventario SET IdSucursal='"+pr.getIdSucursal()+"',CodBarra='"+pr.getCodBarra()+"',Cantidad='"+pr.getInventario()+"' WHERE IdSucursal='"+pr.getIdSucursal()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
@@ -92,13 +93,14 @@ public class ControladorProducto {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT DISTINCT producto.CodBarra,producto.nombre,inventario.Cantidad,producto.Costo FROM producto INNER JOIN inventario ON producto.CodBarra=inventario.CodBarra WHERE producto.nombre LIKE '%"+buscar+"%' OR producto.CodBarra LIKE'%"+buscar+"%'");
+            rs=cn.st.executeQuery("SELECT DISTINCT producto.CodBarra,producto.nombre,inventario.Cantidad,producto.Costo, inventario.IdSucursal FROM producto INNER JOIN inventario ON producto.CodBarra=inventario.CodBarra WHERE producto.nombre LIKE '%"+buscar+"%' OR producto.CodBarra LIKE'%"+buscar+"%'");
             
                 while (rs.next()) {
                     producto.add(rs.getString(1));
                     producto.add(rs.getString(2));
                     producto.add(rs.getString(3));
                     producto.add(rs.getString(4));
+                    producto.add(rs.getString(5));
                 }
             
             
