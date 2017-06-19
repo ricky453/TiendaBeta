@@ -358,6 +358,11 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, -1, 20));
 
         txtNuevoNRCProveedor.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoNRCProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoNRCProveedorActionPerformed(evt);
+            }
+        });
         txtNuevoNRCProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoNRCProveedorKeyTyped(evt);
@@ -472,6 +477,13 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
         txtNuevoNRCProveedor.requestFocus();
         txtNuevoNRCProveedor.selectAll();
     }//GEN-LAST:event_txtNuevoEmailProveedorActionPerformed
+
+    private void txtNuevoNRCProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNRCProveedorActionPerformed
+    int Agregar = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?", "Modificar Proveedor",JOptionPane.YES_NO_OPTION);
+        if(Agregar == 0){
+            GuardarModificacion();
+        }
+    }//GEN-LAST:event_txtNuevoNRCProveedorActionPerformed
 
     /**
      * @param args the command line arguments

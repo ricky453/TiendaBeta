@@ -106,6 +106,53 @@ public class frmProveedores extends javax.swing.JFrame {
         pom.txtNuevoNombreProveedor.requestFocus();
         pom.nombre = tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString();
     }    
+    
+    public void EliminarProveedor(){
+        int fila = tblProveedores.getSelectedRow(); 
+        System.out.println(fila);
+        if (tblProveedores.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+            int seleccion;
+            seleccion = tblProveedores.getSelectedRow();
+            DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
+            Proveedor proveedor = new Proveedor();
+            
+            int idProve=Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString());
+            String nom=tblProveedores.getValueAt(seleccion, 1).toString();
+            String tel=tblProveedores.getValueAt(seleccion, 2).toString();
+            String dire=tblProveedores.getValueAt(seleccion, 3).toString();
+            String nit=tblProveedores.getValueAt(seleccion, 4).toString();
+            
+            
+            
+            proveedor.setIdProveedor(Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString()));
+            proveedor.setNombre(tblProveedores.getValueAt(seleccion, 1).toString());
+            proveedor.setTelefono(tblProveedores.getValueAt(seleccion, 2).toString());
+            proveedor.setDireccion(tblProveedores.getValueAt(seleccion, 3).toString());
+            proveedor.setNIT(tblProveedores.getValueAt(seleccion, 4).toString());
+            try{
+                ControladorProveedor.Eliminar(proveedor);
+                if (ControladorProveedor.isCambio()) {
+                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                    mensajeNotificacion("¡Error! Proveedor con registros vigentes.", "Error");
+                }else{
+                    modeloProveedores.removeRow(fila);
+                    txtProveedoresBuscar.setText("");
+                    mensajeNotificacion("¡Proveedor eliminado exitosamente!", "Ok");
+                }
+                
+                
+            }catch(ErrorTienda ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+           
+            
+        }
+        }else{
+            mensajeNotificacion("¡Seleccione un Proveedor de la tabla!", "Adv");
+        }
+    }
          
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -431,7 +478,7 @@ public class frmProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProveedorMouseExited
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-
+        EliminarProveedor();
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked

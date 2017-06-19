@@ -61,11 +61,24 @@ public class frmVentas extends javax.swing.JFrame {
         txtCodigoBarraVender.requestFocus();
     }
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
-    public void mensajeNotificacion(String mensaje){
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
         frmNotificacion not = new frmNotificacion();
         not.Mensaje(mensaje);
         not.setVisible(true);
-        
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
     }
     //OBTENER EL NUEVO ID DE VENTA ACTUALIZADO
     public void ObtenerIdVenta() throws ErrorTienda {
@@ -94,7 +107,7 @@ public class frmVentas extends javax.swing.JFrame {
             // Verificar si dicho codigo de barra esta almacenado en la bd
             if(miProducto.getCodBarra().isEmpty()){
                 
-                mensajeNotificacion("No se encontraron resultados");
+                mensajeNotificacion("No se encontraron resultados...", "Adv");
                 txtCodigoBarraVender.requestFocus();
                 txtCodigoBarraVender.selectAll();
             }else{
@@ -104,7 +117,7 @@ public class frmVentas extends javax.swing.JFrame {
                 
             }
         }else{
-            mensajeNotificacion("El código de barra está vacío");
+            mensajeNotificacion("El código de barra está vacío.", "Error");
             txtCodigoBarraVender.requestFocus();
             
             
@@ -637,7 +650,8 @@ public class frmVentas extends javax.swing.JFrame {
                     if (c != (char) KeyEvent.VK_DELETE) {
                         if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                            
+                            mensajeNotificacion("¡Error! Solo números.", "Error");
                         }
                     }
                 }
@@ -686,7 +700,7 @@ public class frmVentas extends javax.swing.JFrame {
                         if (c != (char) KeyEvent.VK_DELETE) {
                             if (c != (char) KeyEvent.VK_ENTER) {
                                 evt.consume();
-                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
                             }
                         }
                     }
