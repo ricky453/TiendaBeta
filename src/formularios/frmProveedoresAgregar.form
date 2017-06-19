@@ -310,6 +310,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtNITProveedor">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNITProveedorActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNITProveedorKeyTyped"/>
       </Events>
       <Constraints>
@@ -353,6 +354,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmailProveedor">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailProveedorActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailProveedorKeyTyped"/>
       </Events>
       <Constraints>
@@ -376,6 +378,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtNRCProveedor">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNRCProveedorActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNRCProveedorKeyTyped"/>
       </Events>
       <Constraints>

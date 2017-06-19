@@ -29,6 +29,7 @@ import javax.swing.border.Border;
 public class frmProveedores extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    //public static String tipo;
     private TableRowSorter trsFiltro;
     public DefaultTableModel modeloProveedores= new DefaultTableModel();
     frmProveedoresModificar pom = new frmProveedoresModificar();
@@ -40,7 +41,26 @@ public class frmProveedores extends javax.swing.JFrame {
         actualizarTablaProveedor();
 
     }
-
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+        
+    }
    //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
             modeloProveedores.setRowCount(0);
@@ -478,7 +498,7 @@ public class frmProveedores extends javax.swing.JFrame {
         this.setVisible(false); 
         ObtenerDatos();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Primero debe de seleccionar un proveedor");
+            mensajeNotificacion("Debe de seleccionar un proveedor.", "Adv");
         }
     }//GEN-LAST:event_btnModificarProveedorActionPerformed
 
