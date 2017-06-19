@@ -5,8 +5,17 @@ public class Producto {
     private String nombre;
     private double costo;
     public int Inventario;
+    public int IdSucursal;
 
     public Producto() {
+    }
+
+    public int getIdSucursal() {
+        return IdSucursal;
+    }
+
+    public void setIdSucursal(int IdSucursal) {
+        this.IdSucursal = IdSucursal;
     }
     
     public String getCodBarra() {
