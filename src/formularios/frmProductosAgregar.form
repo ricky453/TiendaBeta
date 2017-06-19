@@ -189,6 +189,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtCostoProductos">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCostoProductosActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCostoProductosKeyTyped"/>
       </Events>
       <Constraints>
