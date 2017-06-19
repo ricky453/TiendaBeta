@@ -41,7 +41,7 @@ public class ControladorCompra {
         try {
             Producto pr;
             for (int i = 0; i < dc.length; i++) {
-                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]));
+                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]),2);
                 int cantidad, cantidad2;
                 cantidad = pr.getInventario();
                 cantidad2 = (Integer) dc[i][2];

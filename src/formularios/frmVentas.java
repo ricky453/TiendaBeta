@@ -49,12 +49,14 @@ public class frmVentas extends javax.swing.JFrame {
         ObtenerIdVenta();
         txtCodigoBarraVender.requestFocus();
     }
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje){
         frmNotificacion not = new frmNotificacion();
         not.Mensaje(mensaje);
         not.setVisible(true);
         
     }
+    //OBTENER EL NUEVO ID DE VENTA ACTUALIZADO
     public void ObtenerIdVenta() throws ErrorTienda {
         int idVenta=0;
         
@@ -66,12 +68,13 @@ public class frmVentas extends javax.swing.JFrame {
         }
         lblIDVenta.setText("ID Venta "+idVenta);
     }
+    //OBETENER PRODUCTO CON CODIGO DE BARRA COMO PARAMETRO
     public void ObtenerProducto(String CodBarra) throws ErrorTienda{
         //Comprobar que el espacio de codigo de barra no esteb vacio 
         if(!txtCodigoBarraVender.getText().isEmpty()){
             Producto miProducto = null;
             try {
-                 miProducto = ControladorProducto.Obtener(CodBarra);
+                 miProducto = ControladorProducto.Obtener(CodBarra,2);
             } catch (ErrorTienda ex) {
                 throw new ErrorTienda("ObtenerProducto error", ex.getMessage());
             }
@@ -89,6 +92,10 @@ public class frmVentas extends javax.swing.JFrame {
             
             
         }
+    }
+    //OBTENER TODAS LAS SUCUARSALES
+    public void CargarSucursales(){
+        
     }
 
     /**
@@ -358,7 +365,6 @@ public class frmVentas extends javax.swing.JFrame {
         jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 20, 60));
 
         cmbSucursalVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cmbSucursalVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sucursal1", "Sucursal2", "Sucursal3" }));
         jpnAgregarCompra.add(cmbSucursalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 17, 160, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -432,11 +438,11 @@ public class frmVentas extends javax.swing.JFrame {
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 250, -1, -1));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraVenderKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyTyped(evt);
             }
         });
         getContentPane().add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 140, 40));

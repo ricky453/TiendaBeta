@@ -112,18 +112,18 @@ public class ControladorProducto {
     }
     
     
-    public static Producto Obtener(String CodBarra) throws ErrorTienda{
+    public static Producto Obtener(String CodBarra,int idSucursal) throws ErrorTienda{
         Producto miproducto=new Producto();
         
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM producto WHERE CodBarra='"+CodBarra+"'");
+            rs=cn.st.executeQuery("SELECT inventario.IdSucursal, inventario.Cantidad, inventario.CodBarra,producto.Nombre,producto.Costo FROM inventario,producto WHERE  inventario.CodBarra='"+CodBarra+"' AND inventario.IdSucursal="+idSucursal+" AND producto.CodBarra=inventario.CodBarra;");
             while (rs.next()) {
-                miproducto.setCodBarra(rs.getString(1));
-                miproducto.setNombre(rs.getString(2));
-                miproducto.setInventario(Integer.parseInt(rs.getString(3)));
-                miproducto.setCosto(Double.parseDouble(rs.getString(4)));
+                miproducto.setCodBarra(rs.getString(3));
+                miproducto.setNombre(rs.getString(4));
+                miproducto.setInventario(Integer.parseInt(rs.getString(2)));
+                miproducto.setCosto(Double.parseDouble(rs.getString(5)));
             }
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Obtener",e.getMessage());
