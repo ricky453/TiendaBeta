@@ -45,9 +45,10 @@ public class frmNotificacion extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(350, 113));
         setMinimumSize(new java.awt.Dimension(350, 113));
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(350, 113));
+        setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(4, 3, 1));

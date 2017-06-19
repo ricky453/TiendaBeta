@@ -41,11 +41,11 @@ public class ControladorCompra {
         try {
             Producto pr;
             for (int i = 0; i < dc.length; i++) {
-                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]));
+                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]),2);
                 int cantidad, cantidad2;
                 cantidad = pr.getInventario();
                 cantidad2 = (Integer) dc[i][2];
-                cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+(cantidad+cantidad2)+"' WHERE CodBarra = '"+dc[i][0]+"';");
+                cn.st.executeUpdate("UPDATE Inventario SET cantidad = '"+(cantidad+cantidad2)+"' WHERE CodBarra = '"+dc[i][0]+"';");
             }
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
@@ -61,7 +61,7 @@ public class ControladorCompra {
                 double actualizarPrecio=0.0;
             
                 ResultSet rsCantidad = null;
-                rsCantidad = cn.st.executeQuery("SELECT Inventario FROM productos WHERE CodBarra='"+dc[i][0]+"';");
+                rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM Inventario WHERE CodBarra='"+dc[i][0]+"';");
                 
                 CantidadActual=0;
                 while(rsCantidad.next()){
