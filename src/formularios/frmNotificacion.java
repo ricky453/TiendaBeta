@@ -43,12 +43,11 @@ public class frmNotificacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setMaximumSize(new java.awt.Dimension(350, 113));
-        setMinimumSize(new java.awt.Dimension(350, 113));
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        setMaximumSize(new java.awt.Dimension(350, 90));
+        setMinimumSize(new java.awt.Dimension(350, 90));
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(350, 113));
-        setType(java.awt.Window.Type.POPUP);
+        setOpacity(0.9F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(4, 3, 1));
@@ -56,12 +55,14 @@ public class frmNotificacion extends javax.swing.JFrame {
 
         lblMensaje.setFont(new java.awt.Font("DejaVu Sans", 1, 15)); // NOI18N
         lblMensaje.setForeground(new java.awt.Color(254, 254, 254));
-        jPanel1.add(lblMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 235, 30));
+        lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 235, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/noti.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, -1));
+        jLabel3.setPreferredSize(new java.awt.Dimension(350, 90));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 90));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 120));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
