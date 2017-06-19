@@ -32,7 +32,26 @@ public class frmProductos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
     //--------------------llenando tabla de productos----------------
     
     public void tablaBuscarProductos(){
@@ -42,8 +61,7 @@ public class frmProductos extends javax.swing.JFrame {
         Object[] fila = new Object[5];
         Object[] sucursales=new Object[4];
         if (codBarra.equals("")) {
-            
-            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
+            mensajeNotificacion("No ha introducido un código o nombre.", "Adv");
             
         }else{
             String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo","Sucursal"};
@@ -93,7 +111,7 @@ public class frmProductos extends javax.swing.JFrame {
                 
                 
                 if (tblProductos.getRowCount()==0) {
-                    JOptionPane.showMessageDialog(null, "El producto buscado no existe");
+                    mensajeNotificacion("¡Error! Ese producto no existe.", "Error");
                 }
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
@@ -550,7 +568,7 @@ public class frmProductos extends javax.swing.JFrame {
             pm.txtNuevoNombreProducto.requestFocus();
             pm.txtNuevoNombreProducto.selectAll();
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Seleccione un dato de la tabla");
+            mensajeNotificacion("¡Seleccione un dato de la tabla!", "Adv");
         }
     }//GEN-LAST:event_btnModificarProductoActionPerformed
 
@@ -588,11 +606,11 @@ public class frmProductos extends javax.swing.JFrame {
             try {
                 ControladorProducto.Eliminar(eliminar);
                 if (ControladorProducto.isCambio()) {
-                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                    mensajeNotificacion("¡Error! Producto con registros vigentes.", "Error");
                 }else{
                     modeloProductos.removeRow(fila);
                     txtProductosBuscar.setText("");
-                    JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+                    mensajeNotificacion("¡Producto eliminado exitosamente!", "Ok");
                 }
                 
             } catch (ErrorTienda ex) {
@@ -600,7 +618,7 @@ public class frmProductos extends javax.swing.JFrame {
             }
             }
         }else{
-            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+            mensajeNotificacion("¡Seleccione un Producto de la tabla!", "Adv");
         }
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
