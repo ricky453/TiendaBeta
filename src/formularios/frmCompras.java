@@ -548,7 +548,7 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCompraKeyTyped
 
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
-      
+        int idSucursal=0;
         char ch = evt.getKeyChar();
         if(txtCodBarraProd.getText().length()>=13){
            evt.consume();
@@ -578,7 +578,8 @@ public class frmCompras extends javax.swing.JFrame {
                 if (codBarra.equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
                 } else {
-                    ControladorProducto.Obtener(codBarra,1);
+                    idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
+                    ControladorProducto.Obtener(codBarra,idSucursal);
                     producto= ControladorProducto.Obtener(codBarra,1).getNombre();
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
                     if (producto==null || producto=="") {

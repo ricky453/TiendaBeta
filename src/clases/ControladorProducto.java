@@ -118,7 +118,7 @@ public class ControladorProducto {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT inventario.IdSucursal, inventario.Cantidad, inventario.CodBarra,producto.Nombre,producto.Costo FROM inventario,producto WHERE  inventario.CodBarra='"+CodBarra+"' AND inventario.IdSucursal="+idSucursal+" AND producto.CodBarra=inventario.CodBarra;");
+            rs=cn.st.executeQuery("SELECT Inventario.IdSucursal, Inventario.Cantidad, Inventario.CodBarra,Producto.Nombre,Producto.Costo FROM Inventario,Producto WHERE  Inventario.CodBarra='"+CodBarra+"' AND Inventario.IdSucursal="+idSucursal+" AND Producto.CodBarra=Inventario.CodBarra;");
             while (rs.next()) {
                 miproducto.setCodBarra(rs.getString(3));
                 miproducto.setNombre(rs.getString(4));

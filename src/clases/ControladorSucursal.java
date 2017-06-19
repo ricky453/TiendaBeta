@@ -22,7 +22,19 @@ public class ControladorSucursal {
     private static boolean cambio;
     
     
+    public static int ObtenerIdSucursal(Object nombre) throws ErrorTienda{
+        cn = new Conexion();
+        int id=0;
+        try {
+            rs = cn.st.executeQuery("SELECT IdSucursal FROM Sucursal WHERE Nombre= '"+nombre+"'");
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return id;
     
+    }
     public static ArrayList<Sucursal> buscarSucursal(String buscar) throws ErrorTienda{
         ArrayList<Object> sucursal = new ArrayList<Object>();
         
