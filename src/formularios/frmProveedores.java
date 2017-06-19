@@ -41,6 +41,8 @@ public class frmProveedores extends javax.swing.JFrame {
         actualizarTablaProveedor();
 
     }
+    
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
         if(tipo.equals("Error")){
         frmNotificacion not = new frmNotificacion();
@@ -58,8 +60,7 @@ public class frmProveedores extends javax.swing.JFrame {
         not.Mensaje(mensaje);
         not.setVisible(true);
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
-        }
-        
+        }       
     }
    //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
@@ -134,7 +135,6 @@ public class frmProveedores extends javax.swing.JFrame {
             try{
                 ControladorProveedor.Eliminar(proveedor);
                 if (ControladorProveedor.isCambio()) {
-                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
                     mensajeNotificacion("¡Error! Proveedor con registros vigentes.", "Error");
                 }else{
                     modeloProveedores.removeRow(fila);
