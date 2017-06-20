@@ -79,7 +79,8 @@ public class ControladorProducto {
             if (matriz[0] != null || matriz2[1] != null) {
                 setCambio(true);
             }else{
-                cn.st.executeUpdate("DELETE FROM Producto WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM inventario WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM producto WHERE CodBarra='"+pr.getCodBarra()+"'");
                 setCambio(false);
             }
         } catch (SQLException e) {
