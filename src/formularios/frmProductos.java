@@ -66,8 +66,8 @@ public class frmProductos extends javax.swing.JFrame {
         }else{
             String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo","Sucursal"};
             try {
-                ArrayList<Sucursal> opcionSucu= ControladorSucursal.obtener();
-                Iterator iterador = opcionSucu.iterator();
+                Sucursal opcionSucu;
+                
                 
                 productos = ControladorProducto.Buscar(codBarra);
                 modeloProductos.setColumnIdentifiers(campos);
@@ -76,39 +76,24 @@ public class frmProductos extends javax.swing.JFrame {
                 
                 
                 while (prod.hasNext()) {
+                    
                     fila[0] = prod.next();
                     fila[1] = prod.next();
                     fila[2] = prod.next();
                     fila[3] = prod.next();
-                    fila[4]=prod.next();
+                    fila[4] = prod.next();
                     
-                    while(iterador.hasNext()){
-                        sucursales[0]=iterador.next();
-                        sucursales[1]=iterador.next();
-                        sucursales[2]=iterador.next();
-                        sucursales[3]=iterador.next();
-                        
-                        if(fila[4].equals(sucursales[0])){
-                            fila[4]=sucursales[1];
-                            System.out.println(fila[4]);
-                            break;
-                            
-                        }
-                    }
+                    opcionSucu= ControladorSucursal.obtenerSucursal(Integer.parseInt(fila[4].toString()));
+                    
+                    
+                    fila[4]=opcionSucu.getNombre();
+                    
                     
                     modeloProductos.addRow(fila);
                     tblProductos.setModel(modeloProductos);
                 }
                 
-                
-                
-                for (int i = 0; i < fila.length; i++) {
-                    if (fila[4]==sucursales[0]) {
-                        fila[4]=sucursales[1];
-                    }
-                }
-                
-                
+            
                 
                 if (tblProductos.getRowCount()==0) {
                     mensajeNotificacion("¡Error! Ese producto no existe.", "Error");
