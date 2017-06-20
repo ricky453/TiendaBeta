@@ -33,8 +33,8 @@ public class ControladorProducto {
         
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO Producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
-            cn.st.executeUpdate("INSERT INTO Inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getCodBarra()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
+            cn.st.executeUpdate("INSERT INTO producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
+            cn.st.executeUpdate("INSERT INTO inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getIdSucursal()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Agregar",e.getMessage());
         }
