@@ -288,7 +288,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
             producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
             producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
             
-            try {
+            try {  //Para establecer el IdSucursal
                     ArrayList<Producto> opcion=ControladorProducto.Buscar(txtNuevoCodBarraProducto.getText());
                     Iterator iterador=opcion.iterator();
                     while(iterador.hasNext()){
@@ -298,14 +298,31 @@ public class frmProductosModificar extends javax.swing.JFrame {
                         produ[3]=iterador.next();
                         produ[4]=iterador.next();
                         
-                        Sucursal miSucursal=ControladorSucursal.obtenerSucursal(Integer.parseInt(produ[4].toString()));
+                        ArrayList<Sucursal> miSucursal=ControladorSucursal.obtener();
                         
-                        if (miSucursal.getNombre().equals(cmbModificarSucursal.getSelectedItem().toString())) {
-                            System.out.println(miSucursal.getNombre());
-                            System.out.println(cmbModificarSucursal.getSelectedItem());
-                            producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
-                            System.out.println(produ[4]);
+                        Iterator ite=miSucursal.iterator();
+                        while (ite.hasNext()) {
+                            sucus[0]=ite.next().toString();
+                            sucus[1]=ite.next().toString();
+                            sucus[2]=ite.next().toString();
+                            sucus[3]=ite.next().toString();
+                            
+                            if (sucus[1].equals(cmbModificarSucursal.getSelectedItem())) {
+                                produ[4]=sucus[0];
+                                System.out.println(produ[4]);
+                                producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
+                            }
+                            
                         }
+                        
+//                        if (miSucursal.getNombre().equals(cmbModificarSucursal.getSelectedItem().toString())) {
+//                            System.out.println(miSucursal.getNombre());
+//                            System.out.println(cmbModificarSucursal.getSelectedItem());
+//                            producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
+//                            System.out.println(produ[4]);
+//                        }else{
+//                            System.out.println("La sucuarsal no es la misma");
+//                        }
                     }
                     
                 } catch (ErrorTienda ex) {

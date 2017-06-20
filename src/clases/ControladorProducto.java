@@ -45,7 +45,7 @@ public class ControladorProducto {
         try {
             cn=new Conexion();
             cn.st.execute("UPDATE producto SET Nombre='"+pr.getNombre()+"',Costo='"+pr.getCosto()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
-            cn.st.execute("UPDATE inventario SET IdSucursal='"+pr.getIdSucursal()+"',CodBarra='"+pr.getCodBarra()+"',Cantidad='"+pr.getInventario()+"' WHERE IdSucursal='"+pr.getIdSucursal()+"'");
+            cn.st.execute("UPDATE inventario SET IdSucursal='"+pr.getIdSucursal()+"',CodBarra='"+pr.getCodBarra()+"',Cantidad='"+pr.getInventario()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
