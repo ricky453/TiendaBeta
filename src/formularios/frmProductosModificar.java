@@ -66,7 +66,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
             Iterator iterador=misucu.iterator();
             while(iterador.hasNext()){
                 seleccion[0]=iterador.next();
-                System.out.println(seleccion[0]);
+                
                 modeloModificarSucursal.addElement(iterador.next());
                 
                 seleccion[2]=iterador.next();
@@ -281,6 +281,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
             DefaultTableModel modeloProductos=(DefaultTableModel) formu.tblProductos.getModel();
             Producto producto = new Producto();
             String[] sucus=new String[4];
+            Object[] produ=new Object[5];
             
             producto.setCodBarra(txtNuevoCodBarraProducto.getText());
             producto.setNombre(txtNuevoNombreProducto.getText());
@@ -288,19 +289,25 @@ public class frmProductosModificar extends javax.swing.JFrame {
             producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
             
             try {
-                    ArrayList<Sucursal> opcion=ControladorSucursal.obtener();
+                    ArrayList<Producto> opcion=ControladorProducto.Buscar(txtNuevoCodBarraProducto.getText());
                     Iterator iterador=opcion.iterator();
                     while(iterador.hasNext()){
-                        sucus[0]=iterador.next().toString();
-                        sucus[1]=iterador.next().toString();
-                        sucus[2]=iterador.next().toString();
-                        sucus[3]=iterador.next().toString();
+                        produ[0]=iterador.next();
+                        produ[1]=iterador.next();
+                        produ[2]=iterador.next();
+                        produ[3]=iterador.next();
+                        produ[4]=iterador.next();
                         
-                        if (sucus[1].equals(cmbModificarSucursal.getSelectedItem().toString())) {
-                            producto.setIdSucursal(Integer.parseInt(sucus[0]));
+                        Sucursal miSucursal=ControladorSucursal.obtenerSucursal(Integer.parseInt(produ[4].toString()));
+                        
+                        if (miSucursal.getNombre().equals(cmbModificarSucursal.getSelectedItem().toString())) {
+                            System.out.println(miSucursal.getNombre());
+                            System.out.println(cmbModificarSucursal.getSelectedItem());
+                            producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
+                            System.out.println(produ[4]);
                         }
-                        
                     }
+                    
                 } catch (ErrorTienda ex) {
                     Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
                 }
