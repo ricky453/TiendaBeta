@@ -148,7 +148,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtNuevoTelefonoSucursal = new javax.swing.JFormattedTextField();
-        btnGuardarModificarProveedor = new javax.swing.JButton();
+        btnGuardarModificarSucursal = new javax.swing.JButton();
 
         tblSucursales =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -286,22 +286,22 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
         });
         getContentPane().add(txtNuevoTelefonoSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 230, 30));
 
-        btnGuardarModificarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
-        btnGuardarModificarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardarModificarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuardarModificarSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
+        btnGuardarModificarSucursal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarModificarSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarModificarProveedorMouseEntered(evt);
+                btnGuardarModificarSucursalMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarModificarProveedorMouseExited(evt);
+                btnGuardarModificarSucursalMouseExited(evt);
             }
         });
-        btnGuardarModificarProveedor.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarModificarSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarModificarProveedorActionPerformed(evt);
+                btnGuardarModificarSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardarModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
+        getContentPane().add(btnGuardarModificarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -360,17 +360,17 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtNuevoTelefonoSucursalActionPerformed
 
-    private void btnGuardarModificarProveedorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorMouseEntered
-        btnGuardarModificarProveedor.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprovB.png")));
-    }//GEN-LAST:event_btnGuardarModificarProveedorMouseEntered
+    private void btnGuardarModificarSucursalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarSucursalMouseEntered
+        btnGuardarModificarSucursal.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprovB.png")));
+    }//GEN-LAST:event_btnGuardarModificarSucursalMouseEntered
 
-    private void btnGuardarModificarProveedorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorMouseExited
-        btnGuardarModificarProveedor.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png")));
-    }//GEN-LAST:event_btnGuardarModificarProveedorMouseExited
+    private void btnGuardarModificarSucursalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarSucursalMouseExited
+        btnGuardarModificarSucursal.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png")));
+    }//GEN-LAST:event_btnGuardarModificarSucursalMouseExited
 
-    private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
+    private void btnGuardarModificarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarSucursalActionPerformed
 
-    }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
+    }//GEN-LAST:event_btnGuardarModificarSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,7 +408,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardarModificarProveedor;
+    private javax.swing.JButton btnGuardarModificarSucursal;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
