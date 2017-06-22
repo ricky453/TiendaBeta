@@ -18,9 +18,12 @@ import javax.swing.table.TableRowSorter;
 import clases.ErrorTienda;
 import clases.Proveedor;
 import clases.ControladorProveedor;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,6 +32,7 @@ import javax.swing.border.Border;
 public class frmProveedores extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    JTableHeader tHeadVentas;
     //public static String tipo;
     private TableRowSorter trsFiltro;
     public DefaultTableModel modeloProveedores= new DefaultTableModel();
@@ -39,6 +43,11 @@ public class frmProveedores extends javax.swing.JFrame {
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         actualizarTablaProveedor();
+        tHeadVentas = tblProveedores.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
 
     }
     
