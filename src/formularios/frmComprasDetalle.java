@@ -305,7 +305,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMenuCerrarMouseClicked
 
     private void lblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParametroMouseClicked
-        frmParametro pt = new frmParametro();
+        frmParametroModificar pt = new frmParametroModificar();
         pt.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblParametroMouseClicked
