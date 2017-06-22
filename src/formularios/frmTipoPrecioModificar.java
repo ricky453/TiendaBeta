@@ -24,11 +24,11 @@ import javax.swing.border.Border;
  *
  * @author Ricky
  */
-public class frmParametroModificar extends javax.swing.JFrame {
+public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
     
-    public frmParametroModificar() {
+    public frmTipoPrecioModificar() {
         initComponents();
         this.setSize(1200, 700);
     }
@@ -49,19 +49,18 @@ public class frmParametroModificar extends javax.swing.JFrame {
         jpnCompras = new javax.swing.JPanel();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel34 = new javax.swing.JLabel();
-        txtIDParametro = new javax.swing.JTextField();
+        txtIDTipoPrecio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtNombreParametro = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        btnGuardarModificarParametro = new javax.swing.JButton();
-        txtValorParametro = new javax.swing.JTextField();
+        btnGuardarModificarTipoPrecio = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
+        txtNombreTipoPrecio = new javax.swing.JTextField();
+        txtUtilidadTipoPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -108,16 +107,16 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Modificar el Parámetro:");
+        jLabel34.setText("Modificar el Tipo de Precio:");
         jpnCompras.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 12, -1, 30));
 
-        txtIDParametro.setEditable(false);
-        txtIDParametro.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtIDTipoPrecio.setEditable(false);
+        txtIDTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIDParametroKeyTyped(evt);
+                txtIDTipoPrecioKeyTyped(evt);
             }
         });
-        jpnCompras.add(txtIDParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 12, 90, 30));
+        jpnCompras.add(txtIDTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 12, 90, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,101 +125,77 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
         getContentPane().add(jpnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
-        txtNombreParametro.setForeground(new java.awt.Color(102, 0, 0));
-        txtNombreParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNombreParametro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreParametroActionPerformed(evt);
-            }
-        });
-        txtNombreParametro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreParametroKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtNombreParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Nombre:");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, 20));
 
-        btnGuardarModificarParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
-        btnGuardarModificarParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardarModificarParametro.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuardarModificarTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
+        btnGuardarModificarTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarModificarTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarModificarParametroMouseEntered(evt);
+                btnGuardarModificarTipoPrecioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarModificarParametroMouseExited(evt);
+                btnGuardarModificarTipoPrecioMouseExited(evt);
             }
         });
-        btnGuardarModificarParametro.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarModificarTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarModificarParametroActionPerformed(evt);
+                btnGuardarModificarTipoPrecioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardarModificarParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
-
-        txtValorParametro.setForeground(new java.awt.Color(102, 0, 0));
-        txtValorParametro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorParametroActionPerformed(evt);
-            }
-        });
-        txtValorParametro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValorParametroKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtValorParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 410, 30));
+        getContentPane().add(btnGuardarModificarTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Valor:");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, 20));
 
+        txtNombreTipoPrecio.setForeground(new java.awt.Color(102, 0, 0));
+        txtNombreTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombreTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreTipoPrecioActionPerformed(evt);
+            }
+        });
+        txtNombreTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreTipoPrecioKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtNombreTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
+
+        txtUtilidadTipoPrecio.setForeground(new java.awt.Color(102, 0, 0));
+        txtUtilidadTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUtilidadTipoPrecioActionPerformed(evt);
+            }
+        });
+        txtUtilidadTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUtilidadTipoPrecioKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtUtilidadTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 410, 30));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreParametroActionPerformed
-        txtValorParametro.requestFocus();
-    }//GEN-LAST:event_txtNombreParametroActionPerformed
+    private void btnGuardarModificarTipoPrecioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarTipoPrecioMouseEntered
+        btnGuardarModificarTipoPrecio.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprovB.png")));
+    }//GEN-LAST:event_btnGuardarModificarTipoPrecioMouseEntered
 
-    private void txtNombreParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreParametroKeyTyped
-        char mayu=evt.getKeyChar();
-        if (Character.isLowerCase(mayu)) {
-            String cadena=(""+mayu).toUpperCase();
-            mayu=cadena.charAt(0);
-            evt.setKeyChar(mayu);
-        }
-        else{
+    private void btnGuardarModificarTipoPrecioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarTipoPrecioMouseExited
+        btnGuardarModificarTipoPrecio.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png")));
+    }//GEN-LAST:event_btnGuardarModificarTipoPrecioMouseExited
 
-        }
-    }//GEN-LAST:event_txtNombreParametroKeyTyped
+    private void btnGuardarModificarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarTipoPrecioActionPerformed
 
-    private void btnGuardarModificarParametroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroMouseEntered
-        btnGuardarModificarParametro.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprovB.png")));
-    }//GEN-LAST:event_btnGuardarModificarParametroMouseEntered
-
-    private void btnGuardarModificarParametroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroMouseExited
-        btnGuardarModificarParametro.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png")));
-    }//GEN-LAST:event_btnGuardarModificarParametroMouseExited
-
-    private void btnGuardarModificarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroActionPerformed
-
-    }//GEN-LAST:event_btnGuardarModificarParametroActionPerformed
-
-    private void txtValorParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorParametroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorParametroActionPerformed
-
-    private void txtValorParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorParametroKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorParametroKeyTyped
+    }//GEN-LAST:event_btnGuardarModificarTipoPrecioActionPerformed
 
     private void lblAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseClicked
-        frmParametro pa = new frmParametro();
-        pa.setVisible(true);
+        frmTipoPrecio tp = new frmTipoPrecio();
+        tp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblAtrasMouseClicked
 
@@ -232,9 +207,33 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
 
-    private void txtIDParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDParametroKeyTyped
+    private void txtIDTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDTipoPrecioKeyTyped
 
-    }//GEN-LAST:event_txtIDParametroKeyTyped
+    }//GEN-LAST:event_txtIDTipoPrecioKeyTyped
+
+    private void txtNombreTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTipoPrecioActionPerformed
+        txtUtilidadTipoPrecio.requestFocus();
+    }//GEN-LAST:event_txtNombreTipoPrecioActionPerformed
+
+    private void txtNombreTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreTipoPrecioKeyTyped
+        char mayu=evt.getKeyChar();
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+    }//GEN-LAST:event_txtNombreTipoPrecioKeyTyped
+
+    private void txtUtilidadTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUtilidadTipoPrecioActionPerformed
+
+    private void txtUtilidadTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUtilidadTipoPrecioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -253,14 +252,22 @@ public class frmParametroModificar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmParametroModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTipoPrecioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmParametroModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTipoPrecioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmParametroModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTipoPrecioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmParametroModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTipoPrecioModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -273,13 +280,13 @@ public class frmParametroModificar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmParametroModificar().setVisible(true);
+                new frmTipoPrecioModificar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardarModificarParametro;
+    private javax.swing.JButton btnGuardarModificarTipoPrecio;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel34;
@@ -290,8 +297,8 @@ public class frmParametroModificar extends javax.swing.JFrame {
     private javax.swing.JPanel jpnCompras;
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
-    public static javax.swing.JTextField txtIDParametro;
-    private javax.swing.JTextField txtNombreParametro;
-    private javax.swing.JTextField txtValorParametro;
+    public static javax.swing.JTextField txtIDTipoPrecio;
+    private javax.swing.JTextField txtNombreTipoPrecio;
+    private javax.swing.JTextField txtUtilidadTipoPrecio;
     // End of variables declaration//GEN-END:variables
 }
