@@ -729,7 +729,7 @@ public final class frmHome extends javax.swing.JFrame {
         jpnOctavo.setBackground(new java.awt.Color(0, 0, 0));
         jpnOctavo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMitad8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad9.jpg"))); // NOI18N
+        lblMitad8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad7.JPG"))); // NOI18N
         jpnOctavo.add(lblMitad8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 515, 640));
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
