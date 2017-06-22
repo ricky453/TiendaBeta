@@ -880,7 +880,7 @@ public final class frmHome extends javax.swing.JFrame {
         apagado();
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnParametro);
         apagado2();
-        frmParametroModificar pr = new frmParametroModificar();
+        frmParametro pr = new frmParametro();
         pr.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnParametroMouseClicked
