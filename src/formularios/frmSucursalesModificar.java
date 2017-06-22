@@ -167,6 +167,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblSucursales);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMaximumSize(new java.awt.Dimension(1200, 700));
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
@@ -369,7 +370,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarModificarSucursalMouseExited
 
     private void btnGuardarModificarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarSucursalActionPerformed
-
+        GuardarModificacion();
     }//GEN-LAST:event_btnGuardarModificarSucursalActionPerformed
 
     /**
@@ -383,7 +384,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
