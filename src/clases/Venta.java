@@ -28,7 +28,11 @@ public class Venta {
     public void AgregarItem(DetalleVenta item){
         
     }
-    public void CalcularTotal(){
+    public void CalcularTotal(double costo,int cantidad, String utilidad){
+        double total, miUtilidad=0;
+        miUtilidad= Double.parseDouble(utilidad);
+        total = ((costo*cantidad)*this.IVA)/miUtilidad;
+        this.Total = total;
         
     }
     public double CalcularIVA(){

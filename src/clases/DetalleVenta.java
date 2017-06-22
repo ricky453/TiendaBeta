@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author jose
@@ -13,13 +15,21 @@ public class DetalleVenta {
     private Producto producto;
     private double Cantidad;
     private double PrecioUnitario;
+    DecimalFormat decimal = new DecimalFormat("0.00");
     
     public void Nuevo(String Cod, int Cantidad){
         
     }
-    public double CalcularPrecio(double precioInicial){
+    public double CalcularPrecio(double utilidad){
+        double nuevoPrecio=0,precioFinal;
+        nuevoPrecio=((this.PrecioUnitario)*1.13)/utilidad;
+        precioFinal=Math.round(nuevoPrecio*100.0)/100.0;
+        return Double.parseDouble(decimal.format(precioFinal));
+    }
+    public double CalcularPrecioDetalle(){
         double nuevoPrecio=0;
-        return nuevoPrecio;
+        nuevoPrecio=(this.PrecioUnitario*this.Cantidad);
+        return Double.parseDouble(decimal.format(nuevoPrecio));
     }
 
     public Producto getProducto() {
