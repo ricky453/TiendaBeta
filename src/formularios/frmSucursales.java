@@ -6,23 +6,33 @@
 package formularios;
 
 import clases.ErrorTienda;
+import static formularios.frmProveedores.tblProveedores;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
+import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author Ricky
  */
 public class frmSucursales extends javax.swing.JFrame {
-
+    
+    JTableHeader tHeadVentas;
     boolean estadoMenu;
     public frmSucursales() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        tHeadVentas = tblSucursales.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
     }
 
     /**
@@ -372,9 +382,9 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarSucursalMouseExited
 
     private void btnAgregarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarSucursalActionPerformed
-//        frmProveedoresAgregar pa = new frmProveedoresAgregar();
-  //      pa.setVisible(true);
-    //    this.setVisible(false);
+        frmSucursalesAgregar su = new frmSucursalesAgregar();
+        su.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAgregarSucursalActionPerformed
 
     private void btnModificarSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarSucursalMouseClicked
@@ -392,9 +402,9 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarSucursalMouseExited
 
     private void btnModificarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarSucursalActionPerformed
-//        frmProveedoresModificar pm = new frmProveedoresModificar();
-  //      pm.setVisible(true);
-    //    this.setVisible(false);
+        frmSucursalesModificar sm = new frmSucursalesModificar();
+        sm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnModificarSucursalActionPerformed
 
     private void txtSucursalesBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSucursalesBuscarKeyTyped

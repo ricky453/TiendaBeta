@@ -19,6 +19,7 @@ import clases.Sucursal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -42,13 +44,19 @@ public class frmCompras extends javax.swing.JFrame {
     DecimalFormat decimalProductos = new DecimalFormat("0.0000");
     DefaultTableModel tablaModel= new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
+    JTableHeader tHeadVentas;
+    
     public frmCompras() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         LlenarCompras();
         TableModel();
-        
+        tHeadVentas = tblCompra.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
     }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION

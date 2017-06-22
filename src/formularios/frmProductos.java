@@ -6,6 +6,9 @@
 package formularios;
 
 import clases.*;
+import static formularios.frmProveedores.tblProveedores;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -24,12 +28,18 @@ import javax.swing.table.DefaultTableModel;
 public class frmProductos extends javax.swing.JFrame {
 
     boolean estadoMenu=false; 
-    
+    JTableHeader tHeadVentas;
     
     public frmProductos() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        tHeadVentas = tblProductos.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
+
     }
     
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION

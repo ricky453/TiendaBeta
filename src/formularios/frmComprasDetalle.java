@@ -6,9 +6,12 @@
 package formularios;
 
 import clases.ErrorTienda;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -17,11 +20,17 @@ import javax.swing.ImageIcon;
 public class frmComprasDetalle extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    JTableHeader tHeadVentas;
     
     public frmComprasDetalle() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        tHeadVentas = tblCompras.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
     }
 
     /**
