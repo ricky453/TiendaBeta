@@ -35,6 +35,21 @@ public class ControladorSucursal {
         return id;
     
     }
+    public static int ObtenerIdMax() throws ErrorTienda{
+        int IdSucursal=0;   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT MAX(IdSucursal) FROM Sucursal");
+        
+            while(rs.next()){
+                IdSucursal = rs.getInt(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorSucursal/ObtenerIdSucursal", ex.getMessage());
+        } 
+        return IdSucursal;
+    
+    }
     public static ArrayList<Sucursal> buscarSucursal(String buscar) throws ErrorTienda{
         ArrayList<Object> sucursal = new ArrayList<Object>();
         

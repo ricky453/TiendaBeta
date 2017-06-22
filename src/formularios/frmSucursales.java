@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +37,7 @@ public class frmSucursales extends javax.swing.JFrame {
     boolean estadoMenu;
     private TableRowSorter trsFiltro;
     public DefaultTableModel modeloSucursales= new DefaultTableModel();
+    frmSucursalesModificar sum = new frmSucursalesModificar();
     
     public frmSucursales() {
         initComponents();
@@ -70,8 +72,19 @@ public class frmSucursales extends javax.swing.JFrame {
         }       
     }
     
+    //Obtener los datos para enviarlo a Modificar
+    public void ObtenerDatos(){
+        sum.txtIDSucursal.setText(tblSucursales.getValueAt(tblSucursales.getSelectedRow(), 0).toString());
+        sum.txtNuevoNombreSucursal.setText(tblSucursales.getValueAt(tblSucursales.getSelectedRow(), 1).toString());
+        sum.txtNuevoTelefonoSucursal.setText(tblSucursales.getValueAt(tblSucursales.getSelectedRow(), 3).toString());
+        sum.txtNuevoDireccionSucursal.setText(tblSucursales.getValueAt(tblSucursales.getSelectedRow(), 2).toString());
+        sum.txtNuevoNombreSucursal.selectAll();
+        sum.txtNuevoNombreSucursal.requestFocus();
+        sum.nombre = tblSucursales.getValueAt(tblSucursales.getSelectedRow(), 1).toString();
+    }    
+    
        //---------------------------Llenar tabla de proveedores----------------------------------------
-        public void actualizarTablaSucursal(){
+    public void actualizarTablaSucursal(){
             modeloSucursales.setRowCount(0);
             
             ArrayList<Sucursal> listaSucursal=new ArrayList();
@@ -99,6 +112,50 @@ public class frmSucursales extends javax.swing.JFrame {
         
          }
     } 
+        
+    public void EliminarSucursal(){
+        int fila = tblSucursales.getSelectedRow(); 
+        System.out.println(fila);
+        if (tblSucursales.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+            int seleccion;
+            seleccion = tblSucursales.getSelectedRow();
+            DefaultTableModel modeloProveedores=(DefaultTableModel) tblSucursales.getModel();
+            Sucursal sucursal = new Sucursal();
+            
+            int idSucursal=Integer.parseInt(tblSucursales.getValueAt(seleccion, 0).toString());
+            String nom=tblSucursales.getValueAt(seleccion, 1).toString();
+            String tel=tblSucursales.getValueAt(seleccion, 2).toString();
+            String dire=tblSucursales.getValueAt(seleccion, 3).toString();
+            
+            
+            
+            sucursal.setIdSucursal(Integer.parseInt(tblSucursales.getValueAt(seleccion, 0).toString()));
+            sucursal.setNombre(tblSucursales.getValueAt(seleccion, 1).toString());
+            sucursal.setTelefono(tblSucursales.getValueAt(seleccion, 2).toString());
+            sucursal.setDireccion(tblSucursales.getValueAt(seleccion, 3).toString());
+            try{
+                ControladorSucursal.eliminarSucursal(sucursal);
+                if (ControladorSucursal.isCambio()) {
+                    mensajeNotificacion("¡Error! Sucursal con registros vigentes.", "Error");
+                }else{
+                    modeloProveedores.removeRow(fila);
+                    txtSucursalesBuscar.setText("");
+                    mensajeNotificacion("¡Sucursal eliminada exitosamente!", "Ok");
+                }
+                
+                
+            }catch(ErrorTienda ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+           
+            
+        }
+        }else{
+            mensajeNotificacion("¡Seleccione una Sucursal de la tabla!", "Adv");
+        }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -390,7 +447,7 @@ public class frmSucursales extends javax.swing.JFrame {
 
             },
             new String [] {
-                "idSucursal", "Sucursal", "Teléfono", "Dirección"
+                "idSucursal", "Sucursal", "Direccion", "Telefono"
             }
         ));
         tblSucursales.getTableHeader().setReorderingAllowed(false);
@@ -429,7 +486,7 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarSucursalMouseExited
 
     private void btnEliminarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSucursalActionPerformed
-
+        EliminarSucursal();
     }//GEN-LAST:event_btnEliminarSucursalActionPerformed
 
     private void btnAgregarSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarSucursalMouseClicked
@@ -467,9 +524,14 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarSucursalMouseExited
 
     private void btnModificarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarSucursalActionPerformed
+    if(tblSucursales.getSelectedRow()!=-1){
         frmSucursalesModificar sm = new frmSucursalesModificar();
         sm.setVisible(true);
         this.setVisible(false);
+        ObtenerDatos();
+        } else {
+            mensajeNotificacion("Debe de seleccionar una Sucursal.", "Adv");
+        }
     }//GEN-LAST:event_btnModificarSucursalActionPerformed
 
     private void txtSucursalesBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSucursalesBuscarKeyTyped

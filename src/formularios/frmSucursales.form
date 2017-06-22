@@ -492,8 +492,8 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="idSucursal" type="java.lang.Object"/>
                 <Column editable="true" title="Sucursal" type="java.lang.Object"/>
-                <Column editable="true" title="Tel&#xe9;fono" type="java.lang.Object"/>
-                <Column editable="true" title="Direcci&#xf3;n" type="java.lang.Object"/>
+                <Column editable="true" title="Direccion" type="java.lang.Object"/>
+                <Column editable="true" title="Telefono" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

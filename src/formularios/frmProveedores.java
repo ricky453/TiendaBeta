@@ -554,7 +554,7 @@ public class frmProveedores extends javax.swing.JFrame {
         this.setVisible(false); 
         ObtenerDatos();
         } else {
-            mensajeNotificacion("Debe de seleccionar un proveedor.", "Adv");
+            mensajeNotificacion("Debe de seleccionar un Proveedor.", "Adv");
         }
     }//GEN-LAST:event_btnModificarProveedorActionPerformed
 

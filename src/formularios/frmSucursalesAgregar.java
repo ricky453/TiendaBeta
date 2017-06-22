@@ -5,7 +5,16 @@
  */
 package formularios;
 
+import clases.ControladorProveedor;
+import clases.ControladorSucursal;
+import clases.ErrorTienda;
+import clases.Sucursal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,24 +22,128 @@ import javax.swing.ImageIcon;
  */
 public class frmSucursalesAgregar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmSusursalesAgregar
-     */
+    public DefaultTableModel modeloSucursales= new DefaultTableModel();
+    boolean encontradoSuc;
+
     public frmSucursalesAgregar() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        limpiandoTxtSucursal();
     }
+    
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
+           //---------------------------Busca datos repetidos----------------------------------------
+        public void buscarRepetidos(){
+            modeloSucursales.setRowCount(0);
+            
+            ArrayList<Sucursal> listaSucursal=new ArrayList();
+            Object fila[]=new Object[7];
+            
+        
+            try {
+            listaSucursal=ControladorSucursal.obtener();
+            String[] nombreSucursal = new String []{"IdSucursal","Nombre","Direccion","Telefono"};
+            modeloSucursales.setColumnIdentifiers(nombreSucursal);
+            Iterator<Sucursal> prov=listaSucursal.iterator();
+                while(prov.hasNext()){
+                    fila[0]= prov.next();
+                    fila[1]= prov.next();
+                    fila[2]= prov.next();
+                    fila[3]= prov.next();
+                    modeloSucursales.addRow(fila);
+                    tblSucursales.setModel(modeloSucursales);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            
+        
+         }
+    }
+    public void limpiandoTxtSucursal(){
+        txtIDSucursal.setText("");
+        txtNombreSucursal.setText("");
+        txtDireccionSucursal.setText("");
+        txtTelefonoSucursal.setText("");
+        txtNombreSucursal.requestFocus();
+        int idSuc;
+        try {
+            idSuc = ControladorSucursal.ObtenerIdMax();
+            idSuc = idSuc+1;
+            txtIDSucursal.setText(""+idSuc);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+    
+    public void guardarDatos(){
+        Sucursal agregado=new Sucursal();
+        int idSuc;
+        encontradoSuc = false;
+        if (txtNombreSucursal.getText().equals("") || txtDireccionSucursal.getText().equals("") || txtTelefonoSucursal.getText().equals("")) {
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
+        }
+        else{
+            try {
+                idSuc = ControladorSucursal.ObtenerIdMax();
+                agregado.setIdSucursal(idSuc+1);
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmProveedoresAgregar.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              buscarRepetidos();
+              if (tblSucursales.getRowCount()>0) {
+                  int i = 0;
+                     while (encontradoSuc==false&&i<tblSucursales.getRowCount()) {
+                     encontradoSuc = tblSucursales.getValueAt(i, 1).equals(txtNombreSucursal.getText());
+                     i++;
+                  }
+              }
+              if(encontradoSuc == false){
+                  agregado.setNombre(txtNombreSucursal.getText());
+                  agregado.setTelefono(txtTelefonoSucursal.getText());
+                  agregado.setDireccion(txtDireccionSucursal.getText());
+              try {
+              ControladorSucursal.agregarSucursal(agregado);
+              mensajeNotificacion("¡Sucursal agregada exitosamente!", "Ok");
+              limpiandoTxtSucursal();
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+              } catch (ErrorTienda e) {      
+           }
+        }else{mensajeNotificacion("¡Error! Sucursal ya registrada.", "Error");}
+              encontradoSuc=false;
+              txtNombreSucursal.requestFocus();
+              txtNombreSucursal.selectAll();
+                
+        }
+        //LlenarCompra();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSucursales = new javax.swing.JTable();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -47,6 +160,22 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtTelefonoSucursal = new javax.swing.JFormattedTextField();
         btnGuardarProveedor = new javax.swing.JButton();
+
+        tblSucursales =new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblSucursales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "idSucursal", "Sucursal", "Teléfono", "Dirección"
+            }
+        ));
+        tblSucursales.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblSucursales);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 700));
@@ -180,7 +309,7 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
                 btnGuardarProveedorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 620, 110, 30));
+        getContentPane().add(btnGuardarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 570, 110, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -249,7 +378,7 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarProveedorMouseExited
 
     private void btnGuardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedorActionPerformed
-
+        guardarDatos();
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
 
     /**
@@ -295,12 +424,14 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnCompras;
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JTable tblSucursales;
     private javax.swing.JTextField txtDireccionSucursal;
     private javax.swing.JTextField txtIDSucursal;
     private javax.swing.JTextField txtNombreSucursal;
