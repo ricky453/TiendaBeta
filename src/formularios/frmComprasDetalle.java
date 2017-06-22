@@ -14,11 +14,11 @@ import javax.swing.ImageIcon;
  *
  * @author Ricky
  */
-public class frmVentasDetalle extends javax.swing.JFrame {
+public class frmComprasDetalle extends javax.swing.JFrame {
 
     boolean estadoMenu;
     
-    public frmVentasDetalle() {
+    public frmComprasDetalle() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
@@ -49,9 +49,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblVentas = new javax.swing.JTable();
+        tblCompras = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        txtVentasBuscar = new javax.swing.JTextField();
+        txtComprasBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
 
@@ -59,7 +59,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -191,7 +190,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Ventas");
+        jLabel34.setText("Compras");
         jpnAgregarCompra.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 12, -1, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -199,37 +198,37 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
-        tblVentas =new javax.swing.JTable(){
+        tblCompras =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tblVentas.setModel(new javax.swing.table.DefaultTableModel(
+        tblCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "idVenta", "CodBarra", "Teléfono", "Cantidad", "Precio Unitario"
+                "idCompra", "1", "2", "3", "4"
             }
         ));
-        tblVentas.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblVentas);
+        tblCompras.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblCompras);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 920, 380));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Lista de las Ventas:");
+        jLabel7.setText("Lista de las Compras:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
-        txtVentasBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtComprasBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtVentasBuscarKeyTyped(evt);
+                txtComprasBuscarKeyTyped(evt);
             }
         });
-        getContentPane().add(txtVentasBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 670, 30));
+        getContentPane().add(txtComprasBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 670, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Ventas a buscar:");
+        jLabel4.setText("Compras a buscar:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
@@ -240,13 +239,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        try {
-            frmVentas vt = new frmVentas();
-            vt.setVisible(true);
-            this.setVisible(false);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        frmCompras co = new frmCompras();
+        co.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
@@ -257,9 +252,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
 
-    private void txtVentasBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVentasBuscarKeyTyped
+    private void txtComprasBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComprasBuscarKeyTyped
 
-    }//GEN-LAST:event_txtVentasBuscarKeyTyped
+    }//GEN-LAST:event_txtComprasBuscarKeyTyped
 
     private void lblSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSucursalesMouseClicked
         frmSucursales sc = new frmSucursales();
@@ -289,7 +284,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             vt.setVisible(true);
             this.setVisible(false);
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmComprasDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblVentasMouseClicked
 
@@ -333,21 +328,27 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmComprasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmComprasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmComprasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmComprasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVentasDetalle().setVisible(true);
+                new frmComprasDetalle().setVisible(true);
             }
         });
     }
@@ -372,7 +373,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblVentas;
-    private javax.swing.JTable tblVentas;
-    private javax.swing.JTextField txtVentasBuscar;
+    private javax.swing.JTable tblCompras;
+    private javax.swing.JTextField txtComprasBuscar;
     // End of variables declaration//GEN-END:variables
 }
