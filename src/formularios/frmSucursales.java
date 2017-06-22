@@ -5,16 +5,26 @@
  */
 package formularios;
 
+import clases.ControladorSucursal;
 import clases.ErrorTienda;
+import clases.Proveedor;
+import clases.Sucursal;
 import static formularios.frmProveedores.tblProveedores;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.RowFilter;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -24,8 +34,12 @@ public class frmSucursales extends javax.swing.JFrame {
     
     JTableHeader tHeadVentas;
     boolean estadoMenu;
+    private TableRowSorter trsFiltro;
+    public DefaultTableModel modeloSucursales= new DefaultTableModel();
+    
     public frmSucursales() {
         initComponents();
+        actualizarTablaSucursal();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         tHeadVentas = tblSucursales.getTableHeader();
@@ -34,6 +48,57 @@ public class frmSucursales extends javax.swing.JFrame {
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
     }
+    
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
+    
+       //---------------------------Llenar tabla de proveedores----------------------------------------
+        public void actualizarTablaSucursal(){
+            modeloSucursales.setRowCount(0);
+            
+            ArrayList<Sucursal> listaSucursal=new ArrayList();
+            Object fila[]=new Object[7];
+            
+        
+            try {
+            listaSucursal=ControladorSucursal.obtener();
+            String[] nombreSucursal = new String []{"IdSucursal","Nombre","Direccion","Telefono"};
+            modeloSucursales.setColumnIdentifiers(nombreSucursal);
+            Iterator<Sucursal> prov=listaSucursal.iterator();
+                while(prov.hasNext()){
+                    fila[0]= prov.next();
+                    fila[1]= prov.next();
+                    fila[2]= prov.next();
+                    fila[3]= prov.next();
+                    modeloSucursales.addRow(fila);
+                    tblSucursales.setModel(modeloSucursales);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            
+        
+         }
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -408,7 +473,26 @@ public class frmSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarSucursalActionPerformed
 
     private void txtSucursalesBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSucursalesBuscarKeyTyped
-
+        char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+        }
+        else{
+         }
+        txtSucursalesBuscar.addKeyListener(new KeyAdapter(){
+            
+            @Override
+            public void keyReleased(final KeyEvent e){
+                String cadena = (txtSucursalesBuscar.getText());
+                txtSucursalesBuscar.setText(cadena);
+                repaint();
+                trsFiltro.setRowFilter(RowFilter.regexFilter(txtSucursalesBuscar.getText(), 1));
+            }
+        });
+        trsFiltro = new TableRowSorter(tblSucursales.getModel());
+        tblSucursales.setRowSorter(trsFiltro);
     }//GEN-LAST:event_txtSucursalesBuscarKeyTyped
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
@@ -510,7 +594,7 @@ public class frmSucursales extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
