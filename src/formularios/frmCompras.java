@@ -614,7 +614,7 @@ public class frmCompras extends javax.swing.JFrame {
         if (tblCompra.getRowCount()>0) {
             int i = 0;
             while (encontrado==false&&i<tblCompra.getRowCount()) {
-                encontrado = tblCompra.getValueAt(i, 0).equals(txtNumeroDoc.getText());
+                encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd1.getText());
                 i++;
             }
         }
@@ -640,7 +640,7 @@ public class frmCompras extends javax.swing.JFrame {
             int nuevaCantidad;
             double nuevoCosto;
             while (buscar==false) {
-                buscar = tblCompra.getValueAt(j, 0).equals(txtNumeroDoc.getText());
+                buscar = tblCompra.getValueAt(j, 0).equals(txtCodBarraProd1.getText());
                 j++;
             }
             nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(j-1, 2).toString());
@@ -772,28 +772,30 @@ public class frmCompras extends javax.swing.JFrame {
                 Object [][] detallesCompra;
 
                 int filas = tablaModel.getRowCount();
-                detallesCompra = new Object[filas][4];
+                detallesCompra = new Object[filas][5];
                 for(int x=0;x<filas;x++){
                     detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
                     detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
                     detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
                     detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
+                    detallesCompra[x][4]=ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
                 }
                 ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
-                ControladorCompra.ActualizarInventario(detallesCompra);
+                ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
 
-                mensajeNotificacion("Compra Agregada", "OK");
+                
                 }
-
-                int idCompra;
-                idCompra = ControladorCompra.ObtenerIdCompra();
-                //limpiarCompra();
-                txtIdCompra.setText(String.valueOf(idCompra+1));
-                tablaModel.setNumRows(0);
-                txtTotal.setText("$");
-                txtIVA.setText("");
-                txtPercepcion.setText("");
+            mensajeNotificacion("Compra Agregada", "Ok");
+            int idCompra;
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            //limpiarCompra();
+            txtIdCompra.setText(String.valueOf(idCompra+1));
+            tablaModel.setNumRows(0);
+            txtTotal.setText("$");
+            txtIVA.setText("");
+            txtPercepcion.setText("");
+            cmbSucursalCompra.setEnabled(true);
             
         } catch (ErrorTienda ex) {
             
@@ -946,7 +948,7 @@ public class frmCompras extends javax.swing.JFrame {
             }
         }
         if (s == KeyEvent.VK_ENTER) {
-           if (txtNumeroDoc.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
+           if (txtCodBarraProd1.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
                 mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
             }else{
                 if(Double.parseDouble(txtCostoProd.getText()) > 0){

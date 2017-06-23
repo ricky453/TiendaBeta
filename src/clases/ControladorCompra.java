@@ -13,8 +13,8 @@ public class ControladorCompra {
             +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             for(int x=0;x<detalleCompra.length;x++){
-                   cn.st.execute("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario)VALUES('"
-                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"')");
+                   cn.st.execute("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario, IdSucursal)VALUES('"
+                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"','"+detalleCompra[x][4]+"')");
                    
             }
             
@@ -40,12 +40,12 @@ public class ControladorCompra {
         return detalleCompra;
     }
     
-    public static void ActualizarInventario(Object[][] dc) throws ErrorTienda{
+    public static void ActualizarInventario(Object[][] dc, int IdSucursal) throws ErrorTienda{
         cn = new Conexion();
         try {
             Producto pr;
             for (int i = 0; i < dc.length; i++) {
-                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]),2);
+                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]),IdSucursal);
                 int cantidad, cantidad2;
                 cantidad = pr.getInventario();
                 cantidad2 = (Integer) dc[i][2];
