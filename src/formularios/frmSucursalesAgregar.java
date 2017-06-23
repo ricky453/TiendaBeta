@@ -57,7 +57,7 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
             modeloSucursales.setRowCount(0);
             
             ArrayList<Sucursal> listaSucursal=new ArrayList();
-            Object fila[]=new Object[7];
+            Object fila[]=new Object[4];
             
         
             try {
