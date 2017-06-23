@@ -33,8 +33,8 @@ public class ControladorProducto {
         
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
-            cn.st.executeUpdate("INSERT INTO inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getIdSucursal()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
+            cn.st.executeUpdate("INSERT INTO Producto(CodBarra,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
+            cn.st.executeUpdate("INSERT INTO Inventario(IdSucursal,CodBarra,Cantidad) VALUES('"+pr.getIdSucursal()+"','"+pr.getCodBarra()+"','"+pr.getInventario()+"')");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Agregar",e.getMessage());
         }
@@ -44,8 +44,8 @@ public class ControladorProducto {
     public static void Modificar(Producto pr) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE producto SET Nombre='"+pr.getNombre()+"',Costo='"+pr.getCosto()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
-            cn.st.execute("UPDATE inventario SET IdSucursal='"+pr.getIdSucursal()+"',CodBarra='"+pr.getCodBarra()+"',Cantidad='"+pr.getInventario()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE Producto SET Nombre='"+pr.getNombre()+"',Costo='"+pr.getCosto()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE Inventario SET IdSucursal='"+pr.getIdSucursal()+"',CodBarra='"+pr.getCodBarra()+"',Cantidad='"+pr.getInventario()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
@@ -79,8 +79,8 @@ public class ControladorProducto {
             if (matriz[0] != null || matriz2[1] != null) {
                 setCambio(true);
             }else{
-                cn.st.executeUpdate("DELETE FROM inventario WHERE CodBarra='"+pr.getCodBarra()+"'");
-                cn.st.executeUpdate("DELETE FROM producto WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM Inventario WHERE CodBarra='"+pr.getCodBarra()+"'");
+                cn.st.executeUpdate("DELETE FROM Producto WHERE CodBarra='"+pr.getCodBarra()+"'");
                 setCambio(false);
             }
         } catch (SQLException e) {
@@ -94,7 +94,7 @@ public class ControladorProducto {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT DISTINCT producto.CodBarra,producto.nombre,inventario.Cantidad,producto.Costo, inventario.IdSucursal FROM producto INNER JOIN inventario ON producto.CodBarra=inventario.CodBarra WHERE producto.nombre LIKE '%"+buscar+"%' OR producto.CodBarra LIKE'%"+buscar+"%'");
+            rs=cn.st.executeQuery("SELECT DISTINCT Producto.CodBarra,Producto.nombre,Inventario.Cantidad,Producto.Costo, Inventario.IdSucursal FROM Producto INNER JOIN Inventario ON Producto.CodBarra=Inventario.CodBarra WHERE Producto.nombre LIKE '%"+buscar+"%' OR Producto.CodBarra LIKE'%"+buscar+"%'");
             
                 while (rs.next()) {
                     producto.add(rs.getString(1));

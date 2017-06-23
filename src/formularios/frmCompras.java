@@ -622,7 +622,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         if(encontrado == false){
             String fila[]  = new String[5];
-            fila[0]=txtNumeroDoc.getText();
+            fila[0]=txtCodBarraProd1.getText();
             fila[1]=txtNomProd.getText();
             fila[2]=txtCantidad.getText();
             //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
@@ -779,7 +779,7 @@ public class frmCompras extends javax.swing.JFrame {
                     detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
                     detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
                 }
-                ControladorCompra.Agregar(compra);
+                ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra);
 
