@@ -43,11 +43,12 @@ public class frmVentas extends javax.swing.JFrame {
     Iterator<Sucursal> Iterador;
     Object sucursal[],misPrecios[][] ;
     DecimalFormat decimal =new DecimalFormat("0.00");
+    double subTotales;
     
     ControladorVenta cv;
     ControladorProducto cp;
     Producto miProducto;
-    Venta venta;
+    Venta venta = new Venta();
     DetalleVenta dv = new DetalleVenta();
     ControladorTipoPrecio precios;
     
@@ -64,9 +65,11 @@ public class frmVentas extends javax.swing.JFrame {
         tHeadVentas.setFont(fuente);
         modeloVentas = (DefaultTableModel) tblProductosVender.getModel();
         
+        
         ObtenerIdVenta();
         CargarSucursales();
         tipoPrecios();
+        cmbTipoPrecio.setSelectedIndex(1);
         txtCodigoBarraVender.requestFocus();
         tipoVentaSeleccion(false);
         limpiar("todo");
@@ -159,8 +162,14 @@ public class frmVentas extends javax.swing.JFrame {
                 System.err.println("Mi utilidad: "+utilidad);
                 
                 dv.setPrecioUnitario(miProducto.getCosto());
-                costoUnitario=dv.CalcularPrecio(utilidad);
-                modeloVentas.setValueAt(costoUnitario,fila, 3);
+                //VERIFICAR EL TIPO DE VENTA
+                if(cmbTipoVenta.getSelectedIndex()==0){
+                    costoUnitario=dv.CalcularPrecio(utilidad)*1.13;
+                }else{
+                    costoUnitario=dv.CalcularPrecio(utilidad);
+                }
+                
+                modeloVentas.setValueAt(decimal.format(costoUnitario),fila, 3);
             
         }
         contador++;
@@ -169,11 +178,29 @@ public class frmVentas extends javax.swing.JFrame {
         dv.setCantidad(Double.parseDouble(txtCantidadVender.getText()));
         totalDetalle=dv.CalcularPrecioDetalle();
         modeloVentas.setValueAt(totalDetalle,fila, 4);
-        System.out.println("");
         
+        if(cmbTipoVenta.getSelectedIndex()==1){
+        SumarSubTotales();
+            System.out.println("sub totales "+subTotales);
+        venta.setTotalGravado(subTotales);
+        venta.CalcularIVA();
+        venta.CalcularTotal();
         
+        txtIVA.setText("$ "+decimal.format(venta.getIVA()));
+        txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
+        }
+        
+        limpiar("p");
     }
-    
+    //CALCULAR SUMA DE SUB TOTALES
+    public void SumarSubTotales(){
+        int filas = modeloVentas.getRowCount();
+        subTotales=0;
+        for(int i=0;i<filas;i++){
+            subTotales+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(i, 4)));
+        }
+        txtSumas.setText("$"+subTotales);
+    }
     //OBTENER TODAS LAS SUCUARSALES
     public void CargarSucursales() throws ErrorTienda{
         sucursales = ControladorSucursal.obtener();
@@ -668,11 +695,11 @@ public class frmVentas extends javax.swing.JFrame {
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/vender.png"))); // NOI18N
         btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVenderMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVenderMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVenderMouseEntered(evt);
             }
         });
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -695,11 +722,11 @@ public class frmVentas extends javax.swing.JFrame {
         btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
         btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetallesMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnDetallesMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetallesMouseEntered(evt);
             }
         });
         btnDetalles.addActionListener(new java.awt.event.ActionListener() {
@@ -873,11 +900,11 @@ public class frmVentas extends javax.swing.JFrame {
        if(cmbTipoVenta.getSelectedIndex() == 0)
        {
            tipoVentaSeleccion(false);
-           limpiar("nombre");
+           limpiar("todo");
        }else{
 
            tipoVentaSeleccion(true);
-           limpiar("nombre");
+           limpiar("todo");
        }
     }//GEN-LAST:event_cmbTipoVentaItemStateChanged
 
