@@ -81,7 +81,7 @@ public class frmProveedores extends javax.swing.JFrame {
         
             try {
             listaProveedor=ControladorProveedor.Obtener();
-            String[] nombreProveedores = new String []{"IdProveedor","Nombre","Telefono","Direccion","NIT","Email","NRC"};
+            String[] nombreProveedores = new String []{"IdProveedor","Nombre","Telefono","Direccion","NIT","NRC","Email"};
             modeloProveedores.setColumnIdentifiers(nombreProveedores);
             Iterator<Proveedor> prov=listaProveedor.iterator();
                 while(prov.hasNext()){
@@ -110,8 +110,8 @@ public class frmProveedores extends javax.swing.JFrame {
         pom.txtNuevoTelefono.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
         pom.txtNuevoDireccionProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
         pom.txtNuevoNITProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
-        pom.txtNuevoEmailProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 5).toString());
-        pom.txtNuevoNRCProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 6).toString());
+        pom.txtNuevoEmailProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 6).toString());
+        pom.txtNuevoNRCProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 5).toString());
         pom.txtNuevoNombreProveedor.selectAll();
         pom.txtNuevoNombreProveedor.requestFocus();
         pom.nombre = tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString();
