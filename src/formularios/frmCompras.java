@@ -538,7 +538,7 @@ public class frmCompras extends javax.swing.JFrame {
             int idCompra;
             idCompra = ControladorCompra.ObtenerIdCompra();
             txtIdCompra.setText(String.valueOf(idCompra+1));
-            txtNumeroDoc.setText(""+(idCompra+1));
+            txtNumeroDoc.setText(String.valueOf(idCompra+1));
             //GENERAR FECHA 
             Date utilDate=new Date();
             SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
@@ -654,11 +654,11 @@ public class frmCompras extends javax.swing.JFrame {
         encontrado = false;
         //LIMPIAR LOS TXT
         txtCodBarraProd1.setText("");
-        txtNumeroDoc.setText("");
+        
         txtNomProd.setText("");
         txtCantidad.setText("1");
         txtCostoProd.setText("");
-        txtNumeroDoc.requestFocus();
+        txtCodBarraProd1.requestFocus();
 
         int filas = tablaModel.getRowCount();
         int iteraciones=0;
@@ -758,7 +758,7 @@ public class frmCompras extends javax.swing.JFrame {
                 }
                 compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 compra.setFecha(formato.format(fechaActual));
-                if (Tipocompra==1) {
+                if (Tipocompra==0) {
                     compra.setPercepcion(Double.parseDouble(total)*0.1);
                     compra.setIVA(Double.parseDouble(total)*0.13);
                     compra.setTotal(Double.parseDouble(total)+(Double.parseDouble(total)*0.1)+(Double.parseDouble(total)*0.13));
@@ -768,7 +768,7 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setARTICULOS(Articulos);
                 compra.setSubTotal(Double.parseDouble(total));
                 compra.setNumDocumento(txtNumeroDoc.getText());
-
+                System.out.println(txtNumeroDoc.getText()+"hfadfhgadsd");
                 Object [][] detallesCompra;
 
                 int filas = tablaModel.getRowCount();
@@ -791,6 +791,7 @@ public class frmCompras extends javax.swing.JFrame {
             idCompra = ControladorCompra.ObtenerIdCompra();
             //limpiarCompra();
             txtIdCompra.setText(String.valueOf(idCompra+1));
+            txtNumeroDoc.setText(String.valueOf(idCompra+1));
             tablaModel.setNumRows(0);
             txtTotal.setText("$");
             txtIVA.setText("");
@@ -828,57 +829,7 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCompraKeyTyped
 
     private void txtNumeroDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDocKeyTyped
-        int idSucursal=0;
-        char ch = evt.getKeyChar();
-        if(txtNumeroDoc.getText().length()>=13){
-           evt.consume();
-        }else{
-            if (ch < '0' || ch > '9') {
-
-                if (ch != (char) KeyEvent.VK_BEGIN) {
-                    if (ch != (char) KeyEvent.VK_BACK_SPACE) {
-                        if (ch != (char) KeyEvent.VK_DELETE) {
-                            if(ch != (char) KeyEvent.VK_ENTER){
-
-                                evt.consume();
-                                mensajeNotificacion("¡Error! Solo números.", "Error");
-
-                            }
-                        }
-                    }
-                }
-            }   
-        }
-        char c = evt.getKeyChar();               
-        if (c == (char) KeyEvent.VK_ENTER) {
-            String codBarra=txtNumeroDoc.getText();
-            String producto;
-
-            try {
-                if (codBarra.equals("")) {
-                    mensajeNotificacion("¡Ingrese un código de barras!", "Error");
-                } else {
-                    idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
-                    ControladorProducto.Obtener(codBarra,idSucursal);
-                    producto= ControladorProducto.Obtener(codBarra,1).getNombre();
-                    //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
-                    if (producto==null || producto=="") {
-                        txtNomProd.setEditable(true);
-                        txtNomProd.requestFocus();                          
-                        mensajeNotificacion("Ese producto no está, ¡Agregue!", "Adv");
-                        exprod=false;
-                    } else {
-                        txtNomProd.setText(producto);
-                        txtCantidad.requestFocus();
-                        txtCantidad.selectAll();
-                        exprod=true;
-                    }
-                }
-            } catch (ErrorTienda ex) {
-
-            }
-                
-        }
+        
 
     }//GEN-LAST:event_txtNumeroDocKeyTyped
 
@@ -1100,6 +1051,7 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetallesActionPerformed
 
     private void txtCodBarraProd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProd1KeyTyped
+        int idSucursal=0;
         char ch = evt.getKeyChar();
         if(txtCodBarraProd1.getText().length()>=13){
            evt.consume();
@@ -1112,7 +1064,7 @@ public class frmCompras extends javax.swing.JFrame {
                             if(ch != (char) KeyEvent.VK_ENTER){
 
                                 evt.consume();
-                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
 
                             }
                         }
@@ -1121,25 +1073,22 @@ public class frmCompras extends javax.swing.JFrame {
             }   
         }
         char c = evt.getKeyChar();               
-             if (c == (char) KeyEvent.VK_ENTER) {
-                String codBarra=txtCodBarraProd1.getText();
-                String producto="";
+        if (c == (char) KeyEvent.VK_ENTER) {
+            String codBarra=txtCodBarraProd1.getText();
+            String producto;
 
+            try {
                 if (codBarra.equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
+                    mensajeNotificacion("¡Ingrese un código de barras!", "Error");
                 } else {
-                    try {
-                        ControladorProducto.Obtener(codBarra,ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
-                        producto= ControladorProducto.Obtener(codBarra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem())).getNombre();
-                    } catch (ErrorTienda ex) {
-                        
-                    }
-                    
+                    idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
+                    ControladorProducto.Obtener(codBarra,idSucursal);
+                    producto= ControladorProducto.Obtener(codBarra,1).getNombre();
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
                     if (producto==null || producto=="") {
-                        txtNomProd.setEditable(true);
-                        txtNomProd.requestFocus();
-                        JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
+                        txtCodBarraProd1.setEditable(true);
+                        txtCodBarraProd1.requestFocus();                          
+                        mensajeNotificacion("Ese producto no está, ¡Agregue!", "Adv");
                         exprod=false;
                     } else {
                         txtNomProd.setText(producto);
@@ -1148,6 +1097,9 @@ public class frmCompras extends javax.swing.JFrame {
                         exprod=true;
                     }
                 }
+            } catch (ErrorTienda ex) {
+
+            }
                 
         }
     }//GEN-LAST:event_txtCodBarraProd1KeyTyped
