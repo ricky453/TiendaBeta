@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Compra {
     private int IdCompra;
-    private Date fecha;
+    private String fecha;
     private Proveedor PROVEEDOR;
     private int IdSucursal;
     private char TipoCompra;
@@ -27,13 +27,14 @@ public class Compra {
         this.IdCompra = IdCompra;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
 
     public Proveedor getPROVEEDOR() {
         return PROVEEDOR;

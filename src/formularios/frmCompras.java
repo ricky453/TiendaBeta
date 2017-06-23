@@ -8,10 +8,12 @@ package formularios;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import AppPackage.AnimationClass;
+import clases.Compra;
 import clases.ControladorCompra;
 import clases.ControladorProducto;
 import clases.ControladorProveedor;
 import clases.ControladorSucursal;
+import clases.DetalleCompra;
 import clases.ErrorTienda;
 import clases.Producto;
 import clases.Proveedor;
@@ -101,11 +103,12 @@ public class frmCompras extends javax.swing.JFrame {
         jpnAgregarCompra = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel34 = new javax.swing.JLabel();
+        lblnumdoc = new javax.swing.JLabel();
         cmbTipoCompra = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel35 = new javax.swing.JLabel();
         cmbSucursalCompra = new javax.swing.JComboBox<>();
+        txtNumeroDoc = new javax.swing.JTextField();
         btnGuardarVenta = new javax.swing.JButton();
         txtIdCompra = new javax.swing.JTextField();
         cmbProveedor = new javax.swing.JComboBox();
@@ -118,7 +121,6 @@ public class frmCompras extends javax.swing.JFrame {
         lblProveedor = new javax.swing.JLabel();
         lblPercepcion = new javax.swing.JLabel();
         lblCodBarraProd = new javax.swing.JLabel();
-        txtCodBarraProd = new javax.swing.JTextField();
         lblNomProd = new javax.swing.JLabel();
         txtNomProd = new javax.swing.JTextField();
         lblCantidad = new javax.swing.JLabel();
@@ -133,12 +135,12 @@ public class frmCompras extends javax.swing.JFrame {
         lblIVA = new javax.swing.JLabel();
         txtIVA = new javax.swing.JTextField();
         btnDetalles = new javax.swing.JButton();
+        txtCodBarraProd1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -311,10 +313,10 @@ public class frmCompras extends javax.swing.JFrame {
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jpnAgregarCompra.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 20, 50));
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Agregar una Compra:");
-        jpnAgregarCompra.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 12, -1, 30));
+        lblnumdoc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblnumdoc.setForeground(new java.awt.Color(240, 240, 240));
+        lblnumdoc.setText("Número Documento:");
+        jpnAgregarCompra.add(lblnumdoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 30));
 
         cmbTipoCompra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cmbTipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crédito Fiscal", "Factura", "Libre" }));
@@ -337,16 +339,24 @@ public class frmCompras extends javax.swing.JFrame {
         cmbSucursalCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sucursal1", "Sucursal2", "Sucursal3" }));
         jpnAgregarCompra.add(cmbSucursalCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 12, 160, 30));
 
+        txtNumeroDoc.setEditable(false);
+        txtNumeroDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroDocKeyTyped(evt);
+            }
+        });
+        jpnAgregarCompra.add(txtNumeroDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 180, 30));
+
         getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseEntered(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -414,13 +424,6 @@ public class frmCompras extends javax.swing.JFrame {
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
         getContentPane().add(lblCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 80, 30));
-
-        txtCodBarraProd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodBarraProdKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 120, 30));
 
         lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNomProd.setText("Producto:");
@@ -515,6 +518,13 @@ public class frmCompras extends javax.swing.JFrame {
         });
         getContentPane().add(btnDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 110, 30));
 
+        txtCodBarraProd1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodBarraProd1KeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtCodBarraProd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 120, 30));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -580,7 +590,7 @@ public class frmCompras extends javax.swing.JFrame {
     }
     public void AgregarProductoCompras(){
         Producto pr = new Producto();
-        pr.setCodBarra(txtCodBarraProd.getText());
+        pr.setCodBarra(txtNumeroDoc.getText());
         pr.setNombre(txtNomProd.getText());
         pr.setInventario(Integer.parseInt(txtCantidad.getText()));
         pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
@@ -598,7 +608,7 @@ public class frmCompras extends javax.swing.JFrame {
         if (tblCompra.getRowCount()>0) {
             int i = 0;
             while (encontrado==false&&i<tblCompra.getRowCount()) {
-                encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                encontrado = tblCompra.getValueAt(i, 0).equals(txtNumeroDoc.getText());
                 i++;
             }
         }
@@ -606,7 +616,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         if(encontrado == false){
             String fila[]  = new String[5];
-            fila[0]=txtCodBarraProd.getText();
+            fila[0]=txtNumeroDoc.getText();
             fila[1]=txtNomProd.getText();
             fila[2]=txtCantidad.getText();
             //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
@@ -620,7 +630,7 @@ public class frmCompras extends javax.swing.JFrame {
             int nuevaCantidad;
             double nuevoCosto;
             while (buscar==false) {
-                buscar = tblCompra.getValueAt(j, 0).equals(txtCodBarraProd.getText());
+                buscar = tblCompra.getValueAt(j, 0).equals(txtNumeroDoc.getText());
                 j++;
             }
             nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(j-1, 2).toString());
@@ -633,11 +643,11 @@ public class frmCompras extends javax.swing.JFrame {
         }
         encontrado = false;
         //LIMPIAR LOS TXT 
-        txtCodBarraProd.setText("");
+        txtNumeroDoc.setText("");
         txtNomProd.setText("");
         txtCantidad.setText("1");
         txtCostoProd.setText("");
-        txtCodBarraProd.requestFocus();
+        txtNumeroDoc.requestFocus();
 
         int filas = tablaModel.getRowCount();
         int iteraciones=0;
@@ -669,7 +679,83 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarVentaMouseExited
 
     private void btnGuardarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVentaActionPerformed
+        ArrayList<Proveedor> Proveedor = new ArrayList();
+        Object IdProveedor;
+        Object[] llenarProveedor = new Object[4];
+        ArrayList<DetalleCompra> Articulos = new ArrayList();
+        DetalleCompra detalleCompra = new DetalleCompra();
+        Date fechaActual = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Compra compra = new Compra();
+        ControladorProducto producto = new ControladorProducto();
+        Proveedor proveedor = new Proveedor();
+        try {
+            Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
+            Iterator<Proveedor> prov = Proveedor.iterator();
+            IdProveedor = prov.next();                       
+            if (tblCompra.getRowCount()>0) {
+               String IDprov=IdProveedor.toString();
+               int idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
+                for (int i = 0; i < tblCompra.getRowCount(); i++) {
+                    detalleCompra.setCostoUnitario(Double.parseDouble(decimal.format(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()))));
+                    detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
+                    detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString(),idSucursal));
+                    Articulos.add(detalleCompra);
+                }
+                while (prov.hasNext()) {
+                    llenarProveedor[0] = prov.next();
+                    llenarProveedor[1] = prov.next();
+                    llenarProveedor[2] = prov.next();
+                    llenarProveedor[3] = prov.next();
+                    
+                    
+                }    
+                    proveedor.setIdProveedor(Integer.parseInt(IdProveedor.toString()));
+                    proveedor.setNombre(llenarProveedor[0].toString());
+                    proveedor.setTelefono(llenarProveedor[1].toString());
+                    proveedor.setDireccion(llenarProveedor[2].toString());
+                    proveedor.setNIT(llenarProveedor[3].toString());
+                    
+                String total="";
+                
+                for (int j = 1; j < txtTotal.getText().length(); j++) {
+                    total = total + txtTotal.getText().charAt(j);
+                }
+ 
+               compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
+               compra.setPROVEEDOR(proveedor);
+               compra.setFecha(formato.format(fechaActual));
+               compra.setARTICULOS(Articulos);
+               compra.setTotal(Double.parseDouble(total));
+               
+               Object [][] detallesCompra;
+            
+            int filas = tablaModel.getRowCount();
+            detallesCompra = new Object[filas][4];
+            for(int x=0;x<filas;x++){
+                detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
+                detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
+                detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
+                detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
+            }
+               ControladorCompra.Agregar(compra);
+               ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
+               ControladorCompra.ActualizarInventario(detallesCompra);
 
+               JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
+            }
+            
+            int idCompra;
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            //limpiarCompra();
+            txtIdCompra.setText(String.valueOf(idCompra+1));
+            tablaModel.setNumRows(0);
+            txtTotal.setText("$");
+            
+        } catch (ErrorTienda ex) {
+            
+        }
+        
     }//GEN-LAST:event_btnGuardarVentaActionPerformed
 
     private void tblCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCompraKeyPressed
@@ -696,10 +782,10 @@ public class frmCompras extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblCompraKeyTyped
 
-    private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
+    private void txtNumeroDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDocKeyTyped
         int idSucursal=0;
         char ch = evt.getKeyChar();
-        if(txtCodBarraProd.getText().length()>=13){
+        if(txtNumeroDoc.getText().length()>=13){
            evt.consume();
         }else{
             if (ch < '0' || ch > '9') {
@@ -720,7 +806,7 @@ public class frmCompras extends javax.swing.JFrame {
         }
         char c = evt.getKeyChar();               
         if (c == (char) KeyEvent.VK_ENTER) {
-            String codBarra=txtCodBarraProd.getText();
+            String codBarra=txtNumeroDoc.getText();
             String producto;
 
             try {
@@ -749,7 +835,7 @@ public class frmCompras extends javax.swing.JFrame {
                 
         }
 
-    }//GEN-LAST:event_txtCodBarraProdKeyTyped
+    }//GEN-LAST:event_txtNumeroDocKeyTyped
 
     private void txtNomProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProdKeyTyped
         // TODO add your handling code here:
@@ -817,7 +903,7 @@ public class frmCompras extends javax.swing.JFrame {
             }
         }
         if (s == KeyEvent.VK_ENTER) {
-           if (txtCodBarraProd.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
+           if (txtNumeroDoc.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
                 mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
             }else{
                 if(Double.parseDouble(txtCostoProd.getText()) > 0){
@@ -844,7 +930,7 @@ public class frmCompras extends javax.swing.JFrame {
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
 
-        txtCodBarraProd.setText("");
+        txtNumeroDoc.setText("");
         txtNomProd.setText("");
         txtCantidad.setText("1");
         txtCostoProd.setText("");
@@ -917,11 +1003,15 @@ public class frmCompras extends javax.swing.JFrame {
 
     private void cmbTipoCompraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCompraItemStateChanged
         if(cmbTipoCompra.getSelectedIndex()==0){
+            lblnumdoc.setVisible(true);
             lblIVA.setVisible(true);
+            txtNumeroDoc.setVisible(true);
             txtIVA.setVisible(true);
             lblPercepcion.setVisible(true);
             txtPercepcion.setVisible(true);
         }else{
+            lblnumdoc.setVisible(false);
+            txtNumeroDoc.setVisible(false);
             lblIVA.setVisible(false);
             txtIVA.setVisible(false);
             lblPercepcion.setVisible(false);
@@ -958,6 +1048,10 @@ public class frmCompras extends javax.swing.JFrame {
         cd.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnDetallesActionPerformed
+
+    private void txtCodBarraProd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProd1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodBarraProd1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -1003,7 +1097,6 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbTipoCompra;
     private javax.swing.JLabel home;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane6;
@@ -1034,15 +1127,17 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblTotal1;
     private javax.swing.JLabel lblVentas;
+    private javax.swing.JLabel lblnumdoc;
     private javax.swing.JLabel menu;
     private javax.swing.JTable tblCompra;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCodBarraProd;
+    private javax.swing.JTextField txtCodBarraProd1;
     private javax.swing.JTextField txtCostoProd;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtIdCompra;
     private javax.swing.JTextField txtNomProd;
+    private javax.swing.JTextField txtNumeroDoc;
     private javax.swing.JTextField txtPercepcion;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

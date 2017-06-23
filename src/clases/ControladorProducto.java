@@ -115,7 +115,7 @@ public class ControladorProducto {
     }
     
     
-    public static Producto Obtener(String CodBarra,int idSucursal) throws ErrorTienda{
+    public static Producto Obtener(String CodBarra, int idSucursal) throws ErrorTienda{
         Producto miproducto=new Producto();
         
         
