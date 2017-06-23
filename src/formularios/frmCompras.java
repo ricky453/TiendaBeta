@@ -746,13 +746,13 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
                 compra.setPROVEEDOR(proveedor);
                 switch (Tipocompra) {                    
-                    case 1:                        
+                    case 0:                        
                         compra.setTipoCompra('C');                        
                         break;
-                    case 2:
+                    case 1:
                         compra.setTipoCompra('F');
                         break;
-                    case 3:
+                    case 2:
                         compra.setTipoCompra('L');
                         break;
                 }
@@ -767,7 +767,7 @@ public class frmCompras extends javax.swing.JFrame {
                 }
                 compra.setARTICULOS(Articulos);
                 compra.setSubTotal(Double.parseDouble(total));
-                
+                compra.setNumDocumento(txtNumeroDoc.getText());
 
                 Object [][] detallesCompra;
 
