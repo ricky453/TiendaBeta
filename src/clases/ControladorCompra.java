@@ -9,7 +9,7 @@ public class ControladorCompra {
     static Conexion cn;
     public static void Agregar(Compra compra) throws ErrorTienda{
         try {
-            cn.st.executeUpdate("INSERT INTO compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getFecha()+"', '"+compra.getPROVEEDOR().getIdProveedor()
+            cn.st.executeUpdate("INSERT INTO Compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getFecha()+"', '"+compra.getPROVEEDOR().getIdProveedor()
             +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             
@@ -22,7 +22,7 @@ public class ControladorCompra {
         ArrayList<Object> dc= new ArrayList<Object>();
         ResultSet rs;
         try {
-            rs = cn.st.executeQuery("SELECT * FROM detalleCompra");
+            rs = cn.st.executeQuery("SELECT * FROM DetalleCompra");
             while (rs.next()) {
                 dc.add(rs.getString(1));
                 dc.add(rs.getString(2));
@@ -72,7 +72,7 @@ public class ControladorCompra {
                 double PrecioActual=0;
 
                 ResultSet rsPrecio = null;
-                rsPrecio = cn.st.executeQuery("SELECT Costo FROM Productos WHERE CodBarra='"+dc[i][0]+"';");
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM Producto WHERE CodBarra='"+dc[i][0]+"';");
 
                 while(rsPrecio.next()){
                     PrecioActual = rsPrecio.getDouble(1);
@@ -83,7 +83,7 @@ public class ControladorCompra {
                 actualizarPrecio = CantidadActual * PrecioActual;
                 actualizarPrecio = actualizarPrecio + ( Integer.parseInt(dc[i][2].toString()) * Double.parseDouble(dc[i][3].toString()) );
                 actualizarPrecio = actualizarPrecio / (Integer.parseInt(dc[i][2].toString())+CantidadActual);
-                cn.st.executeUpdate("UPDATE Productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
+                cn.st.executeUpdate("UPDATE Producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
                 
             }
         

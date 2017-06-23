@@ -18,6 +18,7 @@ import clases.ErrorTienda;
 import clases.Producto;
 import clases.Proveedor;
 import clases.Sucursal;
+import clases.TipoPrecio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
@@ -320,6 +321,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         cmbTipoCompra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cmbTipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crédito Fiscal", "Factura", "Libre" }));
+        cmbTipoCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cmbTipoCompra.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoCompraItemStateChanged(evt);
@@ -536,6 +538,7 @@ public class frmCompras extends javax.swing.JFrame {
             int idCompra;
             idCompra = ControladorCompra.ObtenerIdCompra();
             txtIdCompra.setText(String.valueOf(idCompra+1));
+            txtNumeroDoc.setText(""+(idCompra+1));
             //GENERAR FECHA 
             Date utilDate=new Date();
             SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
@@ -572,28 +575,30 @@ public class frmCompras extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         
-    }
+    } 
     public void eliminarCompras(){
-    int fila = tblCompra.getSelectedRow();
-    if (fila != -1) {
-        int opcion1=JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar el producto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/iconos/pregunta.png"));
+        int fila = tblCompra.getSelectedRow();
+        if (fila != -1) {
+            int opcion1=JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar el producto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/iconos/pregunta.png"));
     
-    if (opcion1 == 0) {
-        tablaModel.removeRow(tblCompra.getSelectedRow());
-        
-    }}
-}
+        if (opcion1 == 0) {
+            tablaModel.removeRow(tblCompra.getSelectedRow());
+        }
+        }
+    }
     public void TableModel(){
         String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
         tablaModel.setColumnIdentifiers(headers);
         tblCompra.setModel(tablaModel);
     }
-    public void AgregarProductoCompras(){
+    public void AgregarProductoCompras() throws ErrorTienda{
         Producto pr = new Producto();
         pr.setCodBarra(txtNumeroDoc.getText());
         pr.setNombre(txtNomProd.getText());
         pr.setInventario(Integer.parseInt(txtCantidad.getText()));
         pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
+        pr.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
+        
         try {
             ControladorProducto.Agregar(pr);
         } catch (ErrorTienda ex) {
@@ -605,6 +610,7 @@ public class frmCompras extends javax.swing.JFrame {
         mensajeNotificacion("¡Producto agregado exitosamente!", "Ok");
     }
     public void AgregarProductoTablaCompras(){
+        int TipoCompra = cmbTipoCompra.getSelectedIndex();
         if (tblCompra.getRowCount()>0) {
             int i = 0;
             while (encontrado==false&&i<tblCompra.getRowCount()) {
@@ -620,7 +626,11 @@ public class frmCompras extends javax.swing.JFrame {
             fila[1]=txtNomProd.getText();
             fila[2]=txtCantidad.getText();
             //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
-            fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText()));
+            if (TipoCompra != 0) {
+                fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText())+Double.parseDouble(txtCostoProd.getText())*0.13);
+            }else{
+                fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText()));
+            }
             fila[4]=String.valueOf(decimalProductos.format((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText()))));
             tablaModel.addRow(fila);
             tblCompra.setModel(tablaModel);
@@ -642,7 +652,8 @@ public class frmCompras extends javax.swing.JFrame {
             tblCompra.setModel(tablaModel);
         }
         encontrado = false;
-        //LIMPIAR LOS TXT 
+        //LIMPIAR LOS TXT
+        txtCodBarraProd1.setText("");
         txtNumeroDoc.setText("");
         txtNomProd.setText("");
         txtCantidad.setText("1");
@@ -660,6 +671,10 @@ public class frmCompras extends javax.swing.JFrame {
 
         double totalFinal=Double.parseDouble(decimal.format(total));
         txtTotal.setText("$"+totalFinal);
+        if (TipoCompra==0) {
+            txtIVA.setText("$"+decimal.format(totalFinal*0.13));
+            txtPercepcion.setText("$"+decimal.format(totalFinal*0.1));
+        }
 }
     
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
@@ -681,7 +696,7 @@ public class frmCompras extends javax.swing.JFrame {
     private void btnGuardarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVentaActionPerformed
         ArrayList<Proveedor> Proveedor = new ArrayList();
         Object IdProveedor;
-        Object[] llenarProveedor = new Object[4];
+        Object[] llenarProveedor = new Object[6];
         ArrayList<DetalleCompra> Articulos = new ArrayList();
         DetalleCompra detalleCompra = new DetalleCompra();
         Date fechaActual = new Date();
@@ -689,6 +704,7 @@ public class frmCompras extends javax.swing.JFrame {
         Compra compra = new Compra();
         ControladorProducto producto = new ControladorProducto();
         Proveedor proveedor = new Proveedor();
+        int Tipocompra = cmbTipoCompra.getSelectedIndex();
         try {
             Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
             Iterator<Proveedor> prov = Proveedor.iterator();
@@ -707,50 +723,77 @@ public class frmCompras extends javax.swing.JFrame {
                     llenarProveedor[1] = prov.next();
                     llenarProveedor[2] = prov.next();
                     llenarProveedor[3] = prov.next();
+                    llenarProveedor[4] = prov.next();
+                    llenarProveedor[5] = prov.next();
+                    
                     
                     
                 }    
-                    proveedor.setIdProveedor(Integer.parseInt(IdProveedor.toString()));
-                    proveedor.setNombre(llenarProveedor[0].toString());
-                    proveedor.setTelefono(llenarProveedor[1].toString());
-                    proveedor.setDireccion(llenarProveedor[2].toString());
-                    proveedor.setNIT(llenarProveedor[3].toString());
-                    
+                proveedor.setIdProveedor(Integer.parseInt(IdProveedor.toString()));
+                proveedor.setNombre(llenarProveedor[0].toString());
+                proveedor.setTelefono(llenarProveedor[1].toString());
+                proveedor.setDireccion(llenarProveedor[2].toString());
+                proveedor.setNIT(llenarProveedor[3].toString());
+                proveedor.setEmail(llenarProveedor[4].toString());
+                proveedor.setNRC(llenarProveedor[5].toString());
+
                 String total="";
-                
+
                 for (int j = 1; j < txtTotal.getText().length(); j++) {
                     total = total + txtTotal.getText().charAt(j);
                 }
- 
-               compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
-               compra.setPROVEEDOR(proveedor);
-               compra.setFecha(formato.format(fechaActual));
-               compra.setARTICULOS(Articulos);
-               compra.setTotal(Double.parseDouble(total));
-               
-               Object [][] detallesCompra;
-            
-            int filas = tablaModel.getRowCount();
-            detallesCompra = new Object[filas][4];
-            for(int x=0;x<filas;x++){
-                detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
-                detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
-                detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
-                detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
-            }
-               ControladorCompra.Agregar(compra);
-               ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
-               ControladorCompra.ActualizarInventario(detallesCompra);
 
-               JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
-            }
-            
-            int idCompra;
-            idCompra = ControladorCompra.ObtenerIdCompra();
-            //limpiarCompra();
-            txtIdCompra.setText(String.valueOf(idCompra+1));
-            tablaModel.setNumRows(0);
-            txtTotal.setText("$");
+                compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
+                compra.setPROVEEDOR(proveedor);
+                switch (Tipocompra) {                    
+                    case 1:                        
+                        compra.setTipoCompra('C');                        
+                        break;
+                    case 2:
+                        compra.setTipoCompra('F');
+                        break;
+                    case 3:
+                        compra.setTipoCompra('L');
+                        break;
+                }
+                compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
+                compra.setFecha(formato.format(fechaActual));
+                if (Tipocompra==1) {
+                    compra.setPercepcion(Double.parseDouble(total)*0.1);
+                    compra.setIVA(Double.parseDouble(total)*0.13);
+                    compra.setTotal(Double.parseDouble(total)+(Double.parseDouble(total)*0.1)+(Double.parseDouble(total)*0.13));
+                }else{
+                    compra.setTotal(Double.parseDouble(total));
+                }
+                compra.setARTICULOS(Articulos);
+                compra.setSubTotal(Double.parseDouble(total));
+                
+
+                Object [][] detallesCompra;
+
+                int filas = tablaModel.getRowCount();
+                detallesCompra = new Object[filas][4];
+                for(int x=0;x<filas;x++){
+                    detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
+                    detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
+                    detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
+                    detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
+                }
+                ControladorCompra.Agregar(compra);
+                ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
+                ControladorCompra.ActualizarInventario(detallesCompra);
+
+                mensajeNotificacion("Compra Agregada", "OK");
+                }
+
+                int idCompra;
+                idCompra = ControladorCompra.ObtenerIdCompra();
+                //limpiarCompra();
+                txtIdCompra.setText(String.valueOf(idCompra+1));
+                tablaModel.setNumRows(0);
+                txtTotal.setText("$");
+                txtIVA.setText("");
+                txtPercepcion.setText("");
             
         } catch (ErrorTienda ex) {
             
@@ -908,10 +951,15 @@ public class frmCompras extends javax.swing.JFrame {
             }else{
                 if(Double.parseDouble(txtCostoProd.getText()) > 0){
                     if (exprod==false){
-                        AgregarProductoCompras();
+                        try {
+                            AgregarProductoCompras();
+                        } catch (ErrorTienda ex) {
+                            
+                        }
                     }else{
                        AgregarProductoTablaCompras();
                     }
+                    cmbTipoCompra.setEnabled(false);
                 }else{
                     mensajeNotificacion("El Costo debe ser mayor a 0.", "Error");
                 }
@@ -1050,7 +1098,56 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetallesActionPerformed
 
     private void txtCodBarraProd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProd1KeyTyped
-        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if(txtCodBarraProd1.getText().length()>=13){
+           evt.consume();
+        }else{
+            if (ch < '0' || ch > '9') {
+
+                if (ch != (char) KeyEvent.VK_BEGIN) {
+                    if (ch != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (ch != (char) KeyEvent.VK_DELETE) {
+                            if(ch != (char) KeyEvent.VK_ENTER){
+
+                                evt.consume();
+                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+        char c = evt.getKeyChar();               
+             if (c == (char) KeyEvent.VK_ENTER) {
+                String codBarra=txtCodBarraProd1.getText();
+                String producto="";
+
+                if (codBarra.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
+                } else {
+                    try {
+                        ControladorProducto.Obtener(codBarra,ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
+                        producto= ControladorProducto.Obtener(codBarra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem())).getNombre();
+                    } catch (ErrorTienda ex) {
+                        
+                    }
+                    
+                    //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
+                    if (producto==null || producto=="") {
+                        txtNomProd.setEditable(true);
+                        txtNomProd.requestFocus();
+                        JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
+                        exprod=false;
+                    } else {
+                        txtNomProd.setText(producto);
+                        txtCantidad.requestFocus();
+                        txtCantidad.selectAll();
+                        exprod=true;
+                    }
+                }
+                
+        }
     }//GEN-LAST:event_txtCodBarraProd1KeyTyped
 
     /**

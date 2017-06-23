@@ -83,7 +83,7 @@ public class ControladorProveedor {
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT, Email, NRC FROM Proveedor");
+            rs=cn.st.executeQuery("SELECT * FROM Proveedor");
             while (rs.next()) {
  
                 proveedor.add(rs.getString(1));
