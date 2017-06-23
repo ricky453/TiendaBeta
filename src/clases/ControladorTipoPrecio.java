@@ -49,9 +49,11 @@ public class ControladorTipoPrecio {
     public static ArrayList<TipoPrecio> ObtenerTodos() throws ErrorTienda{
         ArrayList<Object> precios = new ArrayList<Object>();
         cn = new Conexion();
+       
         try {
             rs=cn.st.executeQuery("SELECT * FROM TipoPrecio");
             while(rs.next()){
+                
             precios.add(rs.getString(1));
             precios.add(rs.getString(2));
             precios.add(rs.getString(3));
