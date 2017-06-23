@@ -40,7 +40,7 @@ public class ControladorParametro {
     public static void Modificar(Parametro pa) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE Parametro SET Valor='"+pa.getValor()+"' WHERE IdParametro='"+pa.getIdParametro()+"'");
+            cn.st.execute("UPDATE Parametro SET Nombre='"+pa.getNombre()+"',Valor='"+pa.getValor()+"' WHERE IdParametro='"+pa.getIdParametro()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorParametro/Modificar",e.getMessage());
         }

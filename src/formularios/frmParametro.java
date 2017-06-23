@@ -14,6 +14,7 @@ import formularios.frmProductos;
 import formularios.frmProveedores;
 import formularios.frmSucursales;
 import formularios.frmVentas;
+import formularios.frmParametroModificar;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -37,7 +38,7 @@ public class frmParametro extends javax.swing.JFrame {
     boolean estadoMenu;
     JTableHeader tHeadVentas;
         public DefaultTableModel modeloparametro= new DefaultTableModel();
-
+       frmParametroModificar fpar = new frmParametroModificar();
     
     public frmParametro() {
         initComponents();
@@ -70,6 +71,16 @@ public class frmParametro extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
+    //Metodo para editar
+    public void TrasladoDatos(){
+        fpar.txtIDParametro.setEditable(false);
+    fpar.txtIDParametro.setText(tblParametro.getValueAt(tblParametro.getSelectedRow(),0).toString());
+    fpar.txtNombre.setText(tblParametro.getValueAt(tblParametro.getSelectedRow(),1).toString());
+    fpar.txtValorParametro.setText(tblParametro.getValueAt(tblParametro.getSelectedRow(),2).toString());
+    fpar.txtNombre.requestFocus();
+    }
+    
    
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
@@ -478,10 +489,12 @@ public class frmParametro extends javax.swing.JFrame {
             frmParametroModificar pm = new frmParametroModificar();
             pm.setVisible(true);
             this.setVisible(false);
+            TrasladoDatos();
 
         }else{
             mensajeNotificacion("¡Seleccione un dato de la tabla!", "Adv");
         }
+        
     }//GEN-LAST:event_btnModificarParametroActionPerformed
 
     /**

@@ -5,7 +5,9 @@
  */
 package formularios;
 
+import clases.ControladorParametro;
 import clases.ErrorTienda;
+import clases.Parametro;
 import formularios.frmCompras;
 import formularios.frmHome;
 import formularios.frmProductos;
@@ -27,6 +29,7 @@ import javax.swing.border.Border;
 public class frmParametroModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    
     
     public frmParametroModificar() {
         initComponents();
@@ -51,7 +54,7 @@ public class frmParametroModificar extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         txtIDParametro = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtNombreParametro = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         btnGuardarModificarParametro = new javax.swing.JButton();
         txtValorParametro = new javax.swing.JTextField();
@@ -126,19 +129,19 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
         getContentPane().add(jpnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
-        txtNombreParametro.setForeground(new java.awt.Color(102, 0, 0));
-        txtNombreParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNombreParametro.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setForeground(new java.awt.Color(102, 0, 0));
+        txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreParametroActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        txtNombreParametro.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreParametroKeyTyped(evt);
+                txtNombreKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNombreParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Nombre:");
@@ -147,11 +150,11 @@ public class frmParametroModificar extends javax.swing.JFrame {
         btnGuardarModificarParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarModificarParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarModificarParametro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarModificarParametroMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarModificarParametroMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarModificarParametroMouseEntered(evt);
             }
         });
         btnGuardarModificarParametro.addActionListener(new java.awt.event.ActionListener() {
@@ -182,11 +185,11 @@ public class frmParametroModificar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreParametroActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         txtValorParametro.requestFocus();
-    }//GEN-LAST:event_txtNombreParametroActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtNombreParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreParametroKeyTyped
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char mayu=evt.getKeyChar();
         if (Character.isLowerCase(mayu)) {
             String cadena=(""+mayu).toUpperCase();
@@ -196,8 +199,28 @@ public class frmParametroModificar extends javax.swing.JFrame {
         else{
 
         }
-    }//GEN-LAST:event_txtNombreParametroKeyTyped
+    }//GEN-LAST:event_txtNombreKeyTyped
 
+    
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+    }
     private void btnGuardarModificarParametroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroMouseEntered
         btnGuardarModificarParametro.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/guardarprovB.png")));
     }//GEN-LAST:event_btnGuardarModificarParametroMouseEntered
@@ -207,7 +230,28 @@ public class frmParametroModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarModificarParametroMouseExited
 
     private void btnGuardarModificarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroActionPerformed
-
+         Parametro pa= new Parametro();
+        try {
+            pa.setIdParametro(Integer.parseInt(txtIDParametro.getText()));
+            pa.setNombre(txtNombre.getText());
+            pa.setValor(txtValorParametro.getText());
+            ControladorParametro.Modificar(pa);
+            mensajeNotificacion("Parametro modificado con exito","Ok");
+            txtIDParametro.setText("");
+            txtNombre.setText("");
+            txtValorParametro.setText("");
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnGuardarModificarParametroActionPerformed
 
     private void txtValorParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorParametroActionPerformed
@@ -291,7 +335,7 @@ public class frmParametroModificar extends javax.swing.JFrame {
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
     public static javax.swing.JTextField txtIDParametro;
-    private javax.swing.JTextField txtNombreParametro;
-    private javax.swing.JTextField txtValorParametro;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtValorParametro;
     // End of variables declaration//GEN-END:variables
 }

@@ -80,7 +80,7 @@ public class ControladorSucursal {
     public static void modificarSucursal(Sucursal sc) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE Sucursal SET Nombre='"+sc.getNombre()+"',Direccion='"+sc.getDireccion()+"',Telefono='"+sc.getTelefono()+"' WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+            cn.st.execute("UPDATE Sucursal SET Nombre='"+sc.getNombre()+"',Direccion='"+sc.getDireccion()+"',Telefono='"+sc.getTelefono()+"' WHERE IDParametro='"+sc.getIdSucursal()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorSucursal/Modificar",e.getMessage());
         }
