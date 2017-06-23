@@ -5,14 +5,18 @@
  */
 package clases;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author jose
  */
 public class Venta {
     private int IdVenta;
-    private int IsSucursal;
+    private int IdSucursal;
     private int IdPrecio;
+    private Date Fecha;
     private double IVA;
     private double TotalGravado;
     private double Total;
@@ -23,10 +27,14 @@ public class Venta {
     private String NRC;
     private String NomDocumento;
     private char IdTipoVenta;
-    private DetalleVenta Articulos;
+    private ArrayList<Object> Articulos = new ArrayList<>();
     
     public void AgregarItem(DetalleVenta item){
         
+        Articulos.add(this.IdVenta);
+        Articulos.add(item.getCodBarra());
+        Articulos.add(item.getCantidad());
+        Articulos.add(item.getPrecioUnitario());
     }
     public void CalcularTotal(){
         this.Total=this.TotalGravado+this.IVA;
@@ -40,6 +48,14 @@ public class Venta {
         return conImpuesto;
     }
 
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(Date Fecha) {
+        this.Fecha = Fecha;
+    }
+    
     public int getIdVenta() {
         return IdVenta;
     }
@@ -48,12 +64,12 @@ public class Venta {
         this.IdVenta = IdVenta;
     }
 
-    public int getIsSucursal() {
-        return IsSucursal;
+    public int getIdSucursal() {
+        return IdSucursal;
     }
 
-    public void setIsSucursal(int IsSucursal) {
-        this.IsSucursal = IsSucursal;
+    public void setIdSucursal(int IsSucursal) {
+        this.IdSucursal = IsSucursal;
     }
 
     public int getIdPrecio() {
@@ -144,13 +160,11 @@ public class Venta {
         this.IdTipoVenta = IdTipoVenta;
     }
 
-    public DetalleVenta getArticulos() {
+    public ArrayList<Object> getArticulos() {
         return Articulos;
     }
 
-    public void setArticulos(DetalleVenta Articulos) {
-        this.Articulos = Articulos;
-    }
+   
     
     
 }

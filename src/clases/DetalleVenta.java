@@ -15,9 +15,12 @@ public class DetalleVenta {
     private Producto producto;
     private double Cantidad;
     private double PrecioUnitario;
+    private String codBarra;
     DecimalFormat decimal = new DecimalFormat("0.00");
     
     public void Nuevo(String Cod, int Cantidad){
+        this.Cantidad=Cantidad;
+        this.codBarra=Cod;
         
     }
     public double CalcularPrecio(double utilidad){
@@ -32,6 +35,14 @@ public class DetalleVenta {
         return Double.parseDouble(decimal.format(nuevoPrecio));
     }
 
+    public String getCodBarra() {
+        return codBarra;
+    }
+
+    public void setCodBarra(String codBarra) {
+        this.codBarra = codBarra;
+    }
+    
     public Producto getProducto() {
         return producto;
     }

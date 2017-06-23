@@ -21,7 +21,20 @@ public class ControladorVenta {
     ResultSet rs;
     PreparedStatement ps=null;
     
-    public void Agregar(Venta venta){
+    public void Agregar(Venta venta) throws ErrorTienda{
+       cn = new Conexion();
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String Fecha = sdf.format(venta.getFecha());
+            cn.st.execute("INSERT INTO Venta(IdVenta,IdSucursal,TipoVenta,IdTipoPrecio,Cliente,Fecha,IVA "
+                    + ",TotalGravado,Total,Direccion,Giro,NIT,NRC,NDocumento) VALUES ('"+venta.getIdVenta()+"','"+venta.getIdSucursal()+"', "
+                            + "'"+venta.getIdTipoVenta()+"','"+venta.getIdPrecio()+"','"+venta.getCliente()+"','"+Fecha+"','"+venta.getIVA()+"', "
+                                    + "'"+venta.getTotalGravado()+"','"+venta.getTotal()+"','"+venta.getDireccion()+"','"+venta.getGiro()+"', "
+                                            + "'"+venta.getNIT()+"','"+venta.getNRC()+"','"+venta.getNomDocumento()+"')");
+        } catch (Exception e) {
+            throw new ErrorTienda("ControladorVenta Agregar", e.getMessage());
+        }
+        
         
     }
     public Venta ObtenerVenta(){
