@@ -7,12 +7,16 @@ import java.util.ArrayList;
 
 public class ControladorCompra {
     static Conexion cn;
-    public static void Agregar(Compra compra) throws ErrorTienda{
+    public static void Agregar(Compra compra, Object[][] detalleCompra) throws ErrorTienda{
         try {
             cn.st.executeUpdate("INSERT INTO Compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getFecha()+"', '"+compra.getPROVEEDOR().getIdProveedor()
             +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
-            
+            for(int x=0;x<detalleCompra.length;x++){
+                   cn.st.execute("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario)VALUES('"
+                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"')");
+                   
+            }
             
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
