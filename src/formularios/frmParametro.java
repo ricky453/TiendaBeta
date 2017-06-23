@@ -5,7 +5,9 @@
  */
 package formularios;
 
+import clases.ControladorParametro;
 import clases.ErrorTienda;
+import clases.Parametro;
 import formularios.frmCompras;
 import formularios.frmHome;
 import formularios.frmProductos;
@@ -15,22 +17,27 @@ import formularios.frmVentas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
  *
- * @author Ricky
+ * @author Oscar
  */
 public class frmParametro extends javax.swing.JFrame {
 
     boolean estadoMenu;
     JTableHeader tHeadVentas;
+        public DefaultTableModel modeloparametro= new DefaultTableModel();
+
     
     public frmParametro() {
         initComponents();
@@ -40,8 +47,30 @@ public class frmParametro extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
+        LlenarTabla();
     }
-
+    
+    //LLenado de tabla
+    public void LlenarTabla(){
+      modeloparametro.setRowCount(0);       
+            ArrayList<Parametro> lstparametro=new ArrayList();
+            Object fila[]=new Object[3];
+        try {
+            lstparametro= ControladorParametro.Obtener();
+            String [] encabezados= new String[]{"IdParametro","Nombre","Valor"};
+            modeloparametro.setColumnIdentifiers(encabezados);
+                        Iterator<Parametro> pa=lstparametro.iterator();
+ while(pa.hasNext()){
+                    fila[0]= pa.next();
+                    fila[1]= pa.next();
+                    fila[2]= pa.next();
+                    modeloparametro.addRow(fila);
+                    tblParametro.setModel(modeloparametro);
+                }        
+        } catch (Exception e) {
+        }
+    }
+   
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
         if(tipo.equals("Error")){
