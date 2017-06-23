@@ -917,7 +917,7 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarVenta1MouseExited
 
     private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
-        System.out.println(sucursal[cmbSucursalVenta.getSelectedIndex()]);
+        limpiar("todo");
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
