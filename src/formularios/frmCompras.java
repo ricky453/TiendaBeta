@@ -797,7 +797,8 @@ public class frmCompras extends javax.swing.JFrame {
             txtIVA.setText("");
             txtPercepcion.setText("");
             cmbSucursalCompra.setEnabled(true);
-            
+            cmbSucursalCompra.setEnabled(true);
+            cmbProveedor.setEnabled(true);
         } catch (ErrorTienda ex) {
             
         }
@@ -913,6 +914,8 @@ public class frmCompras extends javax.swing.JFrame {
                        AgregarProductoTablaCompras();
                     }
                     cmbTipoCompra.setEnabled(false);
+                    cmbSucursalCompra.setEnabled(false);
+                    cmbProveedor.setEnabled(false);
                 }else{
                     mensajeNotificacion("El Costo debe ser mayor a 0.", "Error");
                 }
