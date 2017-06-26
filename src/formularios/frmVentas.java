@@ -310,42 +310,60 @@ public class frmVentas extends javax.swing.JFrame {
         
     }
     public boolean validar(int tipoVenta){
+        int mensaje=0;
         if(modeloVentas.getRowCount()==0){
             mensajeNotificacion("No hay productos seleccionados", "Error");
+            txtCodigoBarraVender.requestFocus();
             return false;
         }else{
-            if(tipoVenta==0){
             if(txtClienteVenta.getText().isEmpty()){
                     mensajeNotificacion("Falta llenar campos", "Adv");
                     lblCliente.setForeground(Color.red);
-                    return false;
+                    mensaje = 1;
                 }
             if(txtDireccionVenta.getText().isEmpty()){
-                    mensajeNotificacion("Falta llenar campos", "Adv");
+                    
                     lblDireccion.setForeground(Color.red);
-                    return false;
+                    mensaje = 1;
                 
             }
-                
-            }else if(tipoVenta==1){
-              if(txtClienteVenta.getText().isEmpty()){
-                    mensajeNotificacion("Falta llenar campos", "Adv");
-                    lblCliente.setForeground(Color.red);
-                    return false;
-                }else if(txtDireccionVenta.getText().isEmpty()){
-                    mensajeNotificacion("Falta llenar campos", "Adv");
-                    lblDireccion.setForeground(Color.red);
-                    return false;
-                
-               }else if(txtGiro.getText().isEmpty()){
-                    mensajeNotificacion("Falta llenar campos", "Adv");
-                    lblDireccion.setForeground(Color.red);
-                    return false;
+            System.out.println("Tipo venta en metodo "+tipoVenta);
+            if(tipoVenta==1){
+                System.out.println("Tipo venta en metodo gasa"+tipoVenta);
+              
+              if(txtGiro.getText().isEmpty()){
+                    
+                    lblGiro.setForeground(Color.red);
+                    mensaje = 1;
                }
+              if(txtNRCVenta.getText().isEmpty()){
+                  lblNRC.setForeground(Color.red);
+                    mensaje = 1;
+              }
+              if(txtNITVenta.getText().isEmpty()){
+                  lblNIT.setForeground(Color.red);
+                    mensaje = 1;
+              }
+              if(txtNDocumento.getText().isEmpty()){
+                  lblDOC.setForeground(Color.red);
+                    mensaje = 1;
+              }
                 
+            }
+            if(mensaje ==1){
+                mensajeNotificacion("Falta llenar algunos campos", "Adv");
+                return false;
             }
         }
         return true;
+    }
+    public void colorLabels(){
+        lblCliente.setForeground(Color.BLACK);
+        lblDireccion.setForeground(Color.BLACK);
+        lblGiro.setForeground(Color.BLACK);
+        lblNRC.setForeground(Color.BLACK);
+        lblNIT.setForeground(Color.BLACK);
+        lblDOC.setForeground(Color.BLACK);
     }
     
 
@@ -989,7 +1007,10 @@ public class frmVentas extends javax.swing.JFrame {
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         try {
-            guardar();
+            System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
+            if(validar(cmbTipoVenta.getSelectedIndex())){
+               guardar();
+            }
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1020,6 +1041,7 @@ public class frmVentas extends javax.swing.JFrame {
            tipoVentaSeleccion(true);
            limpiar("todo");
        }
+       colorLabels();
     }//GEN-LAST:event_cmbTipoVentaItemStateChanged
 
     private void btnCancelarVenta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVenta1MouseEntered
@@ -1031,7 +1053,8 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarVenta1MouseExited
 
     private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
-        validar(0);
+        colorLabels();
+        limpiar("todo");
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
@@ -1136,6 +1159,7 @@ public class frmVentas extends javax.swing.JFrame {
 
     private void cmbSucursalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSucursalVentaActionPerformed
         limpiar("todo");
+        colorLabels();
     }//GEN-LAST:event_cmbSucursalVentaActionPerformed
 
     private void cmbTipoPrecioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoPrecioItemStateChanged
