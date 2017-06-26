@@ -19,7 +19,7 @@ public final class frmHome extends javax.swing.JFrame {
     
     int x,y;
     boolean apagado;
-    boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro;
+    boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro, tipoPrecio;
 
     public frmHome()  {
         initComponents();
@@ -56,6 +56,9 @@ public final class frmHome extends javax.swing.JFrame {
     public void Parametro(boolean estado){
         jpnOctavo.setVisible(estado);
     }
+    public void TipoPrecio(boolean estado){
+        //jpnOctavo.setVisible(estado);
+    }
     public void apagado(){
         apagado = true;
         jpnPrincipal.setVisible(false);  
@@ -76,6 +79,7 @@ public final class frmHome extends javax.swing.JFrame {
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
+        btnTipoPrecio = new javax.swing.JButton();
         btnParametro = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnSucursales = new javax.swing.JButton();
@@ -280,6 +284,27 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 120, 180, 40));
 
+        btnTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/tipoprecio.png"))); // NOI18N
+        btnTipoPrecio.setBorderPainted(false);
+        btnTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTipoPrecioMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTipoPrecioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTipoPrecioMouseExited(evt);
+            }
+        });
+        btnTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTipoPrecioActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 320, 180, 40));
+
         btnParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/parametro.png"))); // NOI18N
         btnParametro.setBorderPainted(false);
         btnParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -333,7 +358,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 220, 180, 40));
 
-        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 330));
+        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 380));
 
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -947,6 +972,30 @@ public final class frmHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnParametroActionPerformed
 
+    private void btnTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseClicked
+        frmTipoPrecio tp = new frmTipoPrecio(); 
+        tp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTipoPrecioMouseClicked
+
+    private void btnTipoPrecioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseEntered
+        if(!tipoPrecio)
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnTipoPrecio);
+        Principal(false);
+        TipoPrecio(true);
+    }//GEN-LAST:event_btnTipoPrecioMouseEntered
+
+    private void btnTipoPrecioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseExited
+        if(!tipoPrecio)
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnTipoPrecio);
+        Principal(true);
+        TipoPrecio(false);
+    }//GEN-LAST:event_btnTipoPrecioMouseExited
+
+    private void btnTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTipoPrecioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -990,6 +1039,7 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnSucursales;
+    private javax.swing.JButton btnTipoPrecio;
     private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
