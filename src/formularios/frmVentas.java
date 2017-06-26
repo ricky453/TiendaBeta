@@ -47,7 +47,7 @@ public class frmVentas extends javax.swing.JFrame {
     Iterator<Sucursal> Iterador;
     Object sucursal[],misPrecios[][] ;
     DecimalFormat decimal =new DecimalFormat("0.00");
-    double subTotales;
+    double subTotales,utilidad;
     
     ControladorVenta cv;
     ControladorProducto cp;
@@ -76,7 +76,7 @@ public class frmVentas extends javax.swing.JFrame {
         cmbTipoPrecio.setSelectedIndex(1);
         txtCodigoBarraVender.requestFocus();
         tipoVentaSeleccion(false);
-        limpiar("todo");
+        
     }
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
@@ -153,7 +153,7 @@ public class frmVentas extends javax.swing.JFrame {
     public void cargarTabla(){
         int contador=0;
         int fila=modeloVentas.getRowCount();
-        double utilidad=0,costoUnitario=0,totalDetalle=0;
+        double costoUnitario=0,totalDetalle=0;
         modeloVentas.addRow(new Object []{"","","","",""});
         modeloVentas.setValueAt(miProducto.getCodBarra(),fila, 0);
         modeloVentas.setValueAt(miProducto.getNombre(),fila, 1);
@@ -274,6 +274,7 @@ public class frmVentas extends javax.swing.JFrame {
         txtNRCVenta.setText("");
         txtNITVenta.setText("");
         txtNDocumento.setText("");
+        
         }
     }
     //SIRVE PARA MOSTRAR U OCULTAR LOS ESPACIOS DE TEXTO QUE DEGLOSAN LOS DOS TIPOS DE VENTAS DISPONIBLES
@@ -315,6 +316,32 @@ public class frmVentas extends javax.swing.JFrame {
         
         
     }
+    //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
+    public boolean VerificarTabla(){
+        double subTotalAnterior, nuevoSubTotal, totalAnterior, nuevoTotal, ivaAnterior, nuevoIva, sumaAnterior, nuevaSuma,nuevoCostoUnitario;
+            int cantidadAnterior, nuevaCantidad, encontrado=-1,contador=0;
+            
+            //COMPROBAR LA EXISTENCIA DE UN PRODUCTO EN LA TABLA
+            for(int x =0; x<modeloVentas.getRowCount();x++){
+                if(txtCodigoBarraVender.getText().equals(String.valueOf(modeloVentas.getValueAt(x, 0)))){
+                    encontrado = x;
+                }
+            }
+            //COMPROBAR SI SE ENCONTRO EL PRODUCTO EN LA TABLA
+            if(encontrado == -1){
+                return false;
+            }
+            //SI NO SE ENCONTRO ENTONCES PROCEDEMOS A EFECTUAR LOS CAMBIOS Y CALCULOS NECESARIOS
+            else{
+                //OBTENER LA UTILIDAD SELECCIONADA
+                
+            
+                        
+                    
+            }
+        return true;
+    }
+    //VALIDAR QUE LOS CAMPOS ESTEN CORRECTAMENTE LLENADOS
     public boolean validar(int tipoVenta){
         int mensaje=0;
         if(modeloVentas.getRowCount()==0){
@@ -441,6 +468,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblNIT = new javax.swing.JLabel();
         cmbTipoPrecio = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -694,11 +722,11 @@ public class frmVentas extends javax.swing.JFrame {
         txtCantidadVender.setText("  1");
         txtCantidadVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCantidadVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCantidadVenderKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadVenderKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadVenderKeyPressed(evt);
             }
         });
         getContentPane().add(txtCantidadVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 110, 40));
@@ -936,12 +964,24 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel25.setText("Código de Barra");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCantidadVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVenderKeyPressed
-
+        char c = evt.getKeyChar();
+        
+        if(c == (char) KeyEvent.VK_ENTER){
+            cargarTabla();
+        }
     }//GEN-LAST:event_txtCantidadVenderKeyPressed
 
     private void txtCantidadVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVenderKeyTyped
@@ -1085,6 +1125,10 @@ public class frmVentas extends javax.swing.JFrame {
     private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
         colorLabels();
         limpiar("todo");
+        cmbSucursalVenta.setSelectedIndex(0);
+        cmbTipoVenta.setSelectedIndex(0);
+        cmbTipoPrecio.setSelectedIndex(1);
+        
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
@@ -1330,6 +1374,10 @@ public class frmVentas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtNDocumentoKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        VerificarTabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1378,6 +1426,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbTipoPrecio;
     private javax.swing.JComboBox<String> cmbTipoVenta;
     private javax.swing.JLabel home;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel21;
