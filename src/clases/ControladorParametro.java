@@ -46,6 +46,7 @@ public class ControladorParametro {
         }
     }
 
+    
     public static ArrayList<Parametro> Obtener() throws ErrorTienda{
         ArrayList<Object> parametro = new ArrayList<Object>();
         

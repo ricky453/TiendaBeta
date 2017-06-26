@@ -6,7 +6,10 @@
 package clases;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +20,13 @@ public class ControladorTipoPrecio {
     static Conexion cn ;
     static ResultSet rs;
     
-    public void AgregarTipoPrecio(TipoPrecio tipo){
+    public void AgregarTipoPrecio(TipoPrecio tp) throws ErrorTienda{
+        cn=new Conexion();
+        try {
+            cn.st.executeUpdate("INSERT INTO TipoPrecio(IdTipoPrecio,Nombre,Utilidad) VALUES('"+tp.getIdTipoPrecio()+"','"+tp.getNombre()+"','"+tp.getUtilidad()+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorTipoPrecio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     public void EliminarTipoPrecio(int idTipoPrecio){
@@ -47,4 +56,24 @@ public class ControladorTipoPrecio {
         ArrayList<TipoPrecio> misPrecios = (ArrayList) precios;
         return misPrecios;
     }
+    
+     public static int ObtenerIdMax() throws ErrorTienda{
+        int IdTipoPrecio=0;   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT MAX(IdTipoPrecio) FROM TipoPrecio");
+        
+            while(rs.next()){
+                IdTipoPrecio = rs.getInt(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorSucursal/ObtenerIdTipoPrecio", ex.getMessage());
+        } 
+        return IdTipoPrecio;
+    
+    }
+   
+    
+    
+    
 }
