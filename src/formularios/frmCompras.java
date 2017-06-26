@@ -784,14 +784,14 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setARTICULOS(Articulos);
                 compra.setSubTotal(Double.parseDouble(total));
                 compra.setNumDocumento(txtNumeroDoc.getText());
-                System.out.println(txtNumeroDoc.getText()+"hfadfhgadsd");
+                System.out.println(txtNumeroDoc.getText());
                 Object [][] detallesCompra;
-
+                
                 int filas = tablaModel.getRowCount();
                 detallesCompra = new Object[filas][5];
                 for(int x=0;x<filas;x++){
-                    detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
-                    detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
+                    detallesCompra[x][0]=Integer.parseInt(txtIdCompra.getText());
+                    detallesCompra[x][1]=tablaModel.getValueAt(x, 0);
                     detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
                     detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
                     detallesCompra[x][4]=ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
