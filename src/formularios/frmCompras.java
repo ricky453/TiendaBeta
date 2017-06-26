@@ -418,7 +418,7 @@ public class frmCompras extends javax.swing.JFrame {
         txtPercepcion.setEditable(false);
         txtPercepcion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtPercepcion.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 100, 40));
+        getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 550, 100, 40));
 
         txtFecha.setEditable(false);
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 160, 30));
@@ -437,7 +437,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblPercepcion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPercepcion.setText("Percepción:");
-        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 90, 40));
+        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, 90, 40));
 
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
@@ -503,21 +503,21 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal1.setText("TOTAL:");
-        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 550, 50, 40));
+        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 50, 40));
 
         txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtTotal.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 550, 100, 40));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 100, 40));
 
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblIVA.setText("IVA:");
-        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 600, 50, 40));
+        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 40));
 
         txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 600, 100, 40));
+        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 550, 100, 40));
 
         btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
         btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

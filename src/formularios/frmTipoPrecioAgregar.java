@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import clases.ControladorTipoPrecio;
 import clases.ErrorTienda;
 import formularios.frmCompras;
 import formularios.frmHome;
@@ -31,8 +32,29 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     public frmTipoPrecioAgregar() {
         initComponents();
         this.setSize(1200, 700);
+        limpiando();
     }
 
+     public void limpiando(){
+         
+         txtUtilidadTipoPrecio.setText("");
+         txtNombreTipoPrecio.setText("");
+         txtIDTipoPrecio.setText("");
+        
+        txtNombreTipoPrecio.requestFocus();
+        int idtp;
+        try {
+            idtp = ControladorTipoPrecio.ObtenerIdMax();
+            idtp = idtp+1;
+            txtIDTipoPrecio.setText(""+idtp);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -417,6 +417,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblVentas = new javax.swing.JLabel();
         lblParametro = new javax.swing.JLabel();
         lblCompras = new javax.swing.JLabel();
+        lblTipoPrecio = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblBotonCerrar = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -468,7 +469,6 @@ public class frmVentas extends javax.swing.JFrame {
         lblNIT = new javax.swing.JLabel();
         cmbTipoPrecio = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -572,6 +572,20 @@ public class frmVentas extends javax.swing.JFrame {
             }
         });
         jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 130, 50));
+
+        lblTipoPrecio.setBackground(new java.awt.Color(0, 0, 0));
+        lblTipoPrecio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTipoPrecio.setForeground(new java.awt.Color(255, 255, 255));
+        lblTipoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/tipoPrecio.png"))); // NOI18N
+        lblTipoPrecio.setText("Tipo Precio");
+        lblTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTipoPrecioMouseClicked(evt);
+            }
+        });
+        jpnMenu.add(lblTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 140, 50));
 
         getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 140, 360));
 
@@ -964,14 +978,6 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel25.setText("Código de Barra");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, -1, -1));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1199,6 +1205,7 @@ public class frmVentas extends javax.swing.JFrame {
             empty = BorderFactory.createEmptyBorder();
             menu.setBorder(empty);
             menu.setText("Menu");
+            txtCodigoBarraVender.requestFocus();
         }else{
             Animacion.Animacion.bajar(-360, 55, 1, 2, jpnMenu);
             estadoMenu=true;
@@ -1206,6 +1213,8 @@ public class frmVentas extends javax.swing.JFrame {
             raisedbevel = BorderFactory.createRaisedBevelBorder();
             menu.setBorder(raisedbevel);
             menu.setText("Cerrar");
+            txtCantidadVender.requestFocus();
+            
         }
     }//GEN-LAST:event_menuMouseClicked
 
@@ -1374,9 +1383,11 @@ public class frmVentas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtNDocumentoKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VerificarTabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void lblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTipoPrecioMouseClicked
+        frmTipoPrecio tp = new frmTipoPrecio();
+        tp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblTipoPrecioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1426,7 +1437,6 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbTipoPrecio;
     private javax.swing.JComboBox<String> cmbTipoVenta;
     private javax.swing.JLabel home;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel21;
@@ -1462,6 +1472,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblSumas;
+    private javax.swing.JLabel lblTipoPrecio;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel menu;
     private javax.swing.JTable tblProductosVender;
