@@ -268,6 +268,12 @@ public class frmVentas extends javax.swing.JFrame {
         txtTotalventa.setText("$ 0.00");
         txtIVA.setText("$ 0.00");
         txtSumas.setText("$ 0.00");
+        txtClienteVenta.setText("");
+        txtDireccionVenta.setText("");
+        txtGiro.setText("");
+        txtNRCVenta.setText("");
+        txtNITVenta.setText("");
+        txtNDocumento.setText("");
         }
     }
     //SIRVE PARA MOSTRAR U OCULTAR LOS ESPACIOS DE TEXTO QUE DEGLOSAN LOS DOS TIPOS DE VENTAS DISPONIBLES
@@ -758,7 +764,19 @@ public class frmVentas extends javax.swing.JFrame {
         lblGiro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblGiro.setText("Giro");
         getContentPane().add(lblGiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
+
+        txtNRCVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNRCVentaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtNRCVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 140, 170, 30));
+
+        txtGiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGiroKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtGiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 400, 30));
 
         lblCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -789,6 +807,12 @@ public class frmVentas extends javax.swing.JFrame {
         lblDOC.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDOC.setText("N° Documento");
         getContentPane().add(lblDOC, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 250, -1, -1));
+
+        txtNITVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNITVentaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtNITVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 210, 180, 30));
 
         tblProductosVender.setModel(new javax.swing.table.DefaultTableModel(
@@ -903,6 +927,12 @@ public class frmVentas extends javax.swing.JFrame {
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblIVA.setText("13% IVA");
         getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 560, -1, -1));
+
+        txtNDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNDocumentoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtNDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 270, 180, 30));
 
         lblNIT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1231,11 +1261,89 @@ public class frmVentas extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_txtDireccionVentaKeyTyped
 
-    private void lblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTipoPrecioMouseClicked
-        frmTipoPrecio tp = new frmTipoPrecio();
-        tp.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblTipoPrecioMouseClicked
+    private void txtGiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiroKeyTyped
+        char c;
+        c =  evt.getKeyChar();
+        
+        if( c < (char) 'a' || c > (char) 'z'){
+            if( c < (char) 'A' || c > (char) 'Z'){
+            if(c < '0' || c > '9'){
+                if(c != (char) KeyEvent.VK_SPACE){
+                 if(c != (char) KeyEvent.VK_ENTER){
+                    evt.consume();
+                }   
+                }
+            }
+            }
+        }else{
+            lblGiro.setForeground(Color.BLACK);
+            
+        }
+        if(c ==  KeyEvent.VK_ENTER){
+            txtNRCVenta.requestFocus();
+            }
+    }//GEN-LAST:event_txtGiroKeyTyped
+
+    private void txtNRCVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNRCVentaKeyTyped
+        char c;
+        c =  evt.getKeyChar();
+        
+        
+            if(c < '0' || c > '9'){
+                
+                 if(c != (char) KeyEvent.VK_ENTER){
+                    evt.consume();
+                }   
+                
+            
+        }else{
+            lblNRC.setForeground(Color.BLACK);
+            
+        }
+        if(c ==  KeyEvent.VK_ENTER){
+            txtNITVenta.requestFocus();
+            }
+    }//GEN-LAST:event_txtNRCVentaKeyTyped
+
+    private void txtNITVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITVentaKeyTyped
+        char c;
+        c =  evt.getKeyChar();
+        
+        
+            if(c < '0' || c > '9'){
+                
+                 if(c != (char) KeyEvent.VK_ENTER){
+                    evt.consume();
+                }   
+                
+            
+        }else{
+            lblNIT.setForeground(Color.BLACK);
+            
+        }
+        if(c ==  KeyEvent.VK_ENTER){
+            txtNDocumento.requestFocus();
+            }
+    }//GEN-LAST:event_txtNITVentaKeyTyped
+
+    private void txtNDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNDocumentoKeyTyped
+        char c;
+        c =  evt.getKeyChar();
+        
+        
+            if(c < '0' || c > '9'){
+                
+                 if(c != (char) KeyEvent.VK_ENTER){
+                    evt.consume();
+                }   
+                
+            
+        }else{
+            lblDOC.setForeground(Color.BLACK);
+            
+        }
+        
+    }//GEN-LAST:event_txtNDocumentoKeyTyped
 
     /**
      * @param args the command line arguments
