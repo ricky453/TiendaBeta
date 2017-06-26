@@ -13,7 +13,7 @@ public class ControladorCompra {
             +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             for(int x=0;x<detalleCompra.length;x++){
-                   cn.st.execute("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario, IdSucursal)VALUES('"
+                   cn.st.execute("INSERT INTO detallecompra(IdCompra,CodBarra,Cantidad,CostoUnitario,IdSucursal)VALUES('"
                            +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"','"+detalleCompra[x][4]+"')");
                    
             }
@@ -24,13 +24,17 @@ public class ControladorCompra {
     }
     public static ArrayList<DetalleCompra> ObtenerCompra() throws ErrorTienda{
         ArrayList<Object> dc= new ArrayList<Object>();
+        cn=new Conexion(); 
         ResultSet rs;
         try {
-            rs = cn.st.executeQuery("SELECT * FROM DetalleCompra");
+            rs = null;
+            rs = cn.st.executeQuery("SELECT tn.Nombre, IdCompra, tw.Nombre, Cantidad, CostoUnitario FROM detalleCompra tp INNER JOIN sucursal tn  ON tn.idSucursal=tp.idSucursal INNER JOIN producto tw ON tw.CodBarra=tp.CodBarra");
             while (rs.next()) {
                 dc.add(rs.getString(1));
                 dc.add(rs.getString(2));
                 dc.add(rs.getString(3));
+                dc.add(rs.getString(4));
+                dc.add(rs.getString(5));
  
             }
         } catch (SQLException e) {
