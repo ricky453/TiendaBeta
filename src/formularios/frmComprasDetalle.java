@@ -50,7 +50,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         
             try {
             listaDetalleCompra=ControladorCompra.ObtenerCompra();
-            String[] nombreDetalleCompra = new String []{"Sucursal","IdCompra","Producto","Cantidad","Costo Unitario"};
+            String[] nombreDetalleCompra = new String []{"IdCompra","Producto","Cantidad","Costo Unitario"};
             modeloDCompras.setColumnIdentifiers(nombreDetalleCompra);
             Iterator<DetalleCompra> dc=listaDetalleCompra.iterator();
                 while(dc.hasNext()){
@@ -58,7 +58,6 @@ public class frmComprasDetalle extends javax.swing.JFrame {
                     fila[1]= dc.next();
                     fila[2]= dc.next();
                     fila[3]= dc.next();
-                    fila[4]= dc.next();
                     modeloDCompras.addRow(fila);
                     tblCompras.setModel(modeloDCompras);
                 }

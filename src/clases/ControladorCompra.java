@@ -9,12 +9,12 @@ public class ControladorCompra {
     static Conexion cn;
     public static void Agregar(Compra compra, Object[][] detalleCompra) throws ErrorTienda{
         try {
-            cn.st.executeUpdate("INSERT INTO Compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getFecha()+"', '"+compra.getPROVEEDOR().getIdProveedor()
-            +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
+            cn.st.executeUpdate("INSERT INTO Compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getPROVEEDOR().getIdProveedor()
+            +"', '"+compra.getIdSucursal()+"', '"+compra.getFecha()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             for(int x=0;x<detalleCompra.length;x++){
-                   cn.st.execute("INSERT INTO detallecompra(IdCompra,CodBarra,Cantidad,CostoUnitario,IdSucursal)VALUES('"
-                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"','"+detalleCompra[x][4]+"')");
+                   cn.st.execute("INSERT INTO detallecompra(IdCompra,CodBarra,Cantidad,CostoUnitario)VALUES('"
+                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"')");
                    
             }
             
@@ -28,13 +28,12 @@ public class ControladorCompra {
         ResultSet rs;
         try {
             rs = null;
-            rs = cn.st.executeQuery("SELECT tn.Nombre, IdCompra, tw.Nombre, Cantidad, CostoUnitario FROM detalleCompra tp INNER JOIN sucursal tn  ON tn.idSucursal=tp.idSucursal INNER JOIN producto tw ON tw.CodBarra=tp.CodBarra");
+            rs = cn.st.executeQuery("SELECT IdCompra, tw.Nombre, Cantidad, CostoUnitario FROM detalleCompra tp INNER JOIN producto tw ON tw.CodBarra=tp.CodBarra");
             while (rs.next()) {
                 dc.add(rs.getString(1));
                 dc.add(rs.getString(2));
                 dc.add(rs.getString(3));
                 dc.add(rs.getString(4));
-                dc.add(rs.getString(5));
  
             }
         } catch (SQLException e) {
