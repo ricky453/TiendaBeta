@@ -73,6 +73,7 @@ public class frmTipoPrecio extends javax.swing.JFrame {
         lblVentas = new javax.swing.JLabel();
         lblParametro = new javax.swing.JLabel();
         lblCompras = new javax.swing.JLabel();
+        lblTipoPrecio = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblBotonCerrar = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -168,14 +169,16 @@ public class frmTipoPrecio extends javax.swing.JFrame {
         lblParametro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblParametro.setForeground(new java.awt.Color(255, 255, 255));
         lblParametro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/EParametro.png"))); // NOI18N
-        lblParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Parametro.png"))); // NOI18N
+        lblParametro.setText("Parámetro");
+        lblParametro.setToolTipText("");
+        lblParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblParametro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblParametroMouseClicked(evt);
             }
         });
-        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 50));
+        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 140, 50));
 
         lblCompras.setBackground(new java.awt.Color(0, 0, 0));
         lblCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -191,7 +194,21 @@ public class frmTipoPrecio extends javax.swing.JFrame {
         });
         jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 130, 50));
 
-        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 140, 316));
+        lblTipoPrecio.setBackground(new java.awt.Color(0, 0, 0));
+        lblTipoPrecio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTipoPrecio.setForeground(new java.awt.Color(255, 255, 255));
+        lblTipoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ETipoPrecio.png"))); // NOI18N
+        lblTipoPrecio.setText("Tipo Precio");
+        lblTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTipoPrecioMouseClicked(evt);
+            }
+        });
+        jpnMenu.add(lblTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 50));
+
+        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 140, 360));
 
         jpnBarraSuperior.setBackground(new java.awt.Color(102, 0, 0));
         jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -400,14 +417,14 @@ public class frmTipoPrecio extends javax.swing.JFrame {
 
     private void menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMouseClicked
         if(estadoMenu==true){
-            Animacion.Animacion.subir(55, -316, 1, 2, jpnMenu);
+            Animacion.Animacion.subir(55, -360, 1, 2, jpnMenu);
             estadoMenu=false;
             Border empty;
             empty = BorderFactory.createEmptyBorder();
             menu.setBorder(empty);
             menu.setText("Menu");
         }else{
-            Animacion.Animacion.bajar(-316, 55, 1, 2, jpnMenu);
+            Animacion.Animacion.bajar(-360, 55, 1, 2, jpnMenu);
             estadoMenu=true;
             Border raisedbevel;
             raisedbevel = BorderFactory.createRaisedBevelBorder();
@@ -453,8 +470,8 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void lblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParametroMouseClicked
-        frmTipoPrecio pt = new frmTipoPrecio();
-        pt.setVisible(true);
+        frmParametro pa = new frmParametro();
+        pa.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblParametroMouseClicked
 
@@ -532,6 +549,12 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     private void btnEliminarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTipoPrecioActionPerformed
 
     }//GEN-LAST:event_btnEliminarTipoPrecioActionPerformed
+
+    private void lblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTipoPrecioMouseClicked
+        frmTipoPrecio tp = new frmTipoPrecio();
+        tp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblTipoPrecioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -619,6 +642,7 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     private javax.swing.JLabel lblProductos;
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
+    private javax.swing.JLabel lblTipoPrecio;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel menu;
     public javax.swing.JTable tblTipoPrecio;
