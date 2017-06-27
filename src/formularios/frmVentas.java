@@ -154,6 +154,7 @@ public class frmVentas extends javax.swing.JFrame {
         int contador=0;
         int fila=modeloVentas.getRowCount();
         double costoUnitario=0,totalDetalle=0;
+        listas(false);
         modeloVentas.addRow(new Object []{"","","","",""});
         modeloVentas.setValueAt(miProducto.getCodBarra(),fila, 0);
         modeloVentas.setValueAt(miProducto.getNombre(),fila, 1);
@@ -283,6 +284,20 @@ public class frmVentas extends javax.swing.JFrame {
           txtSumas.setVisible(estado);
           lblIVA.setVisible(estado);
           lblSumas.setVisible(estado);
+          txtGiro.setVisible(estado);
+          txtNRCVenta.setVisible(estado);
+          txtNITVenta.setVisible(estado);
+          txtNDocumento.setVisible(estado);
+          lblGiro.setVisible(estado);
+          lblNRC.setVisible(estado);
+          lblNIT.setVisible(estado);
+          lblDOC.setVisible(estado);
+    }
+    //ESTADO DE LAS LISTAS PLEGABLES
+    public void listas (boolean estado){
+        cmbSucursalVenta.setEnabled(estado);
+        cmbTipoPrecio.setEnabled(estado);
+        cmbTipoVenta.setEnabled(estado);
     }
     //GUARDAR, AGREGA LA VENTA A LA BASE DE DATOS
     public void guardar() throws ErrorTienda{
@@ -303,43 +318,32 @@ public class frmVentas extends javax.swing.JFrame {
         }else{
             venta.setTotalGravado(Double.parseDouble(txtSumas.getText().substring(1)));
             venta.setIVA(Double.parseDouble(txtIVA.getText().substring(1)));
+            venta.setGiro(txtGiro.getText().toUpperCase());
+            venta.setNIT(txtNITVenta.getText());
+            venta.setNRC(txtNRCVenta.getText());
+            venta.setNomDocumento(txtNDocumento.getText());
         }
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
         venta.setFecha(utilDate);
-        venta.setCliente(txtClienteVenta.getText());
-        venta.setDireccion(txtDireccionVenta.getText());
-        venta.setGiro(txtGiro.getText());
-        venta.setNIT(txtNITVenta.getText());
-        venta.setNRC(txtNRCVenta.getText());
-        venta.setNomDocumento(txtNDocumento.getText());
-        cv.Agregar(venta);
+        venta.setCliente(txtClienteVenta.getText().toUpperCase());
+        venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         
+        
+        
+        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
+        
+        for(int y=0; y<modeloVentas.getRowCount();y++){
+            DetallesVenta[y][0]=txtIdVenta.getText();
+            DetallesVenta[y][1]=modeloVentas.getValueAt(y, 0);
+            DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
+            DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
+        }
+        cv.Agregar(venta,DetallesVenta);
         
     }
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
     public boolean VerificarTabla(){
-        double subTotalAnterior, nuevoSubTotal, totalAnterior, nuevoTotal, ivaAnterior, nuevoIva, sumaAnterior, nuevaSuma,nuevoCostoUnitario;
-            int cantidadAnterior, nuevaCantidad, encontrado=-1,contador=0;
-            
-            //COMPROBAR LA EXISTENCIA DE UN PRODUCTO EN LA TABLA
-            for(int x =0; x<modeloVentas.getRowCount();x++){
-                if(txtCodigoBarraVender.getText().equals(String.valueOf(modeloVentas.getValueAt(x, 0)))){
-                    encontrado = x;
-                }
-            }
-            //COMPROBAR SI SE ENCONTRO EL PRODUCTO EN LA TABLA
-            if(encontrado == -1){
-                return false;
-            }
-            //SI NO SE ENCONTRO ENTONCES PROCEDEMOS A EFECTUAR LOS CAMBIOS Y CALCULOS NECESARIOS
-            else{
-                //OBTENER LA UTILIDAD SELECCIONADA
-                
-            
-                        
-                    
-            }
-        return true;
+       return true;
     }
     //VALIDAR QUE LOS CAMPOS ESTEN CORRECTAMENTE LLENADOS
     public boolean validar(int tipoVenta){
@@ -398,6 +402,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblNIT.setForeground(Color.BLACK);
         lblDOC.setForeground(Color.BLACK);
     }
+    
     
 
     /**
@@ -1086,6 +1091,9 @@ public class frmVentas extends javax.swing.JFrame {
             System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
             if(validar(cmbTipoVenta.getSelectedIndex())){
                guardar();
+                limpiar("todo");
+                ObtenerIdVenta();
+                listas(true);
             }
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
@@ -1134,7 +1142,7 @@ public class frmVentas extends javax.swing.JFrame {
         cmbSucursalVenta.setSelectedIndex(0);
         cmbTipoVenta.setSelectedIndex(0);
         cmbTipoPrecio.setSelectedIndex(1);
-        
+        listas(true);
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked

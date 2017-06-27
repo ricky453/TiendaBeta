@@ -5,6 +5,7 @@
  */
 package clases;
 
+import formularios.frmVentas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,9 +22,10 @@ public class ControladorVenta {
     ResultSet rs;
     PreparedStatement ps=null;
     
-    public void Agregar(Venta venta) throws ErrorTienda{
+    public void Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
        cn = new Conexion();
         try {
+            System.err.println("Detalles ventas "+venta.getArticulos().size());
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(venta.getFecha());
             cn.st.execute("INSERT INTO Venta(IdVenta,IdSucursal,TipoVenta,IdTipoPrecio,Cliente,Fecha,IVA "
@@ -31,6 +33,20 @@ public class ControladorVenta {
                             + "'"+venta.getIdTipoVenta()+"','"+venta.getIdPrecio()+"','"+venta.getCliente()+"','"+Fecha+"','"+venta.getIVA()+"', "
                                     + "'"+venta.getTotalGravado()+"','"+venta.getTotal()+"','"+venta.getDireccion()+"','"+venta.getGiro()+"', "
                                             + "'"+venta.getNIT()+"','"+venta.getNRC()+"','"+venta.getNomDocumento()+"')");
+        
+            cn.conexion.close();
+            ActualizarInventario(detalles, venta.getIdSucursal());
+            cn = new Conexion();
+            try {
+                for(int x=0;x<detalles.length;x++){
+                    cn.st.execute("INSERT INTO DetalleVenta(IdVenta,CodBarra,Cantidad,PrecioUnitario) VALUES('"+detalles[x][0]+"', "
+                            + "'"+detalles[x][1]+"','"+detalles[x][2]+"','"+detalles[x][3]+"')");
+                }
+            } catch (Exception e) {
+            }
+            
+            cn.conexion.close();
+            
         } catch (Exception e) {
             throw new ErrorTienda("ControladorVenta Agregar", e.getMessage());
         }
@@ -42,8 +58,23 @@ public class ControladorVenta {
         
         return ventas;
     }
-    public void ActualizarInventario(DetalleVenta[] detalles){
-        
+    public void ActualizarInventario(Object[][] detalles,int sucursal) throws ErrorTienda{
+        cn = new Conexion();
+        try {
+            clases.Producto pr;
+        for(int x =0;x<detalles.length;x++){
+          
+            pr = ControladorProducto.Obtener(String.valueOf(detalles[x][1]),sucursal);
+          int cantidad = pr.getInventario();
+            
+            int cantidad2= Integer.parseInt(String.valueOf(detalles[x][2]));
+            
+            System.out.println("Cantidad en la bd "+cantidad+" Cantidad exigida "+cantidad2);
+            cn.st.execute("UPDATE Inventario SET Cantidad='"+(cantidad-cantidad2)+"' WHERE IdSucursal='"+sucursal+"' AND CodBarra='"+detalles[x][1]+"'");
+        }    
+        } catch (SQLException e) {
+        throw new ErrorTienda("Controlador Venta catualizar inventario", e.getMessage());
+        }
     }
     public int ObtenerIdVenta() throws ErrorTienda{
         int IdVenta=0;
