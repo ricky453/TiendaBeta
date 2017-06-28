@@ -244,12 +244,7 @@ public class frmParametroModificar extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
+           
         
         
     }//GEN-LAST:event_btnGuardarModificarParametroActionPerformed

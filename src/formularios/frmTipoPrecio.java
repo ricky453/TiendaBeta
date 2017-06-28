@@ -37,6 +37,7 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     boolean estadoMenu;
     JTableHeader tHeadVentas;
     public DefaultTableModel modelotipoprecio= new DefaultTableModel();
+       frmTipoPrecioModificar ftp = new frmTipoPrecioModificar();
 
     public frmTipoPrecio() {
         initComponents();
@@ -69,9 +70,14 @@ public class frmTipoPrecio extends javax.swing.JFrame {
         }
     }
     
-    
-    
-    
+     //Metodo para editar
+    public void TrasladoDatos(){
+        ftp.txtIDTipoPrecio.setEditable(false);
+    ftp.txtIDTipoPrecio.setText(tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(),0).toString());
+    ftp.txtNombreTipo.setText(tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(),1).toString());
+    ftp.txtUtilidadTipoPrecio.setText(tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(),2).toString());
+    ftp.txtNombreTipo.requestFocus();
+    }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
@@ -543,6 +549,7 @@ public class frmTipoPrecio extends javax.swing.JFrame {
             frmTipoPrecioModificar tpm = new frmTipoPrecioModificar();
             tpm.setVisible(true);
             this.setVisible(false);
+            TrasladoDatos();
 
         }else{
             mensajeNotificacion("¡Seleccione un dato de la tabla!", "Adv");

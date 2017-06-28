@@ -32,7 +32,13 @@ public class ControladorTipoPrecio {
     public static void EliminarTipoPrecio(int idTipoPrecio){
         
     }
-    public void ModificarTipoPrecio( TipoPrecio cambios){
+    public static void ModificarTipoPrecio( TipoPrecio cambios) throws ErrorTienda{
+          try {
+            cn=new Conexion();
+            cn.st.execute("UPDATE TipoPrecio SET Nombre='"+cambios.getNombre()+"',Valor='"+cambios.getUtilidad()+"' WHERE IdParametro='"+cambios.getIdTipoPrecio()+"'");
+        } catch (SQLException e) {
+            throw new ErrorTienda("Class ControladorTipoPrecio/Modificar",e.getMessage());
+        }
         
     }
     public TipoPrecio Buscar (int idTipoPrecio){

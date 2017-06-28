@@ -5,7 +5,9 @@
  */
 package formularios;
 
+import clases.ControladorTipoPrecio;
 import clases.ErrorTienda;
+import clases.TipoPrecio;
 import formularios.frmCompras;
 import formularios.frmHome;
 import formularios.frmProductos;
@@ -32,6 +34,29 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         initComponents();
         this.setSize(1200, 700);
     }
+    
+    
+    
+    //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +79,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         btnGuardarModificarTipoPrecio = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
-        txtNombreTipoPrecio = new javax.swing.JTextField();
+        txtNombreTipo = new javax.swing.JTextField();
         txtUtilidadTipoPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,19 +175,19 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         jLabel25.setText("Valor:");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, 20));
 
-        txtNombreTipoPrecio.setForeground(new java.awt.Color(102, 0, 0));
-        txtNombreTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNombreTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreTipo.setForeground(new java.awt.Color(102, 0, 0));
+        txtNombreTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombreTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreTipoPrecioActionPerformed(evt);
+                txtNombreTipoActionPerformed(evt);
             }
         });
-        txtNombreTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreTipo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreTipoPrecioKeyTyped(evt);
+                txtNombreTipoKeyTyped(evt);
             }
         });
-        getContentPane().add(txtNombreTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
+        getContentPane().add(txtNombreTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 410, 30));
 
         txtUtilidadTipoPrecio.setForeground(new java.awt.Color(102, 0, 0));
         txtUtilidadTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +216,30 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     private void btnGuardarModificarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarTipoPrecioActionPerformed
 
+           TipoPrecio tpc= new TipoPrecio();
+           
+           
+           if (txtIDTipoPrecio.getText().equals("")||txtNombreTipo.getText().equals("")||txtUtilidadTipoPrecio.getText().equals("")) {
+               mensajeNotificacion("No puede dejar campos vacios", "Error");
+            
+        } else {
+               try {
+            tpc.setIdTipoPrecio(Integer.parseInt(txtIDTipoPrecio.getText()));
+            tpc.setNombre(txtNombreTipo.getText());
+            tpc.setUtilidad(Double.parseDouble((txtUtilidadTipoPrecio.getText())));
+            ControladorTipoPrecio.ModificarTipoPrecio(tpc);
+            mensajeNotificacion("Parametro modificado con exito","Ok");
+            txtIDTipoPrecio.setText("");
+            txtNombreTipo.setText("");
+            txtUtilidadTipoPrecio.setText("");
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        
+        
     }//GEN-LAST:event_btnGuardarModificarTipoPrecioActionPerformed
 
     private void lblAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseClicked
@@ -211,11 +260,11 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtIDTipoPrecioKeyTyped
 
-    private void txtNombreTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTipoPrecioActionPerformed
+    private void txtNombreTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTipoActionPerformed
         txtUtilidadTipoPrecio.requestFocus();
-    }//GEN-LAST:event_txtNombreTipoPrecioActionPerformed
+    }//GEN-LAST:event_txtNombreTipoActionPerformed
 
-    private void txtNombreTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreTipoPrecioKeyTyped
+    private void txtNombreTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreTipoKeyTyped
         char mayu=evt.getKeyChar();
         if (Character.isLowerCase(mayu)) {
             String cadena=(""+mayu).toUpperCase();
@@ -225,7 +274,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         else{
 
         }
-    }//GEN-LAST:event_txtNombreTipoPrecioKeyTyped
+    }//GEN-LAST:event_txtNombreTipoKeyTyped
 
     private void txtUtilidadTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioActionPerformed
         // TODO add your handling code here:
@@ -298,7 +347,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
     public static javax.swing.JTextField txtIDTipoPrecio;
-    private javax.swing.JTextField txtNombreTipoPrecio;
-    private javax.swing.JTextField txtUtilidadTipoPrecio;
+    public static javax.swing.JTextField txtNombreTipo;
+    public static javax.swing.JTextField txtUtilidadTipoPrecio;
     // End of variables declaration//GEN-END:variables
 }
