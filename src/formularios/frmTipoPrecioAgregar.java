@@ -7,6 +7,7 @@ package formularios;
 
 import clases.ControladorTipoPrecio;
 import clases.ErrorTienda;
+import clases.TipoPrecio;
 import formularios.frmCompras;
 import formularios.frmHome;
 import formularios.frmProductos;
@@ -51,9 +52,52 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
-    
-    
-    
+      public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }       
+    }
+     
+     
+     
+     
+     public void guardarDatos() throws ErrorTienda{
+        TipoPrecio agregado=new TipoPrecio();
+        int idTipoPrecio;
+        if (txtNombreTipoPrecio.getText().equals("") || txtUtilidadTipoPrecio.getText().equals("") ) {
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
+        }
+        else{
+            //PARA VALIDAR QUE EL PORCENTAJE DE UTILIDAD NO SEA MENOR A 0 NI MAYOR A 1
+            if (Double.parseDouble(txtUtilidadTipoPrecio.getText())>1 || Double.parseDouble(txtUtilidadTipoPrecio.getText())<0) {
+                mensajeNotificacion("El porcentaje de utilidad es incorrecto", "Adv");
+            } else {
+                idTipoPrecio = ControladorTipoPrecio.ObtenerIdMax();
+                agregado.setIdTipoPrecio(idTipoPrecio+1);
+            agregado.setNombre(txtNombreTipoPrecio.getText());
+            agregado.setUtilidad(Double.parseDouble(txtUtilidadTipoPrecio.getText()));
+            ControladorTipoPrecio.AgregarTipoPrecio(agregado);
+            mensajeNotificacion("Registro guardado con exito", "Ok");
+            limpiando();
+            }
+            
+                 }
+        //LlenarCompra();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,7 +272,11 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarTipoPrecioMouseExited
 
     private void btnGuardarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoPrecioActionPerformed
-
+        try {
+            guardarDatos();
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmTipoPrecioAgregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGuardarTipoPrecioActionPerformed
 
     private void txtUtilidadTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioActionPerformed

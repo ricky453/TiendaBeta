@@ -20,7 +20,7 @@ public class ControladorTipoPrecio {
     static Conexion cn ;
     static ResultSet rs;
     
-    public void AgregarTipoPrecio(TipoPrecio tp) throws ErrorTienda{
+    public static void AgregarTipoPrecio(TipoPrecio tp) throws ErrorTienda{
         cn=new Conexion();
         try {
             cn.st.executeUpdate("INSERT INTO TipoPrecio(IdTipoPrecio,Nombre,Utilidad) VALUES('"+tp.getIdTipoPrecio()+"','"+tp.getNombre()+"','"+tp.getUtilidad()+"')");
@@ -29,7 +29,7 @@ public class ControladorTipoPrecio {
         }
         
     }
-    public void EliminarTipoPrecio(int idTipoPrecio){
+    public static void EliminarTipoPrecio(int idTipoPrecio){
         
     }
     public void ModificarTipoPrecio( TipoPrecio cambios){
