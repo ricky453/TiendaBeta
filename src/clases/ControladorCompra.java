@@ -28,7 +28,9 @@ public class ControladorCompra {
         ResultSet rs;
         try {
             rs = null;
-            rs = cn.st.executeQuery("SELECT IdCompra, tw.Nombre, Cantidad, CostoUnitario FROM detalleCompra tp INNER JOIN producto tw ON tw.CodBarra=tp.CodBarra");
+            rs = cn.st.executeQuery("SELECT `detallecompra`.`IdCompra`, `producto`.`Nombre`, `detallecompra`.`Cantidad`, `detallecompra`.`CostoUnitario`\n" +
+                  "FROM `producto`\n" +
+                  "    LEFT JOIN `detallecompra` ON `detallecompra`.`CodBarra` = `producto`.`CodBarra`");
             while (rs.next()) {
                 dc.add(rs.getString(1));
                 dc.add(rs.getString(2));

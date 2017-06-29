@@ -423,8 +423,6 @@ public class frmCompras extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 580, 100, 40));
-
-        txtFecha.setEditable(false);
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 160, 30));
 
         lblFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
