@@ -45,7 +45,7 @@ public class frmVentas extends javax.swing.JFrame {
     ArrayList<Sucursal> sucursales = new ArrayList();
     ArrayList<TipoPrecio> precio = new ArrayList();
     Iterator<Sucursal> Iterador;
-    Object sucursal[],misPrecios[][] ;
+    Object miSucursal[][],misPrecios[][] ;
     DecimalFormat decimal =new DecimalFormat("0.00");
     double subTotales,utilidad;
     
@@ -117,7 +117,7 @@ public class frmVentas extends javax.swing.JFrame {
         if(!txtCodigoBarraVender.getText().isEmpty()){
             
             try {
-                int idSucursal = Integer.valueOf(String.valueOf(sucursal[cmbSucursalVenta.getSelectedIndex()]));
+                int idSucursal = Integer.valueOf(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0]));
                  miProducto = ControladorProducto.Obtener(CodBarra,idSucursal);
             } catch (ErrorTienda ex) {
                 throw new ErrorTienda("ObtenerProducto error", ex.getMessage());
@@ -218,29 +218,18 @@ public class frmVentas extends javax.swing.JFrame {
     //OBTENER TODAS LAS SUCUARSALES
     public void CargarSucursales() throws ErrorTienda{
         sucursales = ControladorSucursal.obtener();
-        sucursal = new Object[sucursales.size()/4];
-        int contador=0,fila=0;
+        miSucursal = new Object[sucursales.size()/4][4];
         
-        for(int i=0; i<sucursales.size();i++){
-            
-            if(contador==4){
-                contador=0;
-             
-            }
-            
-            if(contador==0){
-                sucursal[fila]=sucursales.get(i);
-                fila++;
-                
-            }
-            
-            if(contador==1){
-            Object dato = sucursales.get(i);
-            cmbSucursalVenta.addItem((String) dato);
-            }
-            
-            
-            contador++;
+        int contador=0,fila=0;
+        Iterator<Sucursal> iterador= sucursales.iterator();
+        String temporal="";
+        while (iterador.hasNext()){
+            miSucursal[fila][0]=iterador.next();
+            miSucursal[fila][1]=iterador.next();
+            miSucursal[fila][2]=iterador.next();
+            miSucursal[fila][3]=iterador.next();
+            cmbSucursalVenta.addItem(""+miSucursal[fila][1]);
+            fila++;
         }
        
     }
@@ -316,7 +305,7 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
         venta.setIdPrecio(Integer.parseInt(String.valueOf(misPrecios[cmbTipoPrecio.getSelectedIndex()][0])));
         venta.setIdTipoVenta(idTipoVenta);
-        venta.setIdSucursal(Integer.parseInt(String.valueOf(sucursal[cmbSucursalVenta.getSelectedIndex()])));
+        venta.setIdSucursal(Integer.parseInt(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0])));
         if(idTipoVenta=='F'){
             venta.setTotalGravado(Double.parseDouble(txtTotalventa.getText().substring(1)));
             
@@ -349,7 +338,7 @@ public class frmVentas extends javax.swing.JFrame {
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
     public boolean VerificarTabla() throws ErrorTienda{
         if(modeloVentas.getRowCount()!=0){
-       int idSucursal = Integer.valueOf(String.valueOf(sucursal[cmbSucursalVenta.getSelectedIndex()]));
+       int idSucursal = Integer.valueOf(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0]));
        miProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText(),idSucursal);
        for(int x=0;x<modeloVentas.getRowCount();x++){
            if(txtCodigoBarraVender.getText().equals(modeloVentas.getValueAt(x, 0))){

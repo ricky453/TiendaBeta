@@ -35,7 +35,7 @@ public class ControladorTipoPrecio {
     public static void ModificarTipoPrecio( TipoPrecio cambios) throws ErrorTienda{
           try {
             cn=new Conexion();
-            cn.st.execute("UPDATE TipoPrecio SET Nombre='"+cambios.getNombre()+"',Valor='"+cambios.getUtilidad()+"' WHERE IdParametro='"+cambios.getIdTipoPrecio()+"'");
+            cn.st.execute("UPDATE TipoPrecio SET Nombre='"+cambios.getNombre()+"',Utilidad='"+cambios.getUtilidad()+"' WHERE IdTipoPrecio='"+cambios.getIdTipoPrecio()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorTipoPrecio/Modificar",e.getMessage());
         }
