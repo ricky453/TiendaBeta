@@ -229,9 +229,9 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
             tpc.setUtilidad(Double.parseDouble((txtUtilidadTipoPrecio.getText())));
             ControladorTipoPrecio.ModificarTipoPrecio(tpc);
             mensajeNotificacion("Parametro modificado con exito","Ok");
-            txtIDTipoPrecio.setText("");
-            txtNombreTipo.setText("");
-            txtUtilidadTipoPrecio.setText("");
+           //txtIDTipoPrecio.setText("");
+            //txtNombreTipo.setText("");
+            //txtUtilidadTipoPrecio.setText("");
             
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
