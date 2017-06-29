@@ -923,7 +923,7 @@ public class frmCompras extends javax.swing.JFrame {
             }
         }
         if (s == KeyEvent.VK_ENTER) {
-           if (txtCodBarraProd1.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
+           if (txtCodBarraProd1.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")||txtPercepcion.getText().equals("")) {
                 mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
             }else{
                 if(Double.parseDouble(txtCostoProd.getText()) > 0){
