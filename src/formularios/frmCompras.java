@@ -415,10 +415,14 @@ public class frmCompras extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 960, 200));
 
-        txtPercepcion.setEditable(false);
         txtPercepcion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtPercepcion.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 550, 100, 40));
+        txtPercepcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPercepcionKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 580, 100, 40));
 
         txtFecha.setEditable(false);
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 160, 30));
@@ -437,7 +441,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblPercepcion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPercepcion.setText("Percepción:");
-        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, 90, 40));
+        getContentPane().add(lblPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 570, 90, 40));
 
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
@@ -503,21 +507,21 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal1.setText("TOTAL:");
-        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 50, 40));
+        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 630, 50, 40));
 
         txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtTotal.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 620, 100, 40));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, 100, 40));
 
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblIVA.setText("IVA:");
-        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 40));
+        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 530, 50, 40));
 
         txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 550, 100, 40));
+        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, 100, 40));
 
         btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
         btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -686,10 +690,13 @@ public class frmCompras extends javax.swing.JFrame {
         }
 
         double totalFinal=Double.parseDouble(decimal.format(total));
-        txtTotal.setText("$"+totalFinal);
+        
         if (TipoCompra==0) {
             txtIVA.setText("$"+decimal.format(totalFinal*0.13));
-            txtPercepcion.setText("$"+decimal.format(totalFinal*0.1));
+            //txtPercepcion.setText("$"+decimal.format(totalFinal*0.1));
+            txtTotal.setText("$"+decimal.format(totalFinal+(totalFinal*0.13)-(totalFinal*Double.parseDouble(txtPercepcion.getText()))));
+        }else{
+            txtTotal.setText("$"+totalFinal);
         }
 }
     
@@ -949,11 +956,14 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarVentaMouseExited
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
-
+        tablaModel.setRowCount(0);
         txtNumeroDoc.setText("");
         txtNomProd.setText("");
         txtCantidad.setText("1");
         txtCostoProd.setText("");
+        cmbProveedor.setEnabled(true);
+        cmbSucursalCompra.setEnabled(true);
+        cmbTipoCompra.setEnabled(true);
 
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
@@ -1105,8 +1115,8 @@ public class frmCompras extends javax.swing.JFrame {
                     producto= ControladorProducto.Obtener(codBarra,1).getNombre();
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
                     if (producto==null || producto=="") {
-                        txtCodBarraProd1.setEditable(true);
-                        txtCodBarraProd1.requestFocus();                          
+                        txtNomProd.setEditable(true);
+                        txtNomProd.requestFocus();                          
                         mensajeNotificacion("Ese producto no está, ¡Agregue!", "Adv");
                         exprod=false;
                     } else {
@@ -1128,6 +1138,28 @@ public class frmCompras extends javax.swing.JFrame {
         tp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblTipoPrecioMouseClicked
+
+    private void txtPercepcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercepcionKeyTyped
+        s = evt.getKeyChar();
+        int p = (int) evt.getKeyChar();
+
+        // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
+        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
+            getToolkit().beep();
+            evt.consume();
+        }else if (s == KeyEvent.VK_PERIOD) {
+            String cadena=txtPercepcion.getText();
+            int tamanio=cadena.length();
+            for (int i = 0; i <= tamanio; i++) {
+                if (cadena.contains(".")) {
+                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_txtPercepcionKeyTyped
 
     /**
      * @param args the command line arguments

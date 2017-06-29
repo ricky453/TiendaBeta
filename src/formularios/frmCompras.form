@@ -610,7 +610,6 @@
     </Container>
     <Component class="javax.swing.JTextField" name="txtPercepcion">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
@@ -618,9 +617,12 @@
           <Color blue="0" green="0" red="66" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPercepcionKeyTyped"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="790" y="550" width="100" height="40"/>
+          <AbsoluteConstraints x="980" y="580" width="100" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -682,7 +684,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="710" y="550" width="90" height="40"/>
+          <AbsoluteConstraints x="890" y="570" width="90" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -827,7 +829,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="930" y="620" width="50" height="40"/>
+          <AbsoluteConstraints x="920" y="630" width="50" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -843,7 +845,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="980" y="620" width="100" height="40"/>
+          <AbsoluteConstraints x="980" y="630" width="100" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -856,7 +858,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="930" y="550" width="50" height="40"/>
+          <AbsoluteConstraints x="930" y="530" width="50" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -872,7 +874,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="980" y="550" width="100" height="40"/>
+          <AbsoluteConstraints x="980" y="530" width="100" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
