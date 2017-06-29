@@ -96,12 +96,6 @@ public class frmCompras extends javax.swing.JFrame {
         lblParametro = new javax.swing.JLabel();
         lblCompras = new javax.swing.JLabel();
         lblTipoPrecio = new javax.swing.JLabel();
-        jpnBarraSuperior = new javax.swing.JPanel();
-        menu = new javax.swing.JLabel();
-        home = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        lblBotonCerrar = new javax.swing.JLabel();
         jpnAgregarCompra = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
@@ -117,7 +111,6 @@ public class frmCompras extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblCompra = new javax.swing.JTable();
         txtPercepcion = new javax.swing.JTextField();
-        txtFecha = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         lblIdCompra = new javax.swing.JLabel();
         lblProveedor = new javax.swing.JLabel();
@@ -138,6 +131,13 @@ public class frmCompras extends javax.swing.JFrame {
         txtIVA = new javax.swing.JTextField();
         btnDetalles = new javax.swing.JButton();
         txtCodBarraProd1 = new javax.swing.JTextField();
+        dtcFecha = new com.toedter.calendar.JDateChooser();
+        jpnBarraSuperior = new javax.swing.JPanel();
+        menu = new javax.swing.JLabel();
+        home = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        lblBotonCerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -257,68 +257,6 @@ public class frmCompras extends javax.swing.JFrame {
 
         getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 140, 360));
 
-        jpnBarraSuperior.setBackground(new java.awt.Color(102, 0, 0));
-        jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jpnBarraSuperiorMouseDragged(evt);
-            }
-        });
-        jpnBarraSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jpnBarraSuperiorMousePressed(evt);
-            }
-        });
-        jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        menu.setBackground(new java.awt.Color(85, 0, 0));
-        menu.setFont(new java.awt.Font("Trajan Pro", 1, 16)); // NOI18N
-        menu.setForeground(new java.awt.Color(255, 255, 255));
-        menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        menu.setText("Menú");
-        menu.setToolTipText("Menú");
-        menu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        menu.setIconTextGap(-5);
-        menu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menuMouseExited(evt);
-            }
-        });
-        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 55));
-
-        home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Home.png"))); // NOI18N
-        home.setToolTipText("Ir a Home");
-        home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        home.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                homeMouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 70, 55));
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator2.setToolTipText("");
-        jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 30, 60));
-
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator4.setToolTipText("");
-        jpnBarraSuperior.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 60, 60));
-
-        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
-        lblBotonCerrar.setToolTipText("Salir");
-        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBotonCerrarMouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
-
-        getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
-
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -370,11 +308,11 @@ public class frmCompras extends javax.swing.JFrame {
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseExited(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +362,6 @@ public class frmCompras extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 580, 100, 40));
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 160, 30));
 
         lblFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFecha.setText("Fecha:");
@@ -546,6 +483,71 @@ public class frmCompras extends javax.swing.JFrame {
         });
         getContentPane().add(txtCodBarraProd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 120, 30));
 
+        dtcFecha.setDateFormatString("dd/MM/yyyy");
+        getContentPane().add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 150, 30));
+
+        jpnBarraSuperior.setBackground(new java.awt.Color(102, 0, 0));
+        jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jpnBarraSuperiorMouseDragged(evt);
+            }
+        });
+        jpnBarraSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpnBarraSuperiorMousePressed(evt);
+            }
+        });
+        jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        menu.setBackground(new java.awt.Color(85, 0, 0));
+        menu.setFont(new java.awt.Font("Trajan Pro", 1, 16)); // NOI18N
+        menu.setForeground(new java.awt.Color(255, 255, 255));
+        menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menu.setText("Menú");
+        menu.setToolTipText("Menú");
+        menu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menu.setIconTextGap(-5);
+        menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                menuMouseExited(evt);
+            }
+        });
+        jpnBarraSuperior.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 55));
+
+        home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Home.png"))); // NOI18N
+        home.setToolTipText("Ir a Home");
+        home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 70, 55));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator2.setToolTipText("");
+        jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 30, 60));
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator4.setToolTipText("");
+        jpnBarraSuperior.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 60, 60));
+
+        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
+        lblBotonCerrar.setToolTipText("Salir");
+        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBotonCerrarMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
+
+        getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -560,8 +562,7 @@ public class frmCompras extends javax.swing.JFrame {
             txtNumeroDoc.setText(String.valueOf(idCompra+1));
             //GENERAR FECHA 
             Date utilDate=new Date();
-            SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
-            txtFecha.setText(fecha.format(utilDate)); 
+            dtcFecha.setDate(utilDate);
              //AGREGAR PROVEEDORES AL COMBO BOX
             Object vector1[] = new Object[4];
             if (cmbSucursalCompra.getItemCount()==0) {
@@ -721,7 +722,7 @@ public class frmCompras extends javax.swing.JFrame {
         Object[] llenarProveedor = new Object[6];
         ArrayList<DetalleCompra> Articulos = new ArrayList();
         DetalleCompra detalleCompra = new DetalleCompra();
-        Date fechaActual = new Date();
+        
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Compra compra = new Compra();
         ControladorProducto producto = new ControladorProducto();
@@ -779,13 +780,13 @@ public class frmCompras extends javax.swing.JFrame {
                         break;
                 }
                 compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
-                compra.setFecha(formato.format(fechaActual));
+                compra.setFecha(dtcFecha.getDate());
                 if (Tipocompra==0) {
                     compra.setPercepcion(Double.parseDouble(total)*0.1);
                     compra.setIVA(Double.parseDouble(total)*0.13);
-                    compra.setTotal(Double.parseDouble(total)+(Double.parseDouble(total)*0.1)+(Double.parseDouble(total)*0.13));
+                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+(Double.parseDouble(total)*0.1)+(Double.parseDouble(total)*0.13))));
                 }else{
-                    compra.setTotal(Double.parseDouble(total));
+                    compra.setTotal(Double.parseDouble(decimal.format(total)));
                 }
                 compra.setARTICULOS(Articulos);
                 compra.setSubTotal(Double.parseDouble(total));
@@ -1202,6 +1203,7 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbProveedor;
     private javax.swing.JComboBox<String> cmbSucursalCompra;
     private javax.swing.JComboBox<String> cmbTipoCompra;
+    private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel home;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
@@ -1241,7 +1243,6 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodBarraProd1;
     private javax.swing.JTextField txtCostoProd;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtIdCompra;
     private javax.swing.JTextField txtNomProd;

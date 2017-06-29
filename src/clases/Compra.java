@@ -1,11 +1,11 @@
 package clases;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Compra {
     private int IdCompra;
-    private String fecha;
+    private Date fecha;
     private Proveedor PROVEEDOR;
     private int IdSucursal;
     private char TipoCompra;
@@ -27,11 +27,11 @@ public class Compra {
         this.IdCompra = IdCompra;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
