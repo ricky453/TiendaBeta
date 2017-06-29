@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import clases.ControladorSucursal;
 import clases.ControladorTipoPrecio;
 import clases.ErrorTienda;
 import clases.TipoPrecio;
@@ -15,12 +16,15 @@ import formularios.frmProveedores;
 import formularios.frmSucursales;
 import formularios.frmVentas;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,13 +33,43 @@ import javax.swing.border.Border;
 public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
+        DefaultTableModel modelotipomod= new DefaultTableModel();
+
     
     public frmTipoPrecioModificar() {
         initComponents();
         this.setSize(1200, 700);
     }
     
-    
+                //---------------------------Busca datos repetidos----------------------------------------
+    public void buscarRepetidos(){
+            modelotipomod.setRowCount(0);
+            
+            ArrayList<TipoPrecio> listatipom=new ArrayList();
+            Object fila[]=new Object[4];
+            
+        
+            try {
+            listatipom=ControladorTipoPrecio.ObtenerTodos();
+            String[] nombreSucursal = new String []{"IdTipoPrecio","Nombre","Utilidad"};
+            modelotipomod.setColumnIdentifiers(nombreSucursal);
+            Iterator<TipoPrecio> prov=listatipom.iterator();
+                while(prov.hasNext()){
+                    fila[0]= prov.next();
+                    fila[1]= prov.next();
+                    fila[2]= prov.next();
+                    fila[3]= prov.next();
+                    modelotipomod.addRow(fila);
+                    tblTipoPrecio.setModel(modelotipomod);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            
+        
+         }
+    }
     
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
@@ -67,6 +101,8 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTipoPrecio = new javax.swing.JTable();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -81,6 +117,47 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         txtNombreTipo = new javax.swing.JTextField();
         txtUtilidadTipoPrecio = new javax.swing.JTextField();
+
+        tblTipoPrecio =new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblTipoPrecio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "IdTipoPrecio", "Nombre", "Utilidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTipoPrecio.getTableHeader().setReorderingAllowed(false);
+        tblTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTipoPrecioMouseClicked(evt);
+            }
+        });
+        tblTipoPrecio.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                tblTipoPrecioInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        tblTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblTipoPrecioKeyTyped(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblTipoPrecio);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -224,7 +301,10 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
             
         } else {
                try {
-            tpc.setIdTipoPrecio(Integer.parseInt(txtIDTipoPrecio.getText()));
+                   if (Integer.parseInt(txtUtilidadTipoPrecio.getText())>100||Integer.parseInt(txtUtilidadTipoPrecio.getText())<0) {
+                       mensajeNotificacion("Los porcentajes de utilidad son incorrectos", "Adv");
+                   } else {
+                        tpc.setIdTipoPrecio(Integer.parseInt(txtIDTipoPrecio.getText()));
             tpc.setNombre(txtNombreTipo.getText());
             tpc.setUtilidad(Double.parseDouble((txtUtilidadTipoPrecio.getText())));
             ControladorTipoPrecio.ModificarTipoPrecio(tpc);
@@ -232,6 +312,8 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
            //txtIDTipoPrecio.setText("");
             //txtNombreTipo.setText("");
             //txtUtilidadTipoPrecio.setText("");
+                   }
+           
             
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,14 +347,19 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreTipoActionPerformed
 
     private void txtNombreTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreTipoKeyTyped
+        int c=(int) evt.getKeyChar();
         char mayu=evt.getKeyChar();
-        if (Character.isLowerCase(mayu)) {
-            String cadena=(""+mayu).toUpperCase();
-            mayu=cadena.charAt(0);
-            evt.setKeyChar(mayu);
-        }
-        else{
 
+        if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8)  || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            if (Character.isLowerCase(mayu)) {
+                String cadena=(""+mayu).toUpperCase();
+                mayu=cadena.charAt(0);
+                evt.setKeyChar(mayu);
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtNombreTipoKeyTyped
 
@@ -283,6 +370,18 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     private void txtUtilidadTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUtilidadTipoPrecioKeyTyped
+
+    private void tblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoPrecioMouseClicked
+
+    }//GEN-LAST:event_tblTipoPrecioMouseClicked
+
+    private void tblTipoPrecioInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tblTipoPrecioInputMethodTextChanged
+
+    }//GEN-LAST:event_tblTipoPrecioInputMethodTextChanged
+
+    private void tblTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTipoPrecioKeyTyped
+
+    }//GEN-LAST:event_tblTipoPrecioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -340,12 +439,14 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnCompras;
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
+    public javax.swing.JTable tblTipoPrecio;
     public static javax.swing.JTextField txtIDTipoPrecio;
     public static javax.swing.JTextField txtNombreTipo;
     public static javax.swing.JTextField txtUtilidadTipoPrecio;
