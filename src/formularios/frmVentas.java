@@ -269,7 +269,9 @@ public class frmVentas extends javax.swing.JFrame {
         txtNRCVenta.setText("");
         txtNITVenta.setText("");
         txtNDocumento.setText("");
-        
+        cmbTipoVenta.setSelectedIndex(0);
+        cmbSucursalVenta.setSelectedIndex(0);
+        cmbTipoPrecio.setSelectedIndex(1);
         }
     }
     //SIRVE PARA MOSTRAR U OCULTAR LOS ESPACIOS DE TEXTO QUE DEGLOSAN LOS DOS TIPOS DE VENTAS DISPONIBLES
@@ -1132,6 +1134,7 @@ public class frmVentas extends javax.swing.JFrame {
                 limpiar("todo");
                 ObtenerIdVenta();
                 listas(true);
+                
             }
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
