@@ -26,8 +26,8 @@ public class DetalleVenta {
     public double CalcularPrecio(double utilidad){
         double nuevoPrecio=0,precioFinal;
         nuevoPrecio=((this.PrecioUnitario))/utilidad;
-        precioFinal=Math.round(nuevoPrecio*100.0)/100.0;
-        return Double.parseDouble(decimal.format(precioFinal));
+        
+        return Double.parseDouble(decimal.format(nuevoPrecio));
     }
     public double CalcularPrecioDetalle(){
         double nuevoPrecio=0;
@@ -56,7 +56,7 @@ public class DetalleVenta {
     }
 
     public void setCantidad(double Cantidad) {
-        this.Cantidad = Cantidad;
+        this.Cantidad =  Cantidad;
     }
 
     public double getPrecioUnitario() {

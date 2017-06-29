@@ -55,7 +55,7 @@ public class frmVentas extends javax.swing.JFrame {
     Venta venta = new Venta();
     DetalleVenta dv = new DetalleVenta();
     ControladorTipoPrecio precios;
-    
+    Date fecha = new Date();
     
     
     public frmVentas() throws ErrorTienda {
@@ -76,6 +76,7 @@ public class frmVentas extends javax.swing.JFrame {
         cmbTipoPrecio.setSelectedIndex(1);
         txtCodigoBarraVender.requestFocus();
         tipoVentaSeleccion(false);
+        dtcFecha.setDate(fecha);
         
     }
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
@@ -150,10 +151,13 @@ public class frmVentas extends javax.swing.JFrame {
         }
     }
     //CARGAR PRODUCTO EN LA TABLA
-    public void cargarTabla(){
-        int contador=0;
+    public void cargarTabla() throws ErrorTienda{
+        
+        if(VerificarTabla()==false){
+            int contador=0;
         int fila=modeloVentas.getRowCount();
         double costoUnitario=0,totalDetalle=0;
+        listas(false);
         modeloVentas.addRow(new Object []{"","","","",""});
         modeloVentas.setValueAt(miProducto.getCodBarra(),fila, 0);
         modeloVentas.setValueAt(miProducto.getNombre(),fila, 1);
@@ -169,6 +173,7 @@ public class frmVentas extends javax.swing.JFrame {
                 //VERIFICAR EL TIPO DE VENTA
                 if(cmbTipoVenta.getSelectedIndex()==0){
                     costoUnitario=dv.CalcularPrecio(utilidad)*1.13;
+                    System.out.println("Costo Unitario "+costoUnitario);
                 }else{
                     costoUnitario=dv.CalcularPrecio(utilidad);
                 }
@@ -196,6 +201,7 @@ public class frmVentas extends javax.swing.JFrame {
         }else{
           SumarSubTotales();
         txtTotalventa.setText("$ "+decimal.format(subTotales));  
+        }
         }
         
         limpiar("p");
@@ -262,7 +268,7 @@ public class frmVentas extends javax.swing.JFrame {
         txtNombreProductoVender.setText("");
         txtCodigoBarraVender.setText("");
         txtCodigoBarraVender.requestFocus();
-        
+        dtcFecha.setDate(fecha);
         if(condicion.equals("todo")){
             modeloVentas.setRowCount(0);
         txtTotalventa.setText("$ 0.00");
@@ -283,6 +289,20 @@ public class frmVentas extends javax.swing.JFrame {
           txtSumas.setVisible(estado);
           lblIVA.setVisible(estado);
           lblSumas.setVisible(estado);
+          txtGiro.setVisible(estado);
+          txtNRCVenta.setVisible(estado);
+          txtNITVenta.setVisible(estado);
+          txtNDocumento.setVisible(estado);
+          lblGiro.setVisible(estado);
+          lblNRC.setVisible(estado);
+          lblNIT.setVisible(estado);
+          lblDOC.setVisible(estado);
+    }
+    //ESTADO DE LAS LISTAS PLEGABLES
+    public void listas (boolean estado){
+        cmbSucursalVenta.setEnabled(estado);
+        cmbTipoPrecio.setEnabled(estado);
+        cmbTipoVenta.setEnabled(estado);
     }
     //GUARDAR, AGREGA LA VENTA A LA BASE DE DATOS
     public void guardar() throws ErrorTienda{
@@ -292,7 +312,7 @@ public class frmVentas extends javax.swing.JFrame {
         }else{
             idTipoVenta='C';
         }
-        Date utilDate=new Date();
+        
         venta.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
         venta.setIdPrecio(Integer.parseInt(String.valueOf(misPrecios[cmbTipoPrecio.getSelectedIndex()][0])));
         venta.setIdTipoVenta(idTipoVenta);
@@ -303,43 +323,60 @@ public class frmVentas extends javax.swing.JFrame {
         }else{
             venta.setTotalGravado(Double.parseDouble(txtSumas.getText().substring(1)));
             venta.setIVA(Double.parseDouble(txtIVA.getText().substring(1)));
+            venta.setGiro(txtGiro.getText().toUpperCase());
+            venta.setNIT(txtNITVenta.getText());
+            venta.setNRC(txtNRCVenta.getText());
+            venta.setNomDocumento(txtNDocumento.getText());
         }
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
-        venta.setFecha(utilDate);
-        venta.setCliente(txtClienteVenta.getText());
-        venta.setDireccion(txtDireccionVenta.getText());
-        venta.setGiro(txtGiro.getText());
-        venta.setNIT(txtNITVenta.getText());
-        venta.setNRC(txtNRCVenta.getText());
-        venta.setNomDocumento(txtNDocumento.getText());
-        cv.Agregar(venta);
+        venta.setFecha(dtcFecha.getDate());
+        venta.setCliente(txtClienteVenta.getText().toUpperCase());
+        venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         
+        
+        
+        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
+        
+        for(int y=0; y<modeloVentas.getRowCount();y++){
+            DetallesVenta[y][0]=txtIdVenta.getText();
+            DetallesVenta[y][1]=modeloVentas.getValueAt(y, 0);
+            DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
+            DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
+        }
+        cv.Agregar(venta,DetallesVenta);
         
     }
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
-    public boolean VerificarTabla(){
-        double subTotalAnterior, nuevoSubTotal, totalAnterior, nuevoTotal, ivaAnterior, nuevoIva, sumaAnterior, nuevaSuma,nuevoCostoUnitario;
-            int cantidadAnterior, nuevaCantidad, encontrado=-1,contador=0;
-            
-            //COMPROBAR LA EXISTENCIA DE UN PRODUCTO EN LA TABLA
-            for(int x =0; x<modeloVentas.getRowCount();x++){
-                if(txtCodigoBarraVender.getText().equals(String.valueOf(modeloVentas.getValueAt(x, 0)))){
-                    encontrado = x;
-                }
-            }
-            //COMPROBAR SI SE ENCONTRO EL PRODUCTO EN LA TABLA
-            if(encontrado == -1){
-                return false;
-            }
-            //SI NO SE ENCONTRO ENTONCES PROCEDEMOS A EFECTUAR LOS CAMBIOS Y CALCULOS NECESARIOS
-            else{
-                //OBTENER LA UTILIDAD SELECCIONADA
-                
-            
-                        
-                    
-            }
-        return true;
+    public boolean VerificarTabla() throws ErrorTienda{
+        if(modeloVentas.getRowCount()!=0){
+       int idSucursal = Integer.valueOf(String.valueOf(sucursal[cmbSucursalVenta.getSelectedIndex()]));
+       miProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText(),idSucursal);
+       for(int x=0;x<modeloVentas.getRowCount();x++){
+           if(txtCodigoBarraVender.getText().equals(modeloVentas.getValueAt(x, 0))){
+               int cantidad = Integer.parseInt(txtCantidadVender.getText())+ Integer.parseInt(String.valueOf(modeloVentas.getValueAt(x, 2)));
+               modeloVentas.setValueAt(cantidad, x, 2);
+               double precioUnitario = Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
+               double subTotal = precioUnitario*cantidad;
+               modeloVentas.setValueAt(decimal.format(subTotal), x, 4);
+               if(cmbTipoVenta.getSelectedIndex()==0){
+                   SumarSubTotales();
+                   txtTotalventa.setText("$ "+decimal.format(subTotales));
+               }else{
+                   SumarSubTotales();
+            System.out.println("sub totales "+subTotales);
+        venta.setTotalGravado(subTotales);
+        venta.CalcularIVA();
+        venta.CalcularTotal();
+        
+        txtIVA.setText("$ "+decimal.format(venta.getIVA()));
+        txtSumas.setText("$"+subTotales);
+        txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
+               }
+               return true;
+           }
+       }
+        }
+       return false;
     }
     //VALIDAR QUE LOS CAMPOS ESTEN CORRECTAMENTE LLENADOS
     public boolean validar(int tipoVenta){
@@ -399,6 +436,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblDOC.setForeground(Color.BLACK);
     }
     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -435,6 +473,8 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         txtIdVenta = new javax.swing.JTextField();
+        dtcFecha = new com.toedter.calendar.JDateChooser();
+        jLabel40 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         txtNombreProductoVender = new javax.swing.JTextField();
         txtCantidadVender = new javax.swing.JTextField();
@@ -684,7 +724,7 @@ public class frmVentas extends javax.swing.JFrame {
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIDVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lblIDVenta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblIDVenta.setForeground(new java.awt.Color(240, 240, 240));
         lblIDVenta.setText("ID Venta");
         jpnAgregarCompra.add(lblIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
@@ -711,8 +751,8 @@ public class frmVentas extends javax.swing.JFrame {
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel37.setText("Sucursal:");
-        jpnAgregarCompra.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, 30));
+        jLabel37.setText("Fecha:");
+        jpnAgregarCompra.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, 30));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(240, 240, 240));
@@ -722,6 +762,12 @@ public class frmVentas extends javax.swing.JFrame {
         txtIdVenta.setEditable(false);
         txtIdVenta.setBackground(new java.awt.Color(254, 254, 254));
         jpnAgregarCompra.add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 17, 120, 30));
+        jpnAgregarCompra.add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 150, 30));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel40.setText("Sucursal:");
+        jpnAgregarCompra.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, 30));
 
         getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 60));
 
@@ -786,7 +832,7 @@ public class frmVentas extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Cantidad");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
 
         lblGiro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblGiro.setText("Giro");
@@ -986,7 +1032,11 @@ public class frmVentas extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         
         if(c == (char) KeyEvent.VK_ENTER){
-            cargarTabla();
+            try {
+                cargarTabla();
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtCantidadVenderKeyPressed
 
@@ -1024,7 +1074,11 @@ public class frmVentas extends javax.swing.JFrame {
              if(txtCantidadVender.getText().isEmpty()){
             mensajeNotificacion("Ingrese una cantidad", "Adv");
         }else{
-            cargarTabla();
+                 try {
+                     cargarTabla();
+                 } catch (ErrorTienda ex) {
+                     Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+                 }
         }
          }
         
@@ -1086,6 +1140,9 @@ public class frmVentas extends javax.swing.JFrame {
             System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
             if(validar(cmbTipoVenta.getSelectedIndex())){
                guardar();
+                limpiar("todo");
+                ObtenerIdVenta();
+                listas(true);
             }
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
@@ -1104,6 +1161,9 @@ public class frmVentas extends javax.swing.JFrame {
         frmVentasDetalle vd = new frmVentasDetalle();
         vd.setVisible(true);
         this.setVisible(false);
+
+
+
         
     }//GEN-LAST:event_btnDetallesActionPerformed
 
@@ -1134,7 +1194,7 @@ public class frmVentas extends javax.swing.JFrame {
         cmbSucursalVenta.setSelectedIndex(0);
         cmbTipoVenta.setSelectedIndex(0);
         cmbTipoPrecio.setSelectedIndex(1);
-        
+        listas(true);
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
@@ -1436,6 +1496,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbSucursalVenta;
     private javax.swing.JComboBox<String> cmbTipoPrecio;
     private javax.swing.JComboBox<String> cmbTipoVenta;
+    private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel home;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
@@ -1446,6 +1507,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
