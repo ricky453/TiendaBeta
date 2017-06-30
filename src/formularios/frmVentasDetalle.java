@@ -10,6 +10,7 @@ import clases.ErrorTienda;
 import clases.Producto;
 import clases.Venta;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,32 +34,42 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     DefaultTableModel modeloDetalle;
     double subTotales;
     DateFormat df=DateFormat.getDateInstance();
+    DecimalFormat formateo=new DecimalFormat("#.##");
+    Date fdate=new Date();
     
     public frmVentasDetalle() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        modeloDetalle=(DefaultTableModel) tblVentasDetalladas.getModel();
+        jdcFecha.setDate(fdate);
     }
     
     
    public void estableciendoDatos(int id){
-        Object[] fila=new Object[4];
+        Object[] fila=new Object[5];
         
-        modeloDetalle=new DefaultTableModel();
-        String[] campos = {"Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
+//        modeloDetalle=new DefaultTableModel();
+//        String[] campos = {"CodBara","Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
         
         System.out.println(id);
         
         try {
             ArrayList<Venta> misventas=ControladorVenta.ObtenerVenta(id);
-            modeloDetalle.setColumnIdentifiers(campos);
+//            modeloDetalle.setColumnIdentifiers(campos);
             Iterator iterador=misventas.iterator();
             
             while (iterador.hasNext()) {
                 fila[0]=iterador.next();
                 fila[1]=iterador.next();
                 fila[2]=iterador.next();
-                fila[3]=Integer.parseInt(fila[1].toString())*Double.parseDouble(fila[2].toString());
+                fila[3]=iterador.next();
+                 if ((tblVentas.getValueAt(seleccion, 3).toString()).equals("Factura")) {
+                     fila[4]=formateo.format((Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString()))*1.13);
+                 }else{
+                     fila[4]=formateo.format(Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString()));
+                 }
+                
                 
                 modeloDetalle.addRow(fila);
                 tblVentasDetalladas.setModel(modeloDetalle);
@@ -73,9 +84,27 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         int filas = modeloDetalle.getRowCount();
         subTotales=0;
         for(int i=0;i<filas;i++){
-            subTotales+=Double.parseDouble(String.valueOf(modeloDetalle.getValueAt(i, 3)));
+            subTotales+=Double.parseDouble(String.valueOf(modeloDetalle.getValueAt(i, 4)));
         }
         
+    }
+    
+    //Seteando datos
+    public void cambio(boolean cambio){
+        txtSumas.setVisible(cambio);
+        txtIVA.setVisible(cambio);
+        lblSumas.setVisible(cambio);
+        lblIVA.setVisible(cambio);
+        
+    }
+    
+    public void seteando(){
+        txtFecha.setText("");
+        txtIVA.setText("");
+        txtIdVenta.setText("");
+        txtSucursal.setText("");
+        txtTotalventa.setText("");
+        txtSumas.setText("");
     }
     
 
@@ -121,9 +150,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblParametro = new javax.swing.JLabel();
         lblCompras = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
-        lblLogo = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnAtras = new javax.swing.JLabel();
+        lblBotonCerrar = new javax.swing.JLabel();
         jpnAgregarCompra = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
@@ -203,7 +232,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
+                "CodBarra", "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
         ));
         tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
@@ -399,12 +428,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         });
         jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblLogo.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png"))); // NOI18N
-        lblLogo.setToolTipText("");
-        jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, 50, 50));
-
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator2.setToolTipText("");
         jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 60, 60));
@@ -418,6 +441,16 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             }
         });
         jpnBarraSuperior.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 50, 40));
+
+        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
+        lblBotonCerrar.setToolTipText("Salir");
+        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBotonCerrarMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -580,13 +613,19 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 
                 
                 ventas=ControladorVenta.obteniendoVentas(fecha);
-                
+                Object x;
                 Iterator iterador=ventas.iterator();
                 while (iterador.hasNext()) {
                     fila[0]=iterador.next();
                     fila[1]=iterador.next();
                     fila[2]=iterador.next();
-                    fila[3]=iterador.next();
+                    x=iterador.next();
+                    if (x.equals("F")) {
+                        fila[3]="Factura";
+                    }else{
+                        fila[3]="Crédito Fiscal";
+                    }
+                    
                     fila[4]=iterador.next();
                     
                     modeloDetalles.addRow(fila);
@@ -609,9 +648,13 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             frmVentasDetalladas2.show();
             frmVentasDetalladas2.setLocation(this.getLocation());
             
+            tblVentasDetalladas.removeAll();
+            modeloDetalle.setRowCount(0);
+            seteando();
+            
             seleccion=tblVentas.getSelectedRow();
             
-            if ((tblVentas.getValueAt(seleccion, 3).toString()).equals("F")) {
+            if ((tblVentas.getValueAt(seleccion, 3).toString()).equals("Factura")) {
                     
                     System.out.println(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
                     txtIdVenta.setText(tblVentas.getValueAt(seleccion, 0).toString());
@@ -621,11 +664,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                     
                     estableciendoDatos(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
                     SumarSubTotales();
-                    lblSumas.setVisible(false);
-                    txtSumas.setVisible(false);
-                    lblIVA.setVisible(false);
-                    txtIVA.setVisible(false);
-                    txtTotalventa.setText(""+subTotales);
+                    cambio(false);
+                    
+                    txtTotalventa.setText(""+formateo.format(subTotales));
                   
                 
             }else{
@@ -634,14 +675,15 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtSucursal.setText((tblVentas.getValueAt(seleccion, 1).toString()));
                 txtTipoVenta.setText("Crédito Fiscal");
                 
+                cambio(true);
                 estableciendoDatos(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
                 SumarSubTotales();
                 
-                txtSumas.setText(""+subTotales);
+                txtSumas.setText(""+formateo.format(subTotales));
                 double iva=subTotales*0.13;
-                txtIVA.setText(""+iva);
+                txtIVA.setText(""+formateo.format(iva));
                 double total=iva+subTotales;
-                txtTotalventa.setText(""+total);
+                txtTotalventa.setText(""+formateo.format(total));
             }
             
             
@@ -681,6 +723,10 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private void jpnBarraSuperior1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperior1MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jpnBarraSuperior1MousePressed
+
+    private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -746,9 +792,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnBarraSuperior1;
     private javax.swing.JPanel jpnMenu;
+    private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblIVA;
-    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblMenuCerrar;
     private javax.swing.JLabel lblParametro;

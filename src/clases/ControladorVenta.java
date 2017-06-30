@@ -65,12 +65,13 @@ public class ControladorVenta {
         cn=new Conexion();
         
         try {
-            rs=cn.st.executeQuery("SELECT producto.Nombre, detalleventa.Cantidad,detalleventa.PrecioUnitario FROM producto INNER JOIN detalleventa ON producto.CodBarra=detalleventa.CodBarra WHERE detalleventa.IdVenta='"+id+"'");
+            rs=cn.st.executeQuery("SELECT producto.CodBarra, producto.Nombre, detalleventa.Cantidad,detalleventa.PrecioUnitario FROM producto INNER JOIN detalleventa ON producto.CodBarra=detalleventa.CodBarra WHERE detalleventa.IdVenta='"+id+"'");
             
             while (rs.next()) {
                 ventas.add(rs.getString(1));
                 ventas.add(rs.getString(2));
                 ventas.add(rs.getString(3));
+                ventas.add(rs.getString(4));
                 
             }
             

@@ -49,10 +49,10 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
     
     
     public void estableciendoDatos(){
-        Object[] fila=new Object[4];
+        Object[] fila=new Object[5];
         
         frmVentasDetalle frmVenta=new frmVentasDetalle();
-        String[] campos = {"Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
+        String[] campos = {"CodBarra","Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
         
         System.out.println(getId());
         
@@ -65,7 +65,8 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
                 fila[0]=iterador.next();
                 fila[1]=iterador.next();
                 fila[2]=iterador.next();
-                fila[3]=Integer.parseInt(fila[1].toString())*Double.parseDouble(fila[2].toString());
+                fila[3]=iterador.next();
+                fila[4]=Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString());
                 
                 modeloDetalle.addRow(fila);
                 tblVentasDetalladas.setModel(modeloDetalle);
@@ -263,7 +264,7 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
+                "CodBarra", "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
         ));
         tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
