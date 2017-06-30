@@ -1341,11 +1341,7 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtClienteVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteVentaKeyTyped
         char c;
         c =  evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-                String cadena=(""+c).toUpperCase();
-                c=cadena.charAt(0);
-                evt.setKeyChar(c);
-            }
+        
        if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
                 if(c != (char) KeyEvent.VK_SPACE){
@@ -1360,6 +1356,11 @@ public class frmVentas extends javax.swing.JFrame {
             lblCliente.setForeground(Color.BLACK);
            
         }
+       if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
        if(c ==  KeyEvent.VK_ENTER){
             txtDireccionVenta.requestFocus();
             }
@@ -1368,11 +1369,7 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtDireccionVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionVentaKeyTyped
          char c;
         c =  evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-                String cadena=(""+c).toUpperCase();
-                c=cadena.charAt(0);
-                evt.setKeyChar(c);
-            }
+        
         if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
             if(c < '0' || c > '9'){
@@ -1387,6 +1384,11 @@ public class frmVentas extends javax.swing.JFrame {
             lblDireccion.setForeground(Color.BLACK);
             
         }
+        if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
         if(c ==  KeyEvent.VK_ENTER){
             txtGiro.requestFocus();
             }
@@ -1395,11 +1397,7 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtGiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiroKeyTyped
         char c;
         c =  evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-                String cadena=(""+c).toUpperCase();
-                c=cadena.charAt(0);
-                evt.setKeyChar(c);
-            }
+        
         if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
             if(c < '0' || c > '9'){
@@ -1414,6 +1412,11 @@ public class frmVentas extends javax.swing.JFrame {
             lblGiro.setForeground(Color.BLACK);
             
         }
+        if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
         if(c ==  KeyEvent.VK_ENTER){
             txtNRCVenta.requestFocus();
             }
