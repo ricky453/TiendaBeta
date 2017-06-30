@@ -24,7 +24,7 @@ public class DetalleVenta {
         
     }
     public double CalcularPrecio(double utilidad){
-        double nuevoPrecio=0,precioFinal;
+        double nuevoPrecio=0;
         nuevoPrecio=((this.PrecioUnitario))/utilidad;
         
         return Double.parseDouble(decimal.format(nuevoPrecio));

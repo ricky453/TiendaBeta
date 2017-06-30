@@ -43,7 +43,7 @@ public class frmVentas extends javax.swing.JFrame {
     ArrayList<TipoPrecio> precio = new ArrayList();
     Iterator<Sucursal> Iterador;
     Object miSucursal[][],misPrecios[][] ;
-    DecimalFormat decimal =new DecimalFormat("0.00");
+    DecimalFormat decimal =new DecimalFormat("#.##");
     double subTotales,utilidad;
     
     ControladorVenta cv;
@@ -168,13 +168,7 @@ public class frmVentas extends javax.swing.JFrame {
                 
                 dv.setPrecioUnitario(miProducto.getCosto());
                 //VERIFICAR EL TIPO DE VENTA
-                if(cmbTipoVenta.getSelectedIndex()==0){
-                    costoUnitario=dv.CalcularPrecio(utilidad)*1.13;
-                    System.out.println("Costo Unitario "+costoUnitario);
-                }else{
-                    costoUnitario=dv.CalcularPrecio(utilidad);
-                }
-                
+                costoUnitario=dv.CalcularPrecio(utilidad);
                 modeloVentas.setValueAt(decimal.format(costoUnitario),fila, 3);
             
         }
@@ -183,7 +177,13 @@ public class frmVentas extends javax.swing.JFrame {
         dv.setPrecioUnitario(costoUnitario);
         dv.setCantidad(Double.parseDouble(txtCantidadVender.getText()));
         totalDetalle=dv.CalcularPrecioDetalle();
-        modeloVentas.setValueAt(totalDetalle,fila, 4);
+        double subTot=costoUnitario*Double.parseDouble(txtCantidadVender.getText());
+        if(cmbTipoVenta.getSelectedIndex()==0){
+            modeloVentas.setValueAt(decimal.format(subTot*1.13),fila, 4);
+        }else{
+            modeloVentas.setValueAt(decimal.format(subTot),fila, 4);
+        }
+        
         
         if(cmbTipoVenta.getSelectedIndex()==1){
         SumarSubTotales();
@@ -1142,6 +1142,7 @@ public class frmVentas extends javax.swing.JFrame {
         txtSumas.setText("$"+subTotales);
         txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
                }
+             txtCodigoBarraVender.requestFocus();
             
         }
     }//GEN-LAST:event_tblProductosVenderKeyPressed
@@ -1340,6 +1341,11 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtClienteVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteVentaKeyTyped
         char c;
         c =  evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
        if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
                 if(c != (char) KeyEvent.VK_SPACE){
@@ -1362,7 +1368,11 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtDireccionVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionVentaKeyTyped
          char c;
         c =  evt.getKeyChar();
-        
+        if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
         if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
             if(c < '0' || c > '9'){
@@ -1385,7 +1395,11 @@ public class frmVentas extends javax.swing.JFrame {
     private void txtGiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiroKeyTyped
         char c;
         c =  evt.getKeyChar();
-        
+        if (Character.isLowerCase(c)) {
+                String cadena=(""+c).toUpperCase();
+                c=cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
         if( c < (char) 'a' || c > (char) 'z'){
             if( c < (char) 'A' || c > (char) 'Z'){
             if(c < '0' || c > '9'){

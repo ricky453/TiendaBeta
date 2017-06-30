@@ -138,6 +138,7 @@ public class frmCompras extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         lblBotonCerrar = new javax.swing.JLabel();
+        lblNomProd1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -383,9 +384,10 @@ public class frmCompras extends javax.swing.JFrame {
         lblCodBarraProd.setText("Cod Barra:");
         getContentPane().add(lblCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 80, 30));
 
-        lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNomProd.setText("Producto:");
-        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 70, 30));
+        lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNomProd.setForeground(new java.awt.Color(124, 20, 20));
+        lblNomProd.setText("%");
+        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 580, 80, 40));
 
         txtNomProd.setEditable(false);
         txtNomProd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -547,6 +549,10 @@ public class frmCompras extends javax.swing.JFrame {
         jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
+
+        lblNomProd1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNomProd1.setText("Producto:");
+        getContentPane().add(lblNomProd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 70, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -1228,6 +1234,7 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblIdCompra;
     private javax.swing.JLabel lblNomProd;
+    private javax.swing.JLabel lblNomProd1;
     private javax.swing.JLabel lblParametro;
     private javax.swing.JLabel lblPercepcion;
     private javax.swing.JLabel lblProductos;
