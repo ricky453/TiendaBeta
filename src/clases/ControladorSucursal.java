@@ -5,8 +5,6 @@
  */
 package clases;
 
-import static clases.ControladorProducto.cn;
-import static clases.ControladorProducto.rs;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -128,14 +128,15 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
             tblProveedores.removeAll();
             Atras();
             
-        }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");}}
+        }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");
+            encontradoProv=false;
+            txtNuevoNombreProveedor.requestFocus();
+            txtNuevoNombreProveedor.selectAll();}}
                 
         }else{
             mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
         }   
-        encontradoProv=false;
-        txtNuevoNombreProveedor.requestFocus();
-        txtNuevoNombreProveedor.selectAll();
+
     
     }
     

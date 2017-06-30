@@ -15,12 +15,15 @@ import formularios.frmProveedores;
 import formularios.frmSucursales;
 import formularios.frmVentas;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,13 +32,51 @@ import javax.swing.border.Border;
 public class frmParametroModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
-    
+    boolean encontradopara;
+    boolean encontrado;
+        DefaultTableModel modelopara= new DefaultTableModel();
+        public static String nombre;
+
     
     public frmParametroModificar() {
         initComponents();
         this.setSize(1200, 700);
     }
 
+     public void buscarRepetidos(){
+            modelopara.setRowCount(0);
+            
+            ArrayList<Parametro> listaparametro=new ArrayList();
+            Object fila[]=new Object[3];
+            
+        
+            try {
+            listaparametro=ControladorParametro.Obtener();
+            String[] nombreSucursal = new String []{"IdParametro","Nombre","Valor",};
+            modelopara.setColumnIdentifiers(nombreSucursal);
+            Iterator<Parametro> par=listaparametro.iterator();
+                while(par.hasNext()){
+                    fila[0]= par.next();
+                    fila[1]= par.next();
+                    fila[2]= par.next();
+                    modelopara.addRow(fila);
+                    tblParametro.setModel(modelopara);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            
+        
+         }
+    }
+
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +86,8 @@ public class frmParametroModificar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblParametro = new javax.swing.JTable();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -59,6 +102,47 @@ public class frmParametroModificar extends javax.swing.JFrame {
         btnGuardarModificarParametro = new javax.swing.JButton();
         txtValorParametro = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
+
+        tblParametro =new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblParametro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "IdParametro", "Nombre", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblParametro.getTableHeader().setReorderingAllowed(false);
+        tblParametro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblParametroMouseClicked(evt);
+            }
+        });
+        tblParametro.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                tblParametroInputMethodTextChanged(evt);
+            }
+        });
+        tblParametro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblParametroKeyTyped(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblParametro);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -190,14 +274,19 @@ public class frmParametroModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+   int c=(int) evt.getKeyChar();
         char mayu=evt.getKeyChar();
-        if (Character.isLowerCase(mayu)) {
-            String cadena=(""+mayu).toUpperCase();
-            mayu=cadena.charAt(0);
-            evt.setKeyChar(mayu);
-        }
-        else{
 
+        if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8)  || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            if (Character.isLowerCase(mayu)) {
+                String cadena=(""+mayu).toUpperCase();
+                mayu=cadena.charAt(0);
+                evt.setKeyChar(mayu);
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
@@ -231,6 +320,19 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     private void btnGuardarModificarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroActionPerformed
          Parametro pa= new Parametro();
+         encontrado=false;
+            buscarRepetidos();
+            if (tblParametro.getRowCount()>0) {
+                  int i = 0;
+                  while (encontrado==false&&i<tblParametro.getRowCount()) {
+                     encontrado = tblParametro.getValueAt(i, 1).equals(txtNombre.getText());
+                     i++;
+                  }
+            }
+            if(txtNombre.getText().equals(nombre)){
+                encontrado = false;
+            }
+            if(encontrado == false){
         try {
             pa.setIdParametro(Integer.parseInt(txtIDParametro.getText()));
             pa.setNombre(txtNombre.getText());
@@ -244,6 +346,11 @@ public class frmParametroModificar extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");
+            encontrado=false;
+            txtNombre.requestFocus();
+            txtNombre.selectAll();
+            }
            
         
         
@@ -255,6 +362,18 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     private void txtValorParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorParametroKeyTyped
         // TODO add your handling code here:
+        
+           int c=(int) evt.getKeyChar();
+
+        if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            //No pasa nada
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+
+        
     }//GEN-LAST:event_txtValorParametroKeyTyped
 
     private void lblAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseClicked
@@ -274,6 +393,18 @@ public class frmParametroModificar extends javax.swing.JFrame {
     private void txtIDParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDParametroKeyTyped
 
     }//GEN-LAST:event_txtIDParametroKeyTyped
+
+    private void tblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblParametroMouseClicked
+
+    }//GEN-LAST:event_tblParametroMouseClicked
+
+    private void tblParametroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tblParametroInputMethodTextChanged
+
+    }//GEN-LAST:event_tblParametroInputMethodTextChanged
+
+    private void tblParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblParametroKeyTyped
+
+    }//GEN-LAST:event_tblParametroKeyTyped
 
     /**
      * @param args the command line arguments
@@ -323,12 +454,14 @@ public class frmParametroModificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnCompras;
     private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblLogo;
+    public javax.swing.JTable tblParametro;
     public static javax.swing.JTextField txtIDParametro;
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtValorParametro;

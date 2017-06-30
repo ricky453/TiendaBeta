@@ -29,8 +29,13 @@ public class ControladorTipoPrecio {
         }
         
     }
-    public static void EliminarTipoPrecio(int idTipoPrecio){
+    public static void EliminarTipoPrecio(int idTipoPrecio) throws ErrorTienda{
         
+        try {
+            cn.st.executeUpdate("DELETE FROM TipoPrecio WHERE IdTipoPrecio='"+idTipoPrecio+"'");
+        } catch (Exception e) {
+            throw new ErrorTienda("Class ControladorTipoPrecio/Eliminar", e.getMessage());
+        }
     }
     public static void ModificarTipoPrecio( TipoPrecio cambios) throws ErrorTienda{
           try {
@@ -49,9 +54,11 @@ public class ControladorTipoPrecio {
     public static ArrayList<TipoPrecio> ObtenerTodos() throws ErrorTienda{
         ArrayList<Object> precios = new ArrayList<Object>();
         cn = new Conexion();
+       
         try {
             rs=cn.st.executeQuery("SELECT * FROM TipoPrecio");
             while(rs.next()){
+                
             precios.add(rs.getString(1));
             precios.add(rs.getString(2));
             precios.add(rs.getString(3));

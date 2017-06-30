@@ -79,6 +79,8 @@ public class frmParametro extends javax.swing.JFrame {
     fpar.txtNombre.setText(tblParametro.getValueAt(tblParametro.getSelectedRow(),1).toString());
     fpar.txtValorParametro.setText(tblParametro.getValueAt(tblParametro.getSelectedRow(),2).toString());
     fpar.txtNombre.requestFocus();
+    fpar.txtNombre.selectAll();
+    fpar.nombre = tblParametro.getValueAt(tblParametro.getSelectedRow(), 1).toString();
     }
     
    
