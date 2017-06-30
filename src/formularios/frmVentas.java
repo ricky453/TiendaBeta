@@ -1173,7 +1173,7 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
-        //btnVentas.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/ventasB.png")));
+       // //btnVentas.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/ventasB.png")));
     }//GEN-LAST:event_btnVentasMouseEntered
 
     private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
