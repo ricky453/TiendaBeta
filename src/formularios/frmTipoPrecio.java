@@ -58,8 +58,8 @@ public class frmTipoPrecio extends javax.swing.JFrame {
             lsttipoprecio= ControladorTipoPrecio.ObtenerTodos();
             String [] encabezados= new String[]{"IdTipoPrecio","Nombre","Utilidad"};
             modelotipoprecio.setColumnIdentifiers(encabezados);
-                        Iterator<TipoPrecio> tp=lsttipoprecio.iterator();
- while(tp.hasNext()){
+                    Iterator<TipoPrecio> tp=lsttipoprecio.iterator();
+                    while(tp.hasNext()){
                     fila[0]= tp.next();
                     fila[1]= tp.next();
                     fila[2]= tp.next();
@@ -77,6 +77,8 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     ftp.txtNombreTipo.setText(tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(),1).toString());
     ftp.txtUtilidadTipoPrecio.setText(tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(),2).toString());
     ftp.txtNombreTipo.requestFocus();
+    ftp.txtNombreTipo.selectAll();
+    ftp.nombre = tblTipoPrecio.getValueAt(tblTipoPrecio.getSelectedRow(), 1).toString();
     }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION

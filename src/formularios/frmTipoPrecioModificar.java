@@ -33,7 +33,9 @@ import javax.swing.table.DefaultTableModel;
 public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
+    boolean encontrado;
         DefaultTableModel modelotipomod= new DefaultTableModel();
+        public static String nombre;
 
     
     public frmTipoPrecioModificar() {
@@ -46,7 +48,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
             modelotipomod.setRowCount(0);
             
             ArrayList<TipoPrecio> listatipom=new ArrayList();
-            Object fila[]=new Object[4];
+            Object fila[]=new Object[3];
             
         
             try {
@@ -58,7 +60,6 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
                     fila[0]= prov.next();
                     fila[1]= prov.next();
                     fila[2]= prov.next();
-                    fila[3]= prov.next();
                     modelotipomod.addRow(fila);
                     tblTipoPrecio.setModel(modelotipomod);
                 }
@@ -294,7 +295,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     private void btnGuardarModificarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarTipoPrecioActionPerformed
 
            TipoPrecio tpc= new TipoPrecio();
-           
+           encontrado=false;
            
            if (txtIDTipoPrecio.getText().equals("")||txtNombreTipo.getText().equals("")||txtUtilidadTipoPrecio.getText().equals("")) {
                mensajeNotificacion("No puede dejar campos vacios", "Error");
@@ -303,16 +304,34 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
                try {
                    if (Integer.parseInt(txtUtilidadTipoPrecio.getText())>100||Integer.parseInt(txtUtilidadTipoPrecio.getText())<0) {
                        mensajeNotificacion("Los porcentajes de utilidad son incorrectos", "Adv");
+                       txtUtilidadTipoPrecio.selectAll();
+                       txtUtilidadTipoPrecio.requestFocus();
                    } else {
+              buscarRepetidos();
+              if (tblTipoPrecio.getRowCount()>0) {
+                  int i = 0;
+                     while (encontrado==false&&i<tblTipoPrecio.getRowCount()) {
+                     encontrado = tblTipoPrecio.getValueAt(i, 1).equals(txtNombreTipo.getText());
+                     i++;
+                  }
+              }
+              if(txtNombreTipo.getText().equals(nombre)){
+                encontrado = false;
+            }
+              if(encontrado == false){
                         tpc.setIdTipoPrecio(Integer.parseInt(txtIDTipoPrecio.getText()));
             tpc.setNombre(txtNombreTipo.getText());
             tpc.setUtilidad(Double.parseDouble((txtUtilidadTipoPrecio.getText())));
             ControladorTipoPrecio.ModificarTipoPrecio(tpc);
             mensajeNotificacion("Parametro modificado con exito","Ok");
-           //txtIDTipoPrecio.setText("");
-            //txtNombreTipo.setText("");
-            //txtUtilidadTipoPrecio.setText("");
-                   }
+            frmTipoPrecio tp= new frmTipoPrecio();
+            tp.setVisible(true);
+            this.setVisible(false);
+            }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");}
+              encontrado=false;
+              txtNombreTipo.requestFocus();
+              txtNombreTipo.selectAll();
+              }
            
             
         } catch (ErrorTienda ex) {
@@ -344,6 +363,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     private void txtNombreTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTipoActionPerformed
         txtUtilidadTipoPrecio.requestFocus();
+        txtUtilidadTipoPrecio.selectAll();
     }//GEN-LAST:event_txtNombreTipoActionPerformed
 
     private void txtNombreTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreTipoKeyTyped
@@ -368,7 +388,15 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUtilidadTipoPrecioActionPerformed
 
     private void txtUtilidadTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioKeyTyped
-        // TODO add your handling code here:
+        int c=(int) evt.getKeyChar();
+
+        if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            //No pasa nada
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtUtilidadTipoPrecioKeyTyped
 
     private void tblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoPrecioMouseClicked

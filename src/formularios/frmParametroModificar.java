@@ -33,7 +33,9 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     boolean estadoMenu;
     boolean encontradopara;
+    boolean encontrado;
         DefaultTableModel modelopara= new DefaultTableModel();
+        public static String nombre;
 
     
     public frmParametroModificar() {
@@ -45,7 +47,7 @@ public class frmParametroModificar extends javax.swing.JFrame {
             modelopara.setRowCount(0);
             
             ArrayList<Parametro> listaparametro=new ArrayList();
-            Object fila[]=new Object[4];
+            Object fila[]=new Object[3];
             
         
             try {
@@ -57,7 +59,6 @@ public class frmParametroModificar extends javax.swing.JFrame {
                     fila[0]= par.next();
                     fila[1]= par.next();
                     fila[2]= par.next();
-                    fila[3]= par.next();
                     modelopara.addRow(fila);
                     tblParametro.setModel(modelopara);
                 }
@@ -130,10 +131,10 @@ public class frmParametroModificar extends javax.swing.JFrame {
             }
         });
         tblParametro.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblParametroInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblParametro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -319,6 +320,19 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     private void btnGuardarModificarParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarParametroActionPerformed
          Parametro pa= new Parametro();
+         encontrado=false;
+            buscarRepetidos();
+            if (tblParametro.getRowCount()>0) {
+                  int i = 0;
+                  while (encontrado==false&&i<tblParametro.getRowCount()) {
+                     encontrado = tblParametro.getValueAt(i, 1).equals(txtNombre.getText());
+                     i++;
+                  }
+            }
+            if(txtNombre.getText().equals(nombre)){
+                encontrado = false;
+            }
+            if(encontrado == false){
         try {
             pa.setIdParametro(Integer.parseInt(txtIDParametro.getText()));
             pa.setNombre(txtNombre.getText());
@@ -332,6 +346,11 @@ public class frmParametroModificar extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmParametroModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }else{mensajeNotificacion("¡Error! Nombre en uso, cambiélo.", "Error");
+            encontrado=false;
+            txtNombre.requestFocus();
+            txtNombre.selectAll();
+            }
            
         
         
