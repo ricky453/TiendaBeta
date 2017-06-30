@@ -74,7 +74,7 @@ public class frmProductos extends javax.swing.JFrame {
             mensajeNotificacion("No ha introducido un código o nombre.", "Adv");
             
         }else{
-            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo","Sucursal"};
+            String[] campos = {"CodBarra", "Nombre", "Inventario", "Costo","Sucursal"};
             try {
                 Sucursal opcionSucu;
                 
