@@ -193,7 +193,7 @@ public class frmVentas extends javax.swing.JFrame {
         venta.CalcularTotal();
         
         txtIVA.setText("$ "+decimal.format(venta.getIVA()));
-        txtSumas.setText("$"+subTotales);
+        txtSumas.setText("$"+decimal.format(subTotales));
         txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
         }else{
           SumarSubTotales();
