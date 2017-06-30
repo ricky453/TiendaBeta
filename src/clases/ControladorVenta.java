@@ -22,7 +22,7 @@ public class ControladorVenta {
     ResultSet rs;
     PreparedStatement ps=null;
     
-    public void Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
+    public boolean Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
        cn = new Conexion();
         try {
             System.err.println("Detalles ventas "+venta.getArticulos().size());
@@ -42,6 +42,7 @@ public class ControladorVenta {
                     cn.st.execute("INSERT INTO DetalleVenta(IdVenta,CodBarra,Cantidad,PrecioUnitario) VALUES('"+detalles[x][0]+"', "
                             + "'"+detalles[x][1]+"','"+detalles[x][2]+"','"+detalles[x][3]+"')");
                 }
+                return true;
             } catch (Exception e) {
             }
             
@@ -51,7 +52,7 @@ public class ControladorVenta {
             throw new ErrorTienda("ControladorVenta Agregar", e.getMessage());
         }
         
-        
+        return false;
     }
     public Venta ObtenerVenta(){
         Venta ventas = null;
