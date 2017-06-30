@@ -118,7 +118,30 @@ public class ControladorCompra {
         } 
         return IdCompra;
     }
-    
+        public static ArrayList<Compra> obteniendoCompras(String fecha) throws ErrorTienda{
+        ArrayList<Object> compras=new ArrayList<Object>();
+        cn=new Conexion();
+        try {
+            ResultSet rs;
+            rs=cn.st.executeQuery("SELECT compra.IdCompra, sucursal.Nombre, compra.IdProveedor, compra.TipoCompra, compra.Fecha FROM sucursal INNER JOIN compra ON compra.IdSucursal=sucursal.IdSucursal WHERE compra.Fecha LIKE '"+fecha+"%'");
+            
+            while (rs.next()) {
+                compras.add(rs.getString(1));
+                compras.add(rs.getString(2));
+                compras.add(rs.getString(3));
+                compras.add(rs.getString(4));
+                compras.add(rs.getString(5));
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Class ControladorVenta/obtiendoVentas",ex.getMessage());
+        }
+        
+        ArrayList<Compra> micompras=(ArrayList) compras;
+        return micompras; 
+    }
     
     
     }
