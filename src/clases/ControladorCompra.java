@@ -24,7 +24,7 @@ public class ControladorCompra {
             throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
         }
     }
-    public static ArrayList<DetalleCompra> ObtenerCompra() throws ErrorTienda{
+    public static ArrayList<DetalleCompra> ObtenerCompra(int id) throws ErrorTienda{
         ArrayList<Object> dc= new ArrayList<Object>();
         cn=new Conexion(); 
         ResultSet rs;
@@ -32,7 +32,7 @@ public class ControladorCompra {
             rs = null;
             rs = cn.st.executeQuery("SELECT `detallecompra`.`IdCompra`, `producto`.`Nombre`, `detallecompra`.`Cantidad`, `detallecompra`.`CostoUnitario`\n" +
                   "FROM `producto`\n" +
-                  "    LEFT JOIN `detallecompra` ON `detallecompra`.`CodBarra` = `producto`.`CodBarra`");
+                  "    LEFT JOIN `detallecompra` ON `detallecompra`.`CodBarra` = `producto`.`CodBarra` WHERE detallecompra.IdCompra='"+id+"'");
             while (rs.next()) {
                 dc.add(rs.getString(1));
                 dc.add(rs.getString(2));

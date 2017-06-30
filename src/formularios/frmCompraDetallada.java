@@ -68,7 +68,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 fila[3]=Integer.parseInt(fila[1].toString())*Double.parseDouble(fila[2].toString());
                 
                 modeloDetalle.addRow(fila);
-                tblVentasDetalladas.setModel(modeloDetalle);
+                tblComprasDetalladas.setModel(modeloDetalle);
             }
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmCompraDetallada.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,14 +100,14 @@ public class frmCompraDetallada extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblVentasDetalladas = new javax.swing.JTable();
+        tblComprasDetalladas = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
-        txtTipoVenta = new javax.swing.JTextField();
-        txtIdVenta = new javax.swing.JTextField();
+        txtTipoCompra = new javax.swing.JTextField();
+        txtIdCompra = new javax.swing.JTextField();
         txtSucursal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -245,7 +245,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Ventas Detalladas:");
+        jLabel34.setText("Compras Detalladas:");
         jpnAgregarCompra.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 12, -1, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -253,12 +253,12 @@ public class frmCompraDetallada extends javax.swing.JFrame {
 
         getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
-        tblVentasDetalladas =new javax.swing.JTable(){
+        tblComprasDetalladas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tblVentasDetalladas.setModel(new javax.swing.table.DefaultTableModel(
+        tblComprasDetalladas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -266,26 +266,26 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
         ));
-        tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblVentasDetalladas);
+        tblComprasDetalladas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblComprasDetalladas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 1040, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 1040, 220));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Fue una compra con:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 150, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 150, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Sucursal:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 70, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 70, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Fecha:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 190, 50, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, 50, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Id de la compra:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 120, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 120, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setText(" ");
@@ -294,25 +294,25 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 txtFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, 240, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 240, -1));
 
-        txtTipoVenta.setEditable(false);
-        txtTipoVenta.setText(" ");
-        txtTipoVenta.addActionListener(new java.awt.event.ActionListener() {
+        txtTipoCompra.setEditable(false);
+        txtTipoCompra.setText(" ");
+        txtTipoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTipoVentaActionPerformed(evt);
+                txtTipoCompraActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 170, 20));
+        getContentPane().add(txtTipoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 170, 20));
 
-        txtIdVenta.setEditable(false);
-        txtIdVenta.setText(" ");
-        txtIdVenta.addActionListener(new java.awt.event.ActionListener() {
+        txtIdCompra.setEditable(false);
+        txtIdCompra.setText(" ");
+        txtIdCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdVentaActionPerformed(evt);
+                txtIdCompraActionPerformed(evt);
             }
         });
-        getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 50, 20));
+        getContentPane().add(txtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 50, 20));
 
         txtSucursal.setEditable(false);
         txtSucursal.setText(" ");
@@ -321,7 +321,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 txtSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 240, -1));
+        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 240, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -402,13 +402,13 @@ public class frmCompraDetallada extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
 
-    private void txtTipoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoVentaActionPerformed
+    private void txtTipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoVentaActionPerformed
+    }//GEN-LAST:event_txtTipoCompraActionPerformed
 
-    private void txtIdVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdVentaActionPerformed
+    private void txtIdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdVentaActionPerformed
+    }//GEN-LAST:event_txtIdCompraActionPerformed
 
     private void txtSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSucursalActionPerformed
         // TODO add your handling code here:
@@ -485,10 +485,10 @@ public class frmCompraDetallada extends javax.swing.JFrame {
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblVentas;
-    public javax.swing.JTable tblVentasDetalladas;
+    public javax.swing.JTable tblComprasDetalladas;
     public javax.swing.JTextField txtFecha;
-    public javax.swing.JTextField txtIdVenta;
+    public javax.swing.JTextField txtIdCompra;
     public javax.swing.JTextField txtSucursal;
-    public javax.swing.JTextField txtTipoVenta;
+    public javax.swing.JTextField txtTipoCompra;
     // End of variables declaration//GEN-END:variables
 }
