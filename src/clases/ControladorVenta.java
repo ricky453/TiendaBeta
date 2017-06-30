@@ -5,12 +5,15 @@
  */
 package clases;
 
+import static clases.ControladorProducto.rs;
 import formularios.frmVentas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -18,8 +21,8 @@ import java.util.logging.Logger;
  */
 public class ControladorVenta {
     
-    Conexion cn ;
-    ResultSet rs;
+    static Conexion cn ;
+    static ResultSet rs;
     PreparedStatement ps=null;
     
     public boolean Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
@@ -54,10 +57,31 @@ public class ControladorVenta {
         
         return false;
     }
-    public Venta ObtenerVenta(){
-        Venta ventas = null;
+    
+    public static ArrayList<Venta> ObtenerVenta(int id) throws ErrorTienda{
+        ArrayList<Object> ventas=new ArrayList<Object>();
         
-        return ventas;
+        
+        cn=new Conexion();
+        
+        try {
+            rs=cn.st.executeQuery("SELECT producto.Nombre, detalleventa.Cantidad,detalleventa.PrecioUnitario FROM producto INNER JOIN detalleventa ON producto.CodBarra=detalleventa.CodBarra WHERE detalleventa.IdVenta='"+id+"'");
+            
+            while (rs.next()) {
+                ventas.add(rs.getString(1));
+                ventas.add(rs.getString(2));
+                ventas.add(rs.getString(3));
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ArrayList<Venta> miventa=(ArrayList) ventas;
+        
+        return miventa;
     }
     public void ActualizarInventario(Object[][] detalles,int sucursal) throws ErrorTienda{
         cn = new Conexion();
@@ -96,6 +120,32 @@ public class ControladorVenta {
             Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
         return IdVenta+1;
+    }
+    
+    
+    public static ArrayList<Venta> obteniendoVentas(String fecha) throws ErrorTienda{
+        ArrayList<Object> ventas=new ArrayList<Object>();
+        cn=new Conexion();
+        try {
+            
+            rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%'");
+            
+            while (rs.next()) {
+                ventas.add(rs.getString(1));
+                ventas.add(rs.getString(2));
+                ventas.add(rs.getString(3));
+                ventas.add(rs.getString(4));
+                ventas.add(rs.getString(5));
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Class ControladorVenta/obtiendoVentas",ex.getMessage());
+        }
+        
+        ArrayList<Venta> miventas=(ArrayList) ventas;
+        return miventas; 
     }
     
 }

@@ -25,27 +25,55 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ricky
  */
-public class frmVentasDetalle extends javax.swing.JFrame {
+public class frmVentasDetalladas extends javax.swing.JFrame {
 
     boolean estadoMenu;
-    public int seleccion;
-    public int id;
     DateFormat df=DateFormat.getDateInstance();
+    public DefaultTableModel modeloDetalle=new DefaultTableModel();
+    public int id;
     
-    public frmVentasDetalle() {
+    public frmVentasDetalladas() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        estableciendoDatos();
     }
     
-    
-    public int obtenerId(){
-        return id;
-    }
     public void setId(int id){
         this.id=id;
     }
     
+    public int getId(){
+        return id;
+    }
+    
+    
+    public void estableciendoDatos(){
+        Object[] fila=new Object[4];
+        
+        frmVentasDetalle frmVenta=new frmVentasDetalle();
+        String[] campos = {"Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
+        
+        System.out.println(getId());
+        
+        try {
+            ArrayList<Venta> misventas=ControladorVenta.ObtenerVenta(getId());
+            modeloDetalle.setColumnIdentifiers(campos);
+            Iterator iterador=misventas.iterator();
+            
+            while (iterador.hasNext()) {
+                fila[0]=iterador.next();
+                fila[1]=iterador.next();
+                fila[2]=iterador.next();
+                fila[3]=Integer.parseInt(fila[1].toString())*Double.parseDouble(fila[2].toString());
+                
+                modeloDetalle.addRow(fila);
+                tblVentasDetalladas.setModel(modeloDetalle);
+            }
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentasDetalladas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,20 +100,20 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblVentas = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
-        jdcFecha = new com.toedter.calendar.JDateChooser();
-        btnBuscar = new javax.swing.JButton();
-        btnDetalle1 = new javax.swing.JButton();
-        btnDetalles = new javax.swing.JButton();
+        tblVentasDetalladas = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        txtTipoVenta = new javax.swing.JTextField();
+        txtIdVenta = new javax.swing.JTextField();
+        txtSucursal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -217,7 +245,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel34.setText("Ventas");
+        jLabel34.setText("Ventas Detalladas:");
         jpnAgregarCompra.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 12, -1, 30));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -225,82 +253,86 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         getContentPane().add(jpnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1200, 50));
 
-        tblVentas =new javax.swing.JTable(){
+        tblVentasDetalladas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tblVentas.setModel(new javax.swing.table.DefaultTableModel(
+        tblVentasDetalladas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "idVenta", "Sucursal", "Cliente", "Tipo de venta", "Fecha"
+                "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
         ));
-        tblVentas.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblVentas);
+        tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblVentasDetalladas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 920, 340));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 1040, 220));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Lista de las Ventas:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Fue una venta con:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 140, -1));
 
-        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1200, 10));
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Sucursal:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 70, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Fecha:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("Fecha:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 50, -1));
 
-        jdcFecha.setDateFormatString("yyyy-dd-MM");
-        getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 200, -1));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Id de la venta:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 110, -1));
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        txtFecha.setEditable(false);
+        txtFecha.setText(" ");
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                txtFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 240, -1));
 
-        btnDetalle1.setText("Ver detalle");
-        btnDetalle1.addActionListener(new java.awt.event.ActionListener() {
+        txtTipoVenta.setEditable(false);
+        txtTipoVenta.setText(" ");
+        txtTipoVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalle1ActionPerformed(evt);
+                txtTipoVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetalle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, -1, -1));
-        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
-        btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetallesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetallesMouseExited(evt);
-            }
-        });
-        btnDetalles.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 170, -1));
+
+        txtIdVenta.setEditable(false);
+        txtIdVenta.setText(" ");
+        txtIdVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetallesActionPerformed(evt);
+                txtIdVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, 110, 30));
+        getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 50, -1));
+
+        txtSucursal.setEditable(false);
+        txtSucursal.setText(" ");
+        txtSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSucursalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 240, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        try {
-            frmVentas vt = new frmVentas();
+        
+            frmVentasDetalle vt = new frmVentasDetalle();
             vt.setVisible(true);
             this.setVisible(false);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
@@ -339,7 +371,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             vt.setVisible(true);
             this.setVisible(false);
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmVentasDetalladas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblVentasMouseClicked
 
@@ -366,6 +398,21 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnMenuMouseExited
 
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void txtTipoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoVentaActionPerformed
+
+    private void txtIdVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdVentaActionPerformed
+
+    private void txtSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSucursalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,129 +431,41 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVentasDetalladas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVentasDetalladas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVentasDetalladas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVentasDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVentasDetalladas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVentasDetalle().setVisible(true);
+                new frmVentasDetalladas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
-    private void btnDetallesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseEntered
-        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2B.png")));
-    }//GEN-LAST:event_btnDetallesMouseEntered
-
-    private void btnDetallesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseExited
-        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2.png")));
-    }//GEN-LAST:event_btnDetallesMouseExited
-
-    private void btnDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesActionPerformed
-        //        frmVentasDetalle vd = new frmVentasDetalle();
-        //      vd.setVisible(true);
-        //    this.setVisible(false);
-    }//GEN-LAST:event_btnDetallesActionPerformed
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
-        
-        SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
-                
-        String fecha=sd.format(jdcFecha.getDate());
-        
-        DefaultTableModel modeloDetalles = new DefaultTableModel();
-        ArrayList<Venta> ventas = new ArrayList();
-        Object[] fila = new Object[5];
-        
-        
-        if (fecha.equals("")) {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado una fecha");
-        }else{
-            String[] campos = {"IdVenta", "Sucursal", "Cliente", "Tipo de Venta","Fecha"};
-            modeloDetalles.setColumnIdentifiers(campos);
-            try {
-                
-                
-                ventas=ControladorVenta.obteniendoVentas(fecha);
-                
-                Iterator iterador=ventas.iterator();
-                while (iterador.hasNext()) {
-                    fila[0]=iterador.next();
-                    fila[1]=iterador.next();
-                    fila[2]=iterador.next();
-                    fila[3]=iterador.next();
-                    fila[4]=iterador.next();
-                    
-                    modeloDetalles.addRow(fila);
-                    tblVentas.setModel(modeloDetalles);
-                }
-                
-            } catch (ErrorTienda ex) {
-                Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        
-        
-        
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnDetalle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalle1ActionPerformed
-        if(tblVentas.getSelectedRow()!=-1){
-            
-            this.hide();
-            frmVentasDetalladas frmDetalle=new frmVentasDetalladas();
-            frmDetalle.setVisible(true);
-            
-            
-            seleccion=tblVentas.getSelectedRow();
-            
-            if ((tblVentas.getValueAt(seleccion, 3).toString()).equals("F")) {
-                    frmDetalle.setId(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
-                    System.out.println(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
-                    frmDetalle.txtIdVenta.setText(tblVentas.getValueAt(seleccion, 0).toString());
-                    frmDetalle.txtFecha.setText((tblVentas.getValueAt(seleccion, 4).toString()));
-                    frmDetalle.txtSucursal.setText((tblVentas.getValueAt(seleccion, 1).toString()));
-                    frmDetalle.txtTipoVenta.setText("Factura");
-                    frmDetalle.id=Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString());
-                    
-                    
-                    
-                  
-                
-            }else{
-                frmDetalle.txtIdVenta.setText(tblVentas.getValueAt(seleccion, 0).toString());
-                frmDetalle.txtFecha.setText((tblVentas.getValueAt(seleccion, 4).toString()));
-                frmDetalle.txtSucursal.setText((tblVentas.getValueAt(seleccion, 1).toString()));
-                frmDetalle.txtTipoVenta.setText("Crédito Fiscal");
-            }
-            
-            
-            
-            
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "No ha seleccionado en la tabla");
-        }
-    }//GEN-LAST:event_btnDetalle1ActionPerformed
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
-    private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JPanel jpnAgregarCompra;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
@@ -518,6 +477,10 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblVentas;
-    public javax.swing.JTable tblVentas;
+    public javax.swing.JTable tblVentasDetalladas;
+    public javax.swing.JTextField txtFecha;
+    public javax.swing.JTextField txtIdVenta;
+    public javax.swing.JTextField txtSucursal;
+    public javax.swing.JTextField txtTipoVenta;
     // End of variables declaration//GEN-END:variables
 }
