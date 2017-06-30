@@ -309,11 +309,11 @@ public class frmCompras extends javax.swing.JFrame {
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseEntered(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -694,7 +694,7 @@ public class frmCompras extends javax.swing.JFrame {
             //System.out.println(tablaModel.getValueAt(iteraciones, 4));
             iteraciones++;
         }
-
+        System.out.println(total);
         double totalFinal=Double.parseDouble(decimal.format(total));
         
         if (TipoCompra==0) {
@@ -812,10 +812,13 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
-
+                mensajeNotificacion("Compra Agregada", "Ok");
                 
                 }
-            mensajeNotificacion("Compra Agregada", "Ok");
+            if (tblCompra.getRowCount()==0) {
+                mensajeNotificacion("Llenar detalle compra", "Error");
+            }
+            
             int idCompra;
             idCompra = ControladorCompra.ObtenerIdCompra();
             //limpiarCompra();
