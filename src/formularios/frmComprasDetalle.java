@@ -12,6 +12,7 @@ import clases.DetalleCompra;
 import clases.ErrorTienda;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,6 +34,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     public DefaultTableModel modeloDCompras = new DefaultTableModel();
     public int seleccion;
     double subTotales;
+    DecimalFormat decimal = new DecimalFormat("0.00");
     
     public frmComprasDetalle() {
         initComponents();
@@ -43,6 +45,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
+
         modeloDCompras = (DefaultTableModel) tblComprasDetalladas.getModel();
         //actualizarTablaDetalleCompra();
     }
@@ -629,7 +632,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
                     txtSumas.setVisible(false);
                     lblIVA.setVisible(false);
                     txtIVA.setVisible(false);
-                    txtTotalCompra.setText(""+subTotales);
+                    txtTotalCompra.setText(""+decimal.format(subTotales));
                   
                 
             }else{
@@ -641,11 +644,11 @@ public class frmComprasDetalle extends javax.swing.JFrame {
                 estableciendoDatos(Integer.parseInt(tblCompras.getValueAt(seleccion, 0).toString()));
                 SumarSubTotales();
                 
-                txtSumas.setText(""+subTotales);
+                txtSumas.setText(""+decimal.format(subTotales));
                 double iva=subTotales*0.13;
-                txtIVA.setText(""+iva);
+                txtIVA.setText(""+decimal.format(iva));
                 double total=iva+subTotales;
-                txtTotalCompra.setText(""+total);
+                txtTotalCompra.setText(""+decimal.format(total));
             }
             
             

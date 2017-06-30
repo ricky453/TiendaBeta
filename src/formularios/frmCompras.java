@@ -1122,8 +1122,8 @@ public class frmCompras extends javax.swing.JFrame {
                     mensajeNotificacion("¡Ingrese un código de barras!", "Error");
                 } else {
                     idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
-                    ControladorProducto.Obtener(codBarra,idSucursal);
-                    producto= ControladorProducto.Obtener(codBarra,1).getNombre();
+                    
+                    producto= ControladorProducto.Obtener(codBarra,idSucursal).getNombre();
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
                     if (producto==null || producto=="") {
                         txtNomProd.setEditable(true);
