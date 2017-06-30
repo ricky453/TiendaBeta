@@ -790,7 +790,7 @@ public class frmCompras extends javax.swing.JFrame {
                 if (Tipocompra==0) {
                     compra.setPercepcion(Double.parseDouble(total)*0.1);
                     compra.setIVA(Double.parseDouble(total)*0.13);
-                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+(Double.parseDouble(total)*0.1)+(Double.parseDouble(total)*0.13))));
+                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*0.1)-(Double.parseDouble(total)*0.13)))));
                 }else{
                     compra.setTotal(Double.parseDouble(decimal.format(total)));
                 }
