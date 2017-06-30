@@ -587,16 +587,17 @@ public class frmTipoPrecio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarTipoPrecioMouseExited
 
     private void btnEliminarTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTipoPrecioActionPerformed
-        int id = Integer.parseInt(modelotipoprecio.getValueAt(tblTipoPrecio.getSelectedRow(), 0).toString()) ;
+        
         
         if(tblTipoPrecio.getSelectedRow()!=-1){
             int seleccion;
+            int id = Integer.parseInt(modelotipoprecio.getValueAt(tblTipoPrecio.getSelectedRow(), 0).toString()) ;
              try {
             ControladorTipoPrecio.EliminarTipoPrecio(id);
             mensajeNotificacion("Registro eliminado con exito","Ok");
             LlenarTabla();
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmTipoPrecio.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         }else{
