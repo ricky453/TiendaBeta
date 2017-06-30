@@ -356,7 +356,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         txtPercepcion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtPercepcion.setForeground(new java.awt.Color(102, 0, 0));
-        txtPercepcion.setText("10");
+        txtPercepcion.setText("1");
         txtPercepcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPercepcionKeyTyped(evt);
@@ -934,8 +934,9 @@ public class frmCompras extends javax.swing.JFrame {
         if (s == KeyEvent.VK_ENTER) {
            if (txtCodBarraProd1.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")||txtPercepcion.getText().equals("")) {
                 mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
-            }else{
-                if(Double.parseDouble(txtCostoProd.getText()) > 0){
+            }else if(Integer.parseInt(txtPercepcion.getText())<0||Integer.parseInt(txtPercepcion.getText())>100){
+                mensajeNotificacion("Percepcion entre 0 y 100", "Error");
+            }else{    if(Double.parseDouble(txtCostoProd.getText()) > 0){
                     if (exprod==false){
                         try {
                             AgregarProductoCompras();
@@ -948,6 +949,7 @@ public class frmCompras extends javax.swing.JFrame {
                     cmbTipoCompra.setEnabled(false);
                     cmbSucursalCompra.setEnabled(false);
                     cmbProveedor.setEnabled(false);
+                    txtPercepcion.setEnabled(false);
                 }else{
                     mensajeNotificacion("El Costo debe ser mayor a 0.", "Error");
                 }
