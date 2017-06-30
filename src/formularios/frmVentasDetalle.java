@@ -138,7 +138,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         frmVentasDetalladas2.setMinimumSize(new java.awt.Dimension(1200, 700));
         frmVentasDetalladas2.setUndecorated(true);
-        frmVentasDetalladas2.setPreferredSize(new java.awt.Dimension(1200, 700));
         frmVentasDetalladas2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -461,26 +460,26 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Fecha:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, 30));
 
         jdcFecha.setDateFormatString("yyyy-dd-MM");
-        getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 200, -1));
+        getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 200, 30));
 
-        btnBuscar.setText("Buscar");
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/buscar.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 110, 30));
 
-        btnDetalle1.setText("Ver detalle");
+        btnDetalle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
         btnDetalle1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDetalle1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDetalle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, -1, -1));
+        getContentPane().add(btnDetalle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 630, 110, 30));
 
         pack();
         setLocationRelativeTo(null);
