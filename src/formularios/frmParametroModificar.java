@@ -343,6 +343,18 @@ public class frmParametroModificar extends javax.swing.JFrame {
 
     private void txtValorParametroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorParametroKeyTyped
         // TODO add your handling code here:
+        
+           int c=(int) evt.getKeyChar();
+
+        if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            //No pasa nada
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+
+        
     }//GEN-LAST:event_txtValorParametroKeyTyped
 
     private void lblAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseClicked

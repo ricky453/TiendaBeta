@@ -249,7 +249,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         getContentPane().add(btnGuardarModificarTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel25.setText("Valor:");
+        jLabel25.setText("Utilidad:");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, 20));
 
         txtNombreTipo.setForeground(new java.awt.Color(102, 0, 0));
@@ -369,6 +369,19 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
 
     private void txtUtilidadTipoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUtilidadTipoPrecioKeyTyped
         // TODO add your handling code here:
+        
+           int c=(int) evt.getKeyChar();
+
+        if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            //No pasa nada
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+
+        
+        
     }//GEN-LAST:event_txtUtilidadTipoPrecioKeyTyped
 
     private void tblTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoPrecioMouseClicked
