@@ -504,6 +504,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblNIT = new javax.swing.JLabel();
         cmbTipoPrecio = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
+        lblMasIva = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -1025,6 +1026,11 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel25.setText("Código de Barra");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
+        lblMasIva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblMasIva.setForeground(new java.awt.Color(255, 0, 0));
+        lblMasIva.setText("+ IVA");
+        getContentPane().add(lblMasIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 330, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1196,10 +1202,12 @@ public class frmVentas extends javax.swing.JFrame {
        {
            tipoVentaSeleccion(false);
            limpiar("todo");
+           lblMasIva.setVisible(true);
        }else{
 
            tipoVentaSeleccion(true);
            limpiar("todo");
+           lblMasIva.setVisible(false);
        }
        colorLabels();
     }//GEN-LAST:event_cmbTipoVentaItemStateChanged
@@ -1575,6 +1583,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JLabel lblGiro;
     private javax.swing.JLabel lblIDVenta;
     private javax.swing.JLabel lblIVA;
+    private javax.swing.JLabel lblMasIva;
     private javax.swing.JLabel lblNIT;
     private javax.swing.JLabel lblNRC;
     private javax.swing.JLabel lblParametro;
