@@ -459,7 +459,7 @@ public class frmCompras extends javax.swing.JFrame {
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, 100, 40));
 
-        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
+        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/compras.png"))); // NOI18N
         btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1066,11 +1066,11 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
     private void btnDetallesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseEntered
-        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2B.png")));
+//        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/comprasB.png")));
     }//GEN-LAST:event_btnDetallesMouseEntered
 
     private void btnDetallesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseExited
-        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2.png")));
+        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/compras.png")));
     }//GEN-LAST:event_btnDetallesMouseExited
 
     private void btnDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesActionPerformed

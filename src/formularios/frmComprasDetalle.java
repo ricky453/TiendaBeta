@@ -94,6 +94,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         txtComprasBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        btnDetalles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -254,7 +255,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         tblCompras.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblCompras);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 920, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 920, 320));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Lista de las Compras:");
@@ -273,6 +274,23 @@ public class frmComprasDetalle extends javax.swing.JFrame {
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1200, 10));
+
+        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
+        btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetallesMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetallesMouseEntered(evt);
+            }
+        });
+        btnDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetallesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, 110, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -351,6 +369,21 @@ public class frmComprasDetalle extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnMenuMouseExited
 
+    private void btnDetallesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseExited
+        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2.png")));
+    }//GEN-LAST:event_btnDetallesMouseExited
+
+    private void btnDetallesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseEntered
+        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/detalles2B.png")));
+    }//GEN-LAST:event_btnDetallesMouseEntered
+
+    private void btnDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesActionPerformed
+//        frmVentasDetalle vd = new frmVentasDetalle();
+  //      vd.setVisible(true);
+    //    this.setVisible(false);
+
+    }//GEN-LAST:event_btnDetallesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -395,6 +428,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAtras;
+    private javax.swing.JButton btnDetalles;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
