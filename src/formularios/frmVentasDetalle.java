@@ -30,6 +30,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     boolean estadoMenu;
     public int seleccion;
     public int id;
+    DefaultTableModel modeloDetalle;
+    double subTotales;
     DateFormat df=DateFormat.getDateInstance();
     
     public frmVentasDetalle() {
@@ -42,7 +44,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
    public void estableciendoDatos(int id){
         Object[] fila=new Object[4];
         
-        DefaultTableModel modeloDetalle=new DefaultTableModel();
+        modeloDetalle=new DefaultTableModel();
         String[] campos = {"Producto", "Cantidad", "Precio Unitario $", "Sub total $"};
         
         System.out.println(id);
@@ -64,6 +66,16 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmVentasDetalladas.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+   
+   //CALCULAR SUMA DE SUB TOTALES
+    public void SumarSubTotales(){
+        int filas = modeloDetalle.getRowCount();
+        subTotales=0;
+        for(int i=0;i<filas;i++){
+            subTotales+=Double.parseDouble(String.valueOf(modeloDetalle.getValueAt(i, 3)));
+        }
+        
     }
     
 
@@ -94,6 +106,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblLogo1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         btnAtras1 = new javax.swing.JLabel();
+        lblSumas = new javax.swing.JLabel();
+        txtSumas = new javax.swing.JTextField();
+        lblIVA = new javax.swing.JLabel();
+        txtIVA = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        txtTotalventa = new javax.swing.JTextField();
         jpnMenu = new javax.swing.JPanel();
         lblSucursales = new javax.swing.JLabel();
         lblProveedores = new javax.swing.JLabel();
@@ -119,6 +137,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         btnDetalle1 = new javax.swing.JButton();
 
         frmVentasDetalladas2.setMinimumSize(new java.awt.Dimension(1200, 700));
+        frmVentasDetalladas2.setUndecorated(true);
         frmVentasDetalladas2.setPreferredSize(new java.awt.Dimension(1200, 700));
         frmVentasDetalladas2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -239,6 +258,37 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jpnBarraSuperior1.add(btnAtras1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 50, 40));
 
         frmVentasDetalladas2.getContentPane().add(jpnBarraSuperior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
+
+        lblSumas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblSumas.setText("Sumas");
+        frmVentasDetalladas2.getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, -1, -1));
+
+        txtSumas.setEditable(false);
+        txtSumas.setBackground(new java.awt.Color(255, 255, 255));
+        txtSumas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtSumas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        frmVentasDetalladas2.getContentPane().add(txtSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 490, 120, 40));
+
+        lblIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblIVA.setText("13% IVA");
+        frmVentasDetalladas2.getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, -1, -1));
+
+        txtIVA.setEditable(false);
+        txtIVA.setBackground(new java.awt.Color(255, 255, 255));
+        txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtIVA.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        frmVentasDetalladas2.getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 120, 40));
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 3, 0));
+        jLabel38.setText("Total");
+        frmVentasDetalladas2.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 500, -1, 20));
+
+        txtTotalventa.setEditable(false);
+        txtTotalventa.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotalventa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        frmVentasDetalladas2.getContentPane().add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 490, 120, 40));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -570,8 +620,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                     txtTipoVenta.setText("Factura");
                     
                     estableciendoDatos(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
-                    
-                    
+                    SumarSubTotales();
+                    lblSumas.setVisible(false);
+                    txtSumas.setVisible(false);
+                    lblIVA.setVisible(false);
+                    txtIVA.setVisible(false);
+                    txtTotalventa.setText(""+subTotales);
                   
                 
             }else{
@@ -579,6 +633,15 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtFecha.setText((tblVentas.getValueAt(seleccion, 4).toString()));
                 txtSucursal.setText((tblVentas.getValueAt(seleccion, 1).toString()));
                 txtTipoVenta.setText("Crédito Fiscal");
+                
+                estableciendoDatos(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
+                SumarSubTotales();
+                
+                txtSumas.setText(""+subTotales);
+                double iva=subTotales*0.13;
+                txtIVA.setText(""+iva);
+                double total=iva+subTotales;
+                txtTotalventa.setText(""+total);
             }
             
             
@@ -665,6 +728,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -683,6 +747,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraSuperior1;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JLabel lblCompras;
+    private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogo1;
     private javax.swing.JLabel lblMenuCerrar;
@@ -690,12 +755,16 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblProductos;
     private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblSucursales;
+    private javax.swing.JLabel lblSumas;
     private javax.swing.JLabel lblVentas;
     public javax.swing.JTable tblVentas;
     public javax.swing.JTable tblVentasDetalladas;
     public javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtIVA;
     public javax.swing.JTextField txtIdVenta;
     public javax.swing.JTextField txtSucursal;
+    private javax.swing.JTextField txtSumas;
     public javax.swing.JTextField txtTipoVenta;
+    private javax.swing.JTextField txtTotalventa;
     // End of variables declaration//GEN-END:variables
 }
