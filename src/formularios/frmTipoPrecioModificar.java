@@ -250,7 +250,7 @@ public class frmTipoPrecioModificar extends javax.swing.JFrame {
         getContentPane().add(btnGuardarModificarTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 110, 30));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel25.setText("Valor:");
+        jLabel25.setText("Utilidad:");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, 20));
 
         txtNombreTipo.setForeground(new java.awt.Color(102, 0, 0));
