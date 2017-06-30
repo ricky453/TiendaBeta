@@ -486,6 +486,25 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailProveedorKeyTyped
 
     private void txtNRCProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNRCProveedorKeyTyped
+ char c = evt.getKeyChar();
+        if(txtNRCProveedor.getText().length()>=7){
+            evt.consume();
+        }else{
+            if (c < '0' || c > '9') {
+
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                                evt.consume();
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNRCProveedorKeyTyped
 

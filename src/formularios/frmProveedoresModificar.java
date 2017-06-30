@@ -467,6 +467,25 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
 
     private void txtNuevoNRCProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoNRCProveedorKeyTyped
         // TODO add your handling code here:
+         char c = evt.getKeyChar();
+
+         if(txtNuevoNRCProveedor.getText().length()>=7){
+            evt.consume();
+        }else{
+            if (c < '0' || c > '9') {
+
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                                evt.consume();
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_txtNuevoNRCProveedorKeyTyped
 
     private void txtNuevoNITProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNITProveedorActionPerformed
