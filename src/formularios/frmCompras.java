@@ -646,7 +646,7 @@ public class frmCompras extends javax.swing.JFrame {
         }
 
 
-        if(encontrado == false){
+        if(encontrado == false){//verificar si el producto ya esta en la tabla
             String fila[]  = new String[5];
             fila[0]=txtCodBarraProd1.getText();
             fila[1]=txtNomProd.getText();
@@ -1115,7 +1115,7 @@ public class frmCompras extends javax.swing.JFrame {
         char c = evt.getKeyChar();               
         if (c == (char) KeyEvent.VK_ENTER) {
             String codBarra=txtCodBarraProd1.getText();
-            String producto;
+            Producto producto;
 
             try {
                 if (codBarra.equals("")) {
@@ -1123,15 +1123,16 @@ public class frmCompras extends javax.swing.JFrame {
                 } else {
                     idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
                     
-                    producto= ControladorProducto.Obtener(codBarra,idSucursal).getNombre();
+                    producto = ControladorProducto.BuscarProducto(codBarra);
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
-                    if (producto==null || producto=="") {
+                    System.out.println(producto.getNombre());
+                    if (producto.getNombre().equals("")) {
                         txtNomProd.setEditable(true);
                         txtNomProd.requestFocus();                          
                         mensajeNotificacion("Ese producto no está, ¡Agregue!", "Adv");
                         exprod=false;
                     } else {
-                        txtNomProd.setText(producto);
+                        txtNomProd.setText(producto.getNombre());
                         txtCantidad.requestFocus();
                         txtCantidad.selectAll();
                         exprod=true;
