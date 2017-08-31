@@ -3,6 +3,9 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/iconos/home/lanzador.png&quot;)).getImage()" type="code"/>
+    </Property>
     <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
@@ -102,10 +105,10 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnLogin" min="-2" pref="97" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtUser" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jSeparator2" alignment="1" pref="302" max="32767" attributes="0"/>
-                                  <Component id="txt_pwd" max="32767" attributes="0"/>
+                                  <Component id="txtPwd" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
@@ -121,7 +124,7 @@
                           <EmptySpace pref="63" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txt_email" min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="txtUser" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
@@ -130,7 +133,7 @@
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txt_pwd" min="-2" pref="19" max="-2" attributes="0"/>
+                                  <Component id="txtPwd" min="-2" pref="19" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
@@ -150,7 +153,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="txt_email">
+                <Component class="javax.swing.JTextField" name="txtUser">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -164,7 +167,9 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_emailFocusGained"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtUserFocusGained"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUserActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUserKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -248,7 +253,7 @@
                     <Property name="text" type="java.lang.String" value="&#xbf;Olvid&#xf3; su contrase&#xf1;a?"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="txt_pwd">
+                <Component class="javax.swing.JPasswordField" name="txtPwd">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -262,7 +267,9 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_pwdFocusGained"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPwdFocusGained"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPwdActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPwdKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
@@ -327,11 +334,14 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbl_loader">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="49" green="a8" red="29" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="66" type="rgb"/>
+                      <Color blue="49" green="a8" red="29" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Iniciando ...."/>
                   </Properties>

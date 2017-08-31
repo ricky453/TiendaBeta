@@ -24,12 +24,14 @@ import javax.swing.JFrame;
  * @author proxc
  */
 public class frmRegistrarUsuario extends javax.swing.JFrame {
-    int numeroAleatorio = (int) (Math.random()*9999+0001);
+    int numeroAleatorio;
+    String a, n, num, user;
     /**
      * Creates new form NewJFrame
      */
     public frmRegistrarUsuario() {
         initComponents();
+        numeroAleatorio=(int) (Math.random()*9999+0001);
         lblPIN.setText("Contraseña Aleatoria: "+numeroAleatorio);
     }
 
@@ -42,7 +44,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        bgSexo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -166,6 +168,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtDUI.setForeground(new java.awt.Color(255, 255, 255));
         txtDUI.setBorder(null);
         txtDUI.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtDUI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDUIFocusGained(evt);
+            }
+        });
         txtDUI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDUIActionPerformed(evt);
@@ -182,12 +189,12 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel10.setText("NIT:");
 
         rbtMasculino.setBackground(new java.awt.Color(102, 0, 0));
-        buttonGroup1.add(rbtMasculino);
+        bgSexo.add(rbtMasculino);
         rbtMasculino.setForeground(new java.awt.Color(255, 255, 255));
         rbtMasculino.setText("M");
 
         rbtFemenino.setBackground(new java.awt.Color(102, 0, 0));
-        buttonGroup1.add(rbtFemenino);
+        bgSexo.add(rbtFemenino);
         rbtFemenino.setForeground(new java.awt.Color(255, 255, 255));
         rbtFemenino.setText("F");
 
@@ -200,6 +207,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtNIT.setForeground(new java.awt.Color(255, 255, 255));
         txtNIT.setBorder(null);
         txtNIT.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtNIT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNITFocusGained(evt);
+            }
+        });
         txtNIT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNITActionPerformed(evt);
@@ -237,6 +249,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtDireccion.setForeground(new java.awt.Color(255, 255, 255));
         txtDireccion.setBorder(null);
         txtDireccion.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusGained(evt);
+            }
+        });
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionActionPerformed(evt);
@@ -499,6 +516,18 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
         }
     }
+    public void limpiarDatos(){
+        txtApellidos.setText("");
+        txtApellidos.requestFocus();
+        txtNombres.setText("");
+        txtNIT.setText("");
+        txtDUI.setText("");
+        txtDireccion.setText("");
+        bgSexo.clearSelection();
+        lblUsuario.setText("Usuario: ");
+        numeroAleatorio=(int) (Math.random()*9999+0001);
+        lblPIN.setText("Contraseña Aleatoria: "+numeroAleatorio);
+    }
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         txtDUI.requestFocus();
     }//GEN-LAST:event_txtNombresActionPerformed
@@ -550,7 +579,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Usuario agregado=new Usuario();
         int idUsuario;
-        if (txtApellidos.getText().equals("") || txtNombres.getText().equals("") || txtDUI.getText().equals("") || txtNIT.getText().equals("")  || txtDireccion.getText().equals("")) {
+        if (txtApellidos.getText().equals("") || txtNombres.getText().equals("") || txtDUI.getText().equals("") || txtNIT.getText().equals("")  || txtDireccion.getText().equals("")  || (!rbtMasculino.isSelected() && !rbtFemenino.isSelected())) {
             mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
         }
         else{
@@ -582,12 +611,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                   System.out.println();
                   //agregado.setRol(1);
                   agregado.setClave(""+numeroAleatorio);
-                  agregado.setUsuario("lala");
+                  agregado.setUsuario(user);
               try {
               ControladorUsuario.Agregar(agregado);
-              //mensajeNotificacion("¡Proveedor agregado exitosamente!", "Ok");
-              //tblProveedores.removeAll();
-             //actualizarTablaProveedor();
+              mensajeNotificacion("¡Usuario agregado exitosamente!", "Ok");
+              limpiarDatos();
               
               } catch (ErrorTienda e) {      
            }
@@ -606,6 +634,19 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
 
     private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
         char mayu=evt.getKeyChar();
+        char c =  evt.getKeyChar();
+        
+        if( c < (char) 'a' || c > (char) 'z'){
+            if( c < (char) 'A' || c > (char) 'Z'){
+                if(c != (char) KeyEvent.VK_SPACE){
+            if(c != (char) KeyEvent.VK_ENTER){
+            evt.consume();
+            }else{
+                
+            }
+            }
+        }
+        }
         if (Character.isLowerCase(mayu)) {
             String cadena=(""+mayu).toUpperCase();
             mayu=cadena.charAt(0);
@@ -614,10 +655,24 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         else{
 
         }
+
     }//GEN-LAST:event_txtApellidosKeyTyped
 
     private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
         char mayu=evt.getKeyChar();
+        char c =  evt.getKeyChar();
+        
+        if( c < (char) 'a' || c > (char) 'z'){
+            if( c < (char) 'A' || c > (char) 'Z'){
+                if(c != (char) KeyEvent.VK_SPACE){
+            if(c != (char) KeyEvent.VK_ENTER){
+            evt.consume();
+            }else{
+                
+            }
+            }
+        }
+        }
         if (Character.isLowerCase(mayu)) {
             String cadena=(""+mayu).toUpperCase();
             mayu=cadena.charAt(0);
@@ -626,6 +681,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         else{
 
         }
+           
     }//GEN-LAST:event_txtNombresKeyTyped
 
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
@@ -681,6 +737,79 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtDUIKeyTyped
+
+    private void txtDUIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDUIFocusGained
+        if(!txtApellidos.getText().equals("")){
+            if(!txtNombres.getText().equals("")){
+                a=""+txtApellidos.getText().charAt(0);
+                n=""+txtNombres.getText().charAt(0);
+                int idUsuario;
+                try {
+                    idUsuario = ControladorUsuario.ObtenerIdUsuario();
+                    num=""+(idUsuario+1);
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                lblUsuario.setText("Usuario: "+a+n+num); 
+                user=a+n+num;
+            }else{
+            txtNombres.requestFocus();
+            mensajeNotificacion("Rellene el campo 'Nombres' primero.", "Adv");
+            }
+        }else{
+        txtApellidos.requestFocus();
+        mensajeNotificacion("Rellene el campo 'Apellidos' primero.", "Adv");
+        }
+    }//GEN-LAST:event_txtDUIFocusGained
+
+    private void txtNITFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNITFocusGained
+                if(!txtApellidos.getText().equals("")){
+            if(!txtNombres.getText().equals("")){
+                a=""+txtApellidos.getText().charAt(0);
+                n=""+txtNombres.getText().charAt(0);
+                int idUsuario;
+                try {
+                    idUsuario = ControladorUsuario.ObtenerIdUsuario();
+                    num=""+(idUsuario+1);
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                lblUsuario.setText("Usuario: "+a+n+num); 
+                user=a+n+num;
+            }else{
+            txtNombres.requestFocus();
+            mensajeNotificacion("Rellene el campo 'Nombres' primero.", "Adv");
+            }
+        }else{
+        txtApellidos.requestFocus();
+        mensajeNotificacion("Rellene el campo 'Apellidos' primero.", "Adv");
+        }
+    
+    }//GEN-LAST:event_txtNITFocusGained
+
+    private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
+                if(!txtApellidos.getText().equals("")){
+            if(!txtNombres.getText().equals("")){
+                a=""+txtApellidos.getText().charAt(0);
+                n=""+txtNombres.getText().charAt(0);
+                int idUsuario;
+                try {
+                    idUsuario = ControladorUsuario.ObtenerIdUsuario();
+                    num=""+(idUsuario+1);
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                lblUsuario.setText("Usuario: "+a+n+num); 
+                user=a+n+num;
+            }else{
+            txtNombres.requestFocus();
+            mensajeNotificacion("Rellene el campo 'Nombres' primero.", "Adv");
+            }
+        }else{
+        txtApellidos.requestFocus();
+        mensajeNotificacion("Rellene el campo 'Apellidos' primero.", "Adv");
+        }
+    }//GEN-LAST:event_txtDireccionFocusGained
                        
                                        
 
@@ -727,9 +856,9 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgSexo;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbCargo;
     private com.toedter.calendar.JDateChooser dtcNacimiento;
     private javax.swing.JLabel exit;
