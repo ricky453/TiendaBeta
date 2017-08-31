@@ -219,7 +219,7 @@ public final class frmHome extends javax.swing.JFrame {
         lblUser.setForeground(new java.awt.Color(204, 204, 204));
         lblUser.setText("USER");
         lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 80, 30));
+        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 80, 50));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -478,49 +478,49 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl15.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl15.setForeground(new java.awt.Color(102, 102, 102));
         lbl15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl15.setText("el sistema de Compras.");
         jPanel1.add(lbl15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
 
-        lbl14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl14.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl14.setForeground(new java.awt.Color(102, 102, 102));
         lbl14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl14.setText("Usa esta opción para manejar");
         jPanel1.add(lbl14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
 
-        lbl12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl12.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl12.setForeground(new java.awt.Color(102, 102, 102));
         lbl12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl12.setText("Factura o Libre.");
         jPanel1.add(lbl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl18.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl18.setForeground(new java.awt.Color(102, 102, 102));
         lbl18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl18.setText("tipos de venta: Crédito fiscal,");
         jPanel1.add(lbl18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl17.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl17.setForeground(new java.awt.Color(102, 102, 102));
         lbl17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl17.setText("Puedes escoger entre distintos");
         jPanel1.add(lbl17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl13.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl13.setForeground(new java.awt.Color(102, 102, 102));
         lbl13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl13.setText("abastecer tu Tienda.");
         jPanel1.add(lbl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl16.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl16.setForeground(new java.awt.Color(102, 102, 102));
         lbl16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl16.setText("Podrás realizar compras y ");
         jPanel1.add(lbl16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl11.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl11.setForeground(new java.awt.Color(255, 255, 255));
         lbl11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Compras.png"))); // NOI18N
@@ -537,49 +537,49 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl19.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl19.setForeground(new java.awt.Color(102, 102, 102));
         lbl19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl19.setText("el sistema de Ventas.");
         jPanel2.add(lbl19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
 
-        lbl20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl20.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl20.setForeground(new java.awt.Color(102, 102, 102));
         lbl20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl20.setText("Usa esta opción para manejar");
         jPanel2.add(lbl20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
 
-        lbl26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl26.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl26.setForeground(new java.awt.Color(102, 102, 102));
         lbl26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl26.setText("o Factura.");
         jPanel2.add(lbl26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl27.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl27.setForeground(new java.awt.Color(102, 102, 102));
         lbl27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl27.setText("tipos de venta: Crédito fiscal,");
         jPanel2.add(lbl27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl28.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl28.setForeground(new java.awt.Color(102, 102, 102));
         lbl28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl28.setText("Puedes escoger entre distintos");
         jPanel2.add(lbl28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl29.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl29.setForeground(new java.awt.Color(102, 102, 102));
         lbl29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl29.setText("que obtiene tu tienda.");
         jPanel2.add(lbl29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl30.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl30.setForeground(new java.awt.Color(102, 102, 102));
         lbl30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl30.setText("Podrás manejar los ingresos");
         jPanel2.add(lbl30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl36.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl36.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl36.setForeground(new java.awt.Color(255, 255, 255));
         lbl36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Ventas.png"))); // NOI18N
@@ -603,49 +603,49 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl21.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl21.setForeground(new java.awt.Color(102, 102, 102));
         lbl21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl21.setText("agregar o eliminar Productos.");
         jPanel3.add(lbl21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
 
-        lbl22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl22.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl22.setForeground(new java.awt.Color(102, 102, 102));
         lbl22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl22.setText("Usa esta opción para modificar,");
         jPanel3.add(lbl22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
 
-        lbl23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl23.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl23.setForeground(new java.awt.Color(102, 102, 102));
         lbl23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl23.setText("de barra.");
         jPanel3.add(lbl23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl24.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl24.setForeground(new java.awt.Color(102, 102, 102));
         lbl24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl24.setText("agregados mediante un código");
         jPanel3.add(lbl24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl25.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl25.setForeground(new java.awt.Color(102, 102, 102));
         lbl25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl25.setText("Los productos que quieres serán");
         jPanel3.add(lbl25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl37.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl37.setForeground(new java.awt.Color(102, 102, 102));
         lbl37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl37.setText("de tu sistema de Tienda.");
         jPanel3.add(lbl37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl38.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl38.setForeground(new java.awt.Color(102, 102, 102));
         lbl38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl38.setText("Podrás manejar los productos ");
         jPanel3.add(lbl38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl39.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl39.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl39.setForeground(new java.awt.Color(255, 255, 255));
         lbl39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
@@ -665,49 +665,49 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl31.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl31.setForeground(new java.awt.Color(102, 102, 102));
         lbl31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl31.setText("el sistema de Proveedores.");
         jPanel4.add(lbl31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
 
-        lbl32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl32.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl32.setForeground(new java.awt.Color(102, 102, 102));
         lbl32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl32.setText("Usa esta opción para manejar");
         jPanel4.add(lbl32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
 
-        lbl33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl33.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl33.setForeground(new java.awt.Color(102, 102, 102));
         lbl33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl33.setText("tu tienda.");
         jPanel4.add(lbl33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl34.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl34.setForeground(new java.awt.Color(102, 102, 102));
         lbl34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl34.setText("más abastecida podrá estar");
         jPanel4.add(lbl34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl35.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl35.setForeground(new java.awt.Color(102, 102, 102));
         lbl35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl35.setText("Entre más proveedores tengas");
         jPanel4.add(lbl35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl40.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl40.setForeground(new java.awt.Color(102, 102, 102));
         lbl40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl40.setText("¡Agrega a proveedores!");
         jPanel4.add(lbl40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl46.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl46.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl46.setForeground(new java.awt.Color(102, 102, 102));
         lbl46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl46.setText("¿Deseas más productos?");
         jPanel4.add(lbl46, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl47.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl47.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl47.setForeground(new java.awt.Color(255, 255, 255));
         lbl47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Proveedores.png"))); // NOI18N
@@ -727,49 +727,49 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl51.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl51.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl51.setForeground(new java.awt.Color(102, 102, 102));
         lbl51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl51.setText("el sistema de Sucursales.");
         jPanel6.add(lbl51, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 30));
 
-        lbl52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl52.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl52.setForeground(new java.awt.Color(102, 102, 102));
         lbl52.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl52.setText("Usa esta opción para manejar");
         jPanel6.add(lbl52, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, -1));
 
-        lbl53.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl53.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl53.setForeground(new java.awt.Color(102, 102, 102));
         lbl53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl53.setText("para tu tienda.");
         jPanel6.add(lbl53, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl54.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl54.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl54.setForeground(new java.awt.Color(102, 102, 102));
         lbl54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl54.setText("agregando nuevas Sucursales");
         jPanel6.add(lbl54, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl55.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl55.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl55.setForeground(new java.awt.Color(102, 102, 102));
         lbl55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl55.setText("Llega a distintas partes ");
         jPanel6.add(lbl55, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl56.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl56.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl56.setForeground(new java.awt.Color(102, 102, 102));
         lbl56.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl56.setText("seguimos siendo la misma.");
         jPanel6.add(lbl56, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl57.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl57.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl57.setForeground(new java.awt.Color(102, 102, 102));
         lbl57.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl57.setText("Somos una red, y a su vez,");
         jPanel6.add(lbl57, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl58.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl58.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl58.setForeground(new java.awt.Color(255, 255, 255));
         lbl58.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Sucursales.png"))); // NOI18N
@@ -789,19 +789,19 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl64.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl64.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl64.setForeground(new java.awt.Color(102, 102, 102));
         lbl64.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl64.setText("a ser utilizado en la tienda.");
         jPanel7.add(lbl64, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl65.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl65.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl65.setForeground(new java.awt.Color(102, 102, 102));
         lbl65.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl65.setText("Modifica el parámetro ");
         jPanel7.add(lbl65, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl66.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl66.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl66.setForeground(new java.awt.Color(255, 255, 255));
         lbl66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Parametro.png"))); // NOI18N
@@ -821,37 +821,37 @@ public final class frmHome extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl43.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl43.setForeground(new java.awt.Color(102, 102, 102));
         lbl43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl43.setText("también eliminar.");
         jPanel5.add(lbl43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 148, 210, 30));
 
-        lbl44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl44.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl44.setForeground(new java.awt.Color(102, 102, 102));
         lbl44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl44.setText("la lista de tipo de precios y");
         jPanel5.add(lbl44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 30));
 
-        lbl45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl45.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl45.setForeground(new java.awt.Color(102, 102, 102));
         lbl45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl45.setText("Podrás modificar valores, ver");
         jPanel5.add(lbl45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, -1));
 
-        lbl48.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl48.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl48.setForeground(new java.awt.Color(102, 102, 102));
         lbl48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl48.setText("precio a manejar en la tienda.");
         jPanel5.add(lbl48, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 210, 30));
 
-        lbl49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl49.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl49.setForeground(new java.awt.Color(102, 102, 102));
         lbl49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl49.setText("Puedes agregar los tipos de");
         jPanel5.add(lbl49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, -1));
 
-        lbl50.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl50.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lbl50.setForeground(new java.awt.Color(255, 255, 255));
         lbl50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/tipoPrecio.png"))); // NOI18N
