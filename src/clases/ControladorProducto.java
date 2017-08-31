@@ -135,5 +135,22 @@ public class ControladorProducto {
         return miproducto;
     }
     
-    
+    public static Producto BuscarProducto(String CodBarra) throws ErrorTienda{
+        Producto miproducto = new Producto();
+        
+        cn = new Conexion();
+        try {
+           rs = cn.st.executeQuery("SELECT * FROM Producto WHERE CodBarra = '"+CodBarra+"';");
+            while (rs.next()) {
+                miproducto.setIdSucursal(0);
+                miproducto.setCodBarra(rs.getString(1));
+                miproducto.setNombre(rs.getString(2));
+                miproducto.setInventario(0);
+                miproducto.setCosto(Double.parseDouble(rs.getString(3)));
+            }
+        } catch (Exception e) {
+        }
+        return miproducto;
+    }
 }
+

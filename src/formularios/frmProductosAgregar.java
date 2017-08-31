@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +27,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
      */
     frmProductos formu=new frmProductos();
     DefaultComboBoxModel modeloSucursal = new DefaultComboBoxModel();
+    private boolean cambioActualizacion=false;
     
     public frmProductosAgregar() {
         initComponents();
@@ -54,6 +56,70 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
         }       
     }
+    
+    //------------------------------------actualizar(inventario) si el producto a registrar ya existe------------------
+   
+        public void actualizarInventario(){
+            Producto producto = new Producto();
+            String[] sucus=new String[4];
+            Object[] produ=new Object[5];
+            
+            producto.setCodBarra(txtCodBarraProductos.getText());
+            producto.setNombre(txtNombreProductos.getText());
+            producto.setCosto(Double.parseDouble(txtCostoProductos.getText()));
+            producto.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
+            
+            try {  //Para establecer el IdSucursal
+                    ArrayList<Producto> opcion=ControladorProducto.Buscar(txtCodBarraProductos.getText());
+                    Iterator iterador=opcion.iterator();
+                    while(iterador.hasNext()){
+                        produ[0]=iterador.next();
+                        produ[1]=iterador.next();
+                        produ[2]=iterador.next();
+                        produ[3]=iterador.next();
+                        produ[4]=iterador.next();
+                        
+                        ArrayList<Sucursal> miSucursal=ControladorSucursal.obtener();
+                        
+                        Iterator ite=miSucursal.iterator();
+                        while (ite.hasNext()) {
+                            sucus[0]=ite.next().toString();
+                            sucus[1]=ite.next().toString();
+                            sucus[2]=ite.next().toString();
+                            sucus[3]=ite.next().toString();
+                            
+                            if (sucus[1].equals(cmbSucursal.getSelectedItem())) {
+                                produ[4]=sucus[0];
+                                System.out.println(produ[4]);
+                                producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
+                            }
+                            
+                        }
+                        
+//                        if (miSucursal.getNombre().equals(cmbModificarSucursal.getSelectedItem().toString())) {
+//                            System.out.println(miSucursal.getNombre());
+//                            System.out.println(cmbModificarSucursal.getSelectedItem());
+//                            producto.setIdSucursal(Integer.parseInt(produ[4].toString()));
+//                            System.out.println(produ[4]);
+//                        }else{
+//                            System.out.println("La sucuarsal no es la misma");
+//                        }
+                    }
+                    
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            try {
+                ControladorProducto.Modificar(producto);
+                mensajeNotificacion("¡Producto actualizado exitosamente!", "Ok");
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+            //tblProveedores.removeAll();
+            
+            }
+        
     
      //-----------------limpiando cajas de texto-------------------------
     public void limpiandoTxtProducto(){
@@ -89,6 +155,76 @@ public class frmProductosAgregar extends javax.swing.JFrame {
             Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public void tablaBuscarProductos(){
+        String codBarra=txtCodBarraProductos.getText();
+        
+        ArrayList<Producto> productos = new ArrayList();
+        Object[] fila = new Object[5];
+        Object[] sucursales=new Object[4];
+        if (codBarra.equals("")) {
+            mensajeNotificacion("No ha introducido un código o nombre.", "Adv");
+            
+        }else{
+            
+            try {
+                Sucursal opcionSucu;
+                
+                
+                productos = ControladorProducto.Buscar(codBarra);
+                
+                Iterator<Producto> prod = productos.iterator();
+                
+                
+                
+                while (prod.hasNext()) {
+                    
+                    fila[0] = prod.next();
+                    fila[1] = prod.next();
+                    fila[2] = prod.next();
+                    fila[3] = prod.next();
+                    fila[4] = prod.next();
+                    
+                    opcionSucu= ControladorSucursal.obtenerSucursal(Integer.parseInt(fila[4].toString()));
+                    
+                    
+                    fila[4]=opcionSucu.getNombre();
+                    
+                    if (fila[0].equals(codBarra)) {
+                        cmbSucursal.removeAll();
+                        modeloSucursal.removeAllElements();
+                        txtNombreProductos.setText(fila[1].toString());
+                        txtInventarioProducto.setText(fila[2].toString());
+                        txtCostoProductos.setText(fila[3].toString());
+                        
+                        modeloSucursal.addElement(fila[4].toString());
+                        cmbSucursal.setModel(modeloSucursal);
+                        txtNombreProductos.setEditable(false);
+                        txtCostoProductos.setEditable(false);
+                        
+                        cambioActualizacion=true;
+                        
+                        
+                    }else{
+                        llenandoComboSucursal();
+                        txtNombreProductos.setText("");
+                        txtCostoProductos.setText("");
+                        txtInventarioProducto.setText("");
+                        txtCostoProductos.setEditable(true);
+                        txtNombreProductos.setEditable(true);
+                        cambioActualizacion=false;
+                    }
+                    
+                }
+               
+               
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+        }
+         txtInventarioProducto.requestFocus();
+         txtInventarioProducto.selectAll();
     }
 
     /**
@@ -196,6 +332,9 @@ public class frmProductosAgregar extends javax.swing.JFrame {
             }
         });
         txtCodBarraProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodBarraProductosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodBarraProductosKeyTyped(evt);
             }
@@ -299,6 +438,15 @@ public class frmProductosAgregar extends javax.swing.JFrame {
     private void btnAgregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoProductoActionPerformed
         Producto agregado=new Producto();
         String[] sucus=new String[4]; 
+        
+        if (cambioActualizacion) {
+            actualizarInventario();
+            limpiandoTxtProducto();
+            llenandoComboSucursal();
+            txtCodBarraProductos.requestFocus();
+            txtCostoProductos.setEditable(true);
+            txtNombreProductos.setEditable(true);
+        }else{
       
         if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
             mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
@@ -333,7 +481,6 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                     Logger.getLogger(frmProductosAgregar.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-
                 try {
                     ControladorProducto.Agregar(agregado);
 
@@ -344,6 +491,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                 }
             }
             
+        }
         }
     }//GEN-LAST:event_btnAgregarNuevoProductoActionPerformed
 
@@ -436,6 +584,13 @@ public class frmProductosAgregar extends javax.swing.JFrame {
     private void txtCostoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoProductosActionPerformed
         txtInventarioProducto.requestFocus();
     }//GEN-LAST:event_txtCostoProductosActionPerformed
+
+    private void txtCodBarraProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProductosKeyPressed
+        char c=evt.getKeyChar();    
+        if (c == (char) KeyEvent.VK_ENTER) {
+            tablaBuscarProductos();
+        }
+    }//GEN-LAST:event_txtCodBarraProductosKeyPressed
 
     /**
      * @param args the command line arguments
