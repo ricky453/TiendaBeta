@@ -129,7 +129,6 @@ public class frmCompras extends javax.swing.JFrame {
         txtTotal = new javax.swing.JTextField();
         lblIVA = new javax.swing.JLabel();
         txtIVA = new javax.swing.JTextField();
-        btnDetalles = new javax.swing.JButton();
         txtCodBarraProd1 = new javax.swing.JTextField();
         dtcFecha = new com.toedter.calendar.JDateChooser();
         jpnBarraSuperior = new javax.swing.JPanel();
@@ -309,11 +308,11 @@ public class frmCompras extends javax.swing.JFrame {
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseExited(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -460,23 +459,6 @@ public class frmCompras extends javax.swing.JFrame {
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, 100, 40));
-
-        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/compras.png"))); // NOI18N
-        btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetallesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetallesMouseExited(evt);
-            }
-        });
-        btnDetalles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetallesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 110, 30));
 
         txtCodBarraProd1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1076,20 +1058,6 @@ public class frmCompras extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
-    private void btnDetallesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseEntered
-//        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/comprasB.png")));
-    }//GEN-LAST:event_btnDetallesMouseEntered
-
-    private void btnDetallesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesMouseExited
-        btnDetalles.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/compras.png")));
-    }//GEN-LAST:event_btnDetallesMouseExited
-
-    private void btnDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesActionPerformed
-        frmComprasDetalle cd = new frmComprasDetalle();
-        cd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnDetallesActionPerformed
-
     private void txtCodBarraProd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProd1KeyTyped
         int idSucursal=0;
         char ch = evt.getKeyChar();
@@ -1210,7 +1178,6 @@ public class frmCompras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarVenta;
-    private javax.swing.JButton btnDetalles;
     private javax.swing.JButton btnGuardarVenta;
     private javax.swing.JComboBox cmbProveedor;
     private javax.swing.JComboBox<String> cmbSucursalCompra;

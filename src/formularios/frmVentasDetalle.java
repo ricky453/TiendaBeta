@@ -151,7 +151,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblCompras = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        btnAtras = new javax.swing.JLabel();
+        home = new javax.swing.JLabel();
         lblBotonCerrar = new javax.swing.JLabel();
         jpnAgregarCompra = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
@@ -431,16 +431,21 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jSeparator2.setToolTipText("");
         jpnBarraSuperior.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 60, 60));
 
-        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
-        btnAtras.setToolTipText("Volver atrás");
-        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+        home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Home.png"))); // NOI18N
+        home.setToolTipText("Ir a Home");
+        home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAtrasMouseClicked(evt);
+                homeMouseClicked(evt);
             }
         });
-        jpnBarraSuperior.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 50, 40));
+        jpnBarraSuperior.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 55));
 
+        lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
+        lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
+        lblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
         lblBotonCerrar.setToolTipText("Salir");
         lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -449,7 +454,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 lblBotonCerrarMouseClicked(evt);
             }
         });
-        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
+        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -517,16 +522,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
-        try {
-            frmVentas vt = new frmVentas();
-            vt.setVisible(true);
-            this.setVisible(false);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnAtrasMouseClicked
 
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
 
@@ -723,6 +718,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jpnBarraSuperior1MousePressed
 
+    private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_homeMouseClicked
+
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
@@ -764,11 +765,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnAtras;
     private javax.swing.JLabel btnAtras1;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDetalle1;
     private javax.swing.JFrame frmVentasDetalladas2;
+    private javax.swing.JLabel home;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel34;
@@ -791,7 +792,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnBarraSuperior1;
     private javax.swing.JPanel jpnMenu;
-    private javax.swing.JLabel lblBotonCerrar;
+    public static javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblLogo1;

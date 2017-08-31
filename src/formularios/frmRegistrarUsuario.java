@@ -573,7 +573,9 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNITActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-
+        frmHome hm = new frmHome();
+        hm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

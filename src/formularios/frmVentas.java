@@ -493,7 +493,6 @@ public class frmVentas extends javax.swing.JFrame {
         btnVender = new javax.swing.JButton();
         txtTotalventa = new javax.swing.JTextField();
         lblSumas = new javax.swing.JLabel();
-        btnVentas = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         btnCancelarVenta1 = new javax.swing.JButton();
         txtIVA = new javax.swing.JTextField();
@@ -944,23 +943,6 @@ public class frmVentas extends javax.swing.JFrame {
         lblSumas.setText("Sumas");
         getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, -1, -1));
 
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/ventas.png"))); // NOI18N
-        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVentasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVentasMouseExited(evt);
-            }
-        });
-        btnVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVentasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 650, 110, 30));
-
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Tipo de Precio");
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
@@ -1178,24 +1160,6 @@ public class frmVentas extends javax.swing.JFrame {
             Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnVenderActionPerformed
-
-    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
-       // //btnVentas.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/ventasB.png")));
-    }//GEN-LAST:event_btnVentasMouseEntered
-
-    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
-        btnVentas.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/ventas.png")));
-    }//GEN-LAST:event_btnVentasMouseExited
-
-    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-        frmVentasDetalle vd = new frmVentasDetalle();
-        vd.setVisible(true);
-        this.setVisible(false);
-
-
-
-        
-    }//GEN-LAST:event_btnVentasActionPerformed
 
     private void cmbTipoVentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoVentaItemStateChanged
        if(cmbTipoVenta.getSelectedIndex() == 0)
@@ -1548,7 +1512,6 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarProductoVenta;
     private javax.swing.JButton btnCancelarVenta1;
     private javax.swing.JButton btnVender;
-    private javax.swing.JButton btnVentas;
     private javax.swing.JComboBox<String> cmbSucursalVenta;
     private javax.swing.JComboBox<String> cmbTipoPrecio;
     private javax.swing.JComboBox<String> cmbTipoVenta;

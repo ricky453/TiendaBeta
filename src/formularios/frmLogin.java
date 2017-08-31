@@ -314,11 +314,11 @@ public class frmLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 //after validating let's show the main Jframe
-               home.lblUser.setText(txtUser.getText());
-               System.out.println(txtUser.getText());
+
                frmHome m = new frmHome();
                //m.setExtendedState(MAXIMIZED_BOTH);
                m.show();
+               home.lblUser.setText(txtUser.getText());
               // after successfull loggin let's close the login window
               //call:
               
