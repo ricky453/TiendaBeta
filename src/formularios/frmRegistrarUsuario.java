@@ -6,9 +6,14 @@
 package formularios;
 
 import clases.ControladorProveedor;
+import clases.ControladorUsuario;
 import clases.ErrorTienda;
 import clases.Proveedor;
+import clases.Usuario;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -55,13 +60,16 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         rbtMasculino = new javax.swing.JRadioButton();
         rbtFemenino = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtNIT = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         dtcNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cmbCargo = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
         pnl_overlay = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -73,6 +81,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setLocationByPlatform(true);
         setUndecorated(true);
 
@@ -99,6 +108,16 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtApellidos.setForeground(new java.awt.Color(255, 255, 255));
         txtApellidos.setBorder(null);
         txtApellidos.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidosActionPerformed(evt);
+            }
+        });
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,6 +135,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombresActionPerformed(evt);
+            }
+        });
+        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresKeyTyped(evt);
             }
         });
 
@@ -147,10 +171,15 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 txtDUIActionPerformed(evt);
             }
         });
+        txtDUI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDUIKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Email:");
+        jLabel10.setText("NIT:");
 
         rbtMasculino.setBackground(new java.awt.Color(102, 0, 0));
         buttonGroup1.add(rbtMasculino);
@@ -166,14 +195,19 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Sexo:");
 
-        txtEmail.setBackground(new java.awt.Color(102, 0, 0));
-        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
-        txtEmail.setBorder(null);
-        txtEmail.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+        txtNIT.setBackground(new java.awt.Color(102, 0, 0));
+        txtNIT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNIT.setForeground(new java.awt.Color(255, 255, 255));
+        txtNIT.setBorder(null);
+        txtNIT.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtNIT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
+                txtNITActionPerformed(evt);
+            }
+        });
+        txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNITKeyTyped(evt);
             }
         });
 
@@ -185,7 +219,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Cargo Tienda:");
+        jLabel13.setText("Rol en Tienda:");
 
         cmbCargo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comprador", "Vendedor", "Analista", " " }));
@@ -193,6 +227,26 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Agregarás un nuevo usuario");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Dirección:");
+
+        txtDireccion.setBackground(new java.awt.Color(102, 0, 0));
+        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        txtDireccion.setBorder(null);
+        txtDireccion.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDireccionActionPerformed(evt);
+            }
+        });
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -214,9 +268,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                         .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                         .addComponent(jSeparator3)
                         .addComponent(txtDUI))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jSeparator4)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(22, 22, 22)
@@ -232,13 +283,22 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel13)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jSeparator5)
+                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator4)
+                            .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -263,10 +323,16 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,7 +353,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 600));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 650));
 
         pnl_overlay.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -398,7 +464,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addGap(47, 47, 47))
         );
 
-        jPanel1.add(pnl_overlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 490, 600));
+        jPanel1.add(pnl_overlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 490, 650));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,9 +480,27 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+    }
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
-        // TODO add your handling code here:
+        txtDUI.requestFocus();
     }//GEN-LAST:event_txtNombresActionPerformed
     int xy;
     int xx;
@@ -452,20 +536,151 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void txtDUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDUIActionPerformed
-        // TODO add your handling code here:
+        txtNIT.requestFocus();
     }//GEN-LAST:event_txtDUIActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void txtNITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNITActionPerformed
+        txtDireccion.requestFocus();
+    }//GEN-LAST:event_txtNITActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
 
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        Usuario agregado=new Usuario();
+        int idUsuario;
+        if (txtApellidos.getText().equals("") || txtNombres.getText().equals("") || txtDUI.getText().equals("") || txtNIT.getText().equals("")  || txtDireccion.getText().equals("")) {
+            mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
+        }
+        else{
+            if(txtNIT.getText().length() != 14){
+                mensajeNotificacion("El NIT debe de contener 14 digitos.", "Adv");
+                txtNIT.requestFocus();
+                txtNIT.selectAll();
+            }
+            else{
+            try {
+                idUsuario = ControladorUsuario.ObtenerIdUsuario();
+                agregado.setIdUsuario(idUsuario+1);
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+              }
+                  agregado.setApellidos(txtApellidos.getText());
+                  agregado.setNombres(txtNombres.getText());
+                  agregado.setDUI(txtDUI.getText());
+                  agregado.setNIT(txtNIT.getText());
+                  agregado.setDireccion(txtDireccion.getText());
+                  if(rbtMasculino.isSelected()){
+                      agregado.setSexo("M");
+                  }else if(rbtFemenino.isSelected()){
+                      agregado.setSexo("F");
+                  }
+                  Date fecha= dtcNacimiento.getDate();
+                  SimpleDateFormat formatofecha=new SimpleDateFormat("YYYY-MM-dd");
+                  agregado.setFechaNacimiento(formatofecha.format(fecha));
+                  System.out.println();
+                  //agregado.setRol(1);
+                  agregado.setClave(""+numeroAleatorio);
+                  agregado.setUsuario("lala");
+              try {
+              ControladorUsuario.Agregar(agregado);
+              //mensajeNotificacion("¡Proveedor agregado exitosamente!", "Ok");
+              //tblProveedores.removeAll();
+             //actualizarTablaProveedor();
+              
+              } catch (ErrorTienda e) {      
+           }
+                
+        }
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
+        txtNombres.requestFocus();
+    }//GEN-LAST:event_txtApellidosActionPerformed
+
+    private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
+        char mayu=evt.getKeyChar();
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+    }//GEN-LAST:event_txtApellidosKeyTyped
+
+    private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
+        char mayu=evt.getKeyChar();
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+    }//GEN-LAST:event_txtNombresKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        char mayu=evt.getKeyChar();
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
+        char c = evt.getKeyChar();
+        if(txtNIT.getText().length()>=14){
+            evt.consume();
+        }else{
+            if (c < '0' || c > '9') {
+
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                                evt.consume();
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_txtNITKeyTyped
+
+    private void txtDUIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDUIKeyTyped
+        char c = evt.getKeyChar();
+        if(txtDUI.getText().length()>=9){
+            evt.consume();
+        }else{
+            if (c < '0' || c > '9') {
+
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                                evt.consume();
+                                mensajeNotificacion("¡Error! Solo números.", "Error");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_txtDUIKeyTyped
                        
                                        
 
@@ -522,6 +737,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -537,6 +753,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lblPIN;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnl_overlay;
@@ -544,7 +761,8 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtMasculino;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtDUI;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtNIT;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
 }
