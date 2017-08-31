@@ -73,6 +73,7 @@ public final class frmHome extends javax.swing.JFrame {
         jpnBarraSuperior = new javax.swing.JPanel();
         lblBotonCerrar = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
         lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
@@ -192,7 +193,11 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
+        lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
+        lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
+        lblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBotonCerrar.setText("X");
         lblBotonCerrar.setToolTipText("Salir");
         lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -202,12 +207,19 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 50));
 
-        lblLogo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblLogo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblLogo.setForeground(new java.awt.Color(255, 255, 255));
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png"))); // NOI18N
-        lblLogo.setText("iShop 2.0");
+        lblLogo.setText("iShop 3.0");
         lblLogo.setToolTipText("");
         jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 50));
+
+        lblUser.setBackground(new java.awt.Color(222, 222, 222));
+        lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(204, 204, 204));
+        lblUser.setText("USER");
+        lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 80, 30));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -219,7 +231,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnBarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMenu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
@@ -382,44 +394,52 @@ public final class frmHome extends javax.swing.JFrame {
         jpnPrimero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlPortada.setBackground(new java.awt.Color(0, 0, 0));
-        pnlPortada.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Desarrolladores", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnlPortada.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Desarrolladores", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI Light", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnlPortada.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         pnlPortada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlPortada.add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 50, 50));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Gil Menjívar, Sergio Daniel");
         pnlPortada.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 250, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Alegría Arévalo, Ismael Enrique");
         pnlPortada.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 250, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Baños Lobos, Pedro Javier");
         pnlPortada.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 250, -1));
 
+        jLabel32.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(102, 102, 102));
         jLabel32.setText("Barrientos Hernández, Ricardo Alberto");
         pnlPortada.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 250, -1));
 
+        jLabel38.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(102, 102, 102));
         jLabel38.setText("García López, José Armando");
         pnlPortada.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 250, -1));
 
+        jLabel39.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(102, 102, 102));
         jLabel39.setText("García Rodríguez, Oscar Arnoldo");
         pnlPortada.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 250, -1));
 
         jpnPrimero.add(pnlPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 350, 160));
 
-        lbl4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl4.setFont(new java.awt.Font("Segoe UI Light", 1, 16)); // NOI18N
         lbl4.setForeground(new java.awt.Color(255, 255, 255));
         lbl4.setText("iShop");
         jpnPrimero.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 50, -1));
 
         lbl7.setBackground(new java.awt.Color(153, 153, 153));
+        lbl7.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
         lbl7.setForeground(new java.awt.Color(102, 102, 102));
-        lbl7.setText("Versión 2.0");
+        lbl7.setText("Versión 3.0");
         lbl7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lbl7MouseEntered(evt);
@@ -430,12 +450,12 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnPrimero.add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 70, -1));
 
-        lbl5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl5.setForeground(new java.awt.Color(102, 102, 102));
         lbl5.setText("Te damos la bienvenida a tu");
         jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, -1, -1));
 
-        lbl6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl6.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl6.setForeground(new java.awt.Color(102, 102, 102));
         lbl6.setText("nuevo sistema de Tienda.");
         jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, 30));
@@ -1192,6 +1212,7 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblMitad6;
     private javax.swing.JLabel lblMitad7;
     private javax.swing.JLabel lblMitad8;
+    public static javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlPortada;
     // End of variables declaration//GEN-END:variables
 }

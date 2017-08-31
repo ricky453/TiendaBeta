@@ -405,7 +405,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         exit.setBackground(new java.awt.Color(102, 0, 0));
-        exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        exit.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         exit.setForeground(new java.awt.Color(102, 0, 0));
         exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         exit.setText("X");

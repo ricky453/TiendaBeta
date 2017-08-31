@@ -20,6 +20,7 @@ import javax.swing.Timer;
  */
 public class frmLogin extends javax.swing.JFrame {
     String password;
+    frmHome home = new frmHome();
     /**
      * Creates new form Home17
      */
@@ -292,8 +293,8 @@ public class frmLogin extends javax.swing.JFrame {
         }
     }
     public void iniciar(){
-                try {
-            password = ControladorUsuario.ObtenerPass(txtUser.getText());
+        try {
+        password = ControladorUsuario.ObtenerPass(txtUser.getText());
 
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -313,6 +314,8 @@ public class frmLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 //after validating let's show the main Jframe
+               home.lblUser.setText(txtUser.getText());
+               System.out.println(txtUser.getText());
                frmHome m = new frmHome();
                //m.setExtendedState(MAXIMIZED_BOTH);
                m.show();
@@ -451,6 +454,6 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JPanel login;
     private javax.swing.JPanel pnl_bg;
     private javax.swing.JPasswordField txtPwd;
-    private javax.swing.JTextField txtUser;
+    public static javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
