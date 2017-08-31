@@ -300,6 +300,9 @@ public class frmLogin extends javax.swing.JFrame {
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(password.equals(txtPwd.getText())){
+            
+            
+           
 
         // TODO add your handling code here:
         //put your sql/your statements here to check for password and email if correct
@@ -319,6 +322,8 @@ public class frmLogin extends javax.swing.JFrame {
                //m.setExtendedState(MAXIMIZED_BOTH);
                m.show();
                home.lblUser.setText(txtUser.getText());
+               home.lblUser1.setText(txtUser.getText());
+               mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
               // after successfull loggin let's close the login window
               //call:
               

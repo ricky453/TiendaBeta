@@ -63,6 +63,36 @@ public class ControladorUsuario {
         return Usuario;
     
     }
+    
+    public static String obtenerNombres(String id)throws ErrorTienda{
+        String Usuario="";   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT Nombres FROM usuarios WHERE Usuario='"+id+"';");
+            while(rs.next()){
+                Usuario = rs.getString(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
+        } 
+        return Usuario;
+    
+    }    
+    
+    public static String obtenerApellidos(String id)throws ErrorTienda{
+        String Usuario="";   
+        cn = new Conexion();
+        try {
+        rs = cn.st.executeQuery("SELECT Apellidos FROM usuarios WHERE Usuario='"+id+"';");
+            while(rs.next()){
+                Usuario = rs.getString(1);
+            }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
+        } 
+        return Usuario;
+    
+    }   
     public static int ObtenerIdUsuario()throws ErrorTienda{
         int Usuario=0;   
         cn = new Conexion();

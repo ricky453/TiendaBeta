@@ -6,9 +6,12 @@
 package formularios;
 
 import clases.Conexion;
+import clases.ControladorUsuario;
 import clases.ErrorTienda;
+import static formularios.frmLogin.txtUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -18,8 +21,9 @@ import java.util.logging.Logger;
 public final class frmHome extends javax.swing.JFrame {
     
     int x,y;
+    String nombres, apellidos;
     boolean apagado;
-    boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro, tipoPrecio;
+    boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro, tipoPrecio, detalleCompra, detalleVenta;
 
     public frmHome()  {
         initComponents();
@@ -30,8 +34,43 @@ public final class frmHome extends javax.swing.JFrame {
         Productos(false);
         Proveedores(false);
         Sucursales(false);
-        Parametro(false);     
+        Parametro(false);   
+        TipoPrecio(false);
+        DetalleCompra(false);
+        DetalleVenta(false);
+        jpnUser.setVisible(false);
+        jpnWhite.setVisible(false);
         
+    }
+    public void obtenerNombre(){
+                try {
+        nombres = ControladorUsuario.obtenerNombres(txtUser.getText());
+        apellidos = ControladorUsuario.obtenerApellidos(txtUser.getText());
+
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lblNombreUsuario.setText(nombres + " " + apellidos);
+    }
+    
+        public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
     }
 
 /*  ---- Visualización de imágenes en Menú ----  */
@@ -59,6 +98,12 @@ public final class frmHome extends javax.swing.JFrame {
     public void TipoPrecio(boolean estado){
         jpnNoveno.setVisible(estado);
     }
+    public void DetalleCompra(boolean estado){
+        //jpnNoveno.setVisible(estado);
+    }
+    public void DetalleVenta(boolean estado){
+        //jpnNoveno.setVisible(estado);
+    }
     public void apagado(){
         apagado = true;
         jpnPrincipal.setVisible(false);  
@@ -71,9 +116,11 @@ public final class frmHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jpnBarraSuperior = new javax.swing.JPanel();
+        jpnWhite = new javax.swing.JPanel();
+        lblUser1 = new javax.swing.JLabel();
         lblBotonCerrar = new javax.swing.JLabel();
-        lblLogo = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         lblAgregarUsuario = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
         lblMenu = new javax.swing.JLabel();
@@ -105,6 +152,10 @@ public final class frmHome extends javax.swing.JFrame {
         lblMitad = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
+        jpnUser = new javax.swing.JPanel();
+        lblNombreUsuario = new javax.swing.JLabel();
+        lblCambiarPwd = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         jpnSegundo = new javax.swing.JPanel();
         lblMitad2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -196,6 +247,29 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jpnWhite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnWhiteMouseClicked(evt);
+            }
+        });
+        jpnWhite.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUser1.setBackground(new java.awt.Color(0, 0, 0));
+        lblUser1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        lblUser1.setForeground(new java.awt.Color(0, 0, 0));
+        lblUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/configb.png"))); // NOI18N
+        lblUser1.setText("USER");
+        lblUser1.setToolTipText("Configuración");
+        lblUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblUser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUser1MouseClicked(evt);
+            }
+        });
+        jpnWhite.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 80, 50));
+
+        jpnBarraSuperior.add(jpnWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 60));
+
         lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
         lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
@@ -210,13 +284,6 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
 
-        lblLogo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblLogo.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png"))); // NOI18N
-        lblLogo.setText("iShop 3.0");
-        lblLogo.setToolTipText("");
-        jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 50));
-
         lblUser.setBackground(new java.awt.Color(222, 222, 222));
         lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(204, 204, 204));
@@ -224,7 +291,19 @@ public final class frmHome extends javax.swing.JFrame {
         lblUser.setText("USER");
         lblUser.setToolTipText("Configuración");
         lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 80, 50));
+        lblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUserMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 80, 50));
+
+        lblLogo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        lblLogo.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png"))); // NOI18N
+        lblLogo.setText("iShop 3.0");
+        lblLogo.setToolTipText("");
+        jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 50));
 
         lblAgregarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAgregarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/agus.png"))); // NOI18N
@@ -235,7 +314,7 @@ public final class frmHome extends javax.swing.JFrame {
                 lblAgregarUsuarioMouseClicked(evt);
             }
         });
-        jpnBarraSuperior.add(lblAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, 60, 50));
+        jpnBarraSuperior.add(lblAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 60, 50));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -395,7 +474,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 330, 180, 40));
 
-        btnDetalleCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/compras.png"))); // NOI18N
+        btnDetalleCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.compras.png"))); // NOI18N
         btnDetalleCompras.setBorderPainted(false);
         btnDetalleCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDetalleCompras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -416,7 +495,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnSubMenu.add(btnDetalleCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 80, 180, 40));
 
-        btnDetalleVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/ventas.png"))); // NOI18N
+        btnDetalleVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.ventas.png"))); // NOI18N
         btnDetalleVentas.setBorderPainted(false);
         btnDetalleVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDetalleVentas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -524,6 +603,41 @@ public final class frmHome extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png"))); // NOI18N
         jpnPrimero.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, -1, -1));
         jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
+
+        jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jpnUserMouseExited(evt);
+            }
+        });
+        jpnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNombreUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        lblNombreUsuario.setForeground(new java.awt.Color(102, 0, 0));
+        lblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreUsuario.setText("Nombres + Apellidos");
+        jpnUser.add(lblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
+
+        lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblCambiarPwd.setForeground(new java.awt.Color(0, 0, 0));
+        lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
+        lblCambiarPwd.setText("Cambiar contraseña");
+        lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 130, 20));
+
+        lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
+        lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblCerrarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/usuario.png"))); // NOI18N
+        lblCerrarSesion.setText("Cerrar sesión");
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseClicked(evt);
+            }
+        });
+        jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
+
+        jpnPrimero.add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 230, 110));
 
         jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1070, 650));
 
@@ -1144,11 +1258,15 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalleComprasMouseClicked
 
     private void btnDetalleComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseEntered
-        // TODO add your handling code here:
+        if(!detalleCompra)
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnDetalleCompras);
+        //Principal(false);
+        //Compras(true);
     }//GEN-LAST:event_btnDetalleComprasMouseEntered
 
     private void btnDetalleComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseExited
-        // TODO add your handling code here:
+        if(!detalleCompra)
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnDetalleCompras);
     }//GEN-LAST:event_btnDetalleComprasMouseExited
 
     private void btnDetalleComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleComprasActionPerformed
@@ -1158,15 +1276,17 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalleComprasActionPerformed
 
     private void btnDetalleVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnDetalleVentasMouseClicked
 
     private void btnDetalleVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseEntered
-        // TODO add your handling code here:
+        if(!detalleVenta)
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnDetalleVentas);
     }//GEN-LAST:event_btnDetalleVentasMouseEntered
 
     private void btnDetalleVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseExited
-        // TODO add your handling code here:
+               if(!detalleVenta)
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnDetalleVentas);
     }//GEN-LAST:event_btnDetalleVentasMouseExited
 
     private void btnDetalleVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleVentasActionPerformed
@@ -1174,6 +1294,40 @@ public final class frmHome extends javax.swing.JFrame {
         vd.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnDetalleVentasActionPerformed
+
+    private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
+        obtenerNombre();
+        if(jpnUser.isVisible()){
+        jpnUser.setVisible(false);
+        jpnWhite.setVisible(false);
+        }
+        else if(!jpnUser.isVisible()){
+            jpnUser.setVisible(true);
+            jpnWhite.setVisible(true);
+        }
+    }//GEN-LAST:event_lblUserMouseClicked
+
+    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
+        //jpnUser.setVisible(false);
+        //jpnWhite.setVisible(false);
+    }//GEN-LAST:event_jpnUserMouseExited
+
+    private void lblUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUser1MouseClicked
+        jpnWhite.setVisible(false);
+        jpnUser.setVisible(false);
+    }//GEN-LAST:event_lblUser1MouseClicked
+
+    private void jpnWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnWhiteMouseClicked
+        jpnWhite.setVisible(false);
+        jpnUser.setVisible(false);
+    }//GEN-LAST:event_jpnWhiteMouseClicked
+
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        frmLogin lg = new frmLogin();
+        lg.setVisible(true);
+        this.setVisible(false);
+        mensajeNotificacion("¡Has cerrado sesión!", "Error");
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1248,6 +1402,8 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jpnSeptimo;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnTercero;
+    private javax.swing.JPanel jpnUser;
+    private javax.swing.JPanel jpnWhite;
     private javax.swing.JLabel lbl11;
     private javax.swing.JLabel lbl12;
     private javax.swing.JLabel lbl13;
@@ -1305,6 +1461,8 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbl8;
     private javax.swing.JLabel lblAgregarUsuario;
     public static javax.swing.JLabel lblBotonCerrar;
+    private javax.swing.JLabel lblCambiarPwd;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMitad;
@@ -1315,7 +1473,9 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblMitad6;
     private javax.swing.JLabel lblMitad7;
     private javax.swing.JLabel lblMitad8;
+    private javax.swing.JLabel lblNombreUsuario;
     public static javax.swing.JLabel lblUser;
+    public static javax.swing.JLabel lblUser1;
     private javax.swing.JPanel pnlPortada;
     // End of variables declaration//GEN-END:variables
 }
