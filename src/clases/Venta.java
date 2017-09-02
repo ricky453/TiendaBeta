@@ -37,6 +37,7 @@ public class Venta {
         Articulos.add(item.getPrecioUnitario());
         System.out.println("Agregar nuevo item");
     }
+    
     public void CalcularTotal(){
         this.Total=this.TotalGravado+this.IVA;
         

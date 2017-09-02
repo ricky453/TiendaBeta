@@ -338,7 +338,7 @@ public class frmLogin extends javax.swing.JFrame {
               //it will include on Github
               
                }
-        },1000*5);
+        },1500);
         }else{
             mensajeNotificacion("¡Usuario o contraseña incorrecta!.", "Error");
             txtUser.requestFocus();

@@ -134,6 +134,8 @@ public final class frmHome extends javax.swing.JFrame {
         btnSucursales = new javax.swing.JButton();
         btnDetalleCompras = new javax.swing.JButton();
         btnDetalleVentas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
         jpnPrincipal = new javax.swing.JPanel();
         jpnPrimero = new javax.swing.JPanel();
@@ -256,7 +258,6 @@ public final class frmHome extends javax.swing.JFrame {
 
         lblUser1.setBackground(new java.awt.Color(0, 0, 0));
         lblUser1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        lblUser1.setForeground(new java.awt.Color(0, 0, 0));
         lblUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/configb.png"))); // NOI18N
         lblUser1.setText("USER");
         lblUser1.setToolTipText("Configuración");
@@ -356,7 +357,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnComprasActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 30, 180, 40));
+        jpnSubMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 10, 180, 40));
 
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/ventas.png"))); // NOI18N
         btnVentas.setBorderPainted(false);
@@ -377,7 +378,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnVentasActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 130, 180, 40));
+        jpnSubMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 110, 180, 40));
 
         btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/productos.png"))); // NOI18N
         btnProductos.setBorderPainted(false);
@@ -398,7 +399,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnProductosActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 230, 180, 40));
+        jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 210, 180, 40));
 
         btnTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/tipoprecio.png"))); // NOI18N
         btnTipoPrecio.setBorderPainted(false);
@@ -419,7 +420,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnTipoPrecioActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 430, 180, 40));
+        jpnSubMenu.add(btnTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 410, 180, 40));
 
         btnParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/parametro.png"))); // NOI18N
         btnParametro.setBorderPainted(false);
@@ -440,7 +441,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnParametroActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 380, 180, 40));
+        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 360, 180, 40));
 
         btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/proveedores.png"))); // NOI18N
         btnProveedores.setBorderPainted(false);
@@ -456,7 +457,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnProveedoresMouseExited(evt);
             }
         });
-        jpnSubMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 280, 180, 40));
+        jpnSubMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 260, 180, 40));
 
         btnSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/sucursales.png"))); // NOI18N
         btnSucursales.setBorderPainted(false);
@@ -472,7 +473,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnSucursalesMouseExited(evt);
             }
         });
-        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 330, 180, 40));
+        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 310, 180, 40));
 
         btnDetalleCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.compras.png"))); // NOI18N
         btnDetalleCompras.setBorderPainted(false);
@@ -493,7 +494,7 @@ public final class frmHome extends javax.swing.JFrame {
                 btnDetalleComprasActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnDetalleCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 80, 180, 40));
+        jpnSubMenu.add(btnDetalleCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 60, 180, 40));
 
         btnDetalleVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.ventas.png"))); // NOI18N
         btnDetalleVentas.setBorderPainted(false);
@@ -514,9 +515,51 @@ public final class frmHome extends javax.swing.JFrame {
                 btnDetalleVentasActionPerformed(evt);
             }
         });
-        jpnSubMenu.add(btnDetalleVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 180, 180, 40));
+        jpnSubMenu.add(btnDetalleVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 160, 180, 40));
 
-        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 500));
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/reportes.png"))); // NOI18N
+        btnReportes.setBorderPainted(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportesMouseExited(evt);
+            }
+        });
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 460, 180, 40));
+
+        btnBitacoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/bitacoras.png"))); // NOI18N
+        btnBitacoras.setBorderPainted(false);
+        btnBitacoras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBitacoras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBitacorasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBitacorasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBitacorasMouseExited(evt);
+            }
+        });
+        btnBitacoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBitacorasActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnBitacoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 510, 180, 40));
+
+        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 560));
 
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -618,7 +661,6 @@ public final class frmHome extends javax.swing.JFrame {
         jpnUser.add(lblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
 
         lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        lblCambiarPwd.setForeground(new java.awt.Color(0, 0, 0));
         lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
         lblCambiarPwd.setText("Cambiar contraseña");
         lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -626,7 +668,6 @@ public final class frmHome extends javax.swing.JFrame {
 
         lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
         lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        lblCerrarSesion.setForeground(new java.awt.Color(0, 0, 0));
         lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/usuario.png"))); // NOI18N
         lblCerrarSesion.setText("Cerrar sesión");
         lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1329,6 +1370,40 @@ public final class frmHome extends javax.swing.JFrame {
         mensajeNotificacion("¡Has cerrado sesión!", "Error");
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesMouseClicked
+
+    private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnReportes);
+    }//GEN-LAST:event_btnReportesMouseEntered
+
+    private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnReportes);
+    }//GEN-LAST:event_btnReportesMouseExited
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnBitacorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBitacorasMouseClicked
+
+    private void btnBitacorasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnBitacoras);
+    }//GEN-LAST:event_btnBitacorasMouseEntered
+
+    private void btnBitacorasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnBitacoras);
+    }//GEN-LAST:event_btnBitacorasMouseExited
+
+    private void btnBitacorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBitacorasActionPerformed
+        frmBitacoras bi = new frmBitacoras();
+        bi.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBitacorasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1366,6 +1441,7 @@ public final class frmHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBitacoras;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnDetalleCompras;
     private javax.swing.JButton btnDetalleVentas;
@@ -1373,6 +1449,7 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JButton btnParametro;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnSucursales;
     private javax.swing.JButton btnTipoPrecio;
     private javax.swing.JButton btnVentas;
