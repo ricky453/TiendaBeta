@@ -108,4 +108,18 @@ public class ControladorUsuario {
         return Usuario;
     
     }
+    
+    public static int ObtenerIdUser(String nombre) throws ErrorTienda{
+        int user=0;
+        cn= new Conexion();
+        try {
+            rs = cn.st.executeQuery("SELECT idUsuario FROM usuarios WHERE nombres = '"+nombre+"';");
+            while (rs.next()) {
+                user = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdUser", ex.getMessage());
+        }
+        return user;
+    }
 }

@@ -13,12 +13,14 @@ import clases.ControladorCompra;
 import clases.ControladorProducto;
 import clases.ControladorProveedor;
 import clases.ControladorSucursal;
+import clases.ControladorUsuario;
 import clases.DetalleCompra;
 import clases.ErrorTienda;
 import clases.Producto;
 import clases.Proveedor;
 import clases.Sucursal;
 import clases.TipoPrecio;
+import static formularios.frmLogin.txtUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
@@ -35,6 +37,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 
 /**
  *
@@ -60,6 +63,11 @@ public class frmCompras extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
+        try {
+            lblUsuario.setText(ControladorUsuario.obtenerNombres(txtUser.getText()));
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmCompras.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
@@ -137,6 +145,8 @@ public class frmCompras extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         lblBotonCerrar = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         lblNomProd1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -342,11 +352,11 @@ public class frmCompras extends javax.swing.JFrame {
         ));
         tblCompra.getTableHeader().setReorderingAllowed(false);
         tblCompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tblCompraKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblCompraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblCompraKeyTyped(evt);
             }
         });
         jScrollPane6.setViewportView(tblCompra);
@@ -529,6 +539,16 @@ public class frmCompras extends javax.swing.JFrame {
             }
         });
         jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 30, 55));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Usuario :");
+        jpnBarraSuperior.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, -1));
+
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsuario.setText("                ");
+        jpnBarraSuperior.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -755,6 +775,8 @@ public class frmCompras extends javax.swing.JFrame {
                 }
 
                 compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
+                compra.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUsuario.getText()));
+                //System.out.println(ControladorUsuario.ObtenerIdUser(lblUsuario.getText()));
                 compra.setPROVEEDOR(proveedor);
                 switch (Tipocompra) {                    
                     case 0:                        
@@ -1184,6 +1206,7 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbTipoCompra;
     private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JLabel home;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1216,6 +1239,7 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblTipoPrecio;
     private javax.swing.JLabel lblTotal1;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel lblnumdoc;
     private javax.swing.JLabel menu;
