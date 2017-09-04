@@ -5,8 +5,13 @@
  */
 package formularios;
 
+import clases.ControladorUsuario;
+import clases.ErrorTienda;
 import java.awt.Frame;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
@@ -14,7 +19,8 @@ import javax.swing.Timer;
  * @author proxc
  */
 public class frmLogin extends javax.swing.JFrame {
-
+    String password;
+    frmHome home = new frmHome();
     /**
      * Creates new form Home17
      */
@@ -35,7 +41,7 @@ public class frmLogin extends javax.swing.JFrame {
         pnl_bg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         login = new javax.swing.JPanel();
-        txt_email = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -43,13 +49,14 @@ public class frmLogin extends javax.swing.JFrame {
         btnLogin = new java.awt.Button();
         lbl_close = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_pwd = new javax.swing.JPasswordField();
+        txtPwd = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         loader = new javax.swing.JPanel();
         img_loader = new javax.swing.JLabel();
         lbl_loader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setLocationByPlatform(true);
         setUndecorated(true);
 
@@ -70,13 +77,23 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        txt_email.setBackground(new java.awt.Color(255, 255, 255));
-        txt_email.setForeground(new java.awt.Color(102, 102, 102));
-        txt_email.setText("Usuario");
-        txt_email.setBorder(null);
-        txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtUser.setForeground(new java.awt.Color(102, 102, 102));
+        txtUser.setText("Usuario");
+        txtUser.setBorder(null);
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_emailFocusGained(evt);
+                txtUserFocusGained(evt);
+            }
+        });
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUserKeyTyped(evt);
             }
         });
 
@@ -116,13 +133,23 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("¿Olvidó su contraseña?");
 
-        txt_pwd.setBackground(new java.awt.Color(255, 255, 255));
-        txt_pwd.setForeground(new java.awt.Color(102, 102, 102));
-        txt_pwd.setText("jPasswordField1");
-        txt_pwd.setBorder(null);
-        txt_pwd.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPwd.setBackground(new java.awt.Color(255, 255, 255));
+        txtPwd.setForeground(new java.awt.Color(102, 102, 102));
+        txtPwd.setText("jPasswordField1");
+        txtPwd.setBorder(null);
+        txtPwd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_pwdFocusGained(evt);
+                txtPwdFocusGained(evt);
+            }
+        });
+        txtPwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPwdActionPerformed(evt);
+            }
+        });
+        txtPwd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPwdKeyTyped(evt);
             }
         });
 
@@ -150,10 +177,10 @@ public class frmLogin extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txt_email, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                        .addComponent(txt_pwd)))
+                        .addComponent(txtPwd)))
                 .addGap(152, 152, 152))
         );
         loginLayout.setVerticalGroup(
@@ -165,14 +192,14 @@ public class frmLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginLayout.createSequentialGroup()
-                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginLayout.createSequentialGroup()
-                        .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,8 +218,9 @@ public class frmLogin extends javax.swing.JFrame {
 
         img_loader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/anillo.gif"))); // NOI18N
 
+        lbl_loader.setBackground(new java.awt.Color(41, 168, 73));
         lbl_loader.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbl_loader.setForeground(new java.awt.Color(102, 0, 0));
+        lbl_loader.setForeground(new java.awt.Color(41, 168, 73));
         lbl_loader.setText("Iniciando ....");
 
         javax.swing.GroupLayout loaderLayout = new javax.swing.GroupLayout(loader);
@@ -245,9 +273,37 @@ public class frmLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public void mensajeNotificacion(String mensaje, String tipo){
+        if(tipo.equals("Error")){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
+        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
+        }else if(tipo == "Ok"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Ok.png")));
+        }else if(tipo == "Adv"){
+        frmNotificacion not = new frmNotificacion();
+        not.Mensaje(mensaje);
+        not.setVisible(true);
+        not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+    }
+    public void iniciar(){
+        try {
+        password = ControladorUsuario.ObtenerPass(txtUser.getText());
 
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(password.equals(txtPwd.getText())){
+            
+            
+           
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         //put your sql/your statements here to check for password and email if correct
         //then
@@ -261,9 +317,13 @@ public class frmLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 //after validating let's show the main Jframe
+
                frmHome m = new frmHome();
                //m.setExtendedState(MAXIMIZED_BOTH);
                m.show();
+               home.lblUser.setText(txtUser.getText());
+               home.lblUser1.setText(txtUser.getText());
+               mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
               // after successfull loggin let's close the login window
               //call:
               
@@ -278,20 +338,28 @@ public class frmLogin extends javax.swing.JFrame {
               //it will include on Github
               
                }
-        },1000*5);
+        },1500);
+        }else{
+            mensajeNotificacion("¡Usuario o contraseña incorrecta!.", "Error");
+            txtUser.requestFocus();
+        }
 
+    }
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        iniciar();
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txt_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusGained
+    private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
         // TODO add your handling code here:
-        txt_email.setText("");
-    }//GEN-LAST:event_txt_emailFocusGained
+        txtUser.setText("");
+    }//GEN-LAST:event_txtUserFocusGained
 
-    private void txt_pwdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_pwdFocusGained
+    private void txtPwdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPwdFocusGained
         // TODO add your handling code here:
-        txt_pwd.setText("");
-    }//GEN-LAST:event_txt_pwdFocusGained
+        txtPwd.setText("");
+    }//GEN-LAST:event_txtPwdFocusGained
 
     private void lbl_closeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_closeMousePressed
         // TODO add your handling code here:
@@ -312,6 +380,30 @@ public class frmLogin extends javax.swing.JFrame {
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_loginMousePressed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        txtPwd.requestFocus();
+    }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
+        char mayu=evt.getKeyChar();
+        if (Character.isLowerCase(mayu)) {
+            String cadena=(""+mayu).toUpperCase();
+            mayu=cadena.charAt(0);
+            evt.setKeyChar(mayu);
+        }
+        else{
+
+        }
+    }//GEN-LAST:event_txtUserKeyTyped
+
+    private void txtPwdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPwdKeyTyped
+
+    }//GEN-LAST:event_txtPwdKeyTyped
+
+    private void txtPwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPwdActionPerformed
+        iniciar();
+    }//GEN-LAST:event_txtPwdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,7 +458,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JPanel loader;
     private javax.swing.JPanel login;
     private javax.swing.JPanel pnl_bg;
-    private javax.swing.JTextField txt_email;
-    private javax.swing.JPasswordField txt_pwd;
+    private javax.swing.JPasswordField txtPwd;
+    public static javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

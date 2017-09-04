@@ -23,13 +23,15 @@ public class DetalleVenta {
         this.codBarra=Cod;
         
     }
-    public double CalcularPrecio(double utilidad){
+    public double CalcularPrecio(double utilidad){  //Para un producto:jabones
+        //La utilidad es respecto al tipo precio
         double nuevoPrecio=0;
-        nuevoPrecio=((this.PrecioUnitario))/utilidad;
+        nuevoPrecio=((this.PrecioUnitario))/utilidad; //precio de venta
         
         return Double.parseDouble(decimal.format(nuevoPrecio));
     }
-    public double CalcularPrecioDetalle(){
+    
+    public double CalcularPrecioDetalle(){  //Para un conjunto de productos del mismo tipo: muchos jabones
         double nuevoPrecio=0;
         nuevoPrecio=(this.PrecioUnitario*this.Cantidad);
         return Double.parseDouble(decimal.format(nuevoPrecio));
