@@ -671,7 +671,7 @@ public class frmCompras extends javax.swing.JFrame {
             }
             nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(j-1, 2).toString());
             nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(j-1, 3).toString()))/2;
-            System.out.println(j);
+            //System.out.println(j);
             tablaModel.setValueAt(nuevaCantidad, j-1, 2);
             tablaModel.setValueAt(decimalProductos.format(nuevoCosto), j-1, 3);
             tablaModel.setValueAt(decimalProductos.format(nuevaCantidad*nuevoCosto), j-1, 4);
@@ -694,7 +694,7 @@ public class frmCompras extends javax.swing.JFrame {
             //System.out.println(tablaModel.getValueAt(iteraciones, 4));
             iteraciones++;
         }
-        System.out.println(total);
+        //System.out.println(total);
         double totalFinal=Double.parseDouble(decimal.format(total));
         
         if (TipoCompra==0) {

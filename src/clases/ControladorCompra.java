@@ -41,7 +41,7 @@ public class ControladorCompra {
  
             }
         } catch (SQLException e) {
-            throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ObtenerComprar", e.getMessage());
         }
         ArrayList<DetalleCompra> detalleCompra = (ArrayList) dc;
         return detalleCompra;
@@ -49,17 +49,27 @@ public class ControladorCompra {
     
     public static void ActualizarInventario(Object[][] dc, int IdSucursal) throws ErrorTienda{
         cn = new Conexion();
+        ResultSet rs;
         try {
-            Producto pr;
+            Producto producto = null;
             for (int i = 0; i < dc.length; i++) {
-                pr = ControladorProducto.Obtener(String.valueOf(dc[i][0]),IdSucursal);
-                int cantidad, cantidad2;
-                cantidad = pr.getInventario();
-                cantidad2 = (Integer) dc[i][2];
-                cn.st.executeUpdate("UPDATE Inventario SET cantidad = '"+(cantidad+cantidad2)+"' WHERE CodBarra = '"+dc[i][0]+"';");
+                rs = cn.st.executeQuery("SELECT * FROM Inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][0]+"';");
+                System.out.println(rs.first()+", "+rs.next());
+                if (rs.first()==false){
+
+                    cn.st.executeUpdate("INSERT INTO Inventario VALUES('"+dc[i][0]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
+                }else{
+                    while(rs.next()) {
+                        producto.setCodBarra(rs.getString(1));
+                        producto.setIdSucursal(rs.getInt(2));
+                        producto.setInventario(rs.getInt(3));
+
+                        cn.st.executeUpdate("UPDATE Inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][0]+"' AND IdSucursal='"+IdSucursal+"';");
+                    }
+                }
             }
         } catch (SQLException e) {
-            throw new ErrorTienda("Class ControladorCompra/Agregar", e.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarInventario", e.getMessage());
         }
     }
     
@@ -75,8 +85,10 @@ public class ControladorCompra {
                 rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM Inventario WHERE CodBarra='"+dc[i][0]+"';");
                 
                 CantidadActual=0;
+                int j=0;
                 while(rsCantidad.next()){
-                    CantidadActual = rsCantidad.getInt(1);
+                    CantidadActual = CantidadActual + rsCantidad.getInt(j);
+                    j++;
                 }
 
                 //Obtener el precio actual
