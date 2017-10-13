@@ -23,7 +23,7 @@ public class ControladorParametro {
     
     cn = new Conexion();
     try {
-            rs=cn.st.executeQuery("SELECT IdParametro,Nombre,Valor FROM Parametro WHERE IdParametro='"+idpa+"'");
+            rs=cn.st.executeQuery("SELECT IdParametro,Nombre,Valor FROM parametro WHERE IdParametro='"+idpa+"'");
             while (rs.next()) {
                 pa.setIdParametro(Integer.parseInt(rs.getString(1)));
                 pa.setNombre(rs.getString(2));
@@ -40,7 +40,7 @@ public class ControladorParametro {
     public static void Modificar(Parametro pa) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE Parametro SET Nombre='"+pa.getNombre()+"',Valor='"+pa.getValor()+"' WHERE IdParametro='"+pa.getIdParametro()+"'");
+            cn.st.execute("UPDATE parametro SET Nombre='"+pa.getNombre()+"',Valor='"+pa.getValor()+"' WHERE IdParametro='"+pa.getIdParametro()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorParametro/Modificar",e.getMessage());
         }
@@ -52,7 +52,7 @@ public class ControladorParametro {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT IdParametro,Nombre,Valor FROM Parametro");
+            rs=cn.st.executeQuery("SELECT IdParametro,Nombre,Valor FROM parametro");
             
                 while (rs.next()) {
                    parametro.add(rs.getString(1));

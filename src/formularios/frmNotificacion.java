@@ -42,6 +42,7 @@ public class frmNotificacion extends javax.swing.JFrame {
         lblIcono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(409, 59));
         setMinimumSize(new java.awt.Dimension(409, 59));

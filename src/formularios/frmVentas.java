@@ -16,6 +16,7 @@ import clases.Sucursal;
 import clases.TipoPrecio;
 import clases.Venta;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
@@ -69,8 +70,9 @@ public class frmVentas extends javax.swing.JFrame {
         
         ObtenerIdVenta();
         CargarSucursales();
+        
         tipoPrecios();
-        cmbTipoPrecio.setSelectedIndex(1);
+        
         txtCodigoBarraVender.requestFocus();
         tipoVentaSeleccion(false);
         dtcFecha.setDate(fecha);
@@ -234,8 +236,10 @@ public class frmVentas extends javax.swing.JFrame {
     public void tipoPrecios() throws ErrorTienda{
         
         precio = ControladorTipoPrecio.ObtenerTodos();
-        misPrecios = new Object[precio.size()/3][3];
-        int contador=0,fila=0;
+        
+        if(precio.size()!=0){
+            misPrecios = new Object[precio.size()/3][3];
+            int contador=0,fila=0;
         Iterator<TipoPrecio> iterador= precio.iterator();
                 while(iterador.hasNext()){
                     misPrecios[fila][0]=iterador.next();
@@ -245,6 +249,14 @@ public class frmVentas extends javax.swing.JFrame {
                     fila++;
                 }
        
+                cmbTipoPrecio.setSelectedIndex(1);
+        }else{
+            mensajeNotificacion("Aún no hay tipos de precio definidos", "Error");
+            
+        
+            
+        }
+        
         
     }
     //LIMPIA EL FORMULARIO PERO COMO PARAMETRO SE ENVIA SI LIMPIA TODO O SOLO UNA PARTE DE EL, SIRVE PARA CANCELAR Y PRA CUANDO SE AGREGA UNA NUEVA TUPLA

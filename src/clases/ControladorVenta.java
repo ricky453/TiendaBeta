@@ -31,7 +31,7 @@ public class ControladorVenta {
             System.err.println("Detalles ventas "+venta.getArticulos().size());
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(venta.getFecha());
-            cn.st.execute("INSERT INTO Venta(IdVenta,IdSucursal,TipoVenta,IdTipoPrecio,Cliente,Fecha,IVA "
+            cn.st.execute("INSERT INTO venta(IdVenta,IdSucursal,TipoVenta,IdTipoPrecio,Cliente,Fecha,IVA "
                     + ",TotalGravado,Total,Direccion,Giro,NIT,NRC,NDocumento) VALUES ('"+venta.getIdVenta()+"','"+venta.getIdSucursal()+"', "
                             + "'"+venta.getIdTipoVenta()+"','"+venta.getIdPrecio()+"','"+venta.getCliente()+"','"+Fecha+"','"+venta.getIVA()+"', "
                                     + "'"+venta.getTotalGravado()+"','"+venta.getTotal()+"','"+venta.getDireccion()+"','"+venta.getGiro()+"', "
@@ -42,7 +42,7 @@ public class ControladorVenta {
             cn = new Conexion();
             try {
                 for(int x=0;x<detalles.length;x++){
-                    cn.st.execute("INSERT INTO DetalleVenta(IdVenta,CodBarra,Cantidad,PrecioUnitario) VALUES('"+detalles[x][0]+"', "
+                    cn.st.execute("INSERT INTO detalleventa(IdVenta,CodBarra,Cantidad,PrecioUnitario) VALUES('"+detalles[x][0]+"', "
                             + "'"+detalles[x][1]+"','"+detalles[x][2]+"','"+detalles[x][3]+"')");
                 }
                 return true;
@@ -96,7 +96,7 @@ public class ControladorVenta {
             int cantidad2= Integer.parseInt(String.valueOf(detalles[x][2]));
             
             System.out.println("Cantidad en la bd "+cantidad+" Cantidad exigida "+cantidad2);
-            cn.st.execute("UPDATE Inventario SET Cantidad='"+(cantidad-cantidad2)+"' WHERE IdSucursal='"+sucursal+"' AND CodBarra='"+detalles[x][1]+"'");
+            cn.st.execute("UPDATE inventario SET Cantidad='"+(cantidad-cantidad2)+"' WHERE IdSucursal='"+sucursal+"' AND CodBarra='"+detalles[x][1]+"'");
         }    
         } catch (SQLException e) {
         throw new ErrorTienda("Controlador Venta catualizar inventario", e.getMessage());
@@ -107,7 +107,7 @@ public class ControladorVenta {
         try {
             cn=new Conexion();
        rs=null;
-        rs = cn.st.executeQuery("SELECT count(IdVenta) FROM Venta");
+        rs = cn.st.executeQuery("SELECT count(IdVenta) FROM venta");
         
         while(rs.next()){
             IdVenta = rs.getInt(1);

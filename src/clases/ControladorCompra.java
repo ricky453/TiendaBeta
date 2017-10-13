@@ -12,7 +12,7 @@ public class ControladorCompra {
         try {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(compra.getFecha());
-            cn.st.executeUpdate("INSERT INTO Compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getPROVEEDOR().getIdProveedor()
+            cn.st.executeUpdate("INSERT INTO compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getPROVEEDOR().getIdProveedor()
             +"', '"+compra.getIdSucursal()+"', '"+compra.getIdUsuario()+"', '"+Fecha+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             for(int x=0;x<detalleCompra.length;x++){
@@ -54,18 +54,18 @@ public class ControladorCompra {
         try {
             Producto producto = null;
             for (int i = 0; i < dc.length; i++) {
-                rs = cn.st.executeQuery("SELECT * FROM Inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][0]+"';");
+                rs = cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][0]+"';");
                 System.out.println(rs.first()+", "+rs.next());
                 if (rs.first()==false){
 
-                    cn.st.executeUpdate("INSERT INTO Inventario VALUES('"+dc[i][0]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
+                    cn.st.executeUpdate("INSERT INTO inventario VALUES('"+dc[i][0]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
                 }else{
                     while(rs.next()) {
                         producto.setCodBarra(rs.getString(1));
                         producto.setIdSucursal(rs.getInt(2));
                         producto.setInventario(rs.getInt(3));
 
-                        cn.st.executeUpdate("UPDATE Inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][0]+"' AND IdSucursal='"+IdSucursal+"';");
+                        cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][0]+"' AND IdSucursal='"+IdSucursal+"';");
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class ControladorCompra {
                 double actualizarPrecio=0.0;
             
                 ResultSet rsCantidad = null;
-                rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM Inventario WHERE CodBarra='"+dc[i][0]+"';");
+                rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM inventario WHERE CodBarra='"+dc[i][0]+"';");
                 
                 CantidadActual=0;
                 int j=0;
@@ -96,7 +96,7 @@ public class ControladorCompra {
                 double PrecioActual=0;
 
                 ResultSet rsPrecio = null;
-                rsPrecio = cn.st.executeQuery("SELECT Costo FROM Producto WHERE CodBarra='"+dc[i][0]+"';");
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM producto WHERE CodBarra='"+dc[i][0]+"';");
 
                 while(rsPrecio.next()){
                     PrecioActual = rsPrecio.getDouble(1);
@@ -107,7 +107,7 @@ public class ControladorCompra {
                 actualizarPrecio = CantidadActual * PrecioActual;
                 actualizarPrecio = actualizarPrecio + ( Integer.parseInt(dc[i][2].toString()) * Double.parseDouble(dc[i][3].toString()) );
                 actualizarPrecio = actualizarPrecio / (Integer.parseInt(dc[i][2].toString())+CantidadActual);
-                cn.st.executeUpdate("UPDATE Producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
+                cn.st.executeUpdate("UPDATE producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
                 
             }
         
@@ -121,7 +121,7 @@ public class ControladorCompra {
         int IdCompra=0;
         try {
         ResultSet rsIdCompra = null;
-        rsIdCompra = cn.st.executeQuery("SELECT COUNT(*) FROM Compra");
+        rsIdCompra = cn.st.executeQuery("SELECT COUNT(*) FROM compra");
         
         while(rsIdCompra.next()){
             IdCompra = rsIdCompra.getInt("count(*)");

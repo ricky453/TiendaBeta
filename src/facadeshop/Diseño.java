@@ -5,6 +5,7 @@
  */
 package facadeshop;
 
+import formularios.frmHome;
 import formularios.frmLogin;
 /**
  *
@@ -16,7 +17,7 @@ public class Diseño {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        frmLogin home= new frmLogin();
+        frmHome home = new frmHome();
         home.setVisible(true);
     }
     

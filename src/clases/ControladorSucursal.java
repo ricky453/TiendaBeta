@@ -24,7 +24,7 @@ public class ControladorSucursal {
         cn = new Conexion();
         int id=0;
         try {
-            rs = cn.st.executeQuery("SELECT IdSucursal FROM Sucursal WHERE Nombre= '"+nombre+"'");
+            rs = cn.st.executeQuery("SELECT IdSucursal FROM sucursal WHERE Nombre= '"+nombre+"'");
             while (rs.next()) {
                 id = rs.getInt(1);
             }
@@ -37,7 +37,7 @@ public class ControladorSucursal {
         int IdSucursal=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT MAX(IdSucursal) FROM Sucursal");
+        rs = cn.st.executeQuery("SELECT MAX(IdSucursal) FROM sucursal");
         
             while(rs.next()){
                 IdSucursal = rs.getInt(1);
@@ -53,7 +53,7 @@ public class ControladorSucursal {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT DISTINCT IdSucursal,Nombre, Direccion, Telefono FROM Sucursal WHERE Nombre LIKE '%"+buscar+"%'");
+            rs=cn.st.executeQuery("SELECT DISTINCT IdSucursal,Nombre, Direccion, Telefono FROM sucursal WHERE Nombre LIKE '%"+buscar+"%'");
             
                 while (rs.next()) {
                     sucursal.add(rs.getString(1));
@@ -78,7 +78,7 @@ public class ControladorSucursal {
     public static void modificarSucursal(Sucursal sc) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.execute("UPDATE Sucursal SET Nombre='"+sc.getNombre()+"',Direccion='"+sc.getDireccion()+"',Telefono='"+sc.getTelefono()+"' WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+            cn.st.execute("UPDATE sucursal SET Nombre='"+sc.getNombre()+"',Direccion='"+sc.getDireccion()+"',Telefono='"+sc.getTelefono()+"' WHERE IdSucursal='"+sc.getIdSucursal()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorSucursal/Modificar",e.getMessage());
         }
@@ -91,7 +91,7 @@ public class ControladorSucursal {
             String [] matriz2=new String[5];
             String [] matriz3=new String[10];
             
-            rs=cn.st.executeQuery("SELECT * FROM Inventario WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+            rs=cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal='"+sc.getIdSucursal()+"'");
             
             while (rs.next()) {
                 matriz[0]=rs.getString(1);
@@ -100,7 +100,7 @@ public class ControladorSucursal {
                 
             }
             
-            rs=cn.st.executeQuery("SELECT * FROM DetalleVenta WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+            rs=cn.st.executeQuery("SELECT * FROM detalleventa WHERE IdSucursal='"+sc.getIdSucursal()+"'");
             
             while (rs.next()) {
                 matriz2[0]=rs.getString(1);
@@ -110,7 +110,7 @@ public class ControladorSucursal {
                 matriz2[4]=rs.getString(5);
             }
             
-            rs=cn.st.executeQuery("SELECT * FROM Compra WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+            rs=cn.st.executeQuery("SELECT * FROM compra WHERE IdSucursal='"+sc.getIdSucursal()+"'");
             
             while (rs.next()) {
                 matriz2[0]=rs.getString(1);
@@ -128,7 +128,7 @@ public class ControladorSucursal {
             if (matriz[0] != null || matriz2[4] != null || matriz3[2] != null) {
                 setCambio(true);
             }else{
-                cn.st.executeUpdate("DELETE FROM Sucursal WHERE IdSucursal='"+sc.getIdSucursal()+"'");
+                cn.st.executeUpdate("DELETE FROM sucursal WHERE IdSucursal='"+sc.getIdSucursal()+"'");
                 setCambio(false);
             }
         } catch (SQLException e) {
@@ -140,7 +140,7 @@ public class ControladorSucursal {
     public static void agregarSucursal(Sucursal sc) throws ErrorTienda{
          try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO Sucursal(IdSucursal,Nombre,Direccion, Telefono) VALUES('"+sc.getIdSucursal()+"','"+sc.getNombre()+"','"+sc.getDireccion()+"','"+sc.getTelefono()+"')");
+            cn.st.executeUpdate("INSERT INTO sucursal(IdSucursal,Nombre,Direccion, Telefono) VALUES('"+sc.getIdSucursal()+"','"+sc.getNombre()+"','"+sc.getDireccion()+"','"+sc.getTelefono()+"')");
             } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorSucursal/Agregar",e.getMessage());
         }
@@ -152,7 +152,7 @@ public class ControladorSucursal {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT IdSucursal,Nombre,Direccion, Telefono FROM Sucursal WHERE IdSucursal='"+sc+"'");
+            rs=cn.st.executeQuery("SELECT IdSucursal,Nombre,Direccion, Telefono FROM sucursal WHERE IdSucursal='"+sc+"'");
             while (rs.next()) {
                 misucursal.setIdSucursal(Integer.parseInt(rs.getString(1)));
                 misucursal.setNombre(rs.getString(2));
@@ -171,7 +171,7 @@ public class ControladorSucursal {
         
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT IdSucursal,Nombre,Direccion,Telefono FROM Sucursal ");
+            rs=cn.st.executeQuery("SELECT IdSucursal,Nombre,Direccion,Telefono FROM sucursal ");
             
                 while (rs.next()) {
                     sucursal.add(rs.getString(1));
