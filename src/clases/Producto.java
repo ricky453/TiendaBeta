@@ -2,7 +2,7 @@ package clases;
 public class Producto {
     
     private String CodBarra="";
-    private String nombre;
+    private String nombre="";
     private double costo;
     public int Inventario=0;
     public int IdSucursal=0;

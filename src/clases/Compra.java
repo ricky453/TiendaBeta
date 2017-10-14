@@ -15,7 +15,7 @@ public class Compra {
     private double percepcion;
     private double Total;
     private ArrayList<DetalleCompra> ARTICULOS;
-    private int IdUsuario;
+    
 
     public Compra() {
     }
@@ -23,15 +23,7 @@ public class Compra {
     public int getIdCompra() {
         return IdCompra;
     }
-
-    public int getIdUsuario() {
-        return IdUsuario;
-    }
-
-    public void setIdUsuario(int IdUsuario) {
-        this.IdUsuario = IdUsuario;
-    }
-
+    
     public void setIdCompra(int IdCompra) {
         this.IdCompra = IdCompra;
     }

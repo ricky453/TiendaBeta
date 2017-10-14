@@ -63,11 +63,7 @@ public class frmCompras extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
-        try {
-            lblUsuario.setText(ControladorUsuario.obtenerNombres(txtUser.getText()));
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmCompras.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
@@ -775,7 +771,7 @@ public class frmCompras extends javax.swing.JFrame {
                 }
 
                 compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
-                compra.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUsuario.getText()));
+                //compra.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUsuario.getText()));
                 //System.out.println(ControladorUsuario.ObtenerIdUser(lblUsuario.getText()));
                 compra.setPROVEEDOR(proveedor);
                 switch (Tipocompra) {                    
@@ -1106,7 +1102,7 @@ public class frmCompras extends javax.swing.JFrame {
         if (c == (char) KeyEvent.VK_ENTER) {
             String codBarra=txtCodBarraProd1.getText();
             Producto producto;
-
+            
             try {
                 if (codBarra.equals("")) {
                     mensajeNotificacion("¡Ingrese un código de barras!", "Error");

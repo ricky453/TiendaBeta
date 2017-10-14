@@ -12,12 +12,12 @@ public class ControladorCompra {
         try {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(compra.getFecha());
-            cn.st.executeUpdate("INSERT INTO compra VALUES ('"+compra.getIdCompra()+"', '"+compra.getPROVEEDOR().getIdProveedor()
-            +"', '"+compra.getIdSucursal()+"', '"+compra.getIdUsuario()+"', '"+Fecha+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
+            cn.st.executeUpdate("INSERT INTO compra VALUES ('"+compra.getIdCompra()+"', '"+Fecha+"', '"+compra.getPROVEEDOR().getIdProveedor()
+            +"', '"+compra.getIdSucursal()+"', '"+compra.getTipoCompra()+"', '"+compra.getNumDocumento()+"', '"+compra.getSubTotal()+"', '"+compra.getIVA()
             +"', '"+compra.getPercepcion()+"', '"+compra.getTotal()+"');");
             for(int x=0;x<detalleCompra.length;x++){
-                   cn.st.execute("INSERT INTO detallecompra(IdCompra,CodBarra,Cantidad,CostoUnitario)VALUES('"
-                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"')");
+                   cn.st.execute("INSERT INTO detallecompra VALUES('"
+                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"', '"+compra.getIdSucursal()+"');");
                    
             }
             
@@ -54,19 +54,20 @@ public class ControladorCompra {
         try {
             Producto producto = null;
             for (int i = 0; i < dc.length; i++) {
-                rs = cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][0]+"';");
-                System.out.println(rs.first()+", "+rs.next());
-                if (rs.first()==false){
-
-                    cn.st.executeUpdate("INSERT INTO inventario VALUES('"+dc[i][0]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
-                }else{
-                    while(rs.next()) {
-                        producto.setCodBarra(rs.getString(1));
+                rs = cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][1]+"';");
+                //System.out.println(rs.first()+", "+rs.next());
+                if (rs != null && rs.next()){
+                        
+                        producto.setCodBarra(rs.getString("CodBarra"));
                         producto.setIdSucursal(rs.getInt(2));
                         producto.setInventario(rs.getInt(3));
 
-                        cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][0]+"' AND IdSucursal='"+IdSucursal+"';");
-                    }
+                        cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
+                        System.out.println("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
+                    
+                    
+                }else{
+                    cn.st.executeUpdate("INSERT INTO inventario VALUES('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
                 }
             }
         } catch (SQLException e) {
@@ -77,7 +78,7 @@ public class ControladorCompra {
     public static void ActualizarPrecioPromedioProducto(Object[][] dc) throws ErrorTienda{
         int CantidadActual=0;
         DecimalFormat decimal = new DecimalFormat("#.####");
-        
+        System.out.println(dc.length);
         try {
             for (int i = 0; i < dc.length; i++) {
                 double actualizarPrecio=0.0;
@@ -86,7 +87,7 @@ public class ControladorCompra {
                 rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM inventario WHERE CodBarra='"+dc[i][0]+"';");
                 
                 CantidadActual=0;
-                int j=0;
+                int j=1;
                 while(rsCantidad.next()){
                     CantidadActual = CantidadActual + rsCantidad.getInt(j);
                     j++;
