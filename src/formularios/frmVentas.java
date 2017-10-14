@@ -252,6 +252,9 @@ public class frmVentas extends javax.swing.JFrame {
                 cmbTipoPrecio.setSelectedIndex(1);
         }else{
             mensajeNotificacion("Aún no hay tipos de precio definidos", "Error");
+            txtCodigoBarraVender.setEnabled(false);
+            txtNombreProductoVender.setText("NO HAY TIPOS DE PRECIO, ES NECESARIO AGREGAR");
+            txtNombreProductoVender.setForeground(Color.red);
             
         
             
@@ -831,11 +834,11 @@ public class frmVentas extends javax.swing.JFrame {
         getContentPane().add(lblNRC, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 120, -1, -1));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraVenderKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyPressed(evt);
             }
         });
         getContentPane().add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 40));
@@ -1012,6 +1015,11 @@ public class frmVentas extends javax.swing.JFrame {
         cmbTipoPrecio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoPrecioItemStateChanged(evt);
+            }
+        });
+        cmbTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoPrecioActionPerformed(evt);
             }
         });
         getContentPane().add(cmbTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 170, 40));
@@ -1480,6 +1488,10 @@ public class frmVentas extends javax.swing.JFrame {
     private void dtcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dtcFechaFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_dtcFechaFocusLost
+
+    private void cmbTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPrecioActionPerformed
+        
+    }//GEN-LAST:event_cmbTipoPrecioActionPerformed
 
     /**
      * @param args the command line arguments
