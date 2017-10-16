@@ -52,7 +52,7 @@ public class ControladorCompra {
         cn = new Conexion();
         ResultSet rs;
         try {
-            Producto producto = null;
+            Producto producto = new Producto();
             for (int i = 0; i < dc.length; i++) {
                 rs = cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][1]+"';");
                 //System.out.println(rs.first()+", "+rs.next());
