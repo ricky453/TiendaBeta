@@ -232,6 +232,8 @@ public class frmVentas extends javax.swing.JFrame {
         }
        
     }
+    //CALCULAR PAC
+    
     //CARGAR LOS TIPOS DE PRECIO
     public void tipoPrecios() throws ErrorTienda{
         
@@ -331,13 +333,14 @@ public class frmVentas extends javax.swing.JFrame {
             venta.setIVA(Double.parseDouble(txtIVA.getText().substring(1)));
             venta.setGiro(txtGiro.getText().toUpperCase());
             venta.setNIT(txtNITVenta.getText());
-            venta.setNRC(txtNRCVenta.getText());
-            venta.setNomDocumento(txtNDocumento.getText());
+            venta.setNRC(Integer.parseInt(txtNRCVenta.getText()));
+            venta.setNomDocumento(Integer.parseInt(txtNDocumento.getText()));
         }
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
         venta.setFecha(dtcFecha.getDate());
         venta.setCliente(txtClienteVenta.getText().toUpperCase());
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
+        venta.CalcularPAC();
         
         
         

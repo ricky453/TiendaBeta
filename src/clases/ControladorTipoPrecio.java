@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ControladorTipoPrecio {
     public static void AgregarTipoPrecio(TipoPrecio tp) throws ErrorTienda{
         cn=new Conexion();
         try {
-            cn.st.executeUpdate("INSERT INTO TipoPrecio(IdTipoPrecio,Nombre,Utilidad) VALUES('"+tp.getIdTipoPrecio()+"','"+tp.getNombre()+"','"+tp.getUtilidad()+"')");
+            cn.st.executeUpdate("INSERT INTO tipoprecio(IdTipoPrecio,Nombre,Utilidad) VALUES('"+tp.getIdTipoPrecio()+"','"+tp.getNombre()+"','"+tp.getUtilidad()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(ControladorTipoPrecio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -32,7 +33,7 @@ public class ControladorTipoPrecio {
     public static void EliminarTipoPrecio(int idTipoPrecio) throws ErrorTienda{
         
         try {
-            cn.st.executeUpdate("DELETE FROM TipoPrecio WHERE IdTipoPrecio='"+idTipoPrecio+"'");
+            cn.st.executeUpdate("DELETE FROM tipoprecio WHERE IdTipoPrecio='"+idTipoPrecio+"'");
         } catch (Exception e) {
             throw new ErrorTienda("Class ControladorTipoPrecio/Eliminar", e.getMessage());
         }
@@ -40,7 +41,7 @@ public class ControladorTipoPrecio {
     public static void ModificarTipoPrecio( TipoPrecio cambios) throws ErrorTienda{
           try {
             cn=new Conexion();
-            cn.st.execute("UPDATE TipoPrecio SET Nombre='"+cambios.getNombre()+"',Utilidad='"+cambios.getUtilidad()+"' WHERE IdTipoPrecio='"+cambios.getIdTipoPrecio()+"'");
+            cn.st.execute("UPDATE tipoprecio SET Nombre='"+cambios.getNombre()+"',Utilidad='"+cambios.getUtilidad()+"' WHERE IdTipoPrecio='"+cambios.getIdTipoPrecio()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorTipoPrecio/Modificar",e.getMessage());
         }
@@ -56,7 +57,8 @@ public class ControladorTipoPrecio {
         cn = new Conexion();
        
         try {
-            rs=cn.st.executeQuery("SELECT * FROM TipoPrecio");
+            rs=cn.st.executeQuery("SELECT * FROM tipoprecio");
+            
             while(rs.next()){
                 
             precios.add(rs.getString(1));
@@ -74,7 +76,7 @@ public class ControladorTipoPrecio {
         int IdTipoPrecio=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT MAX(IdTipoPrecio) FROM TipoPrecio");
+        rs = cn.st.executeQuery("SELECT MAX(IdTipoPrecio) FROM tipoprecio");
         
             while(rs.next()){
                 IdTipoPrecio = rs.getInt(1);

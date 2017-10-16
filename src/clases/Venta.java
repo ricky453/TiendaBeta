@@ -5,6 +5,7 @@
  */
 package clases;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,20 +15,23 @@ import java.util.Date;
  */
 public class Venta {
     private int IdVenta;
+    
     private int IdSucursal;
     private int IdPrecio;
     private Date Fecha;
-    private double IVA;
-    private double TotalGravado;
-    private double Total;
-    private String Cliente;
-    private String Direccion;
-    private String Giro;
-    private String NIT;
-    private String NRC;
-    private String NomDocumento;
+    private double IVA=0;
+    private double TotalGravado=0;
+    private double Total=0;
+    private double PAC=0;
+    private String Cliente="";
+    private String Direccion="";
+    private String Giro="";
+    private String NIT="";
+    private int NRC;
+    private int NomDocumento;
     private char IdTipoVenta;
     private ArrayList<Object> Articulos = new ArrayList<>();
+    DecimalFormat decf = new DecimalFormat("0.0000");
     
     public void AgregarItem(DetalleVenta item){
         
@@ -49,6 +53,12 @@ public class Venta {
         
         return conImpuesto;
     }
+    
+    public void CalcularPAC(){
+        double pac;
+        pac=Double.parseDouble(decf.format(this.TotalGravado*0.0175));
+        this.PAC= pac;
+    }
 
     public Date getFecha() {
         return Fecha;
@@ -66,6 +76,14 @@ public class Venta {
         this.IdVenta = IdVenta;
     }
 
+    public double getPAC() {
+        return PAC;
+    }
+
+    public void setPAC(double PAC) {
+        this.PAC = PAC;
+    }
+    
     public int getIdSucursal() {
         return IdSucursal;
     }
@@ -138,19 +156,19 @@ public class Venta {
         this.NIT = NIT;
     }
 
-    public String getNRC() {
+    public int getNRC() {
         return NRC;
     }
 
-    public void setNRC(String NRC) {
+    public void setNRC(int NRC) {
         this.NRC = NRC;
     }
 
-    public String getNomDocumento() {
+    public int getNomDocumento() {
         return NomDocumento;
     }
 
-    public void setNomDocumento(String NomDocumento) {
+    public void setNomDocumento(int NomDocumento) {
         this.NomDocumento = NomDocumento;
     }
 
