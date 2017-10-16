@@ -63,11 +63,11 @@ public class ControladorCompra {
                         producto.setInventario(rs.getInt(3));
 
                         cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
-                        System.out.println("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
+                        //System.out.println("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
                     
                     
                 }else{
-                    cn.st.executeUpdate("INSERT INTO inventario VALUES('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
+                    cn.st.executeUpdate("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
                 }
             }
         } catch (SQLException e) {

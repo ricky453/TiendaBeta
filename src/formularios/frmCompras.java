@@ -827,7 +827,7 @@ public class frmCompras extends javax.swing.JFrame {
             tablaModel.setNumRows(0);
             txtTotal.setText("$");
             txtIVA.setText("");
-            txtPercepcion.setText("");
+            //txtPercepcion.setText("");
             cmbSucursalCompra.setEnabled(true);
             cmbSucursalCompra.setEnabled(true);
             cmbProveedor.setEnabled(true);
