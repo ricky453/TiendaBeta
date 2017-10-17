@@ -79,13 +79,13 @@ public class ControladorCompra {
     public static void ActualizarPrecioPromedioProducto(Object[][] dc) throws ErrorTienda{
         int CantidadActual=0;
         DecimalFormat decimal = new DecimalFormat("#.####");
-        System.out.println(dc.length);
+        //System.out.println(dc.length);
         try {
             for (int i = 0; i < dc.length; i++) {
                 double actualizarPrecio=0.0;
             
                 ResultSet rsCantidad = null;
-                rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM inventario WHERE CodBarra='"+dc[i][0]+"';");
+                rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM inventario WHERE CodBarra='"+dc[i][1]+"';");
                 
                 CantidadActual=0;
                 int j=1;
@@ -94,11 +94,10 @@ public class ControladorCompra {
                     j++;
                 }
 
-                //Obtener el precio actual
                 double PrecioActual=0;
 
                 ResultSet rsPrecio = null;
-                rsPrecio = cn.st.executeQuery("SELECT Costo FROM producto WHERE CodBarra='"+dc[i][0]+"';");
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM producto WHERE CodBarra='"+dc[i][1]+"';");
 
                 while(rsPrecio.next()){
                     PrecioActual = rsPrecio.getDouble(1);
@@ -109,6 +108,7 @@ public class ControladorCompra {
                 actualizarPrecio = CantidadActual * PrecioActual;
                 actualizarPrecio = actualizarPrecio + ( Integer.parseInt(dc[i][2].toString()) * Double.parseDouble(dc[i][3].toString()) );
                 actualizarPrecio = actualizarPrecio / (Integer.parseInt(dc[i][2].toString())+CantidadActual);
+                System.out.println(actualizarPrecio);
                 cn.st.executeUpdate("UPDATE producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
                 
             }
