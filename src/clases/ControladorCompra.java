@@ -67,7 +67,8 @@ public class ControladorCompra {
                     
                     
                 }else{
-                    cn.st.executeUpdate("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"')");
+                    //System.out.println("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"');");
+                    cn.st.executeUpdate("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+IdSucursal+"', '"+dc[i][1]+"', '"+dc[i][2]+"');");
                 }
             }
         } catch (SQLException e) {
