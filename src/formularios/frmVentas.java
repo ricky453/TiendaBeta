@@ -1171,6 +1171,9 @@ public class frmVentas extends javax.swing.JFrame {
             System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
             if(validar(cmbTipoVenta.getSelectedIndex())){
                guardar();
+               frmCalcularCambio cc = new frmCalcularCambio();
+               cc.txtTotalaPagar.setText(txtTotalventa.getText());
+               cc.setVisible(true);
                 limpiar("todo");
                 ObtenerIdVenta();
                 listas(true);
