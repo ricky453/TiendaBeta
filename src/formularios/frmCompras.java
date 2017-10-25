@@ -617,7 +617,7 @@ public class frmCompras extends javax.swing.JFrame {
     }
     public void AgregarProductoCompras() throws ErrorTienda{
         Producto pr = new Producto();
-        pr.setCodBarra(txtNumeroDoc.getText());
+        pr.setCodBarra(txtCodBarraProd1.getText());
         pr.setNombre(txtNomProd.getText());
         pr.setInventario(Integer.parseInt(txtCantidad.getText()));
         pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
@@ -788,9 +788,9 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 compra.setFecha(dtcFecha.getDate());
                 if (Tipocompra==0) {
-                    compra.setPercepcion(Double.parseDouble(total)*0.1);
+                    compra.setPercepcion(Double.parseDouble(total)*Double.parseDouble(txtPercepcion.getText()));
                     compra.setIVA(Double.parseDouble(total)*0.13);
-                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*((Double.parseDouble(total)*0.13)-Double.parseDouble(txtPercepcion.getText())/100))))));
+                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*0.13))+(Double.parseDouble(total)*Double.parseDouble(txtPercepcion.getText())))));
                 }else{
                     compra.setTotal(Double.parseDouble(decimal.format(total)));
                 }
@@ -896,7 +896,7 @@ public class frmCompras extends javax.swing.JFrame {
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         // TODO add your handling code here:
         s = evt.getKeyChar();
-        if (!Character.isDigit(s)) {
+        if (!Character.isDigit(s)&&s!=KeyEvent.VK_ENTER&&s!=KeyEvent.VK_BACK_SPACE) {
             getToolkit().beep();
             evt.consume();
 
@@ -915,7 +915,7 @@ public class frmCompras extends javax.swing.JFrame {
         int p=(int) evt.getKeyChar();
 
         // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
-        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
+        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD && s!=KeyEvent.VK_BACK_SPACE && s!= KeyEvent.VK_ENTER) {
             getToolkit().beep();
             evt.consume();
         }else{
