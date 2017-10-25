@@ -98,18 +98,17 @@ public class ControladorCompra {
 
                 ResultSet rsPrecio = null;
                 rsPrecio = cn.st.executeQuery("SELECT Costo FROM producto WHERE CodBarra='"+dc[i][1]+"';");
-
+                int r =1;
                 while(rsPrecio.next()){
-                    PrecioActual = rsPrecio.getDouble(1);
-
-
+                    PrecioActual = rsPrecio.getDouble(r);
+                    r++;
                 }
                 
                 actualizarPrecio = CantidadActual * PrecioActual;
                 actualizarPrecio = actualizarPrecio + ( Integer.parseInt(dc[i][2].toString()) * Double.parseDouble(dc[i][3].toString()) );
                 actualizarPrecio = actualizarPrecio / (Integer.parseInt(dc[i][2].toString())+CantidadActual);
                 System.out.println(actualizarPrecio);
-                cn.st.executeUpdate("UPDATE producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][0]+"';");
+                cn.st.executeUpdate("UPDATE producto SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+dc[i][1]+"';");
                 
             }
         
