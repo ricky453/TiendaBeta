@@ -104,7 +104,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTotalaPagar.setEditable(false);
-        txtTotalaPagar.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotalaPagar.setBackground(new java.awt.Color(204, 204, 255));
         txtTotalaPagar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtTotalaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +127,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         txtCambio.setEditable(false);
-        txtCambio.setBackground(new java.awt.Color(255, 255, 255));
+        txtCambio.setBackground(new java.awt.Color(204, 204, 255));
         txtCambio.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel2.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 240, 30));
 
