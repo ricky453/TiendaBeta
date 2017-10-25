@@ -788,9 +788,9 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 compra.setFecha(dtcFecha.getDate());
                 if (Tipocompra==0) {
-                    compra.setPercepcion(Double.parseDouble(total)*Double.parseDouble(txtPercepcion.getText()));
-                    compra.setIVA(Double.parseDouble(total)*0.13);
-                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*0.13))+(Double.parseDouble(total)*Double.parseDouble(txtPercepcion.getText())))));
+                    compra.setPercepcion(Double.parseDouble(decimal.format(Double.parseDouble(total)*((Double.parseDouble(txtPercepcion.getText())/100)))));
+                    compra.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(total)*0.13)));
+                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*0.13))+(Double.parseDouble(total)*((Double.parseDouble(txtPercepcion.getText())/100))))));
                 }else{
                     compra.setTotal(Double.parseDouble(decimal.format(total)));
                 }
@@ -1111,7 +1111,7 @@ public class frmCompras extends javax.swing.JFrame {
                     
                     producto = ControladorProducto.BuscarProducto(codBarra);
                     //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
-                    System.out.println(producto.getNombre());
+                    //System.out.println(producto.getNombre());
                     if (producto.getNombre().equals("")) {
                         txtNomProd.setEditable(true);
                         txtNomProd.requestFocus();                          
