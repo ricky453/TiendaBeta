@@ -406,10 +406,10 @@ public class frmProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 110, 30));
 
-        btnAgregarProveedor.setBackground(new java.awt.Color(0, 0, 0));
+        btnAgregarProveedor.setBackground(new java.awt.Color(204, 204, 204));
         btnAgregarProveedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/agregarprov.png"))); // NOI18N
+        btnAgregarProveedor.setForeground(new java.awt.Color(102, 0, 0));
+        btnAgregarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/agregar.png"))); // NOI18N
         btnAgregarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProveedor.setFocusCycleRoot(true);
         btnAgregarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -428,7 +428,7 @@ public class frmProveedores extends javax.swing.JFrame {
                 btnAgregarProveedorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, 110, 30));
+        getContentPane().add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 600, 110, 30));
 
         btnModificarProveedor.setBackground(new java.awt.Color(0, 0, 0));
         btnModificarProveedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
