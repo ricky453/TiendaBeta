@@ -949,7 +949,7 @@ public class frmCompras extends javax.swing.JFrame {
                     cmbTipoCompra.setEnabled(false);
                     cmbSucursalCompra.setEnabled(false);
                     cmbProveedor.setEnabled(false);
-                    txtPercepcion.setEnabled(false);
+                    //txtPercepcion.setEnabled(false);
                 }else{
                     mensajeNotificacion("El Costo debe ser mayor a 0.", "Error");
                 }
