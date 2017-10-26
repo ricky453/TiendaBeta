@@ -23,6 +23,7 @@ public class Venta {
     private double TotalGravado=0;
     private double Total=0;
     private double PAC=0;
+    private double utilidad;
     private String Cliente="";
     private String Direccion="";
     private String Giro="";
@@ -30,6 +31,7 @@ public class Venta {
     private int NRC;
     private int NomDocumento;
     private char IdTipoVenta;
+    
     private ArrayList<Object> Articulos = new ArrayList<>();
     DecimalFormat decf = new DecimalFormat("0.0000");
     
@@ -52,6 +54,14 @@ public class Venta {
         this.IVA=conImpuesto-TotalGravado;
         
         return conImpuesto;
+    }
+
+    public double getUtilidad() {
+        return utilidad;
+    }
+
+    public void setUtilidad(double utilidad) {
+        this.utilidad = utilidad;
     }
     
     public void CalcularPAC(){

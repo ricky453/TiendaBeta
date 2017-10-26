@@ -16,6 +16,7 @@ public class DetalleVenta {
     private double Cantidad;
     private double PrecioUnitario;
     private String codBarra;
+    
     DecimalFormat decimal = new DecimalFormat("0.00");
     
     public void Nuevo(String Cod, int Cantidad){
@@ -31,12 +32,14 @@ public class DetalleVenta {
         return Double.parseDouble(decimal.format(nuevoPrecio));
     }
     
+    
     public double CalcularPrecioDetalle(){  //Para un conjunto de productos del mismo tipo: muchos jabones
         double nuevoPrecio=0;
         nuevoPrecio=(this.PrecioUnitario*this.Cantidad);
         return Double.parseDouble(decimal.format(nuevoPrecio));
     }
 
+    
     public String getCodBarra() {
         return codBarra;
     }

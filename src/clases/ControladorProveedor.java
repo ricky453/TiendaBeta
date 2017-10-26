@@ -28,10 +28,10 @@ public class ControladorProveedor {
     }
     
     
-    public static void Agregar(Proveedor pv)throws ErrorTienda{
+    public static void Agregar(Proveedor pv)throws ErrorTienda{ 
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO Proveedor(IdProveedor,Nombre,Telefono,Direccion, NIT, Email, NRC) VALUES('"+pv.getIdProveedor()+"','"+pv.getNombre()+"','"+pv.getTelefono()+"','"+pv.getDireccion()+"','"+pv.getNIT()+"','"+pv.getEmail()+"','"+pv.getNRC()+"')");
+            cn.st.executeUpdate("INSERT INTO proveedor(IdProveedor,Nombre,Telefono,Direccion, NIT, Email, NRC) VALUES('"+pv.getIdProveedor()+"','"+pv.getNombre()+"','"+pv.getTelefono()+"','"+pv.getDireccion()+"','"+pv.getNIT()+"','"+pv.getEmail()+"','"+pv.getNRC()+"')");
             
         } catch (SQLException ex) {
             throw new ErrorTienda("Class ControladorProveedor/Agregar", ex.getMessage());
@@ -39,14 +39,14 @@ public class ControladorProveedor {
     }
     public static void Eliminar(Proveedor pv)throws ErrorTienda{
         try {
-            cn.st.executeUpdate("DELETE FROM Proveedor WHERE IdProveedor='"+pv.getIdProveedor()+"'");
+            cn.st.executeUpdate("DELETE FROM proveedor WHERE IdProveedor='"+pv.getIdProveedor()+"'");
         } catch (Exception e) {
             throw new ErrorTienda("Class ControladorProveedor/Eliminar", e.getMessage());
         }
     }
     public static void Modificar(Proveedor pv)throws ErrorTienda{
         try {
-            cn.st.executeUpdate("UPDATE Proveedor SET Nombre='"+pv.getNombre()+"',Telefono='"+pv.getTelefono()+"',Direccion='"+pv.getDireccion()+"',NIT='"+pv.getNIT()+"', Email='"+pv.getEmail()+"', NRC='"+pv.getNRC()+"' WHERE IdProveedor='"+pv.getIdProveedor()+"'");
+            cn.st.executeUpdate("UPDATE proveedor SET Nombre='"+pv.getNombre()+"',Telefono='"+pv.getTelefono()+"',Direccion='"+pv.getDireccion()+"',NIT='"+pv.getNIT()+"', Email='"+pv.getEmail()+"', NRC='"+pv.getNRC()+"' WHERE IdProveedor='"+pv.getIdProveedor()+"'");
             } catch (Exception e) {
             throw new ErrorTienda("Class ControladorProveedor/Modificar", e.getMessage());
         }
@@ -57,7 +57,7 @@ public class ControladorProveedor {
     
             cn=new Conexion();   
             try { 
-            rs=cn.st.executeQuery("SELECT * FROM Proveedor WHERE Nombre='"+pv+"'");
+            rs=cn.st.executeQuery("SELECT * FROM proveedor WHERE Nombre='"+pv+"'");
             
             while (rs.next()) {
                 proveedor.add(rs.getString(1));
@@ -83,7 +83,7 @@ public class ControladorProveedor {
             cn=new Conexion();   
             try { 
                 rs=null;
-            rs=cn.st.executeQuery("SELECT * FROM Proveedor");
+            rs=cn.st.executeQuery("SELECT * FROM proveedor");
             while (rs.next()) {
  
                 proveedor.add(rs.getString(1));
@@ -107,7 +107,7 @@ public class ControladorProveedor {
         int IdProveedor=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT MAX(IdProveedor) FROM Proveedor");
+        rs = cn.st.executeQuery("SELECT MAX(IdProveedor) FROM proveedor");
         
             while(rs.next()){
                 IdProveedor = rs.getInt(1);

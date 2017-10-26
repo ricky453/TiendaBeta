@@ -45,7 +45,7 @@ public class frmVentas extends javax.swing.JFrame {
     Iterator<Sucursal> Iterador;
     Object miSucursal[][],misPrecios[][] ;
     DecimalFormat decimal =new DecimalFormat("#.##");
-    double subTotales,utilidad;
+    double subTotales,utilidad,CostoGravado;
     
     ControladorVenta cv;
     ControladorProducto cp;
@@ -166,9 +166,11 @@ public class frmVentas extends javax.swing.JFrame {
             if(misPrecios[contador][1].equals(""+cmbTipoPrecio.getSelectedItem())){
                 
                 utilidad = (Double.parseDouble(String.valueOf(misPrecios[contador][2]))/(-100))+1;
-                System.err.println("Mi utilidad: "+utilidad);
                 
                 dv.setPrecioUnitario(miProducto.getCosto());
+                
+                
+                
                 //VERIFICAR EL TIPO DE VENTA
                 costoUnitario=dv.CalcularPrecio(utilidad);
                 modeloVentas.setValueAt(decimal.format(costoUnitario),fila, 3);
@@ -189,7 +191,7 @@ public class frmVentas extends javax.swing.JFrame {
         
         if(cmbTipoVenta.getSelectedIndex()==1){
         SumarSubTotales();
-            System.out.println("sub totales "+subTotales);
+            
         venta.setTotalGravado(subTotales);
         venta.CalcularIVA();
         venta.CalcularTotal();
@@ -315,6 +317,7 @@ public class frmVentas extends javax.swing.JFrame {
     //GUARDAR, AGREGA LA VENTA A LA BASE DE DATOS
     public void guardar() throws ErrorTienda{
         char idTipoVenta;
+        double totGravado;
         if(cmbTipoVenta.getSelectedIndex()==0){
             idTipoVenta='F';
         }else{
@@ -326,9 +329,12 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setIdTipoVenta(idTipoVenta);
         venta.setIdSucursal(Integer.parseInt(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0])));
         if(idTipoVenta=='F'){
-            venta.setTotalGravado(Double.parseDouble(txtTotalventa.getText().substring(1)));
+            totGravado=Double.parseDouble(txtTotalventa.getText().substring(1))/1.13;
             
+            venta.setTotalGravado(Double.parseDouble(decimal.format(totGravado)));
+            venta.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(txtTotalventa.getText().substring(1))-totGravado)));
         }else{
+            totGravado=Double.parseDouble(txtSumas.getText().substring(1));
             venta.setTotalGravado(Double.parseDouble(txtSumas.getText().substring(1)));
             venta.setIVA(Double.parseDouble(txtIVA.getText().substring(1)));
             venta.setGiro(txtGiro.getText().toUpperCase());
@@ -336,6 +342,7 @@ public class frmVentas extends javax.swing.JFrame {
             venta.setNRC(Integer.parseInt(txtNRCVenta.getText()));
             venta.setNomDocumento(Integer.parseInt(txtNDocumento.getText()));
         }
+        venta.setUtilidad(Double.parseDouble(decimal.format((totGravado-this.CostoGravado))));
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
         venta.setFecha(dtcFecha.getDate());
         venta.setCliente(txtClienteVenta.getText().toUpperCase());
@@ -359,13 +366,28 @@ public class frmVentas extends javax.swing.JFrame {
         }
         
     }
+    public void CalcularCostoGravado(){
+        
+        for(int fila=0;fila<modeloVentas.getRowCount();fila++){
+            double CostoProducto = Double.parseDouble(String.valueOf(modeloVentas.getValueAt(fila, 3)))*utilidad;
+            int ProductoCantidad = Integer.parseInt(String.valueOf(modeloVentas.getValueAt(fila, 2)));
+            this.CostoGravado+=CostoProducto*ProductoCantidad;
+            
+        }
+        
+    }
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
     public boolean VerificarTabla() throws ErrorTienda{
-        if(modeloVentas.getRowCount()!=0){
-       int idSucursal = Integer.valueOf(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0]));
-       miProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText(),idSucursal);
-       for(int x=0;x<modeloVentas.getRowCount();x++){
-           if(txtCodigoBarraVender.getText().equals(modeloVentas.getValueAt(x, 0))){
+        if(modeloVentas.getRowCount()!=0){// VERIFICA TUPLAS EXISTENTES EN LA TABLA DE PRODUCTOS DEL FORM
+            
+       int idSucursal = Integer.valueOf(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0]));// OBTIENE EL ID DE LA SUCURSAL
+       
+       miProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText(),idSucursal);//OBTIENE LOS DATOS DEL PRODUCTO SOLICITADO
+       
+       for(int x=0;x<modeloVentas.getRowCount();x++){// RECORRE LA TABLA DE PRODUCTOS DEL FORM 
+           
+           if(txtCodigoBarraVender.getText().equals(modeloVentas.getValueAt(x, 0))){//VERIFICANDO SI ESTE YA EXISTE EN ESTA
+               
                int cantidad = Integer.parseInt(txtCantidadVender.getText())+ Integer.parseInt(String.valueOf(modeloVentas.getValueAt(x, 2)));
                modeloVentas.setValueAt(cantidad, x, 2);
                double precioUnitario = Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
@@ -754,7 +776,7 @@ public class frmVentas extends javax.swing.JFrame {
         jpnAgregarCompra.add(cmbSucursalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 160, 30));
 
         cmbTipoVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cmbTipoVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Cŕedito Fiscal" }));
+        cmbTipoVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Cŕedito Fiscal", "Borrador" }));
         cmbTipoVenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoVentaItemStateChanged(evt);
@@ -937,11 +959,11 @@ public class frmVentas extends javax.swing.JFrame {
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/vender.png"))); // NOI18N
         btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVenderMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVenderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVenderMouseExited(evt);
             }
         });
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -1170,7 +1192,9 @@ public class frmVentas extends javax.swing.JFrame {
         try {
             System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
             if(validar(cmbTipoVenta.getSelectedIndex())){
-               guardar();
+                CalcularCostoGravado();
+                guardar();
+               
                frmCalcularCambio cc = new frmCalcularCambio();
                cc.txtTotalaPagar.setText(txtTotalventa.getText());
                cc.setVisible(true);
