@@ -7,6 +7,7 @@ package clases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,17 +26,24 @@ public class ControladorBitacora {
         }
     }
     
-    public static void ObenerBitacoras(String consulta) throws ErrorTienda{
+    public static ArrayList<Bitacora> ObenterBitacoras(String consulta) throws ErrorTienda{
+        ArrayList<Object> bitacora = new ArrayList<Object>();
         try {
+            
             rs = null;
             rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion`\n" +
                                     "FROM `bitacora`\n" +
                                     "LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n" +
                                     "WHERE ((`bitacora`.`IdUsuario` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
-            
-        } catch (Exception e) {
+            while (rs.next()) {
+                bitacora.add(rs.getString(1));
+                bitacora.add(rs.getString(2));
+                bitacora.add(rs.getString(3));
+                bitacora.add(rs.getString(4));
+            }
+        } catch (SQLException e) {
         }
-    
-    
+        ArrayList<Bitacora> bit = (ArrayList) bitacora;
+        return bit;
     }
 }
