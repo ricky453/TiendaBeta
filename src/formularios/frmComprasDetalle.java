@@ -664,7 +664,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetallesActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
 
         String fecha=sd.format(jdcFecha.getDate());

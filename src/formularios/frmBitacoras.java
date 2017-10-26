@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import clases.Bitacora;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import clases.Proveedor;
 import clases.ControladorProveedor;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -94,6 +96,7 @@ public class frmBitacoras extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -316,6 +319,14 @@ public class frmBitacoras extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 950, 400));
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/buscar.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 110, 30));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -418,6 +429,20 @@ public class frmBitacoras extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dctBuscarFechaFocusLost
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        String fecha = sdf.format(dctBuscarFecha.getDate());
+        DefaultTableModel modeloDetalles = new DefaultTableModel();
+        ArrayList<Bitacora> bitacora = new ArrayList();
+        Object[] fila = new Object[4];
+        if (fecha.equals("")) {
+            JOptionPane.showInputDialog("no ha selecionado una fecha");
+        } else {
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +480,7 @@ public class frmBitacoras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private com.toedter.calendar.JDateChooser dctBuscarFecha;
     private javax.swing.JLabel home;
     private javax.swing.JLabel jLabel17;

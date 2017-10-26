@@ -109,11 +109,11 @@ public class ControladorUsuario {
     
     }
     
-    public static int ObtenerIdUser(String nombre) throws ErrorTienda{
+    public static int ObtenerIdUser(String login) throws ErrorTienda{
         int user=0;
         cn= new Conexion();
         try {
-            rs = cn.st.executeQuery("SELECT idUsuario FROM usuarios WHERE nombres = '"+nombre+"';");
+            rs = cn.st.executeQuery("SELECT IdUsuario FROM usuarios WHERE Login = '"+login+"';");
             while (rs.next()) {
                 user = rs.getInt(1);
             }
