@@ -273,19 +273,19 @@ public class frmCompraDetallada extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Fue una compra con:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 150, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Sucursal:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 70, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, 100, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Fecha:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, 50, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 220, 60, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Id de la compra:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 120, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 130, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setText(" ");
@@ -294,7 +294,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 txtFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 240, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 220, 240, -1));
 
         txtTipoCompra.setEditable(false);
         txtTipoCompra.setText(" ");
@@ -303,7 +303,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 txtTipoCompraActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTipoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 170, 20));
+        getContentPane().add(txtTipoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 150, 20));
 
         txtIdCompra.setEditable(false);
         txtIdCompra.setText(" ");
@@ -321,7 +321,7 @@ public class frmCompraDetallada extends javax.swing.JFrame {
                 txtSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 240, -1));
+        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 200, -1));
 
         pack();
         setLocationRelativeTo(null);
