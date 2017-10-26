@@ -6,6 +6,7 @@
 package formularios;
 
 import clases.Bitacora;
+import clases.ControladorBitacora;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class frmBitacoras extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBitacoras = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -304,7 +305,7 @@ public class frmBitacoras extends javax.swing.JFrame {
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 1200, 10));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBitacoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -315,7 +316,7 @@ public class frmBitacoras extends javax.swing.JFrame {
                 "N°", "Usuario", "Descripción", "Fecha"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblBitacoras);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 950, 400));
 
@@ -433,13 +434,29 @@ public class frmBitacoras extends javax.swing.JFrame {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
         String fecha = sdf.format(dctBuscarFecha.getDate());
-        DefaultTableModel modeloDetalles = new DefaultTableModel();
+        DefaultTableModel modeloBitacoras = new DefaultTableModel();
         ArrayList<Bitacora> bitacora = new ArrayList();
         Object[] fila = new Object[4];
         if (fecha.equals("")) {
             JOptionPane.showInputDialog("no ha selecionado una fecha");
         } else {
-            
+            String[] campos = {"IdUsurario", "Login", "Fecha", "Accion"};
+            modeloBitacoras.setColumnIdentifiers(campos);
+            try {
+                Object i;
+                bitacora = ControladorBitacora.ObenterBitacoras(fecha);
+                Iterator iterador = bitacora.iterator();
+                while (iterador.hasNext()) {
+                    fila[0] = iterador.next();
+                    fila[1] = iterador.next();
+                    fila[2] = iterador.next();
+                    fila[3] = iterador.next();
+                    modeloBitacoras.addRow(fila);
+                    tblBitacoras.setModel(modeloBitacoras);
+                }
+            } catch (ErrorTienda e) {
+                Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -490,7 +507,6 @@ public class frmBitacoras extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpnAgregarCompra;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnMenu;
@@ -503,5 +519,6 @@ public class frmBitacoras extends javax.swing.JFrame {
     private javax.swing.JLabel lblTipoPrecio;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel menu;
+    private javax.swing.JTable tblBitacoras;
     // End of variables declaration//GEN-END:variables
 }
