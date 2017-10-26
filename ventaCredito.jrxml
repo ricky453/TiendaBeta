@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="237097ef-3c2e-44b5-9ee3-acb40fd71d23">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT venta.IdSucursal,sucursal.Nombre,ROUND(SUM(venta.IVA),2) AS IVA,ROUND(SUM(venta.TotalGravado),2) AS TOTALGRAVADO ,ROUND(SUM(venta.Total),2) AS TOTAL FROM venta,sucursal WHERE venta.IdSucursal=sucursal.IdSucursal AND venta.TipoVenta='C' GROUP BY venta.IdSucursal]]>
+	</queryString>
+	<field name="IdSucursal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IVA" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTALGRAVADO" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTAL" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="IdSucursal">
+		<groupExpression><![CDATA[$F{IdSucursal}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#000000" backcolor="#FFFFFF" uuid="552f386b-8458-4cf1-987f-de4fea9af5c2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IdSucursal]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="0" width="109" height="32" forecolor="#731509" backcolor="#FFFFFF" uuid="5519b541-ec03-4ba5-99b2-815aae46d2a8"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{IdSucursal}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="c796dd4e-6185-455b-880b-51093c204c25"/>
+				</line>
+				<staticText>
+					<reportElement x="209" y="0" width="68" height="32" forecolor="#000000" uuid="b2ff0214-0fa1-4668-a0bd-85f310c256ef"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="277" y="1" width="278" height="32" forecolor="#731509" uuid="13c5fd02-2a7e-4b2c-9f8c-55886f258e32"/>
+					<textElement>
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Nombre">
+		<groupExpression><![CDATA[$F{Nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="154" height="20" forecolor="#850808" backcolor="#E6E6E6" uuid="22bbc5cb-f7c6-4086-a940-ad522cd170f0"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IVA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="154" y="0" width="216" height="20" forecolor="#850808" backcolor="#E6E6E6" uuid="7184aaed-7bee-4f29-bb50-213007cf0a1a"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTALGRAVADO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="370" y="0" width="145" height="20" forecolor="#850808" backcolor="#E6E6E6" uuid="f110b663-d2fa-435e-954a-297ef94d390b"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#761507" uuid="ec71039e-3b3e-4a2a-8ffe-37407329d742"/>
+				<staticText>
+					<reportElement x="20" y="20" width="246" height="61" forecolor="#FFFFFF" uuid="26b77002-9de6-4467-82f0-ef5e26133890"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VENTAS CREDITO FISCAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="71802729-5fc4-43c5-bb18-00d12115a7fa"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[TODAS SUCURSALES]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="a26d835e-234d-40b3-9fb5-774552dce1c1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="20974720-1a21-43cd-afae-7a67a13786d4"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="62" y="0" width="123" height="20" uuid="642be56e-bdef-40c8-bf12-e1b363a3a084"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IVA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="231" y="0" width="139" height="20" uuid="52e1d0e4-2ca6-4204-8e19-6aeec4a0f347"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTALGRAVADO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="420" y="0" width="135" height="20" uuid="a31e01e3-b688-43cc-8610-e25b11ad7796"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="cace1716-b12b-488a-ae16-3ceb0d9c69df"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="ceb406d4-6557-4f44-8edf-059167115a53"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="3c9d7062-b418-489b-ab56-f166a909ec92"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
