@@ -174,6 +174,7 @@ public class frmCompras extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
@@ -542,7 +543,7 @@ public class frmCompras extends javax.swing.JFrame {
         getContentPane().add(lblNomProd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 70, 30));
 
         jpnBarraSuperior.setBackground(new java.awt.Color(0, 0, 0));
-        jpnBarraSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jpnBarraSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jpnBarraSuperiorMouseDragged(evt);
