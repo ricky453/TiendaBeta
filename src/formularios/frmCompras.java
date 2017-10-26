@@ -831,6 +831,7 @@ public class frmCompras extends javax.swing.JFrame {
             cmbSucursalCompra.setEnabled(true);
             cmbSucursalCompra.setEnabled(true);
             cmbProveedor.setEnabled(true);
+            cmbTipoCompra.setEnabled(true);
         } catch (ErrorTienda ex) {
             
         }
@@ -968,7 +969,7 @@ public class frmCompras extends javax.swing.JFrame {
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
         tablaModel.setRowCount(0);
-        txtNumeroDoc.setText("");
+        //txtNumeroDoc.setText("");
         txtNomProd.setText("");
         txtCantidad.setText("1");
         txtCostoProd.setText("");
