@@ -46,9 +46,11 @@ public class frmComprasReportes extends javax.swing.JFrame {
         btnGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btngTipos.add(rbtnFactura);
         rbtnFactura.setText("COMPRAS FACTURA");
+        getContentPane().add(rbtnFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 91, -1, -1));
 
         btngTipos.add(rbtnCredito);
         rbtnCredito.setText("COMPRAS CREDITO FISCAL");
@@ -57,9 +59,11 @@ public class frmComprasReportes extends javax.swing.JFrame {
                 rbtnCreditoActionPerformed(evt);
             }
         });
+        getContentPane().add(rbtnCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 91, -1, -1));
 
         btngTipos.add(rbtnLibres);
         rbtnLibres.setText("COMPRAS LIBRES");
+        getContentPane().add(rbtnLibres, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 91, -1, -1));
 
         btnGenerarReporte.setText("GENERAR REPORTE");
         btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -67,36 +71,7 @@ public class frmComprasReportes extends javax.swing.JFrame {
                 btnGenerarReporteActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(rbtnFactura)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addComponent(rbtnCredito)
-                .addGap(108, 108, 108)
-                .addComponent(rbtnLibres)
-                .addGap(90, 90, 90))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(260, 260, 260))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnFactura)
-                    .addComponent(rbtnCredito)
-                    .addComponent(rbtnLibres))
-                .addGap(90, 90, 90)
-                .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
-        );
+        getContentPane().add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 204, 271, 74));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -117,9 +92,9 @@ public class frmComprasReportes extends javax.swing.JFrame {
                 view.setVisible(true);
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmComprasReportes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(frmComprasReportes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (JRException ex) {
+                Logger.getLogger(frmComprasReportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         

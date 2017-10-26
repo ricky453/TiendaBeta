@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ **    **  ******  **      **  ******
+ **    **  **  **  ****  ****  **
+ ********  **  **  **  **  **  ****
+ **    **  **  **  **      **  **
+ **    **  ******  **      **  ******
  */
 package formularios;
 
-import clases.Conexion;
 import clases.ControladorUsuario;
 import clases.ErrorTienda;
+import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,10 +20,11 @@ import javax.swing.ImageIcon;
  *
  * @author Ricky
  */
+
 public final class frmHome extends javax.swing.JFrame {
     
     int x,y;
-    String nombres, apellidos;
+    String nombres, apellidos, rol;
     boolean apagado;
     boolean ventas, compras, productos, proveedores, sucursales, inventario, parametro, tipoPrecio, detalleCompra, detalleVenta;
 
@@ -40,18 +43,23 @@ public final class frmHome extends javax.swing.JFrame {
         DetalleVenta(false);
         jpnUser.setVisible(false);
         jpnWhite.setVisible(false);
-        
+        lblUser.setText(Diseño.user);
+        lblUser1.setText(Diseño.user);
     }
-    public void obtenerNombre(){
-                try {
-        nombres = ControladorUsuario.obtenerNombres(txtUser.getText());
-        apellidos = ControladorUsuario.obtenerApellidos(txtUser.getText());
-
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+    public void obtenerRol(){
+        try {
+            rol = ControladorUsuario.obtenerRol(txtUser.getText());
+            if(rol.equals("A"))
+                lblRolUsuario.setText("ADMINISTRADOR");
+            else if(rol.equals("V"))
+                lblRolUsuario.setText("VENDEDOR");
+            else if(rol.equals("C"))
+                lblRolUsuario.setText("COMPRADOR");
+            
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        lblNombreUsuario.setText(nombres + " " + apellidos);
-    }
     
         public void mensajeNotificacion(String mensaje, String tipo){
         if(tipo.equals("Error")){
@@ -59,7 +67,6 @@ public final class frmHome extends javax.swing.JFrame {
         not.Mensaje(mensaje);
         not.setVisible(true);
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Error.png")));
-        //not.setIcon(new ImageIcon(getClass().getResource("/iconos/botones/eliminar.png")));
         }else if(tipo == "Ok"){
         frmNotificacion not = new frmNotificacion();
         not.Mensaje(mensaje);
@@ -155,7 +162,7 @@ public final class frmHome extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
         jpnUser = new javax.swing.JPanel();
-        lblNombreUsuario = new javax.swing.JLabel();
+        lblRolUsuario = new javax.swing.JLabel();
         lblCambiarPwd = new javax.swing.JLabel();
         lblCerrarSesion = new javax.swing.JLabel();
         jpnSegundo = new javax.swing.JPanel();
@@ -258,6 +265,7 @@ public final class frmHome extends javax.swing.JFrame {
 
         lblUser1.setBackground(new java.awt.Color(0, 0, 0));
         lblUser1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        lblUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/configb.png"))); // NOI18N
         lblUser1.setText("USER");
         lblUser1.setToolTipText("Configuración");
@@ -267,7 +275,7 @@ public final class frmHome extends javax.swing.JFrame {
                 lblUser1MouseClicked(evt);
             }
         });
-        jpnWhite.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 80, 50));
+        jpnWhite.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
         jpnBarraSuperior.add(jpnWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 60));
 
@@ -288,6 +296,7 @@ public final class frmHome extends javax.swing.JFrame {
         lblUser.setBackground(new java.awt.Color(222, 222, 222));
         lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(204, 204, 204));
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/config.png"))); // NOI18N
         lblUser.setText("USER");
         lblUser.setToolTipText("Configuración");
@@ -297,7 +306,7 @@ public final class frmHome extends javax.swing.JFrame {
                 lblUserMouseClicked(evt);
             }
         });
-        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 80, 50));
+        jpnBarraSuperior.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 50));
 
         lblLogo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblLogo.setForeground(new java.awt.Color(255, 255, 255));
@@ -654,11 +663,11 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNombreUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
-        lblNombreUsuario.setForeground(new java.awt.Color(102, 0, 0));
-        lblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombreUsuario.setText("Nombres + Apellidos");
-        jpnUser.add(lblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
+        lblRolUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        lblRolUsuario.setForeground(new java.awt.Color(102, 0, 0));
+        lblRolUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRolUsuario.setText("Nombres + Apellidos");
+        jpnUser.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
 
         lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
@@ -1337,7 +1346,7 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalleVentasActionPerformed
 
     private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
-        obtenerNombre();
+        obtenerRol();
         if(jpnUser.isVisible()){
         jpnUser.setVisible(false);
         jpnWhite.setVisible(false);
@@ -1550,7 +1559,7 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lblMitad6;
     private javax.swing.JLabel lblMitad7;
     private javax.swing.JLabel lblMitad8;
-    private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JLabel lblRolUsuario;
     public static javax.swing.JLabel lblUser;
     public static javax.swing.JLabel lblUser1;
     private javax.swing.JPanel pnlPortada;

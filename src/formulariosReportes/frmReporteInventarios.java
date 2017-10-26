@@ -58,12 +58,15 @@ public class frmReporteInventarios extends javax.swing.JFrame {
         cmbSucursalReporte = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(rbtnTodasS);
         rbtnTodasS.setText("INVENTARIO TODAS LAS SUCURSALES");
+        getContentPane().add(rbtnTodasS, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 63, -1, -1));
 
         buttonGroup1.add(rbtnUnaS);
         rbtnUnaS.setText("UNA SUCURSAL EN ESPECIFICO");
+        getContentPane().add(rbtnUnaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
 
         btnGenerar.setText("GENERAR REPORTE");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,39 +74,9 @@ public class frmReporteInventarios extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(btnGenerar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtnTodasS)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbtnUnaS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                                .addComponent(cmbSucursalReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(34, 34, 34))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(rbtnTodasS)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rbtnUnaS)
-                    .addComponent(cmbSucursalReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addComponent(btnGenerar)
-                .addGap(64, 64, 64))
-        );
+        getContentPane().add(cmbSucursalReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 89, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
