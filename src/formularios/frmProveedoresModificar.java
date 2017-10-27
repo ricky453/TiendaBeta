@@ -202,9 +202,9 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
         lblBotonCerrar = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
-        lblAgregarProductos = new javax.swing.JLabel();
+        lblAgregarProveedores = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        lblListaProductos = new javax.swing.JLabel();
+        lblListaProveedores = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
         lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
@@ -483,33 +483,33 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
-        lblAgregarProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblAgregarProductos.setForeground(new java.awt.Color(153, 153, 153));
-        lblAgregarProductos.setText("Agregar Proveedores");
-        lblAgregarProductos.setToolTipText("Agregar un nuevo proveedor.");
-        lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAgregarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAgregarProveedores.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAgregarProveedores.setForeground(new java.awt.Color(153, 153, 153));
+        lblAgregarProveedores.setText("Agregar Proveedores");
+        lblAgregarProveedores.setToolTipText("Agregar un nuevo proveedor.");
+        lblAgregarProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAgregarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAgregarProductosMouseClicked(evt);
+                lblAgregarProveedoresMouseClicked(evt);
             }
         });
-        getContentPane().add(lblAgregarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 50));
+        getContentPane().add(lblAgregarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 50));
 
         jSeparator9.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator9.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 117, 1020, 10));
 
-        lblListaProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblListaProductos.setForeground(new java.awt.Color(153, 153, 153));
-        lblListaProductos.setText("Proveedores");
-        lblListaProductos.setToolTipText("Ver listado de los proveedores.");
-        lblListaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblListaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblListaProveedores.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblListaProveedores.setForeground(new java.awt.Color(153, 153, 153));
+        lblListaProveedores.setText("Proveedores");
+        lblListaProveedores.setToolTipText("Ver listado de los proveedores.");
+        lblListaProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblListaProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblListaProductosMouseClicked(evt);
+                lblListaProveedoresMouseClicked(evt);
             }
         });
-        getContentPane().add(lblListaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
+        getContentPane().add(lblListaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
 
         jpnBarraMenu.setBackground(new java.awt.Color(102, 0, 0));
         jpnBarraMenu.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -927,21 +927,21 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
         //jpnWhite.setVisible(false);
     }//GEN-LAST:event_jpnUserMouseExited
 
-    private void lblAgregarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarProductosMouseClicked
+    private void lblAgregarProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarProveedoresMouseClicked
         frmProveedoresAgregar pa = new frmProveedoresAgregar();
         pa.setVisible(true);
         this.setVisible(false);
-        lblAgregarProductos.setForeground(java.awt.Color.black);
-        lblListaProductos.setForeground(java.awt.Color.lightGray);
-    }//GEN-LAST:event_lblAgregarProductosMouseClicked
+        lblAgregarProveedores.setForeground(java.awt.Color.black);
+        lblListaProveedores.setForeground(java.awt.Color.lightGray);
+    }//GEN-LAST:event_lblAgregarProveedoresMouseClicked
 
-    private void lblListaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaProductosMouseClicked
+    private void lblListaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaProveedoresMouseClicked
         frmProveedores lp = new frmProveedores();
         lp.setVisible(true);
         this.setVisible(false);
-        lblListaProductos.setForeground(java.awt.Color.black);
-        lblAgregarProductos.setForeground(java.awt.Color.lightGray);
-    }//GEN-LAST:event_lblListaProductosMouseClicked
+        lblListaProveedores.setForeground(java.awt.Color.black);
+        lblAgregarProveedores.setForeground(java.awt.Color.lightGray);
+    }//GEN-LAST:event_lblListaProveedoresMouseClicked
 
     private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
         frmCompras cm = new frmCompras();
@@ -1206,11 +1206,11 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
-    private javax.swing.JLabel lblAgregarProductos;
+    private javax.swing.JLabel lblAgregarProveedores;
     public static javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblListaProductos;
+    private javax.swing.JLabel lblListaProveedores;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblRolUsuario;

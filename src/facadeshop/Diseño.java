@@ -19,7 +19,7 @@ public class Diseño {
     public static String user; // USUARIO A GUARDAR
         
     public static void main(String[] args) {
-        frmHome home = new frmHome();
+        frmLogin home = new frmLogin();
         home.setVisible(true);
     }
     

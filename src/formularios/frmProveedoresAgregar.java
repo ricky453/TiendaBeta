@@ -235,8 +235,8 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
-        lblListaProductos = new javax.swing.JLabel();
-        lblAgregarProductos = new javax.swing.JLabel();
+        lblListaProveedores = new javax.swing.JLabel();
+        lblAgregarProveedores = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
 
         jScrollPane1.setEnabled(false);
@@ -749,29 +749,29 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
-        lblListaProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblListaProductos.setForeground(new java.awt.Color(153, 153, 153));
-        lblListaProductos.setText("Proveedores");
-        lblListaProductos.setToolTipText("Ver listado de los proveedores.");
-        lblListaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblListaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblListaProveedores.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblListaProveedores.setForeground(new java.awt.Color(153, 153, 153));
+        lblListaProveedores.setText("Proveedores");
+        lblListaProveedores.setToolTipText("Ver listado de los proveedores.");
+        lblListaProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblListaProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblListaProductosMouseClicked(evt);
+                lblListaProveedoresMouseClicked(evt);
             }
         });
-        getContentPane().add(lblListaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
+        getContentPane().add(lblListaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
 
-        lblAgregarProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblAgregarProductos.setForeground(new java.awt.Color(51, 51, 51));
-        lblAgregarProductos.setText("Agregar Proveedores");
-        lblAgregarProductos.setToolTipText("");
-        lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lblAgregarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAgregarProveedores.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblAgregarProveedores.setForeground(new java.awt.Color(51, 51, 51));
+        lblAgregarProveedores.setText("Agregar Proveedores");
+        lblAgregarProveedores.setToolTipText("");
+        lblAgregarProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblAgregarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAgregarProductosMouseClicked(evt);
+                lblAgregarProveedoresMouseClicked(evt);
             }
         });
-        getContentPane().add(lblAgregarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 50));
+        getContentPane().add(lblAgregarProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, 50));
 
         jSeparator9.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator9.setForeground(new java.awt.Color(102, 0, 0));
@@ -1129,18 +1129,18 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraMenuPropertyChange
 
-    private void lblListaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaProductosMouseClicked
+    private void lblListaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaProveedoresMouseClicked
         frmProveedores lp = new frmProveedores();
         lp.setVisible(true);
         this.setVisible(false);
-        lblListaProductos.setForeground(java.awt.Color.black);
-        lblAgregarProductos.setForeground(java.awt.Color.lightGray);
-    }//GEN-LAST:event_lblListaProductosMouseClicked
+        lblListaProveedores.setForeground(java.awt.Color.black);
+        lblAgregarProveedores.setForeground(java.awt.Color.lightGray);
+    }//GEN-LAST:event_lblListaProveedoresMouseClicked
 
-    private void lblAgregarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarProductosMouseClicked
-        lblAgregarProductos.setForeground(java.awt.Color.black);
-        lblListaProductos.setForeground(java.awt.Color.lightGray);
-    }//GEN-LAST:event_lblAgregarProductosMouseClicked
+    private void lblAgregarProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarProveedoresMouseClicked
+        lblAgregarProveedores.setForeground(java.awt.Color.black);
+        lblListaProveedores.setForeground(java.awt.Color.lightGray);
+    }//GEN-LAST:event_lblAgregarProveedoresMouseClicked
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         frmLogin lg = new frmLogin();
@@ -1218,11 +1218,11 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
-    private javax.swing.JLabel lblAgregarProductos;
+    private javax.swing.JLabel lblAgregarProveedores;
     public static javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblListaProductos;
+    private javax.swing.JLabel lblListaProveedores;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblRolUsuario;
