@@ -12,13 +12,21 @@ import javax.print.attribute.standard.PrinterName;
 
 public class UsoTicket {
     
-    public static void imprimiendo(String[] args) {
+    private static PrinterOptions p = new PrinterOptions();
+    
+    public static void imprimir() {
         
+        //metodo para imprimir
+        feedPrinter(p.finalCommandSet().getBytes());
 
-PrinterOptions p = new PrinterOptions();
-
+    }
+    
+    public static void borradoInicializacion(){
         p.resetAll();
         p.initialize();
+    }
+    
+    public static void cabecera(){
         p.feedBack((byte) 2);
         p.chooseFont(1);
         p.color(0);
@@ -30,7 +38,9 @@ PrinterOptions p = new PrinterOptions();
        
         p.addLineSeperator();
         p.newLine();
-
+    }
+    
+    public static void datosTicket(){
         p.alignLeft();
         p.setText("Num. Ticket:" + "1");
         p.newLine();
@@ -42,7 +52,9 @@ PrinterOptions p = new PrinterOptions();
         p.newLine();
         p.addLineSeperator();
         p.newLine();
-        
+    }
+    
+    public static void datosVentaFactura(){
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
@@ -56,12 +68,34 @@ PrinterOptions p = new PrinterOptions();
         p.newLine();
         p.addLineSeperator();
         p.newLine();
+    }
+    
+    public static void datosVentaCreditoFiscal(){
+        p.setText("Descripción \tCantidad\tPrecio\t$Total");
+        p.newLine();
+        
+        for (int i = 0; i < 4; i++) {
+            p.setText("os"+"3"+"5"+"89");
+            p.newLine();
+        }
+        p.newLine();
+       
+        p.setText("SubTotal: $" + "venta subtotal");
+        p.newLine();
+        p.setText("Iva: $"+"venta iva");
+        p.newLine();
+        p.setText("Total: $"+"venta total");
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+    }
+    
+    public static void datosClienteFactura(){
         p.alignLeft();
         p.setText(" - Detalles Cliente- ");
         p.newLine();
         p.alignLeft();
         p.addLineSeperator();
-
         p.newLine();
 
         p.setText("Cliente: " + "el cliente");
@@ -76,14 +110,37 @@ PrinterOptions p = new PrinterOptions();
         p.feed((byte) 3);
         
         p.finit();
+    }
+    
+    public static void datosClienteCreditoFiscal(){
+        p.alignLeft();
+        p.setText(" - Detalles Cliente- ");
+        p.newLine();
+        p.alignLeft();
+        p.addLineSeperator();
+        p.newLine();
 
-
-//metodo para imprimir
-
-        feedPrinter(p.finalCommandSet().getBytes());
-
-
-
+        p.setText("Cliente: " + "el cliente");
+        p.newLine();
+        p.setText("Dirección: "+"la direccion");
+        p.newLine();
+        p.setText("Giro"+"giro men");
+        p.newLine();
+        p.setText("NRC: "+"giro men");
+        p.newLine();
+        p.setText("NIT: "+"nitmen");
+        p.newLine();
+        p.setText("N° Documento"+"documento bitchs");
+        p.newLine();
+   
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("Tenga un buen dia!!!");
+        p.newLine();
+        p.addLineSeperator();
+        p.feed((byte) 3);
+        
+        p.finit();
     }
     
     private static boolean feedPrinter(byte[] b) {
