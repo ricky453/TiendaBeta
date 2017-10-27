@@ -1149,7 +1149,7 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setARTICULOS(Articulos);
                 compra.setSubTotal(Double.parseDouble(total));
                 compra.setNumDocumento(txtNumeroDoc.getText());
-                System.out.println(txtNumeroDoc.getText());
+                //System.out.println(txtNumeroDoc.getText());
                 Object [][] detallesCompra;
                 
                 int filas = tablaModel.getRowCount();
