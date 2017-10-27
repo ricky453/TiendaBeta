@@ -31,25 +31,14 @@ public class ControladorUsuario {
     public static void Agregar(Usuario pv)throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO usuario(idUsuario,Nombres,Apellidos, Sexo, FechaNacimiento, DUI, NIT, Direccion, Usuario, Clave) VALUES('"+pv.getIdUsuario()+"','"+pv.getNombres()+"','"+pv.getApellidos()+"','"+pv.getSexo()+"','"+pv.getFechaNacimiento()+"','"+pv.getDUI()+"','"+pv.getNIT()+"','"+pv.getDireccion()+"','"+pv.getUsuario()+"','"+pv.getClave()+"')");
+            cn.st.executeUpdate("INSERT INTO usuario(IdUsuario, Login, Clave, Rol) VALUES('"+pv.getIdUsuario()+"','"+pv.getUsuario()+"','"+pv.getClave()+"','"+pv.getRol()+"')");
             
         } catch (SQLException ex) {
             throw new ErrorTienda("Class ControladorUsuario/Agregar", ex.getMessage());
         }
     }
     
-    public static void AgregarRol(Usuario pv)throws ErrorTienda{
-        try {
-            cn=new Conexion();
-            cn.st.executeUpdate("INSERT INTO usuarioroles(idUsuario,idRol) VALUES('"+pv.getIdUsuario()+"','"+pv.getRol()+"')");
-            
-        } catch (SQLException ex) {
-            throw new ErrorTienda("Class ControladorUsuario/AgregarRolUsuarios", ex.getMessage());
-        }
-    }
-    
-    
-        public static String ObtenerPass(String id)throws ErrorTienda{
+    public static String ObtenerPass(String id)throws ErrorTienda{
         String Usuario="";   
         cn = new Conexion();
         try {
@@ -63,21 +52,6 @@ public class ControladorUsuario {
         return Usuario;
     
     }
-    
-    public static String obtenerNombres(String id)throws ErrorTienda{
-        String Usuario="";   
-        cn = new Conexion();
-        try {
-        rs = cn.st.executeQuery("SELECT Nombres FROM usuarios WHERE Usuario='"+id+"';");
-            while(rs.next()){
-                Usuario = rs.getString(1);
-            }
-        }catch (Exception ex){
-            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
-        } 
-        return Usuario;
-    
-    }    
     
     public static String obtenerRol(String id)throws ErrorTienda{
         String rol="";   
@@ -97,30 +71,16 @@ public class ControladorUsuario {
         int Usuario=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT max(idUsuario) FROM usuarios");
+        rs = cn.st.executeQuery("SELECT max(IdUsuario) FROM usuario");
         
             while(rs.next()){
                 Usuario = rs.getInt(1);
             }
         }catch (Exception ex){
-            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
+            throw new ErrorTienda("Class ControladorUsuario/ObtenerIdUsuario", ex.getMessage());
         } 
         return Usuario;
     
-    }
-    
-    public static int ObtenerIdUser(String login) throws ErrorTienda{
-        int user=0;
-        cn= new Conexion();
-        try {
-            rs = cn.st.executeQuery("SELECT IdUsuario FROM usuarios WHERE Login = '"+login+"';");
-            while (rs.next()) {
-                user = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            throw new ErrorTienda("Class ControladorProveedor/ObtenerIdUser", ex.getMessage());
-        }
-        return user;
     }
 
 }
