@@ -259,6 +259,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         btnHome = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
 
+        frmComprasDetalladas.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         frmComprasDetalladas.setMinimumSize(new java.awt.Dimension(1200, 700));
         frmComprasDetalladas.setUndecorated(true);
         frmComprasDetalladas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1863,7 +1864,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     private void lblComprar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprar1MouseClicked
         frmCompras cd = new frmCompras();
         cd.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
         lblComprar.setForeground(java.awt.Color.black);
         lblDetallesCompras.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblComprar1MouseClicked
@@ -1871,7 +1872,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     private void lblDetallesCompras1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDetallesCompras1MouseClicked
         frmComprasDetalle cdd = new frmComprasDetalle();
         cdd.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
         lblDetallesCompras.setForeground(java.awt.Color.black);
         lblComprar.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblDetallesCompras1MouseClicked
