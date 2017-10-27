@@ -37,7 +37,7 @@ public class ControladorVenta {
                     + ",TotalGravado,Total,Direccion,Giro,NIT,NRC,NDocumento,PAC,Utilidad) VALUES ('"+venta.getIdVenta()+"','"+venta.getIdSucursal()+"', "
                             + "'"+venta.getIdTipoVenta()+"','"+venta.getIdPrecio()+"','"+venta.getCliente()+"','"+Fecha+"','"+venta.getIVA()+"', "
                                     + "'"+venta.getTotalGravado()+"','"+venta.getTotal()+"','"+venta.getDireccion()+"','"+venta.getGiro()+"', "
-                                            + "'"+venta.getNIT()+"',"+venta.getNRC()+","+venta.getNomDocumento()+","+venta.getPAC()+",12.12)");
+                                            + "'"+venta.getNIT()+"',"+venta.getNRC()+","+venta.getNomDocumento()+","+venta.getPAC()+","+venta.getUtilidad()+")");
         
             cn.conexion.close();
             ActualizarInventario(detalles, venta.getIdSucursal());
