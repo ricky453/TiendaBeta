@@ -45,6 +45,7 @@ public class frmProductos extends javax.swing.JFrame {
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
         obtenerUsuario();
+        txtProductosBuscar.requestFocus();
     }
     public void obtenerUsuario(){
         lblUser.setText(Diseño.user);
@@ -828,7 +829,7 @@ public class frmProductos extends javax.swing.JFrame {
         lblAgregarProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblAgregarProductos.setForeground(new java.awt.Color(153, 153, 153));
         lblAgregarProductos.setText("Agregar Productos");
-        lblAgregarProductos.setToolTipText("Ver los detalles de compras realizadas.");
+        lblAgregarProductos.setToolTipText("Agregar un nuevo producto.");
         lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAgregarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

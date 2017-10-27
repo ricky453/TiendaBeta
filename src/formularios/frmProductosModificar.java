@@ -250,6 +250,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
         lblListaProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblListaProductos.setForeground(new java.awt.Color(153, 153, 153));
         lblListaProductos.setText("Productos");
+        lblListaProductos.setToolTipText("Ver listado de todos los productos.");
         lblListaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblListaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -259,10 +260,10 @@ public class frmProductosModificar extends javax.swing.JFrame {
         getContentPane().add(lblListaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
 
         lblAgregarProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblAgregarProductos.setForeground(new java.awt.Color(51, 51, 51));
+        lblAgregarProductos.setForeground(new java.awt.Color(153, 153, 153));
         lblAgregarProductos.setText("Agregar Productos");
-        lblAgregarProductos.setToolTipText("Ver los detalles de compras realizadas.");
-        lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblAgregarProductos.setToolTipText("Agregar un nuevo producto.");
+        lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAgregarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAgregarProductosMouseClicked(evt);
@@ -791,15 +792,17 @@ public class frmProductosModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNuevoCodBarraProductoKeyTyped
 
     private void lblListaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaProductosMouseClicked
-        frmProductos pa = new frmProductos();
-        pa.setVisible(true);
+        frmProductos pro = new frmProductos();
+        pro.setVisible(true);
         this.setVisible(false);
         lblListaProductos.setForeground(java.awt.Color.black);
         lblAgregarProductos.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblListaProductosMouseClicked
 
     private void lblAgregarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarProductosMouseClicked
-
+        frmProductosAgregar pa = new frmProductosAgregar();
+        pa.setVisible(true);
+        this.setVisible(false);
         lblAgregarProductos.setForeground(java.awt.Color.black);
         lblListaProductos.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblAgregarProductosMouseClicked

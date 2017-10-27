@@ -40,6 +40,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         llenandoComboSucursal();
         obtenerUsuario();
+        txtCodBarraProductos.requestFocus();
     }
     
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
@@ -770,6 +771,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         lblListaProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblListaProductos.setForeground(new java.awt.Color(153, 153, 153));
         lblListaProductos.setText("Productos");
+        lblListaProductos.setToolTipText("Ver listado de todos los productos.");
         lblListaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblListaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -781,7 +783,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         lblAgregarProductos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         lblAgregarProductos.setForeground(new java.awt.Color(51, 51, 51));
         lblAgregarProductos.setText("Agregar Productos");
-        lblAgregarProductos.setToolTipText("Ver los detalles de compras realizadas.");
+        lblAgregarProductos.setToolTipText("");
         lblAgregarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblAgregarProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

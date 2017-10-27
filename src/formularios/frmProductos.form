@@ -1033,7 +1033,7 @@
           <Color blue="99" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Agregar Productos"/>
-        <Property name="toolTipText" type="java.lang.String" value="Ver los detalles de compras realizadas."/>
+        <Property name="toolTipText" type="java.lang.String" value="Agregar un nuevo producto."/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Mano"/>
         </Property>
