@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import ticket.UsoTicket;
 
 /**
  *
@@ -333,6 +334,10 @@ public class frmVentas extends javax.swing.JFrame {
             
             venta.setTotalGravado(Double.parseDouble(decimal.format(totGravado)));
             venta.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(txtTotalventa.getText().substring(1))-totGravado)));
+        
+            
+            
+            
         }else{
             totGravado=Double.parseDouble(txtSumas.getText().substring(1));
             venta.setTotalGravado(Double.parseDouble(txtSumas.getText().substring(1)));
@@ -341,6 +346,9 @@ public class frmVentas extends javax.swing.JFrame {
             venta.setNIT(txtNITVenta.getText());
             venta.setNRC(Integer.parseInt(txtNRCVenta.getText()));
             venta.setNomDocumento(Integer.parseInt(txtNDocumento.getText()));
+            
+
+            
         }
         venta.setUtilidad(Double.parseDouble(decimal.format((totGravado-this.CostoGravado))));
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
@@ -349,18 +357,65 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         venta.CalcularPAC();
         
+        String sucursal=cmbSucursalVenta.getSelectedItem().toString();
+        String producto=txtNombreProductoVender.getText();
+        double total=Double.parseDouble(txtTotalventa.getText());
+        double subtotal=Double.parseDouble(txtSumas.getText());
+        double iva=Double.parseDouble(txtIVA.getText());
+        
+        String detalles[][] = new String[modeloVentas.getRowCount()][4];
+        
+            for(int y=0; y<modeloVentas.getRowCount();y++){
+                detalles[y][0]=modeloVentas.getValueAt(y, 1).toString();
+                detalles[y][1]=modeloVentas.getValueAt(y, 2).toString();
+                detalles[y][2]=modeloVentas.getValueAt(y, 3).toString();
+                detalles[y][3]=modeloVentas.getValueAt(y, 4).toString();
+                
+            }
+        
+        if (idTipoVenta=='F') {
+            
+            for (int i =1; i < modeloVentas.getRowCount(); i++) {
+                
+            }
+            
+            
+            //Imprimir
+            UsoTicket.borradoInicializacion();
+            UsoTicket.cabecera();
+            UsoTicket.datosTicket(sucursal,venta.getFecha());
+            
+            
+            UsoTicket.datosVentaFactura(detalles,total);
+            
+            UsoTicket.datosVendedor();
+            UsoTicket.imprimir();
+        }else{
+            //Imprimir
+            UsoTicket.borradoInicializacion();
+            UsoTicket.cabecera();
+            UsoTicket.datosTicket(sucursal,venta.getFecha());
+            UsoTicket.datosVentaCreditoFiscal(detalles,subtotal,iva,total);
+            UsoTicket.datosVendedor();
+            UsoTicket.imprimir();
+        }
         
         
-        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
+        
+        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][5];
         
         for(int y=0; y<modeloVentas.getRowCount();y++){
             DetallesVenta[y][0]=txtIdVenta.getText();
             DetallesVenta[y][1]=modeloVentas.getValueAt(y, 0);
             DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
+            DetallesVenta[y][4]=modeloVentas.getValueAt(y, 1);
         }
+        
         if(cv.Agregar(venta,DetallesVenta)){
             mensajeNotificacion("¡Venta realizada!", "Ok");
+            
+            
         }else{
             mensajeNotificacion("¡Venta NO realizada!", "Error");
         }

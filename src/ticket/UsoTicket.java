@@ -1,6 +1,8 @@
 
 package ticket;
 
+import clases.Venta;
+import java.util.Date;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -40,51 +42,55 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosTicket(){
+    public static void datosTicket(String sucursal, Date fecha){
         p.alignLeft();
         p.setText("Num. Ticket:" + "1");
         p.newLine();
-        p.setText("Sucursal"+"suco");
+        p.setText("Sucursal"+sucursal);
         p.newLine();
         p.setText("Factura");
         p.newLine();
-        p.setText("Fecha de venta: "+"fuking fecha");
+        p.setText("Fecha de venta: "+fecha);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
     }
     
-    public static void datosVentaFactura(){
+    public static void datosVentaFactura(String venta[][],double total){
+        
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
-        for (int i = 0; i < 4; i++) {
-            p.setText("os"+"3"+"5"+"89");
+        for (int i = 0; i < 5; i++) {
+            p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
+            total +=Double.parseDouble(venta[i][3]);
             p.newLine();
         }
         p.newLine();
        
-        p.setText("Total: $" + "cuando nos vemos?");
+        p.setText("Total: $" + total);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
     }
     
-    public static void datosVentaCreditoFiscal(){
+    public static void datosVentaCreditoFiscal(String venta[][],double subtotal,double iva,double total){
+        
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
-        for (int i = 0; i < 4; i++) {
-            p.setText("os"+"3"+"5"+"89");
+        for (int i = 0; i < 5; i++) {
+            p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
+            
             p.newLine();
         }
         p.newLine();
        
-        p.setText("SubTotal: $" + "venta subtotal");
+        p.setText("SubTotal: $" + subtotal);
         p.newLine();
-        p.setText("Iva: $"+"venta iva");
+        p.setText("Iva: $"+iva);
         p.newLine();
-        p.setText("Total: $"+"venta total");
+        p.setText("Total: $"+total);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
@@ -110,6 +116,21 @@ public class UsoTicket {
         p.feed((byte) 3);
         
         p.finit();
+    }
+    
+    public static void datosVendedor(){
+        p.alignLeft();
+        p.setText(" - Detalles Vendedor - ");
+        p.newLine();
+        p.setText("Id vendedor: "+"id");
+        p.newLine();
+        p.setText("Vendedor: "+"login");
+        p.newLine();
+        p.setText("Rol: "+"rolito");
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        
     }
     
     public static void datosClienteCreditoFiscal(){

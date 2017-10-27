@@ -369,10 +369,10 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -389,11 +389,11 @@ public class frmProductos extends javax.swing.JFrame {
         btnBuscarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/buscar.png"))); // NOI18N
         btnBuscarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarProductoMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarProductoMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarProductoMouseEntered(evt);
             }
         });
         btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
