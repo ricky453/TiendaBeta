@@ -433,7 +433,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFecha.setText("Fecha:");
-        getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 60, 30));
+        getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 60, 30));
 
         lblIdCompra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblIdCompra.setText("Id Compra:");
@@ -536,7 +536,7 @@ public class frmCompras extends javax.swing.JFrame {
         getContentPane().add(txtCodBarraProd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 120, 30));
 
         dtcFecha.setDateFormatString("dd/MM/yyyy");
-        getContentPane().add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 150, 30));
+        getContentPane().add(dtcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 150, 30));
 
         lblNomProd1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNomProd1.setText("Producto:");
