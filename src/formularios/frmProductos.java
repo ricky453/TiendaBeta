@@ -54,7 +54,7 @@ public class frmProductos extends javax.swing.JFrame {
         jpnWhite.setVisible(false);
         obtenerRol();
     }
-        public void obtenerRol(){
+    public void obtenerRol(){
         try {
             rol = ControladorUsuario.obtenerRol(txtUser.getText());
             if(rol.equals("A")){
