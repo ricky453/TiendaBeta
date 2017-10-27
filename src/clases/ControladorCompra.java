@@ -54,19 +54,20 @@ public class ControladorCompra {
         try {
             Producto producto = new Producto();
             for (int i = 0; i < dc.length; i++) {
+                //System.out.println(dc[i][1]);
                 rs = cn.st.executeQuery("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][1]+"';");
+                //System.out.println("SELECT * FROM inventario WHERE IdSucursal = '"+IdSucursal+"' AND CodBarra = '"+dc[i][1]+"'");
                 //System.out.println(rs.first()+", "+rs.next());
                 if (rs != null && rs.next()){
                         
-                        producto.setCodBarra(rs.getString("CodBarra"));
-                        producto.setIdSucursal(rs.getInt(2));
+                        producto.setIdSucursal(rs.getInt(1));
+                        producto.setCodBarra(rs.getString(2));
                         producto.setInventario(rs.getInt(3));
 
-                        cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
-                        //System.out.println("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");
-                    
-                    
+                        cn.st.executeUpdate("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+producto.getCodBarra()+"' AND IdSucursal='"+producto.getIdSucursal()+"';");
+                        //System.out.println("UPDATE inventario SET cantidad = '"+((int) dc[i][2]+producto.getInventario())+"' WHERE CodBarra = '"+dc[i][1]+"' AND IdSucursal='"+IdSucursal+"';");                    
                 }else{
+                    System.out.println(dc[i][1]);
                     //System.out.println("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+dc[i][1]+"', '"+IdSucursal+"', '"+dc[i][2]+"');");
                     cn.st.executeUpdate("INSERT INTO `inventario`(`IdSucursal`, `CodBarra`, `Cantidad`) VALUES ('"+IdSucursal+"', '"+dc[i][1]+"', '"+dc[i][2]+"');");
                 }
