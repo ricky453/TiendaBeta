@@ -7,19 +7,16 @@ package formularios;
 
 import clases.ControladorVenta;
 import clases.ErrorTienda;
-import clases.Producto;
 import clases.Venta;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -31,12 +28,18 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
     DateFormat df=DateFormat.getDateInstance();
     public DefaultTableModel modeloDetalle=new DefaultTableModel();
     public int id;
+    JTableHeader tHeadVentasD;
     
     public frmVentasDetalladas() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         estableciendoDatos();
+        tHeadVentasD = tblVentasDetalladas.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentasD.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentasD.setForeground(Color.WHITE);
+        tHeadVentasD.setFont(fuente);
     }
     
     public void setId(int id){
@@ -274,19 +277,19 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Fue una venta con:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 140, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Sucursal:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 70, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 80, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Fecha:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 50, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 190, 60, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Id de la venta:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 110, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 130, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setText(" ");
@@ -295,7 +298,7 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
                 txtFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 240, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 190, 140, -1));
 
         txtTipoVenta.setEditable(false);
         txtTipoVenta.setText(" ");
@@ -304,7 +307,7 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
                 txtTipoVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 170, -1));
+        getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 240, -1));
 
         txtIdVenta.setEditable(false);
         txtIdVenta.setText(" ");
@@ -313,7 +316,7 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
                 txtIdVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 50, -1));
+        getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 50, -1));
 
         txtSucursal.setEditable(false);
         txtSucursal.setText(" ");
@@ -322,7 +325,7 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
                 txtSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 240, -1));
+        getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 240, -1));
 
         pack();
         setLocationRelativeTo(null);

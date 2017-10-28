@@ -9,6 +9,8 @@ import clases.ControladorVenta;
 import clases.ErrorTienda;
 import clases.Producto;
 import clases.Venta;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -36,6 +39,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     DateFormat df=DateFormat.getDateInstance();
     DecimalFormat formateo=new DecimalFormat("#.##");
     Date fdate=new Date();
+    JTableHeader tHeadVentas;
     
     public frmVentasDetalle() {
         initComponents();
@@ -43,6 +47,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         modeloDetalle=(DefaultTableModel) tblVentasDetalladas.getModel();
         jdcFecha.setDate(fdate);
+        
+        tHeadVentas = tblVentas.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
+        tHeadVentas.setForeground(Color.WHITE);
+        tHeadVentas.setFont(fuente);
     }
     
     
@@ -606,19 +616,22 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             try {
                 
                 
-                ventas=ControladorVenta.obteniendoVentas(fecha);
+                ventas=ControladorVenta.obteniendoVentas(fecha,1);
                 Object x;
                 Iterator iterador=ventas.iterator();
                 while (iterador.hasNext()) {
+                    
+                    
                     fila[0]=iterador.next();
                     fila[1]=iterador.next();
                     fila[2]=iterador.next();
                     x=iterador.next();
                     if (x.equals("F")) {
                         fila[3]="Factura";
-                    }else{
-                        fila[3]="Crédito Fiscal";
+                    }else if(x.equals("C")){
+                        fila[3]="Credito Fiscal";
                     }
+                    
                     
                     fila[4]=iterador.next();
                     
@@ -674,10 +687,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 SumarSubTotales();
                 
                 txtSumas.setText(""+formateo.format(subTotales));
-                double iva=subTotales*0.13;
-                txtIVA.setText(""+formateo.format(iva));
-                double total=iva+subTotales;
+                
+                double total=subTotales*1.13;
                 txtTotalventa.setText(""+formateo.format(total));
+                double iva=total-subTotales;
+                txtIVA.setText(""+formateo.format(iva));
             }
             
             

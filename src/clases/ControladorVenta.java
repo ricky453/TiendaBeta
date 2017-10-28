@@ -5,8 +5,6 @@
  */
 package clases;
 
-import static clases.ControladorProducto.rs;
-import formularios.frmVentas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +22,8 @@ public class ControladorVenta {
     static Conexion cn ;
     static ResultSet rs;
     PreparedStatement ps=null;
+    
+    
     
     public boolean Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
        cn = new Conexion();
@@ -126,12 +126,16 @@ public class ControladorVenta {
     }
     
     
-    public static ArrayList<Venta> obteniendoVentas(String fecha) throws ErrorTienda{
+    public static ArrayList<Venta> obteniendoVentas(String fecha,int opcion) throws ErrorTienda{
         ArrayList<Object> ventas=new ArrayList<Object>();
         cn=new Conexion();
         try {
+            if(opcion==1){
+                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
+            }else{
+                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta='B'");
+            }
             
-            rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%'");
             
             while (rs.next()) {
                 ventas.add(rs.getString(1));
