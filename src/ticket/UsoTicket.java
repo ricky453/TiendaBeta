@@ -42,7 +42,7 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosTicket(String sucursal, Date fecha){
+    public static void datosTicket(Object sucursal, Date fecha){
         p.alignLeft();
         p.setText("Num. Ticket:" + "1");
         p.newLine();
@@ -56,12 +56,12 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosVentaFactura(String venta[][],double total){
+    public static void datosVentaFactura(String venta[][],String total,int filas){
         
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < filas; i++) {
             p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
             total +=Double.parseDouble(venta[i][3]);
             p.newLine();
@@ -74,12 +74,12 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosVentaCreditoFiscal(String venta[][],double subtotal,double iva,double total){
+    public static void datosVentaCreditoFiscal(String venta[][],String subtotal,String iva,String total,int filas){
         
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < filas; i++) {
             p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
             
             p.newLine();

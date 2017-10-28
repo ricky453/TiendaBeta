@@ -334,7 +334,7 @@ public class frmVentas extends javax.swing.JFrame {
             
             venta.setTotalGravado(Double.parseDouble(decimal.format(totGravado)));
             venta.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(txtTotalventa.getText().substring(1))-totGravado)));
-        
+            System.out.println("1");
             
             
             
@@ -357,14 +357,17 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         venta.CalcularPAC();
         
-        String sucursal=cmbSucursalVenta.getSelectedItem().toString();
+        System.out.println("2");
+        Object sucursal=cmbSucursalVenta.getSelectedItem();
+        System.out.println("3");
         String producto=txtNombreProductoVender.getText();
-        double total=Double.parseDouble(txtTotalventa.getText());
-        double subtotal=Double.parseDouble(txtSumas.getText());
-        double iva=Double.parseDouble(txtIVA.getText());
+        String total=txtTotalventa.getText();
+        String subtotal=txtSumas.getText();
+        String iva=txtIVA.getText();
+        int filas=modeloVentas.getRowCount();
         
         String detalles[][] = new String[modeloVentas.getRowCount()][4];
-        
+            System.out.println("pereza");
             for(int y=0; y<modeloVentas.getRowCount();y++){
                 detalles[y][0]=modeloVentas.getValueAt(y, 1).toString();
                 detalles[y][1]=modeloVentas.getValueAt(y, 2).toString();
@@ -386,7 +389,7 @@ public class frmVentas extends javax.swing.JFrame {
             UsoTicket.datosTicket(sucursal,venta.getFecha());
             
             
-            UsoTicket.datosVentaFactura(detalles,total);
+            UsoTicket.datosVentaFactura(detalles,total,filas);
             
             UsoTicket.datosVendedor();
             UsoTicket.imprimir();
@@ -395,21 +398,20 @@ public class frmVentas extends javax.swing.JFrame {
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
             UsoTicket.datosTicket(sucursal,venta.getFecha());
-            UsoTicket.datosVentaCreditoFiscal(detalles,subtotal,iva,total);
+            UsoTicket.datosVentaCreditoFiscal(detalles,subtotal,iva,total,filas);
             UsoTicket.datosVendedor();
             UsoTicket.imprimir();
         }
         
         
         
-        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][5];
+        Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
         
         for(int y=0; y<modeloVentas.getRowCount();y++){
             DetallesVenta[y][0]=txtIdVenta.getText();
             DetallesVenta[y][1]=modeloVentas.getValueAt(y, 0);
             DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
-            DetallesVenta[y][4]=modeloVentas.getValueAt(y, 1);
         }
         
         if(cv.Agregar(venta,DetallesVenta)){
@@ -429,6 +431,7 @@ public class frmVentas extends javax.swing.JFrame {
             this.CostoGravado+=CostoProducto*ProductoCantidad;
             
         }
+        System.out.println("pereza men bitch");
         
     }
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
