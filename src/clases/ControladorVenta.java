@@ -126,15 +126,15 @@ public class ControladorVenta {
     }
     
     
-    public static ArrayList<Venta> obteniendoVentas(String fecha,int opcion) throws ErrorTienda{
+    public static ArrayList<Venta> obteniendoVentas(String fecha) throws ErrorTienda{
         ArrayList<Object> ventas=new ArrayList<Object>();
         cn=new Conexion();
         try {
-            if(opcion==1){
+            
                 rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
-            }else{
-                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta='B'");
-            }
+            
+                
+            
             
             
             while (rs.next()) {

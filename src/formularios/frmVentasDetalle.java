@@ -616,7 +616,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             try {
                 
                 
-                ventas=ControladorVenta.obteniendoVentas(fecha,1);
+                ventas=ControladorVenta.obteniendoVentas(fecha);
                 Object x;
                 Iterator iterador=ventas.iterator();
                 while (iterador.hasNext()) {
