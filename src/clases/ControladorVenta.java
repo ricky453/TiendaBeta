@@ -5,6 +5,7 @@
  */
 package clases;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,5 +155,27 @@ public class ControladorVenta {
         ArrayList<Venta> miventas=(ArrayList) ventas;
         return miventas; 
     }
+    public static ArrayList<Venta> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda, SQLException{
+        ArrayList<Object> ventasBorrador=new ArrayList<Object>();
+        cn=new Conexion();
+        System.out.println("DENDTRO DE CONTROLADOR");
+        if(filtro.equals("TODAS")){
+            System.out.println("DENTRO DE TODAS LAS OPCIONES DE BUSQUEDA DENDTRO DE CONTROLADOR");
+            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B';"));
+        }else{
+            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
+        }
+        while (rs.next()) {
+                ventasBorrador.add(rs.getString(1));
+                ventasBorrador.add(rs.getString(2));
+                ventasBorrador.add(rs.getString(3));
+               
+                
+            }
+        ArrayList<Venta> miventass=(ArrayList) ventasBorrador;
+        return miventass;
+    }
+    
+    
     
 }
