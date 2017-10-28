@@ -493,9 +493,24 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             new String [] {
                 "idVenta", "Sucursal", "Cliente", "Tipo de venta", "Fecha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblVentas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblVentas);
+        if (tblVentas.getColumnModel().getColumnCount() > 0) {
+            tblVentas.getColumnModel().getColumn(0).setResizable(false);
+            tblVentas.getColumnModel().getColumn(1).setResizable(false);
+            tblVentas.getColumnModel().getColumn(2).setResizable(false);
+            tblVentas.getColumnModel().getColumn(3).setResizable(false);
+            tblVentas.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 920, 330));
 

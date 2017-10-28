@@ -269,25 +269,40 @@ public class frmVentasDetalladas extends javax.swing.JFrame {
             new String [] {
                 "CodBarra", "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblVentasDetalladas);
+        if (tblVentasDetalladas.getColumnModel().getColumnCount() > 0) {
+            tblVentasDetalladas.getColumnModel().getColumn(0).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(1).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(2).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(3).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 1040, 220));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel8.setText("Fue una venta con:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 160, -1));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel9.setText("Sucursal:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 80, -1));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel10.setText("Fecha:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 190, 60, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel11.setText("Id de la venta:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 130, -1));
 
