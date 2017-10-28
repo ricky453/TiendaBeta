@@ -321,23 +321,21 @@ public class frmVentas extends javax.swing.JFrame {
         double totGravado;
         if(cmbTipoVenta.getSelectedIndex()==0){
             idTipoVenta='F';
-        }else{
+        }else if(cmbTipoVenta.getSelectedIndex()==1){
             idTipoVenta='C';
+        }else{
+            idTipoVenta='B';
         }
         
         venta.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
         venta.setIdPrecio(Integer.parseInt(String.valueOf(misPrecios[cmbTipoPrecio.getSelectedIndex()][0])));
         venta.setIdTipoVenta(idTipoVenta);
         venta.setIdSucursal(Integer.parseInt(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0])));
-        if(idTipoVenta=='F'){
+        if(idTipoVenta=='F' || idTipoVenta=='B'){
             totGravado=Double.parseDouble(txtTotalventa.getText().substring(1))/1.13;
             
             venta.setTotalGravado(Double.parseDouble(decimal.format(totGravado)));
             venta.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(txtTotalventa.getText().substring(1))-totGravado)));
-            System.out.println("1");
-            
-            
-            
         }else{
             totGravado=Double.parseDouble(txtSumas.getText().substring(1));
             venta.setTotalGravado(Double.parseDouble(txtSumas.getText().substring(1)));
@@ -451,7 +449,7 @@ public class frmVentas extends javax.swing.JFrame {
                double precioUnitario = Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
                double subTotal = precioUnitario*cantidad;
                modeloVentas.setValueAt(decimal.format(subTotal), x, 4);
-               if(cmbTipoVenta.getSelectedIndex()==0){
+               if(cmbTipoVenta.getSelectedIndex()==0 || cmbTipoVenta.getSelectedIndex()==2){
                    SumarSubTotales();
                    txtTotalventa.setText("$ "+decimal.format(subTotales));
                }else{
@@ -473,13 +471,14 @@ public class frmVentas extends javax.swing.JFrame {
     }
     //VALIDAR QUE LOS CAMPOS ESTEN CORRECTAMENTE LLENADOS
     public boolean validar(int tipoVenta){
-        int mensaje=0;
+         int mensaje=0;
         if(modeloVentas.getRowCount()==0){
             mensajeNotificacion("No hay productos seleccionados", "Error");
             txtCodigoBarraVender.requestFocus();
             return false;
         }else{
-            if(txtClienteVenta.getText().isEmpty()){
+            if(tipoVenta==0){
+                if(txtClienteVenta.getText().isEmpty()){
                     mensajeNotificacion("Falta llenar campos", "Adv");
                     lblCliente.setForeground(Color.red);
                     mensaje = 1;
@@ -490,6 +489,8 @@ public class frmVentas extends javax.swing.JFrame {
                     mensaje = 1;
                 
             }
+            }
+            
             System.out.println("Tipo venta en metodo "+tipoVenta);
             if(tipoVenta==1){
                 System.out.println("Tipo venta en metodo gasa"+tipoVenta);
@@ -1270,16 +1271,36 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void cmbTipoVentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoVentaItemStateChanged
-       if(cmbTipoVenta.getSelectedIndex() == 0)
+        if(cmbTipoVenta.getSelectedIndex() == 0)
        {
            tipoVentaSeleccion(false);
            limpiar("todo");
            lblMasIva.setVisible(true);
-       }else{
-
+           txtClienteVenta.setVisible(!false);
+           txtDireccionVenta.setVisible(!false);
+           lblCliente.setVisible(!false);
+           lblDireccion.setVisible(!false);
+           cmbTipoPrecio.setSelectedIndex(1);
+       }else if(cmbTipoVenta.getSelectedIndex() == 1){
+           
            tipoVentaSeleccion(true);
            limpiar("todo");
+           txtClienteVenta.setVisible(!false);
+           txtDireccionVenta.setVisible(!false);
+           lblCliente.setVisible(!false);
+           lblDireccion.setVisible(!false);
            lblMasIva.setVisible(false);
+           cmbTipoPrecio.setSelectedIndex(1);
+       }
+       else{
+           tipoVentaSeleccion(false);
+           limpiar("todo");
+           lblMasIva.setVisible(true);
+           txtClienteVenta.setVisible(false);
+           txtDireccionVenta.setVisible(false);
+           lblCliente.setVisible(false);
+           lblDireccion.setVisible(false);
+           cmbTipoPrecio.setSelectedIndex(0);
        }
        colorLabels();
     }//GEN-LAST:event_cmbTipoVentaItemStateChanged
