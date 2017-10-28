@@ -355,9 +355,9 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         venta.CalcularPAC();
         
-        System.out.println("2");
-        Object sucursal=cmbSucursalVenta.getSelectedItem();
-        System.out.println("3");
+        
+        /*Object sucursal=cmbSucursalVenta.getSelectedItem();
+        
         String producto=txtNombreProductoVender.getText();
         String total=txtTotalventa.getText();
         String subtotal=txtSumas.getText();
@@ -365,7 +365,7 @@ public class frmVentas extends javax.swing.JFrame {
         int filas=modeloVentas.getRowCount();
         
         String detalles[][] = new String[modeloVentas.getRowCount()][4];
-            System.out.println("pereza");
+        
             for(int y=0; y<modeloVentas.getRowCount();y++){
                 detalles[y][0]=modeloVentas.getValueAt(y, 1).toString();
                 detalles[y][1]=modeloVentas.getValueAt(y, 2).toString();
@@ -376,9 +376,7 @@ public class frmVentas extends javax.swing.JFrame {
         
         if (idTipoVenta=='F') {
             
-            for (int i =1; i < modeloVentas.getRowCount(); i++) {
-                
-            }
+            
             
             
             //Imprimir
@@ -400,7 +398,7 @@ public class frmVentas extends javax.swing.JFrame {
             UsoTicket.datosVendedor();
             UsoTicket.imprimir();
         }
-        
+        */
         
         
         Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
@@ -429,7 +427,7 @@ public class frmVentas extends javax.swing.JFrame {
             this.CostoGravado+=CostoProducto*ProductoCantidad;
             
         }
-        System.out.println("pereza men bitch");
+        
         
     }
     //COMPROBAR QUE UN PRODUCTO SELECCIONADO ESTE O NO AGREGADO ANTRERIROMENTE A LA TABLA DE PRODUCTOS
