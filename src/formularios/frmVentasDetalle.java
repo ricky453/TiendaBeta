@@ -218,14 +218,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         btnReportes1 = new javax.swing.JButton();
         btnBitacoras1 = new javax.swing.JButton();
         btnHome1 = new javax.swing.JLabel();
-        jpnMenu = new javax.swing.JPanel();
-        lblSucursales = new javax.swing.JLabel();
-        lblProveedores = new javax.swing.JLabel();
-        lblProductos = new javax.swing.JLabel();
-        lblVentas = new javax.swing.JLabel();
-        lblMenuCerrar = new javax.swing.JLabel();
-        lblParametro = new javax.swing.JLabel();
-        lblCompras = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -701,94 +693,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpnMenu.setBackground(new java.awt.Color(102, 0, 0));
-        jpnMenu.setPreferredSize(new java.awt.Dimension(80, 304));
-        jpnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jpnMenuMouseExited(evt);
-            }
-        });
-        jpnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Sucursales.png"))); // NOI18N
-        lblSucursales.setToolTipText("Sucursales");
-        lblSucursales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSucursales.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSucursalesMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 230, -1, 30));
-
-        lblProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Proveedores.png"))); // NOI18N
-        lblProveedores.setToolTipText("Proveedores");
-        lblProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblProveedoresMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 190, -1, 30));
-
-        lblProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
-        lblProductos.setToolTipText("Productos");
-        lblProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblProductosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblProductosMouseEntered(evt);
-            }
-        });
-        jpnMenu.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 150, -1, 30));
-
-        lblVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Ventas.png"))); // NOI18N
-        lblVentas.setToolTipText("Ventas");
-        lblVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblVentasMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 110, -1, 30));
-
-        lblMenuCerrar.setBackground(new java.awt.Color(0, 0, 0));
-        lblMenuCerrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblMenuCerrar.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenuCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMenuCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
-        lblMenuCerrar.setToolTipText("Cerrar");
-        lblMenuCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblMenuCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblMenuCerrarMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblMenuCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 55));
-
-        lblParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Parametro.png"))); // NOI18N
-        lblParametro.setToolTipText("Sucursales");
-        lblParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblParametro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblParametroMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 270, -1, 30));
-
-        lblCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Compras.png"))); // NOI18N
-        lblCompras.setToolTipText("Compras");
-        lblCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCompras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblComprasMouseClicked(evt);
-            }
-        });
-        jpnMenu.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 70, -1, 30));
-
-        getContentPane().add(jpnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -360, 80, 318));
-
         tblVentas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
@@ -1256,61 +1160,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSucursalesMouseClicked
-        frmSucursales sc = new frmSucursales();
-        sc.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblSucursalesMouseClicked
-
-    private void lblProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProveedoresMouseClicked
-        frmProveedores pv = new frmProveedores();
-        pv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblProveedoresMouseClicked
-
-    private void lblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseClicked
-        frmProductos pd = new frmProductos();
-        pd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblProductosMouseClicked
-
-    private void lblProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseEntered
-
-    }//GEN-LAST:event_lblProductosMouseEntered
-
-    private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
-        try {
-            frmVentas vt = new frmVentas();
-            vt.setVisible(true);
-            this.setVisible(false);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_lblVentasMouseClicked
-
-    private void lblMenuCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuCerrarMouseClicked
-        if(estadoMenu==true){
-            Animacion.Animacion.subir(0, -360, 1, 2, jpnMenu);
-            estadoMenu=false;
-        }
-    }//GEN-LAST:event_lblMenuCerrarMouseClicked
-
-    private void lblParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParametroMouseClicked
-        frmParametroModificar pt = new frmParametroModificar();
-        pt.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblParametroMouseClicked
-
-    private void lblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprasMouseClicked
-        frmCompras cm = new frmCompras();
-        cm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lblComprasMouseClicked
-
-    private void jpnMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnMenuMouseExited
-
-    }//GEN-LAST:event_jpnMenuMouseExited
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
@@ -2037,7 +1886,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraMenu1;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnBarraSuperior2;
-    private javax.swing.JPanel jpnMenu;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnSubMenu1;
     private javax.swing.JPanel jpnUser;
@@ -2046,7 +1894,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     public static javax.swing.JLabel lblBotonCerrar1;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblCompras;
     private javax.swing.JLabel lblDetallesVentas;
     private javax.swing.JLabel lblDetallesVentas1;
     private javax.swing.JLabel lblIVA;
@@ -2054,18 +1901,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo2;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMenu1;
-    private javax.swing.JLabel lblMenuCerrar;
-    private javax.swing.JLabel lblParametro;
-    private javax.swing.JLabel lblProductos;
-    private javax.swing.JLabel lblProveedores;
     private javax.swing.JLabel lblRolUsuario;
-    private javax.swing.JLabel lblSucursales;
     private javax.swing.JLabel lblSumas;
     public static javax.swing.JLabel lblUser;
     public static javax.swing.JLabel lblUser1;
     private javax.swing.JLabel lblVender;
     private javax.swing.JLabel lblVender1;
-    private javax.swing.JLabel lblVentas;
     private javax.swing.JLabel lblVentasBorrador;
     private javax.swing.JLabel lblVentasBorrador1;
     public javax.swing.JTable tblVentas;

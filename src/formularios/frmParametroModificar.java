@@ -181,10 +181,10 @@ public class frmParametroModificar extends javax.swing.JFrame {
             }
         });
         tblParametro.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblParametroInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblParametro.addKeyListener(new java.awt.event.KeyAdapter() {
