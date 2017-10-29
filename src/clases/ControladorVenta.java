@@ -155,7 +155,7 @@ public class ControladorVenta {
         ArrayList<Venta> miventas=(ArrayList) ventas;
         return miventas; 
     }
-    public static ArrayList<Venta> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda, SQLException{
+    public ArrayList<Object> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda, SQLException{
         ArrayList<Object> ventasBorrador=new ArrayList<Object>();
         cn=new Conexion();
         System.out.println("DENDTRO DE CONTROLADOR");
@@ -165,15 +165,15 @@ public class ControladorVenta {
         }else{
             rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
         }
-        while (rs.next()) {
-                ventasBorrador.add(rs.getString(1));
-                ventasBorrador.add(rs.getString(2));
-                ventasBorrador.add(rs.getString(3));
-               
-                
-            }
-        ArrayList<Venta> miventass=(ArrayList) ventasBorrador;
-        return miventass;
+        int fila=0;
+        while(rs.next()){
+            
+            ventasBorrador.add(rs.getString(1));
+            ventasBorrador.add(rs.getString(2));
+            ventasBorrador.add(rs.getString(3));
+        }
+        
+        return ventasBorrador;
     }
     
     

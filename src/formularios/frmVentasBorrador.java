@@ -36,55 +36,54 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     Object miSucursal[][];
     ResultSet rs = null;
     ControladorVenta cv = new ControladorVenta();
+    int contador=0;
     
     
     
     public frmVentasBorrador() throws ErrorTienda, SQLException {
         initComponents();
-        modeloVentas = (DefaultTableModel) tblVentasBorrador.getModel();
+       modeloVentas = (DefaultTableModel) tblVentas.getModel();
         modeloDetalles = (DefaultTableModel) tblDetallesVenta.getModel();
         CargarSucursales();
-        CargarVentasBorrador("Todas", 12);
+        CargarVentasBorrador("TODAS",0);
         
     }
     public void CabeceraTablas(){
-        ventas = tblVentasBorrador.getTableHeader();
+        ventas = tblVentas.getTableHeader();
         detalles = tblDetallesVenta.getTableHeader();
         
         Font fuente = new Font("Tahoma", Font.BOLD, 12);
         ventas.setBackground(Color.red);
     }
     
-    public void CargarVentasBorrador(String Criterio,int idSucursal) throws ErrorTienda, SQLException{
-        Object[] fila=new Object[4];
-        ArrayList<Venta> misventas;
-        if(Criterio.equals("Todas")){
-            misventas=ControladorVenta.VentasBorrador("TODAS", idSucursal);
+    public void CargarVentasBorrador(String criterio, int idSucursal) throws ErrorTienda, SQLException{
+        ArrayList<Object> misVentas= new ArrayList<>();
+        if(criterio.equals("TODAS")){
+            misVentas= cv.VentasBorrador("TODAS", idSucursal);
         }else{
-            misventas=ControladorVenta.VentasBorrador("PorSucursal", idSucursal);
+            misVentas= cv.VentasBorrador("PorSucursal", idSucursal);
+        }
+        modeloVentas.setRowCount(0);
+        
+        Iterator<Object> iterador = misVentas.iterator();
+        int fila=0;
+        while(iterador.hasNext()){
+            modeloVentas.addRow(new Object[]{"","","",false});
+            modeloVentas.setValueAt(iterador.next(), fila, 0);
+            modeloVentas.setValueAt(iterador.next(), fila, 1);
+            modeloVentas.setValueAt(iterador.next(), fila, 2);
+            fila++;
         }
         
-//            modeloDetalle.setColumnIdentifiers(campos);
-            Iterator iterador=misventas.iterator();
-            
-            while (iterador.hasNext()) {
-                fila[0]=iterador.next();
-                fila[1]=iterador.next();
-                fila[2]=iterador.next();
-                fila[3]=false;
-                
-                modeloVentas.addRow(fila);
-                
-            }
        
     }
     public void CargarSucursales() throws ErrorTienda{
         sucursales = ControladorSucursal.obtener();
         miSucursal = new Object[sucursales.size()/4][4];
         
-        int contador=0,fila=0;
+        int fila=0;
         Iterator<Sucursal> iterador= sucursales.iterator();
-        String temporal="";
+        
         cmbSucursales.addItem("TODAS");
         while (iterador.hasNext()){
             miSucursal[fila][0]=iterador.next();
@@ -95,6 +94,32 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             fila++;
         }
        
+    }
+    public void cargarDetalles(int idVenta){
+        Object[] fila=new Object[5];
+        
+        modeloDetalles.setRowCount(0);
+        
+        
+        
+        try {
+            ArrayList<Venta> misventas=ControladorVenta.ObtenerVenta(idVenta);
+           
+            Iterator iterador=misventas.iterator();
+            
+            while (iterador.hasNext()) {
+                fila[0]=iterador.next();
+                fila[1]=iterador.next();
+                fila[2]=iterador.next();
+                fila[3]=iterador.next();
+                fila[4]=Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString());
+                
+                modeloDetalles.addRow(fila);
+                
+            }
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentasDetalladas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -111,8 +136,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         lblBotonCerrar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblVentasBorrador = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -124,6 +147,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jrbCredito = new javax.swing.JRadioButton();
         jrbFactura = new javax.swing.JRadioButton();
         btnContinuar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblVentas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 700));
@@ -158,41 +183,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         jLabel3.setText("Ventas:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-
-        tblVentasBorrador.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Venta", "Fecha", "Total", "Consolidar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblVentasBorrador.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
-        tblVentasBorrador.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblVentasBorrador);
-        if (tblVentasBorrador.getColumnModel().getColumnCount() > 0) {
-            tblVentasBorrador.getColumnModel().getColumn(0).setResizable(false);
-            tblVentasBorrador.getColumnModel().getColumn(1).setResizable(false);
-            tblVentasBorrador.getColumnModel().getColumn(2).setResizable(false);
-            tblVentasBorrador.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, 340));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -232,6 +222,11 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cmbSucursales.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbSucursalesItemStateChanged(evt);
+            }
+        });
         jPanel1.add(cmbSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 350, -1));
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
@@ -260,6 +255,45 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         btnContinuar.setText("Continuar");
         getContentPane().add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 580, -1, -1));
 
+        tblVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Venta", "Fecha", "Total", "Consolidar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblVentas.getTableHeader().setReorderingAllowed(false);
+        tblVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVentasMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblVentas);
+        if (tblVentas.getColumnModel().getColumnCount() > 0) {
+            tblVentas.getColumnModel().getColumn(0).setResizable(false);
+            tblVentas.getColumnModel().getColumn(1).setResizable(false);
+            tblVentas.getColumnModel().getColumn(2).setResizable(false);
+            tblVentas.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, 340));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -267,6 +301,39 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
+
+    private void cmbSucursalesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSucursalesItemStateChanged
+        
+        if(cmbSucursales.getSelectedIndex()==0){
+            try {
+                CargarVentasBorrador("TODAS",0);
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+            if(contador==0){
+                
+                CargarVentasBorrador("sucursal", Integer.parseInt(String.valueOf(miSucursal[cmbSucursales.getSelectedIndex()-1][0])));
+            }else{
+                contador=-1;
+            }
+            contador++;
+                
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_cmbSucursalesItemStateChanged
+
+    private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
+        
+    }//GEN-LAST:event_tblVentasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -318,8 +385,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jpnBarra1;
     private javax.swing.JPanel jpnlConsolidarComo;
@@ -327,6 +394,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbFactura;
     public static javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JTable tblDetallesVenta;
-    private javax.swing.JTable tblVentasBorrador;
+    private javax.swing.JTable tblVentas;
     // End of variables declaration//GEN-END:variables
 }
