@@ -38,6 +38,16 @@ public class ControladorUsuario {
         }
     }
     
+    public static void ModificarPass(Usuario pv)throws ErrorTienda{
+        try{
+            cn=new Conexion();
+            cn.st.executeUpdate("UPDATE usuario SET Clave='"+pv.getClave()+"' WHERE Login='"+pv.getUsuario()+"'");
+            
+        } catch(SQLException ex){
+            throw new ErrorTienda("Class ControladorUsuario/ModificarPassword", ex.getMessage());
+        }
+    }
+    
     public static String ObtenerPass(String id)throws ErrorTienda{
         String Usuario="";   
         cn = new Conexion();
