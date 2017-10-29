@@ -783,12 +783,12 @@ public final class frmHome extends javax.swing.JFrame {
         lbl5.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl5.setForeground(new java.awt.Color(102, 102, 102));
         lbl5.setText("Te damos la bienvenida a tu");
-        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, -1, -1));
+        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, -1));
 
         lbl6.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         lbl6.setForeground(new java.awt.Color(102, 102, 102));
         lbl6.setText("nuevo sistema de Tienda.");
-        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, 30));
+        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, -1, 30));
 
         lblMitad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/mitad6.jpg"))); // NOI18N
         jpnPrimero.add(lblMitad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 515, 640));

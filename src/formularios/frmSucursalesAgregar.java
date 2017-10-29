@@ -234,6 +234,8 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 700));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1200, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {

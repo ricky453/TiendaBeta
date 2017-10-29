@@ -656,6 +656,7 @@ public class frmVentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -813,7 +814,7 @@ public class frmVentas extends javax.swing.JFrame {
 
         lblGiro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblGiro.setText("Giro:");
-        getContentPane().add(lblGiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 30, -1));
+        getContentPane().add(lblGiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 100, -1));
 
         txtNRCVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -831,7 +832,7 @@ public class frmVentas extends javax.swing.JFrame {
 
         lblCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCliente.setText("Cliente:");
-        getContentPane().add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 50, -1));
+        getContentPane().add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 130, -1));
 
         txtClienteVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -845,7 +846,7 @@ public class frmVentas extends javax.swing.JFrame {
 
         lblDireccion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDireccion.setText("Dirección:");
-        getContentPane().add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 60, -1));
+        getContentPane().add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 130, -1));
 
         txtDireccionVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

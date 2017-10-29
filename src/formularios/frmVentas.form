@@ -14,6 +14,9 @@
       <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/iconos/home/lanzador.png&quot;)).getImage()" type="code"/>
     </Property>
     <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1200, 700]"/>
+    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -419,7 +422,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="290" width="30" height="-1"/>
+          <AbsoluteConstraints x="670" y="290" width="100" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -452,7 +455,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="170" width="50" height="-1"/>
+          <AbsoluteConstraints x="670" y="170" width="130" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -476,7 +479,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="230" width="60" height="-1"/>
+          <AbsoluteConstraints x="670" y="230" width="130" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -226,6 +226,7 @@ public class frmSucursalesModificar extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 700));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
