@@ -13,21 +13,24 @@ import clases.Usuario;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author proxc
+ * @author ricky453
  */
 public class frmRegistrarUsuario extends javax.swing.JFrame {
     String a, n, num, user;
-    /**
-     * Creates new form NewJFrame
-     */
+    boolean encontrado;
+    DefaultTableModel modeloUsuario = new DefaultTableModel();
+    
     public frmRegistrarUsuario() {
         initComponents();
     }
@@ -42,6 +45,8 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         bgSexo = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUsuarios = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,6 +74,19 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         exit = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
+
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblUsuarios);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -219,8 +237,9 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
                             .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -238,7 +257,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                                 .addComponent(jSeparator4)
                                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,9 +397,9 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
-                .addGap(63, 63, 63)
+                .addGap(433, 433, 433)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -428,6 +447,36 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtUsuario.setText("");
         lblUsuario.setText("Usuario recomendado: ");
     }
+    
+    public void comprobarUsuario(){
+            modeloUsuario.setRowCount(0);
+            
+            ArrayList<Usuario> listaUsuario=new ArrayList();
+            Object fila[]=new Object[7];
+            
+        
+            try {
+            listaUsuario=ControladorUsuario.Obtener();
+            String[] nombreProveedores = new String []{"IdUsuario","Login","Password","Login"};
+            modeloUsuario.setColumnIdentifiers(nombreProveedores);
+            Iterator<Usuario> prov=listaUsuario.iterator();
+                while(prov.hasNext()){
+                    fila[0]= prov.next();
+                    fila[1]= prov.next();
+                    fila[2]= prov.next();
+                    fila[3]= prov.next();
+                    modeloUsuario.addRow(fila);
+                    tblUsuarios.setModel(modeloUsuario);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(frmProveedores.class.getName()).log(Level.SEVERE, null, ex);
+            
+         }
+    }
+    
+    
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         txtUsuario.requestFocus();
     }//GEN-LAST:event_txtNombresActionPerformed
@@ -481,6 +530,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Usuario agregado=new Usuario();
         int idUsuario;
+        encontrado=false;
         if (txtApellidos.getText().equals("") || txtNombres.getText().equals("") || txtUsuario.getText().equals("") || txtClave.getText().equals("")) {
             mensajeNotificacion("Debe de rellenar todos los campos.", "Error");
         }
@@ -491,6 +541,16 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             } catch (ErrorTienda ex) {
                 Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
               }
+            
+              comprobarUsuario();
+              if (tblUsuarios.getRowCount()>0) {
+                  int i = 0;
+                     while (encontrado==false&&i<tblUsuarios.getRowCount()) {
+                     encontrado = tblUsuarios.getValueAt(i, 1).equals(txtUsuario.getText());
+                     i++;
+                  }
+              }
+              if(encontrado == false){
                   agregado.setUsuario(txtUsuario.getText());
                   agregado.setClave(txtClave.getText());
                   if(cmbCargo.getSelectedIndex()==0){
@@ -510,6 +570,10 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
               
               } catch (ErrorTienda e) {      
            }
+        }else{mensajeNotificacion("¡Error! Usuario en uso, cambiélo.", "Error");}
+              encontrado=false;
+              txtUsuario.requestFocus();
+              txtUsuario.selectAll();       
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -613,7 +677,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             }
         }else{
         txtApellidos.requestFocus();
-        mensajeNotificacion("Rellene el campo 'Apellidos' primero.", "Adv");
+        //mensajeNotificacion("Rellene el campo 'Apellidos' primero.", "Adv");
         }
     }//GEN-LAST:event_txtUsuarioFocusGained
 
@@ -705,12 +769,14 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnl_overlay;
+    private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtNombres;
