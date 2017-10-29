@@ -994,8 +994,8 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAgregarSucursalesMouseClicked
 
     private void lblListaSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaSucursalesMouseClicked
-        frmProveedores lp = new frmProveedores();
-        lp.setVisible(true);
+        frmSucursales su = new frmSucursales();
+        su.setVisible(true);
         this.setVisible(false);
         lblListaSucursales.setForeground(java.awt.Color.black);
         lblAgregarSucursales.setForeground(java.awt.Color.lightGray);
