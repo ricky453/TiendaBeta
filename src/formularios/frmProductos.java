@@ -205,7 +205,6 @@ public class frmProductos extends javax.swing.JFrame {
         lblCerrarSesion = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jpnBarraMenu = new javax.swing.JPanel();
-        lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
@@ -219,6 +218,7 @@ public class frmProductos extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        lblMenu2 = new javax.swing.JLabel();
         lblListaProductos = new javax.swing.JLabel();
         lblAgregarProductos = new javax.swing.JLabel();
 
@@ -369,10 +369,10 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -574,13 +574,6 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         jpnBarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
-        lblMenu.setText("Menu");
-        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 170, 50));
 
         jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
         jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -812,6 +805,21 @@ public class frmProductos extends javax.swing.JFrame {
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpnBarraMenu.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+
+        lblMenu2.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
+        lblMenu2.setText("Volver a Home");
+        lblMenu2.setToolTipText("");
+        lblMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMenu2MouseClicked(evt);
+            }
+        });
+        jpnBarraMenu.add(lblMenu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 180, 50));
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
@@ -1291,6 +1299,12 @@ public class frmProductos extends javax.swing.JFrame {
         lblListaProductos.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblAgregarProductosMouseClicked
 
+    private void lblMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenu2MouseClicked
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblMenu2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1360,6 +1374,8 @@ public class frmProductos extends javax.swing.JFrame {
     private javax.swing.JLabel lblListaProductos;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
+    private javax.swing.JLabel lblMenu1;
+    private javax.swing.JLabel lblMenu2;
     private javax.swing.JLabel lblParametro;
     private javax.swing.JLabel lblProductos;
     private javax.swing.JLabel lblProveedores;

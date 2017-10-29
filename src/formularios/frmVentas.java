@@ -120,11 +120,13 @@ public class frmVentas extends javax.swing.JFrame {
                 lblRolUsuario.setText("ADMINISTRADOR");
                 jpnSubMenu.setVisible(true);
                 lblDetallesVentas.setVisible(true);
+                lblMenu.setVisible(true);
             }
             else if(rol.equals("V")){
                 lblRolUsuario.setText("VENDEDOR");
                 jpnSubMenu.setVisible(false);
                 lblDetallesVentas.setVisible(false);
+                lblMenu.setVisible(false);
             }
             else if(rol.equals("C")){
                 lblRolUsuario.setText("COMPRADOR");
@@ -638,7 +640,6 @@ public class frmVentas extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
-        lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
@@ -652,6 +653,7 @@ public class frmVentas extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        lblMenu = new javax.swing.JLabel();
         lblVentasBorrador = new javax.swing.JLabel();
         lblVender = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -1191,13 +1193,6 @@ public class frmVentas extends javax.swing.JFrame {
         });
         jpnBarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
-        lblMenu.setText("Menu");
-        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 170, 50));
-
         jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
         jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnSubMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1428,6 +1423,21 @@ public class frmVentas extends javax.swing.JFrame {
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpnBarraMenu.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+
+        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
+        lblMenu.setText("Volver a Home");
+        lblMenu.setToolTipText("");
+        lblMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMenu.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMenuMouseClicked(evt);
+            }
+        });
+        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 180, 50));
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
@@ -2169,6 +2179,12 @@ public class frmVentas extends javax.swing.JFrame {
         vd.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblDetallesVentasMouseClicked
+
+    private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblMenuMouseClicked
 
     /**
      * @param args the command line arguments
