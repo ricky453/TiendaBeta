@@ -638,7 +638,7 @@ public final class frmHome extends javax.swing.JFrame {
 
         jpnPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
         jLabel3.setText("Repita nueva contraseña:");
         jpnPass.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
@@ -657,7 +657,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnPass.add(pwdAntigua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 200, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel4.setText("Contraseña antigua:");
         jpnPass.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
@@ -675,7 +675,7 @@ public final class frmHome extends javax.swing.JFrame {
         });
         jpnPass.add(pwdNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 200, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 0, 0));
         jLabel7.setText("Nueva contraseña:");
         jpnPass.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
@@ -819,7 +819,7 @@ public final class frmHome extends javax.swing.JFrame {
                 lblCambiarPwdMouseClicked(evt);
             }
         });
-        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 130, 20));
+        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 180, 20));
 
         lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
         lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
