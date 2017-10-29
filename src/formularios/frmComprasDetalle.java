@@ -51,7 +51,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
-
+        jpnSubMenu1.setVisible(false);
         modeloDCompras = (DefaultTableModel) tblComprasDetalladas.getModel();
         obtenerUsuario();
     }
@@ -131,7 +131,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         int filas = modeloDCompras.getRowCount();
         subTotales=0;
         for(int i=0;i<filas;i++){
-            subTotales+=Double.parseDouble(String.valueOf(modeloDCompras.getValueAt(i, 3)));
+            subTotales+=Double.parseDouble(String.valueOf(modeloDCompras.getValueAt(i, 3)))*Double.parseDouble(String.valueOf(modeloDCompras.getValueAt(i, 2)));
         }
         
     }
