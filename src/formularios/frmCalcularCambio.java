@@ -8,6 +8,7 @@ package formularios;
 import clases.ErrorTienda;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,9 +24,11 @@ public class frmCalcularCambio extends javax.swing.JFrame {
      */
     DecimalFormat decf = new DecimalFormat("0.00");
     
+    
     public frmCalcularCambio() {
         initComponents();
         txtRecibido.requestFocus();
+        
     }
     public void calcular(){
         if(txtRecibido.getText().isEmpty()){
@@ -160,7 +163,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
                 btnTerminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, -1, -1));
+        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 540, 270));
 

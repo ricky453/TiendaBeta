@@ -54,13 +54,14 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         modeloVentas = (DefaultTableModel) tblVentas.getModel();
         modeloDetalles = (DefaultTableModel) tblDetallesVenta.getModel();
+        ventas = tblVentas.getTableHeader();
         CargarSucursales();
         CargarVentasBorrador("TODAS",0);
         obtenerUsuario();
         
     }
     public void CabeceraTablas(){
-        ventas = tblVentas.getTableHeader();
+        
         detalles = tblDetallesVenta.getTableHeader();
         
         Font fuente = new Font("Tahoma", Font.BOLD, 12);
@@ -153,7 +154,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         modeloDetalles.setRowCount(0);
         
-        
+        txtIdVenta.setText(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
         
         try {
             ArrayList<Venta> misventas=ControladorVenta.ObtenerVenta(idVenta);
@@ -241,6 +242,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         lblMenu = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        txtIdVenta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 700));
@@ -375,7 +378,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         });
         jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
 
-        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
+        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, 230, 110));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Ventas:");
@@ -386,7 +389,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Detalle de la venta:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 130, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 160, 40));
 
         tblDetallesVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -408,9 +411,11 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblDetallesVenta);
         if (tblDetallesVenta.getColumnModel().getColumnCount() > 0) {
             tblDetallesVenta.getColumnModel().getColumn(0).setResizable(false);
+            tblDetallesVenta.getColumnModel().getColumn(0).setPreferredWidth(85);
             tblDetallesVenta.getColumnModel().getColumn(1).setResizable(false);
-            tblDetallesVenta.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tblDetallesVenta.getColumnModel().getColumn(1).setPreferredWidth(270);
             tblDetallesVenta.getColumnModel().getColumn(2).setResizable(false);
+            tblDetallesVenta.getColumnModel().getColumn(2).setPreferredWidth(50);
             tblDetallesVenta.getColumnModel().getColumn(3).setResizable(false);
         }
 
@@ -504,7 +509,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         getContentPane().add(lblVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, -1, 50));
 
         lblVentasBorrador.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblVentasBorrador.setForeground(new java.awt.Color(51, 51, 51));
         lblVentasBorrador.setText("Ventas Borrador");
         lblVentasBorrador.setToolTipText("");
         lblVentasBorrador.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -865,6 +869,12 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 10, 370));
+
+        jLabel1.setText("ID Venta");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 170, -1, -1));
+
+        txtIdVenta.setEditable(false);
+        getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 170, 40, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -1272,7 +1282,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1320,6 +1330,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbSucursales;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1360,5 +1371,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwdNueva2;
     private javax.swing.JTable tblDetallesVenta;
     private javax.swing.JTable tblVentas;
+    private javax.swing.JTextField txtIdVenta;
     // End of variables declaration//GEN-END:variables
 }

@@ -84,6 +84,7 @@ public class frmVentas extends javax.swing.JFrame {
         
         txtCodigoBarraVender.requestFocus();
         tipoVentaSeleccion(false);
+        dtcFecha.setDateFormatString("dd-MM-YYYY");
         dtcFecha.setDate(fecha);
         obtenerUsuario();
         HabilitarCalcularCambio();

@@ -54,6 +54,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         modeloDetalle=(DefaultTableModel) tblVentasDetalladas.getModel();
+        jdcFecha.setDateFormatString("dd-MM-YYYY");
         jdcFecha.setDate(fdate);
         
         tHeadVentas = tblVentas.getTableHeader();
@@ -812,7 +813,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
         lblCambiarPwd.setText("Cambiar contraseña");
         lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 130, 20));
+        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 160, 20));
 
         lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
         lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
@@ -1184,7 +1185,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         getContentPane().add(lblVentasBorrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, 50));
 
         lblDetallesVentas.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblDetallesVentas.setForeground(new java.awt.Color(51, 51, 51));
         lblDetallesVentas.setText("Detalles de Ventas");
         lblDetallesVentas.setToolTipText("");
         lblDetallesVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
