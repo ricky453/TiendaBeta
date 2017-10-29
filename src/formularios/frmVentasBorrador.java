@@ -332,7 +332,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSucursalesItemStateChanged
 
     private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
-        
+        cargarDetalles(Integer.parseInt((tblVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString()));
     }//GEN-LAST:event_tblVentasMouseClicked
 
     /**
