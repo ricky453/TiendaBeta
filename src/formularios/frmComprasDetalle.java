@@ -20,6 +20,7 @@ import java.awt.Font;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     public int seleccion;
     double subTotales;
     String rol;
+    Date fdate=new Date();
     DecimalFormat decimal = new DecimalFormat("0.00");
     
     public frmComprasDetalle() {
@@ -54,6 +56,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         jpnSubMenu1.setVisible(false);
         modeloDCompras = (DefaultTableModel) tblComprasDetalladas.getModel();
         obtenerUsuario();
+        jdcFecha.setDate(fdate);
     }
     
     public void obtenerUsuario(){
@@ -1864,7 +1867,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     private void lblComprar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprar1MouseClicked
         frmCompras cd = new frmCompras();
         cd.setVisible(true);
-        this.dispose();
+        frmComprasDetalladas.dispose();
         lblComprar.setForeground(java.awt.Color.black);
         lblDetallesCompras.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblComprar1MouseClicked
@@ -1872,7 +1875,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
     private void lblDetallesCompras1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDetallesCompras1MouseClicked
         frmComprasDetalle cdd = new frmComprasDetalle();
         cdd.setVisible(true);
-        this.dispose();
+        frmComprasDetalladas.dispose();
         lblDetallesCompras.setForeground(java.awt.Color.black);
         lblComprar.setForeground(java.awt.Color.lightGray);
     }//GEN-LAST:event_lblDetallesCompras1MouseClicked
