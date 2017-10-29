@@ -319,6 +319,15 @@ public class frmLogin extends javax.swing.JFrame {
                    mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
                    dispose();
             }else if(rol.equals("V")){
+                    try {
+                        Diseño.user = txtUser.getText();
+                        frmVentas ve = new frmVentas();
+                        ve.show();
+                        mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
+                        dispose();
+                    } catch (ErrorTienda ex) {
+                        Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 
             }else if(rol.equals("E")){
                 

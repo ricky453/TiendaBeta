@@ -173,7 +173,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
                 tblComprasDetalladas.setModel(modeloDCompras);
             }
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalladas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmComprasDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @SuppressWarnings("unchecked")

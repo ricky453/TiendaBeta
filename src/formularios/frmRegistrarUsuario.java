@@ -77,13 +77,10 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tblUsuarios);
@@ -452,7 +449,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             modeloUsuario.setRowCount(0);
             
             ArrayList<Usuario> listaUsuario=new ArrayList();
-            Object fila[]=new Object[7];
+            Object fila[]=new Object[4];
             
         
             try {
@@ -541,9 +538,9 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             } catch (ErrorTienda ex) {
                 Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
               }
-            
               comprobarUsuario();
-              if (tblUsuarios.getRowCount()>0) {
+              System.out.println(modeloUsuario.getRowCount());
+              if (modeloUsuario.getRowCount()>0) {
                   int i = 0;
                      while (encontrado==false&&i<tblUsuarios.getRowCount()) {
                      encontrado = tblUsuarios.getValueAt(i, 1).equals(txtUsuario.getText());
