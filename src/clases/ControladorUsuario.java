@@ -82,5 +82,26 @@ public class ControladorUsuario {
         return Usuario;
     
     }
-
+    public static ArrayList<Usuario> Obtener()throws ErrorTienda{
+    ArrayList<Object> usuario = new ArrayList<Object>();
+    
+            cn=new Conexion();   
+            try { 
+                rs=null;
+            rs=cn.st.executeQuery("SELECT * FROM usuario");
+            while (rs.next()) {
+ 
+                usuario.add(rs.getString(1));
+                usuario.add(rs.getString(2));
+                usuario.add(rs.getString(3));
+                usuario.add(rs.getString(4));
+            }
+            
+        } catch (SQLException e) {
+            throw new ErrorTienda("Class ControladorUsuario/Obtener",e.getMessage());
+        }
+        
+        ArrayList<Usuario> usuarios=(ArrayList) usuario;
+        return usuarios;
+    }
 }
