@@ -10,6 +10,7 @@ import clases.ControladorUsuario;
 import clases.ControladorVenta;
 import clases.ErrorTienda;
 import clases.Sucursal;
+import clases.Usuario;
 import clases.Venta;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
@@ -43,7 +44,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     ResultSet rs = null;
     ControladorVenta cv = new ControladorVenta();
     int contador=0;
-    String rol;
+    String rol, password;
     
     
     
@@ -105,6 +106,48 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         }
        
     }
+        //CAMBIAR CONTRASEÑA DEL USUARIO
+    public void comprobarPass(){
+        try {
+            password = ControladorUsuario.ObtenerPass(Diseño.user);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(password.equals(pwdAntigua.getText())){
+            comprobarNuevaPass();
+        }else{
+            pwdAntigua.requestFocus();
+            mensajeNotificacion("¡Contraseña actual errónea!", "Error");
+        }
+    }
+    
+    public void comprobarNuevaPass(){
+        if(pwdNueva.getText().equals(pwdNueva2.getText())){
+            cambiarPassword();
+        }else{
+            pwdNueva.requestFocus();
+            mensajeNotificacion("¡Contraseñas no coinciden!", "Error");
+        }
+    }
+    
+    public void cambiarPassword(){
+        Usuario user = new Usuario();
+        user.setClave(pwdNueva.getText());
+        user.setUsuario(Diseño.user);
+        try {
+
+            ControladorUsuario.ModificarPass(user);
+            mensajeNotificacion("¡Contraseña cambiada correctamente!", "Ok");
+            pwdAntigua.setText("");
+            pwdNueva.setText("");
+            pwdNueva2.setText("");
+            Animacion.Animacion.subir(55, -195, 1, 2, jpnPass);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
     public void cargarDetalles(int idVenta){
         Object[] fila=new Object[5];
         
@@ -142,6 +185,18 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jpnPass = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        pwdAntigua = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        pwdNueva = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        pwdNueva2 = new javax.swing.JPasswordField();
+        btnAtrasPwd = new javax.swing.JLabel();
+        btnCambiarPwd = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         jpnUser = new javax.swing.JPanel();
         lblRolUsuario = new javax.swing.JLabel();
         lblCambiarPwd = new javax.swing.JLabel();
@@ -195,6 +250,95 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jpnPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
+        jpnPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel5.setText("Repita nueva contraseña:");
+        jpnPass.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        pwdAntigua.setBackground(new java.awt.Color(240, 240, 240));
+        pwdAntigua.setBorder(null);
+        pwdAntigua.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdAntiguaFocusGained(evt);
+            }
+        });
+        pwdAntigua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdAntiguaActionPerformed(evt);
+            }
+        });
+        jpnPass.add(pwdAntigua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 200, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel6.setText("Contraseña antigua:");
+        jpnPass.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        pwdNueva.setBackground(new java.awt.Color(240, 240, 240));
+        pwdNueva.setBorder(null);
+        pwdNueva.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdNuevaFocusGained(evt);
+            }
+        });
+        pwdNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdNuevaActionPerformed(evt);
+            }
+        });
+        jpnPass.add(pwdNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 200, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel7.setText("Nueva contraseña:");
+        jpnPass.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        pwdNueva2.setBackground(new java.awt.Color(240, 240, 240));
+        pwdNueva2.setBorder(null);
+        pwdNueva2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdNueva2FocusGained(evt);
+            }
+        });
+        jpnPass.add(pwdNueva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 200, -1));
+
+        btnAtrasPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras1Negro.png"))); // NOI18N
+        btnAtrasPwd.setToolTipText("Volver atrás.");
+        btnAtrasPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtrasPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasPwdMouseClicked(evt);
+            }
+        });
+        jpnPass.add(btnAtrasPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 155, 30, 30));
+
+        btnCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Aceptar1Negro.png"))); // NOI18N
+        btnCambiarPwd.setToolTipText("Cambiar Contraseña.");
+        btnCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambiarPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCambiarPwdMouseClicked(evt);
+            }
+        });
+        jpnPass.add(btnCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, 30, 30));
+
+        jSeparator3.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator3.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 145, 200, 10));
+
+        jSeparator4.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator4.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 45, 200, 10));
+
+        jSeparator5.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator5.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 95, 200, 10));
+
+        getContentPane().add(jpnPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, -195, 230, 190));
+
+        jpnUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
         jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jpnUserMouseExited(evt);
@@ -212,7 +356,12 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
         lblCambiarPwd.setText("Cambiar contraseña");
         lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 130, 20));
+        lblCambiarPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCambiarPwdMouseClicked(evt);
+            }
+        });
+        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 180, 20));
 
         lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
         lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
@@ -861,18 +1010,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
 
-    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
-        frmLogin lg = new frmLogin();
-        lg.setVisible(true);
-        this.setVisible(false);
-        mensajeNotificacion("¡Has cerrado sesión!", "Error");
-    }//GEN-LAST:event_lblCerrarSesionMouseClicked
-
-    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
-        //jpnUser.setVisible(false);
-        //jpnWhite.setVisible(false);
-    }//GEN-LAST:event_jpnUserMouseExited
-
     private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
         frmCompras cm = new frmCompras();
         cm.setVisible(true);
@@ -1078,6 +1215,52 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblMenuMouseClicked
 
+    private void pwdAntiguaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdAntiguaFocusGained
+        pwdAntigua.selectAll();
+    }//GEN-LAST:event_pwdAntiguaFocusGained
+
+    private void pwdAntiguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdAntiguaActionPerformed
+        pwdNueva.requestFocus();
+    }//GEN-LAST:event_pwdAntiguaActionPerformed
+
+    private void pwdNuevaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdNuevaFocusGained
+        pwdNueva.selectAll();
+    }//GEN-LAST:event_pwdNuevaFocusGained
+
+    private void pwdNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdNuevaActionPerformed
+        pwdNueva2.requestFocus();
+    }//GEN-LAST:event_pwdNuevaActionPerformed
+
+    private void pwdNueva2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdNueva2FocusGained
+        pwdNueva2.selectAll();
+    }//GEN-LAST:event_pwdNueva2FocusGained
+
+    private void btnAtrasPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasPwdMouseClicked
+        Animacion.Animacion.subir(55, -195, 1, 2, jpnPass);
+    }//GEN-LAST:event_btnAtrasPwdMouseClicked
+
+    private void btnCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCambiarPwdMouseClicked
+        comprobarPass();
+    }//GEN-LAST:event_btnCambiarPwdMouseClicked
+
+    private void lblCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarPwdMouseClicked
+        jpnPass.setVisible(true);
+        Animacion.Animacion.bajar(-195, 55, 1, 2, jpnPass);
+        pwdAntigua.requestFocus();
+    }//GEN-LAST:event_lblCambiarPwdMouseClicked
+
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        frmLogin lg = new frmLogin();
+        lg.setVisible(true);
+        this.setVisible(false);
+        mensajeNotificacion("¡Has cerrado sesión!", "Error");
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
+
+    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
+        //jpnUser.setVisible(false);
+        //jpnWhite.setVisible(false);
+    }//GEN-LAST:event_jpnUserMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1120,7 +1303,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnAtrasPwd;
     private javax.swing.JButton btnBitacoras;
+    private javax.swing.JLabel btnCambiarPwd;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnDetalleCompras;
@@ -1138,14 +1323,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JPanel jpnBarraMenu;
     private javax.swing.JPanel jpnBarraSuperior;
+    private javax.swing.JPanel jpnPass;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
@@ -1163,6 +1355,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     public static javax.swing.JLabel lblUser1;
     private javax.swing.JLabel lblVender;
     private javax.swing.JLabel lblVentasBorrador;
+    private javax.swing.JPasswordField pwdAntigua;
+    private javax.swing.JPasswordField pwdNueva;
+    private javax.swing.JPasswordField pwdNueva2;
     private javax.swing.JTable tblDetallesVenta;
     private javax.swing.JTable tblVentas;
     // End of variables declaration//GEN-END:variables
