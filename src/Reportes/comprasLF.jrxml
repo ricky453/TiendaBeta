@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT compra.IdCompra,compra.TipoCompra,compra.IdSucursal,sucursal.Nombre,compra.Fecha,compra.NumDocumento,compra.IdProveedor,proveedor.Nombre as Proveedor,compra.SubTotal,compra.Total FROM compra,sucursal,proveedor WHERE compra.IdSucursal=sucursal.IdSucursal and compra.IdProveedor=proveedor.IdProveedor AND (compra.TipoCompra="F" OR compra.TipoCompra="L") ORDER BY compra.Fecha]]>
+		<![CDATA[SELECT compra.IdCompra,compra.TipoCompra,compra.IdSucursal,sucursal.Nombre,compra.Fecha,compra.NumDocumento,compra.IdProveedor,proveedor.Nombre as Proveedor,compra.SubTotal,compra.Total FROM compra,sucursal,proveedor WHERE compra.IdSucursal=sucursal.IdSucursal and compra.IdProveedor=proveedor.IdProveedor AND (compra.TipoCompra="F" OR compra.TipoCompra="L") ORDER BY compra.Fecha,compra.IdSucursal]]>
 	</queryString>
 	<field name="IdCompra" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
