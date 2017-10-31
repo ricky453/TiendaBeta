@@ -13,6 +13,7 @@ import clases.ControladorVenta;
 import clases.DetalleVenta;
 import clases.ErrorTienda;
 import clases.Producto;
+import clases.PropiedadesVentas;
 import clases.Sucursal;
 import clases.TipoPrecio;
 import clases.Usuario;
@@ -62,7 +63,7 @@ public class frmVentas extends javax.swing.JFrame {
     DetalleVenta dv = new DetalleVenta();
     ControladorTipoPrecio precios;
     Date fecha = new Date();
-    
+     boolean calcularCambio;
     
     public frmVentas() throws ErrorTienda {
         initComponents();
@@ -85,7 +86,7 @@ public class frmVentas extends javax.swing.JFrame {
         tipoVentaSeleccion(false);
         dtcFecha.setDate(fecha);
         obtenerUsuario();
-        
+        HabilitarCalcularCambio();
     }
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
     public void mensajeNotificacion(String mensaje, String tipo){
@@ -105,6 +106,17 @@ public class frmVentas extends javax.swing.JFrame {
         not.Mensaje(mensaje);
         not.setVisible(true);
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
+        }
+    }
+    public void HabilitarCalcularCambio(){
+        PropiedadesVentas pv = new PropiedadesVentas();
+        pv.CargarDatos();
+        pv.Cambio();
+        calcularCambio=pv.isEstado();
+        if(calcularCambio){
+            rdbCalcularTotal.setSelected(true);
+        }else{
+            rdbCalcularTotal.setSelected(false);
         }
     }
     public void obtenerUsuario(){
@@ -706,6 +718,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblVender = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         lblDetallesVentas = new javax.swing.JLabel();
+        rdbCalcularTotal = new javax.swing.JRadioButton();
 
         jLabel1.setText("jLabel1");
 
@@ -1511,6 +1524,16 @@ public class frmVentas extends javax.swing.JFrame {
         });
         getContentPane().add(lblDetallesVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 60, -1, 50));
 
+        rdbCalcularTotal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        rdbCalcularTotal.setSelected(true);
+        rdbCalcularTotal.setText("Habilitar Calcular Total");
+        rdbCalcularTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbCalcularTotalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rdbCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 660, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1649,8 +1672,12 @@ public class frmVentas extends javax.swing.JFrame {
                 guardar();
                
                frmCalcularCambio cc = new frmCalcularCambio();
-               cc.txtTotalaPagar.setText(txtTotalventa.getText());
-               cc.setVisible(true);
+               if(calcularCambio){
+                   cc.txtTotalaPagar.setText(txtTotalventa.getText());
+                   System.err.println("Hola");
+                   cc.setVisible(true);
+               }
+               
                 limpiar("todo");
                 ObtenerIdVenta();
                 listas(true);
@@ -2198,6 +2225,17 @@ public class frmVentas extends javax.swing.JFrame {
         //jpnWhite.setVisible(false);
     }//GEN-LAST:event_jpnUserMouseExited
 
+    private void rdbCalcularTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCalcularTotalActionPerformed
+        PropiedadesVentas pv = new PropiedadesVentas();
+        if(rdbCalcularTotal.isSelected()){
+            pv.Modificar("true");
+            HabilitarCalcularCambio();
+        }else{
+            pv.Modificar("false");
+            HabilitarCalcularCambio();
+        }
+    }//GEN-LAST:event_rdbCalcularTotalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2310,6 +2348,7 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwdAntigua;
     private javax.swing.JPasswordField pwdNueva;
     private javax.swing.JPasswordField pwdNueva2;
+    private javax.swing.JRadioButton rdbCalcularTotal;
     private javax.swing.JTable tblProductosVender;
     private javax.swing.JTextField txtCantidadVender;
     private javax.swing.JTextField txtClienteVenta;
