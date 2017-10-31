@@ -184,18 +184,6 @@
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="56298bee-79f5-4b32-83be-b8f5fa554a0b"/>
 			</line>
 			<textField>
-				<reportElement x="455" y="0" width="100" height="20" uuid="b79c65c6-4d51-4a56-bb00-691799ce4114"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{Costo}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="41" y="0" width="100" height="19" uuid="5c7e61dd-8c9e-4553-a25b-6641d88c179b"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -242,6 +230,18 @@
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{IdSucursal_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="455" y="0" width="100" height="20" uuid="b79c65c6-4d51-4a56-bb00-691799ce4114"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Costo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
