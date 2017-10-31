@@ -131,7 +131,7 @@ public class ControladorVenta {
         cn=new Conexion();
         try {
             
-                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
+                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha, venta.PAC, venta.Utilidad FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
             
                 
             
@@ -143,7 +143,8 @@ public class ControladorVenta {
                 ventas.add(rs.getString(3));
                 ventas.add(rs.getString(4));
                 ventas.add(rs.getString(5));
-                
+                ventas.add(rs.getString(6));
+                ventas.add(rs.getString(7));
             }
             
             
