@@ -56,6 +56,7 @@ public class frmComprasDetalle extends javax.swing.JFrame {
         jpnSubMenu1.setVisible(false);
         modeloDCompras = (DefaultTableModel) tblComprasDetalladas.getModel();
         obtenerUsuario();
+        jdcFecha.setDateFormatString("dd-MM-yyyy");
         jdcFecha.setDate(fdate);
     }
     

@@ -54,7 +54,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         modeloDetalle=(DefaultTableModel) tblVentasDetalladas.getModel();
-        jdcFecha.setDateFormatString("dd-MM-YYYY");
+        jdcFecha.setDateFormatString("dd-MM-yyyy");
         jdcFecha.setDate(fdate);
         
         tHeadVentas = tblVentas.getTableHeader();

@@ -73,6 +73,7 @@ public class frmCompras extends javax.swing.JFrame {
         jpnUser.setVisible(false);
         jpnWhite.setVisible(false);
         obtenerRol();
+        dtcFecha.setDateFormatString("dd-MM-yyyy");
     }
 
     //METODO GENERAL PARA ENVIAR MENSAJES POR NOTIFICAICON DE FRMNOTIFICACION
