@@ -122,7 +122,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sumTotalGrav}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="###0.00;-###0.00">
 					<reportElement x="396" y="0" width="55" height="20" uuid="d6fd79d0-1d4a-4f39-9d28-6eb50552e361"/>
 					<box>
 						<pen lineWidth="2.0"/>
@@ -440,7 +440,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="287" y="0" width="40" height="20" uuid="f74c9450-05d8-4d09-9d42-05057c445d25"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -454,7 +454,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IVA}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="396" y="0" width="55" height="20" uuid="11e6d5d6-51a1-4da5-aa32-0272ed57c681"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -468,7 +468,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="451" y="0" width="44" height="20" uuid="fc71a8c1-22f5-44c7-ac44-3385af07449e"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -482,7 +482,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PAC}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="495" y="0" width="60" height="20" uuid="3cddda44-b9ad-4765-a7f3-d473ca4d8702"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -496,7 +496,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Utilidad}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="327" y="0" width="69" height="20" uuid="89c4cd3d-7a0c-40c3-91e0-a02955ffd3cd"/>
 				<box>
 					<pen lineWidth="1.0"/>

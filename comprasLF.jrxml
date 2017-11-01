@@ -375,7 +375,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proveedor}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="414" y="0" width="69" height="20" uuid="6d0e082d-972f-462d-a540-1f5ab6b81cf8"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -389,7 +389,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="483" y="0" width="72" height="20" uuid="7a628891-5881-4013-b950-1cd56d537963"/>
 				<box>
 					<pen lineWidth="1.0"/>

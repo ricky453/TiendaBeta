@@ -48,6 +48,7 @@ public class frmComprasReportes extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btngTipos.add(rbtnFactura);
+        rbtnFactura.setSelected(true);
         rbtnFactura.setText("COMPRAS FACTURA, LIBRES");
         getContentPane().add(rbtnFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 91, -1, -1));
 

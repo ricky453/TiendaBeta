@@ -412,7 +412,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{NRC}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="360" y="0" width="69" height="20" uuid="4a8c76d2-f20d-4f44-bbc5-8ec0b8997d8a"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -426,7 +426,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TotalGravado}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="429" y="0" width="54" height="20" uuid="0f4ef5f1-3cae-4195-8811-7fd4f1fbb14a"/>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -440,7 +440,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{IVA}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement x="483" y="0" width="72" height="20" uuid="d9cad182-9fef-4a77-9696-65da7a90475d"/>
 				<box>
 					<pen lineWidth="1.0"/>
