@@ -331,9 +331,25 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             new String [] {
                 "CodBarra", "Producto", "Cantidad", "Precio Unitario $", "Sub total $"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblVentasDetalladas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblVentasDetalladas);
+        if (tblVentasDetalladas.getColumnModel().getColumnCount() > 0) {
+            tblVentasDetalladas.getColumnModel().getColumn(0).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(1).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tblVentasDetalladas.getColumnModel().getColumn(2).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(3).setResizable(false);
+            tblVentasDetalladas.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         frmVentasDetalladas2.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 960, 220));
 
