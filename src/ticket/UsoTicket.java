@@ -46,7 +46,7 @@ public class UsoTicket {
         p.alignLeft();
         p.setText("Num. Ticket:" + "1");
         p.newLine();
-        p.setText("Sucursal"+sucursal);
+        p.setText("Sucursal "+sucursal);
         p.newLine();
         p.setText("Factura");
         p.newLine();
@@ -57,18 +57,17 @@ public class UsoTicket {
     }
     
     public static void datosVentaFactura(String venta[][],String total,int filas){
-        
+        double totalInterno=0;
         p.setText("Descripción \tCantidad\tPrecio\t$Total");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
             p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
-            total +=Double.parseDouble(venta[i][3]);
+            totalInterno +=Double.parseDouble(venta[i][3]);
             p.newLine();
         }
         p.newLine();
-       
-        p.setText("Total: $" + total);
+        p.setText("Total: " + total+" ");
         p.newLine();
         p.addLineSeperator();
         p.newLine();
@@ -106,7 +105,7 @@ public class UsoTicket {
 
         p.setText("Cliente: " + "el cliente");
         p.newLine();
-        p.setText("Dirección: "+"la direccion");
+        p.setText("Direccion: "+"la direccion");
    
         p.addLineSeperator();
         p.newLine();
@@ -120,7 +119,7 @@ public class UsoTicket {
     
     public static void datosVendedor(){
         p.alignLeft();
-        p.setText(" - Detalles Vendedor - ");
+        p.setText("\t - Detalles Vendedor - ");
         p.newLine();
         p.setText("Id vendedor: "+"id");
         p.newLine();
@@ -130,6 +129,7 @@ public class UsoTicket {
         p.newLine();
         p.addLineSeperator();
         p.newLine();
+        p.finit();
         
     }
     

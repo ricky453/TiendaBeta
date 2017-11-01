@@ -450,7 +450,7 @@ public class frmVentas extends javax.swing.JFrame {
         venta.CalcularPAC();
         
         
-        /*Object sucursal=cmbSucursalVenta.getSelectedItem();
+        Object sucursal=cmbSucursalVenta.getSelectedItem();
         
         String producto=txtNombreProductoVender.getText();
         String total=txtTotalventa.getText();
@@ -458,7 +458,7 @@ public class frmVentas extends javax.swing.JFrame {
         String iva=txtIVA.getText();
         int filas=modeloVentas.getRowCount();
         
-        String detalles[][] = new String[modeloVentas.getRowCount()][4];
+        String detalles[][] = new String[modeloVentas.getRowCount()][5];
         
             for(int y=0; y<modeloVentas.getRowCount();y++){
                 detalles[y][0]=modeloVentas.getValueAt(y, 1).toString();
@@ -492,7 +492,7 @@ public class frmVentas extends javax.swing.JFrame {
             UsoTicket.datosVendedor();
             UsoTicket.imprimir();
         }
-        */
+        
         
         
         Object DetallesVenta[][] = new Object[modeloVentas.getRowCount()][4];
@@ -680,8 +680,8 @@ public class frmVentas extends javax.swing.JFrame {
         txtNITVenta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductosVender = new javax.swing.JTable();
-        btnVender = new javax.swing.JButton();
         txtTotalventa = new javax.swing.JTextField();
+        btnVender = new javax.swing.JButton();
         lblSumas = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         btnCancelarVenta1 = new javax.swing.JButton();
@@ -1056,15 +1056,20 @@ public class frmVentas extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 970, 190));
 
+        txtTotalventa.setEditable(false);
+        txtTotalventa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 590, 120, 40));
+
         btnVender.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/vender.png"))); // NOI18N
         btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVenderMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVenderMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVenderMouseEntered(evt);
             }
         });
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -1073,11 +1078,6 @@ public class frmVentas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 650, 110, 30));
-
-        txtTotalventa.setEditable(false);
-        txtTotalventa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 590, 120, 40));
 
         lblSumas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblSumas.setText("Sumas");
