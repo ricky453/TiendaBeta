@@ -33,9 +33,9 @@ public class UsoTicket {
         p.chooseFont(1);
         p.color(0);
         p.alignLeft();
-        p.setText("\tTienda ABC");
+        p.setText("\tTIENDA ABC");
         p.newLine();
-        p.setText("\tFinal calle principal santa ana");
+        p.setText("  Final Calle Principal Santa Ana");
         p.newLine();
        
         p.addLineSeperator();
@@ -110,13 +110,48 @@ public class UsoTicket {
     
     public static void datosVentaCreditoFiscal(String venta[][],String subtotal,String iva,String total,int filas){
         
-        p.setText("Descripción \tCantidad\tPrecio\t$Total");
+        p.setText("Descripcion\tCantidad   Precio");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
-            p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
             
-            p.newLine();
+            if (venta[i][0].length()>15) {
+                String tempo1,tempo2;
+                int largoCantidad=venta[i][1].length();
+                tempo1=venta[i][0].substring(0, 14);
+                tempo2=venta[i][0].substring(14);
+                
+                
+                for (int j = tempo2.length(); j <= 15; j++) {
+                    tempo2=tempo2+" ";
+                }
+                venta[i][0]=tempo1+"\n"+tempo2;
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+                
+                
+            }else{
+                int largo=venta[i][0].length();
+                int largoCantidad=venta[i][1].length();
+                
+                for (int j = largo; j <= 15; j++) {
+                    venta[i][0]=venta[i][0]+" ";
+                }
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+            }
+            
+            
         }
         p.newLine();
        
