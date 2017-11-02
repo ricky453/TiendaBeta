@@ -58,27 +58,44 @@ public class UsoTicket {
     
     public static void datosVentaFactura(String venta[][],String total,int filas){
         
-        p.setText("Descripcion\t\t   Cantidad   Precio");
+        p.setText("Descripcion\tCantidad   Precio");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
             
             if (venta[i][0].length()>15) {
                 String tempo1,tempo2;
+                int largoCantidad=venta[i][1].length();
                 tempo1=venta[i][0].substring(0, 14);
                 tempo2=venta[i][0].substring(14);
+                
+                
+                for (int j = tempo2.length(); j <= 15; j++) {
+                    tempo2=tempo2+" ";
+                }
                 venta[i][0]=tempo1+"\n"+tempo2;
-                p.setText(venta[i][0]+"\t\t\t"+venta[i][1]+"   "+venta[i][2]);
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
                 p.newLine();
                 
                 
             }else{
                 int largo=venta[i][0].length();
+                int largoCantidad=venta[i][1].length();
                 
                 for (int j = largo; j <= 15; j++) {
                     venta[i][0]=venta[i][0]+" ";
                 }
-                p.setText(venta[i][0]+"\t\t    "+venta[i][1]+"   "+venta[i][2]);
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
                 p.newLine();
             }
             
