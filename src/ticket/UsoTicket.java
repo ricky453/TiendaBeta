@@ -29,7 +29,7 @@ public class UsoTicket {
     }
     
     public static void cabecera(){
-        p.feedBack((byte) 2);
+        p.feedBack((byte)2);
         p.chooseFont(1);
         p.color(0);
         p.alignLeft();
@@ -57,17 +57,35 @@ public class UsoTicket {
     }
     
     public static void datosVentaFactura(String venta[][],String total,int filas){
-        double totalInterno=0;
-        p.setText("Descripción \tCantidad\tPrecio\t$Total");
+        
+        p.setText("Descripcion\t\t   Cantidad   Precio");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
-            p.setText(venta[i][0]+" "+venta[i][1]+" "+venta[i][2]+" "+venta[i][3]);
-            totalInterno +=Double.parseDouble(venta[i][3]);
-            p.newLine();
+            
+            if (venta[i][0].length()>15) {
+                String tempo1,tempo2;
+                tempo1=venta[i][0].substring(0, 14);
+                tempo2=venta[i][0].substring(14);
+                venta[i][0]=tempo1+"\n"+tempo2;
+                p.setText(venta[i][0]+"\t\t\t"+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+                
+                
+            }else{
+                int largo=venta[i][0].length();
+                
+                for (int j = largo; j <= 15; j++) {
+                    venta[i][0]=venta[i][0]+" ";
+                }
+                p.setText(venta[i][0]+"\t\t    "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+            }
+            
+            
         }
         p.newLine();
-        p.setText("Total: " + total+" ");
+        p.setText("Total: " + total);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
@@ -85,11 +103,11 @@ public class UsoTicket {
         }
         p.newLine();
        
-        p.setText("SubTotal: $" + subtotal);
+        p.setText("SubTotal: " + subtotal);
         p.newLine();
-        p.setText("Iva: $"+iva);
+        p.setText("Iva: "+iva);
         p.newLine();
-        p.setText("Total: $"+total);
+        p.setText("Total: "+total);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
