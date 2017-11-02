@@ -467,29 +467,29 @@ public class frmVentas extends javax.swing.JFrame {
                 detalles[y][3]=modeloVentas.getValueAt(y, 4).toString();
                 
             }
+            
+            String login=lblUser1.getText();
+            String rol=lblRolUsuario.getText();
+            int id=ControladorUsuario.ObtenerIdUsuario();
         
-        if (idTipoVenta=='F') {
-            
-            
-            
-            
+        if (idTipoVenta=='F') { 
             //Imprimir
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
-            UsoTicket.datosTicket(sucursal,venta.getFecha());
+            UsoTicket.datosTicket(sucursal,venta.getFecha(),"Factura");
             
             
             UsoTicket.datosVentaFactura(detalles,total,filas);
             
-            UsoTicket.datosVendedor();
+            UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();
         }else{
             //Imprimir
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
-            UsoTicket.datosTicket(sucursal,venta.getFecha());
+            UsoTicket.datosTicket(sucursal,venta.getFecha(),"Credito Fiscal");
             UsoTicket.datosVentaCreditoFiscal(detalles,subtotal,iva,total,filas);
-            UsoTicket.datosVendedor();
+            UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();
         }
         

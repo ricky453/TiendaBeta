@@ -42,13 +42,13 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosTicket(Object sucursal, Date fecha){
+    public static void datosTicket(Object sucursal, Date fecha,String tipoVenta){
         p.alignLeft();
         p.setText("Num. Ticket:" + "1");
         p.newLine();
         p.setText("Sucursal "+sucursal);
         p.newLine();
-        p.setText("Factura");
+        p.setText("Tipo de venta: "+tipoVenta);
         p.newLine();
         p.setText("Fecha de venta: "+fecha);
         p.newLine();
@@ -187,15 +187,15 @@ public class UsoTicket {
         p.finit();
     }
     
-    public static void datosVendedor(){
+    public static void datosVendedor(int id,String login,String rol){
         p.alignLeft();
         p.setText("\t - Detalles Vendedor - ");
         p.newLine();
-        p.setText("Id vendedor: "+"id");
+        p.setText("Id vendedor: "+id);
         p.newLine();
-        p.setText("Vendedor: "+"login");
+        p.setText("Vendedor: "+login);
         p.newLine();
-        p.setText("Rol: "+"rolito");
+        p.setText("Rol: "+rol);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
