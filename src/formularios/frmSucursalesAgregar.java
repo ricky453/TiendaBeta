@@ -195,7 +195,6 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
-        lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
@@ -209,6 +208,7 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        lblMenu = new javax.swing.JLabel();
         lblAgregarSucursales = new javax.swing.JLabel();
         lblListaSucursales = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
@@ -234,6 +234,8 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 700));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1200, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -430,13 +432,6 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
             }
         });
         jpnBarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Menu.png"))); // NOI18N
-        lblMenu.setText("Menu");
-        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 170, 50));
 
         jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
         jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -668,6 +663,21 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpnBarraMenu.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+
+        lblMenu.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras.png"))); // NOI18N
+        lblMenu.setText("Volver a Home");
+        lblMenu.setToolTipText("");
+        lblMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMenu.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMenuMouseClicked(evt);
+            }
+        });
+        jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 180, 50));
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
@@ -994,8 +1004,8 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAgregarSucursalesMouseClicked
 
     private void lblListaSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblListaSucursalesMouseClicked
-        frmProveedores lp = new frmProveedores();
-        lp.setVisible(true);
+        frmSucursales su = new frmSucursales();
+        su.setVisible(true);
         this.setVisible(false);
         lblListaSucursales.setForeground(java.awt.Color.black);
         lblAgregarSucursales.setForeground(java.awt.Color.lightGray);
@@ -1012,6 +1022,12 @@ public class frmSucursalesAgregar extends javax.swing.JFrame {
         //jpnUser.setVisible(false);
         //jpnWhite.setVisible(false);
     }//GEN-LAST:event_jpnUserMouseExited
+
+    private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
+        frmHome home = new frmHome();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblMenuMouseClicked
 
     /**
      * @param args the command line arguments

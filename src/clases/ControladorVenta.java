@@ -5,8 +5,6 @@
  */
 package clases;
 
-import static clases.ControladorProducto.rs;
-import formularios.frmVentas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +22,8 @@ public class ControladorVenta {
     static Conexion cn ;
     static ResultSet rs;
     PreparedStatement ps=null;
+    
+    
     
     public boolean Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
        cn = new Conexion();
@@ -131,7 +131,11 @@ public class ControladorVenta {
         cn=new Conexion();
         try {
             
-            rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%'");
+                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha, venta.PAC, venta.Utilidad FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
+            
+                
+            
+            
             
             while (rs.next()) {
                 ventas.add(rs.getString(1));
@@ -139,7 +143,8 @@ public class ControladorVenta {
                 ventas.add(rs.getString(3));
                 ventas.add(rs.getString(4));
                 ventas.add(rs.getString(5));
-                
+                ventas.add(rs.getString(6));
+                ventas.add(rs.getString(7));
             }
             
             
@@ -150,5 +155,27 @@ public class ControladorVenta {
         ArrayList<Venta> miventas=(ArrayList) ventas;
         return miventas; 
     }
+    public ArrayList<Object> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda, SQLException{
+        ArrayList<Object> ventasBorrador=new ArrayList<Object>();
+        cn=new Conexion();
+        System.out.println("DENDTRO DE CONTROLADOR");
+        if(filtro.equals("TODAS")){
+            System.out.println("DENTRO DE TODAS LAS OPCIONES DE BUSQUEDA DENDTRO DE CONTROLADOR");
+            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B';"));
+        }else{
+            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
+        }
+        int fila=0;
+        while(rs.next()){
+            
+            ventasBorrador.add(rs.getString(1));
+            ventasBorrador.add(rs.getString(2));
+            ventasBorrador.add(rs.getString(3));
+        }
+        
+        return ventasBorrador;
+    }
+    
+    
     
 }

@@ -10,16 +10,16 @@ import javax.print.attribute.standard.PrinterName;
 
 
 public class PrinterOptions {
-    String commandSet = "";
+    String commandSet ="";
 
     public String initialize() {
-        final byte[] Init = {27, 64};
+        final byte[] Init = {27,64};
         commandSet += new String(Init);
         return new String(Init);
     }
 
     public String chooseFont(int Options) {
-        String s = "";
+        String s ="";
         final byte[] ChooseFontA = {27, 77, 0};
         final byte[] ChooseFontB = {27, 77, 1};
         final byte[] ChooseFontC = {27, 77, 48};
@@ -64,14 +64,14 @@ public class PrinterOptions {
     }
 
     public String alignLeft() {
-        final byte[] AlignLeft = {27, 97,48};
+        final byte[] AlignLeft = {27,97,48};
         String s = new String(AlignLeft);
         commandSet += s;
         return s;
     }
 
     public String alignCenter() {
-        final byte[] AlignCenter = {27, 97,49};
+        final byte[] AlignCenter = {27,97,49};
         String s = new String(AlignCenter);
         commandSet += s;
         return s;
@@ -235,7 +235,7 @@ public class PrinterOptions {
     }
 
     public void resetAll() {
-        commandSet = "";
+        commandSet ="";
     }
 
     public void setText(String s) {

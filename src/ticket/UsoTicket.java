@@ -1,6 +1,9 @@
 
 package ticket;
 
+import clases.Venta;
+import java.text.DecimalFormat;
+import java.util.Date;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -12,7 +15,9 @@ import javax.print.attribute.standard.PrinterName;
 
 public class UsoTicket {
     
+    
     private static PrinterOptions p = new PrinterOptions();
+    private static DecimalFormat decimal=new DecimalFormat("#.##");
     
     public static void imprimir() {
         
@@ -27,64 +32,138 @@ public class UsoTicket {
     }
     
     public static void cabecera(){
-        p.feedBack((byte) 2);
+        p.feedBack((byte)2);
         p.chooseFont(1);
         p.color(0);
         p.alignLeft();
-        p.setText("\tTienda ABC");
+        p.setText("\tTIENDA ABC");
         p.newLine();
-        p.setText("\tFinal calle principal santa ana");
+        p.setText("  Final Calle Principal Santa Ana");
         p.newLine();
        
         p.addLineSeperator();
         p.newLine();
     }
     
-    public static void datosTicket(){
+    public static void datosTicket(Object sucursal, String fecha,String tipoVenta){
         p.alignLeft();
-        p.setText("Num. Ticket:" + "1");
         p.newLine();
-        p.setText("Sucursal"+"suco");
+        p.setText("Sucursal "+sucursal);
         p.newLine();
-        p.setText("Factura");
+        p.setText("Tipo de venta: "+tipoVenta);
         p.newLine();
-        p.setText("Fecha de venta: "+"fuking fecha");
-        p.newLine();
-        p.addLineSeperator();
-        p.newLine();
-    }
-    
-    public static void datosVentaFactura(){
-        p.setText("Descripción \tCantidad\tPrecio\t$Total");
-        p.newLine();
-        
-        for (int i = 0; i < 4; i++) {
-            p.setText("os"+"3"+"5"+"89");
-            p.newLine();
-        }
-        p.newLine();
-       
-        p.setText("Total: $" + "cuando nos vemos?");
+        p.setText("Fecha de venta: "+fecha);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
     }
     
-    public static void datosVentaCreditoFiscal(){
-        p.setText("Descripción \tCantidad\tPrecio\t$Total");
+    public static void datosVentaFactura(String venta[][],String total,int filas){
+        
+        p.setText("Descripcion\tCantidad   Precio");
         p.newLine();
         
-        for (int i = 0; i < 4; i++) {
-            p.setText("os"+"3"+"5"+"89");
-            p.newLine();
+        for (int i = 0; i < filas; i++) {
+            
+            if (venta[i][0].length()>15) {
+                String tempo1,tempo2;
+                int largoCantidad=venta[i][1].length();
+                tempo1=venta[i][0].substring(0, 14);
+                tempo2=venta[i][0].substring(14);
+                
+                
+                for (int j = tempo2.length(); j <= 15; j++) {
+                    tempo2=tempo2+" ";
+                }
+                venta[i][0]=tempo1+"\n"+tempo2;
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                String precioIva=decimal.format(Double.parseDouble(venta[i][2])*1.13);
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+precioIva);
+                p.newLine();
+                
+                
+            }else{
+                int largo=venta[i][0].length();
+                int largoCantidad=venta[i][1].length();
+                
+                for (int j = largo; j <= 15; j++) {
+                    venta[i][0]=venta[i][0]+" ";
+                }
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+            }
+            
+            
+        }
+        p.newLine();
+        p.setText("Total: " + total);
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+    }
+    
+    public static void datosVentaCreditoFiscal(String venta[][],String subtotal,String iva,String total,int filas){
+        
+        p.setText("Descripcion\tCantidad   Precio");
+        p.newLine();
+        
+        for (int i = 0; i < filas; i++) {
+            
+            if (venta[i][0].length()>15) {
+                String tempo1,tempo2;
+                int largoCantidad=venta[i][1].length();
+                tempo1=venta[i][0].substring(0, 14);
+                tempo2=venta[i][0].substring(14);
+                
+                
+                for (int j = tempo2.length(); j <= 15; j++) {
+                    tempo2=tempo2+" ";
+                }
+                venta[i][0]=tempo1+"\n"+tempo2;
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+                
+                
+            }else{
+                int largo=venta[i][0].length();
+                int largoCantidad=venta[i][1].length();
+                
+                for (int j = largo; j <= 15; j++) {
+                    venta[i][0]=venta[i][0]+" ";
+                }
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                p.newLine();
+            }
+            
+            
         }
         p.newLine();
        
-        p.setText("SubTotal: $" + "venta subtotal");
+        p.setText("SubTotal: " + subtotal);
         p.newLine();
-        p.setText("Iva: $"+"venta iva");
+        p.setText("Iva: "+iva);
         p.newLine();
-        p.setText("Total: $"+"venta total");
+        p.setText("Total: "+total);
         p.newLine();
         p.addLineSeperator();
         p.newLine();
@@ -100,7 +179,7 @@ public class UsoTicket {
 
         p.setText("Cliente: " + "el cliente");
         p.newLine();
-        p.setText("Dirección: "+"la direccion");
+        p.setText("Direccion: "+"la direccion");
    
         p.addLineSeperator();
         p.newLine();
@@ -110,6 +189,22 @@ public class UsoTicket {
         p.feed((byte) 3);
         
         p.finit();
+    }
+    
+    public static void datosVendedor(int id,String login,String rol){
+        p.alignLeft();
+        p.setText("\t - Detalles Vendedor - ");
+        p.newLine();
+        p.setText("Vendedor: "+login);
+        p.newLine();
+        p.setText("Rol: "+rol);
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("\tTenga buen dia!!");
+        p.newLine();
+        p.finit();
+        
     }
     
     public static void datosClienteCreditoFiscal(){

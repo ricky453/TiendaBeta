@@ -42,14 +42,14 @@ public class frmComprasReportes extends javax.swing.JFrame {
         btngTipos = new javax.swing.ButtonGroup();
         rbtnFactura = new javax.swing.JRadioButton();
         rbtnCredito = new javax.swing.JRadioButton();
-        rbtnLibres = new javax.swing.JRadioButton();
         btnGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btngTipos.add(rbtnFactura);
-        rbtnFactura.setText("COMPRAS FACTURA");
+        rbtnFactura.setSelected(true);
+        rbtnFactura.setText("COMPRAS FACTURA, LIBRES");
         getContentPane().add(rbtnFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 91, -1, -1));
 
         btngTipos.add(rbtnCredito);
@@ -60,10 +60,6 @@ public class frmComprasReportes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbtnCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 91, -1, -1));
-
-        btngTipos.add(rbtnLibres);
-        rbtnLibres.setText("COMPRAS LIBRES");
-        getContentPane().add(rbtnLibres, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 91, -1, -1));
 
         btnGenerarReporte.setText("GENERAR REPORTE");
         btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +92,18 @@ public class frmComprasReportes extends javax.swing.JFrame {
                 Logger.getLogger(frmComprasReportes.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+        }
+        try {
+            if (rbtnFactura.isSelected()) {
+             Conexion cn = new Conexion();
+            JasperReport reportecomprasLF = JasperCompileManager.compileReport("comprasLF.jrxml");
+                JasperPrint print = JasperFillManager.fillReport(reportecomprasLF, null, cn.conexion);
+                JasperViewer view = new JasperViewer (print,false);
+                view.setVisible(true);
+            
+        }
+            
+        } catch (Exception e) {
         }
         
         
@@ -146,6 +154,5 @@ public class frmComprasReportes extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton rbtnCredito;
     private javax.swing.JRadioButton rbtnFactura;
-    private javax.swing.JRadioButton rbtnLibres;
     // End of variables declaration//GEN-END:variables
 }

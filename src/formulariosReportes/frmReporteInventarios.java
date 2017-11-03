@@ -61,12 +61,13 @@ public class frmReporteInventarios extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(rbtnTodasS);
+        rbtnTodasS.setSelected(true);
         rbtnTodasS.setText("INVENTARIO TODAS LAS SUCURSALES");
         getContentPane().add(rbtnTodasS, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 63, -1, -1));
 
         buttonGroup1.add(rbtnUnaS);
         rbtnUnaS.setText("UNA SUCURSAL EN ESPECIFICO");
-        getContentPane().add(rbtnUnaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 86, -1, -1));
+        getContentPane().add(rbtnUnaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         btnGenerar.setText("GENERAR REPORTE");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
@@ -74,9 +75,9 @@ public class frmReporteInventarios extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
 
-        getContentPane().add(cmbSucursalReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 89, -1, -1));
+        getContentPane().add(cmbSucursalReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

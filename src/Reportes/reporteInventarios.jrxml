@@ -3,8 +3,8 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT inventario.IdSucursal, sucursal.Nombre AS Sucursal, inventario.CodBarra, producto.Nombre AS Producto, inventario.Cantidad FROM inventario,producto,sucursal WHERE inventario.IdSucursal=sucursal.IdSucursal AND inventario.CodBarra=producto.CodBarra order by inventario.IdSucursal]]>
+	<queryString>
+		<![CDATA[SELECT inventario.IdSucursal, sucursal.Nombre AS Sucursal, inventario.CodBarra, producto.Nombre AS Producto, inventario.Cantidad,producto.Costo FROM inventario,producto,sucursal WHERE inventario.IdSucursal=sucursal.IdSucursal AND inventario.CodBarra=producto.CodBarra order by inventario.IdSucursal]]>
 	</queryString>
 	<field name="IdSucursal" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -17,6 +17,12 @@
 	<field name="Cantidad" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="Costo" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="count" class="java.lang.String" resetType="Group" resetGroup="IdSucursal">
+		<variableExpression><![CDATA[$F{IdSucursal}]]></variableExpression>
+	</variable>
 	<group name="IdSucursal">
 		<groupExpression><![CDATA[$F{IdSucursal}]]></groupExpression>
 		<groupHeader>
@@ -30,7 +36,7 @@
 				</staticText>
 				<textField>
 					<reportElement mode="Opaque" x="77" y="1" width="111" height="32" forecolor="#710804" backcolor="#FFFFFF" uuid="6e9f73e5-b4d4-4a07-8197-4bdd27bf443f"/>
-					<textElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="24" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{IdSucursal}]]></textFieldExpression>
@@ -40,8 +46,8 @@
 				</line>
 				<textField>
 					<reportElement x="253" y="1" width="302" height="32" forecolor="#710804" uuid="eee2cb9d-c40d-408c-b4e3-161359ed3032"/>
-					<textElement>
-						<font size="22" isBold="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="20" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{Sucursal}]]></textFieldExpression>
 				</textField>
@@ -61,7 +67,78 @@
 	<group name="Sucursal">
 		<groupExpression><![CDATA[$F{Sucursal}]]></groupExpression>
 		<groupHeader>
-			<band/>
+			<band height="36">
+				<staticText>
+					<reportElement x="0" y="16" width="41" height="20" uuid="e0937840-5299-41ff-a69c-5fc638c3fe22"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="455" y="16" width="100" height="20" uuid="318a40c1-7964-4004-9af4-d0edb661268c"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Costo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="16" width="100" height="20" uuid="5513062c-c684-4c7f-ad44-7b0196690dbe"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CodBarra]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="141" y="16" width="214" height="20" uuid="0beda56a-26af-485d-8c9d-61ebd26cb508"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Producto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="355" y="16" width="100" height="20" uuid="2222854b-a731-4a36-97ea-a987c7a31355"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+			</band>
 		</groupHeader>
 		<groupFooter>
 			<band/>
@@ -75,7 +152,7 @@
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#7F0B05" uuid="1781d695-e827-468c-b057-47acc198ff4f"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="5aac79bf-8ad2-4961-a02a-3d931a55579a"/>
+					<reportElement x="20" y="20" width="269" height="43" forecolor="#FFFFFF" uuid="5aac79bf-8ad2-4961-a02a-3d931a55579a"/>
 					<textElement verticalAlignment="Middle">
 						<font size="34" isBold="true"/>
 					</textElement>
@@ -99,27 +176,6 @@
 			<line>
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="4f0bf65a-a3a4-4fbb-9929-aac135c87f24"/>
 			</line>
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="143" height="20" forecolor="#74030D" backcolor="#E6E6E6" uuid="56520e6c-412e-4f66-bc68-b53e2124c43f"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CodBarra]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="143" y="0" width="227" height="20" forecolor="#74030D" backcolor="#E6E6E6" uuid="43da68b2-f02f-4a9f-96c6-b443eb47cae7"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Producto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#74030D" backcolor="#E6E6E6" uuid="c3565212-3d3c-4e84-83e1-8e94aa9ce770"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cantidad]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -127,26 +183,65 @@
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="56298bee-79f5-4b32-83be-b8f5fa554a0b"/>
 			</line>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="30" y="0" width="113" height="20" uuid="0194c640-63c6-477d-97ca-c5a068fa02bc"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
+			<textField>
+				<reportElement x="41" y="0" width="100" height="19" uuid="5c7e61dd-8c9e-4553-a25b-6641d88c179b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{CodBarra}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="143" y="0" width="316" height="20" uuid="ffcdcd04-ec45-4db7-92c5-b06fba3572d6"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
+			<textField>
+				<reportElement x="141" y="0" width="214" height="20" uuid="0b696e45-700d-4429-9f87-c95d8229ba55"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Producto}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="###0">
-				<reportElement x="459" y="0" width="96" height="20" uuid="f4682f3e-54f8-4c17-9b97-642b7a45bd76"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
+			<textField pattern="###0">
+				<reportElement x="355" y="0" width="100" height="20" uuid="ff82f8f8-b8ce-46c0-8f83-bdd2966cfab4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="41" height="20" uuid="85645b74-78e1-4793-9f99-c5ce5e1f2e46"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{IdSucursal_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="455" y="0" width="100" height="20" uuid="b79c65c6-4d51-4a56-bb00-691799ce4114"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Costo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
