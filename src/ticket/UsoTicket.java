@@ -60,7 +60,7 @@ public class UsoTicket {
     
     public static void datosVentaFactura(String venta[][],String total,int filas){
         
-        p.setText("Descripcion\tCantidad   Precio+Iva");
+        p.setText("Descripcion\tCantidad   Precio");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
@@ -195,13 +195,13 @@ public class UsoTicket {
         p.alignLeft();
         p.setText("\t - Detalles Vendedor - ");
         p.newLine();
-        p.setText("Id vendedor: "+id);
-        p.newLine();
         p.setText("Vendedor: "+login);
         p.newLine();
         p.setText("Rol: "+rol);
         p.newLine();
         p.addLineSeperator();
+        p.newLine();
+        p.setText("\tTenga buen dia!!");
         p.newLine();
         p.finit();
         
