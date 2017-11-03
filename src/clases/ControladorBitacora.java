@@ -20,8 +20,8 @@ public class ControladorBitacora {
         try {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(bitacora.getFecha());
-            System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
-            cn.st.executeUpdate("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
+            //System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
+            cn.st.execute("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorBitacora/Agregar", e.getMessage());
         }
@@ -32,10 +32,9 @@ public class ControladorBitacora {
         try {
             
             rs = null;
-            rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion`\n" +
-                                    "FROM `bitacora`\n" +
-                                    "LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n" +
-                                    "WHERE ((`bitacora`.`IdUsuario` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
+           
+            rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion` FROM `bitacora` LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n WHERE ((`bitacora`.`IdUsuario` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
+            
             while (rs.next()) {
                 bitacora.add(rs.getString(1));
                 bitacora.add(rs.getString(2));

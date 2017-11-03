@@ -57,6 +57,7 @@ public class frmCompras extends javax.swing.JFrame {
     DefaultTableModel tablaModel= new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
     JTableHeader tHeadVentas;
+    double percepcio =0;
     String rol, password;
     
     public frmCompras() {
@@ -180,6 +181,8 @@ public class frmCompras extends javax.swing.JFrame {
         lblComprar = new javax.swing.JLabel();
         lblDetallesCompras = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
+        lblNomProd2 = new javax.swing.JLabel();
+        lblNomProd3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -444,8 +447,8 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNomProd.setForeground(new java.awt.Color(124, 20, 20));
-        lblNomProd.setText("%");
-        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 580, 30, 40));
+        lblNomProd.setText("$");
+        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 630, 30, 40));
 
         txtNomProd.setEditable(false);
         txtNomProd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -503,7 +506,7 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal1.setText("TOTAL:");
-        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, 50, 40));
+        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 630, 50, 40));
 
         txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -890,6 +893,16 @@ public class frmCompras extends javax.swing.JFrame {
         jSeparator8.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 117, 1020, 10));
 
+        lblNomProd2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNomProd2.setForeground(new java.awt.Color(124, 20, 20));
+        lblNomProd2.setText("%");
+        getContentPane().add(lblNomProd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 580, 30, 40));
+
+        lblNomProd3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNomProd3.setForeground(new java.awt.Color(124, 20, 20));
+        lblNomProd3.setText("$");
+        getContentPane().add(lblNomProd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 530, 30, 40));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1097,9 +1110,9 @@ public class frmCompras extends javax.swing.JFrame {
         double totalFinal=Double.parseDouble(decimal.format(total));
         
         if (TipoCompra==0) {
-            txtIVA.setText("$"+decimal.format(totalFinal*0.13));
-            //txtPercepcion.setText("$"+decimal.format(totalFinal*0.1));
-            txtTotal.setText("$"+decimal.format(totalFinal+(totalFinal*0.13)-(totalFinal*(Double.parseDouble(txtPercepcion.getText())/100))));
+            txtIVA.setText(decimal.format(totalFinal*0.13));
+            percepcio = totalFinal*(Double.parseDouble(txtPercepcion.getText())/100);
+            txtTotal.setText(decimal.format(totalFinal+(totalFinal*0.13)-(totalFinal*(Double.parseDouble(txtPercepcion.getText())/100))));
         }else{
             txtTotal.setText("$"+totalFinal);
         }
@@ -1181,9 +1194,9 @@ public class frmCompras extends javax.swing.JFrame {
                 compra.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 compra.setFecha(dtcFecha.getDate());
                 if (Tipocompra==0) {
-                    compra.setPercepcion(Double.parseDouble(decimal.format(Double.parseDouble(total)*((Double.parseDouble(txtPercepcion.getText())/100)))));
-                    compra.setIVA(Double.parseDouble(decimal.format(Double.parseDouble(total)*0.13)));
-                    compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total)+((Double.parseDouble(total)*0.13))+(Double.parseDouble(total)*((Double.parseDouble(txtPercepcion.getText())/100))))));
+                    compra.setPercepcion(Double.parseDouble(decimal.format(percepcio)));
+                    compra.setIVA(Double.parseDouble(txtIVA.getText()));
+                    compra.setTotal(Double.parseDouble(txtTotal.getText()));
                 }else{
                     compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total))));
                 }
@@ -1206,7 +1219,7 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 Bitacora bitacora = new Bitacora();
-                //bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+                bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
                 bitacora.setFecha(dtcFecha.getDate());
                 bitacora.setAccion("Compra");
                 ControladorBitacora.Agregar(bitacora);
@@ -1866,6 +1879,8 @@ public class frmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblNomProd;
     private javax.swing.JLabel lblNomProd1;
+    private javax.swing.JLabel lblNomProd2;
+    private javax.swing.JLabel lblNomProd3;
     private javax.swing.JLabel lblPercepcion;
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblRolUsuario;

@@ -26,6 +26,9 @@ import static formularios.frmLogin.txtUser;
 import java.awt.Color;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -45,11 +48,14 @@ public class frmBitacoras extends javax.swing.JFrame {
     frmProveedoresModificar pom = new frmProveedoresModificar();
     String rol;
     
+    
     public frmBitacoras() {
         initComponents();
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         obtenerUsuario();
+        java.util.Date date = new Date();
+        dctBuscarFecha.setDate(date);
 
 
     }

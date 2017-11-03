@@ -114,4 +114,18 @@ public class ControladorUsuario {
         ArrayList<Usuario> usuarios=(ArrayList) usuario;
         return usuarios;
     }
+    public static int ObtenerIdUser(String Login) throws ErrorTienda{
+        cn = new Conexion();
+        int id=0;
+        try {
+            rs = null;
+            rs = cn.st.executeQuery("SELECT IdUsuario FROM Usuario WHERE Login="+"'"+Login+"';");
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            throw  new ErrorTienda("Class ControladorUsuario/ ObtenerIdUser", e.getMessage());
+        }
+        return id;
+    }
 }
