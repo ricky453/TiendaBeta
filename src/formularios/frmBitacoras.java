@@ -594,7 +594,7 @@ public class frmBitacoras extends javax.swing.JFrame {
                     modeloBitacoras.addRow(fila);
                     tblBitacoras.setModel(modeloBitacoras);
                 }
-            } catch (ErrorTienda e) {
+            }catch (ErrorTienda e) {
                 Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, e);
             }
         }

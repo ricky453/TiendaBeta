@@ -17,11 +17,12 @@ public class ControladorBitacora {
     static Conexion cn;
     static ResultSet rs;
     public static void Agregar(Bitacora bitacora) throws ErrorTienda{
+        cn = new Conexion();
         try {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(bitacora.getFecha());
             //System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
-            cn.st.execute("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
+            cn.st.executeUpdate("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorBitacora/Agregar", e.getMessage());
         }
@@ -29,10 +30,9 @@ public class ControladorBitacora {
     
     public static ArrayList<Bitacora> ObenterBitacoras(String consulta) throws ErrorTienda{
         ArrayList<Object> bitacora = new ArrayList<Object>();
+        cn = new Conexion();
         try {
-            
-            rs = null;
-           
+
             rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion` FROM `bitacora` LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n WHERE ((`bitacora`.`IdUsuario` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
             
             while (rs.next()) {
@@ -42,6 +42,7 @@ public class ControladorBitacora {
                 bitacora.add(rs.getString(4));
             }
         } catch (SQLException e) {
+            throw new ErrorTienda("ContrladorBitacora/Obtener", e.getMessage());
         }
         ArrayList<Bitacora> bit = (ArrayList) bitacora;
         return bit;
