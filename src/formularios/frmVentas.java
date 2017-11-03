@@ -28,9 +28,11 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -411,6 +413,7 @@ public class frmVentas extends javax.swing.JFrame {
     }
     //GUARDAR, AGREGA LA VENTA A LA BASE DE DATOS
     public void guardar() throws ErrorTienda{
+        SimpleDateFormat formato;
         char idTipoVenta;
         double totGravado;
         if(cmbTipoVenta.getSelectedIndex()==0){
@@ -445,6 +448,8 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setUtilidad(Double.parseDouble(decimal.format((totGravado-this.CostoGravado))));
         venta.setTotal(Double.parseDouble(txtTotalventa.getText().substring(1)));
         venta.setFecha(dtcFecha.getDate());
+        formato=new SimpleDateFormat("dd/MM/yy HH:mm:ss",Locale.getDefault());
+        String fecha=formato.format(venta.getFecha());
         venta.setCliente(txtClienteVenta.getText().toUpperCase());
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         venta.CalcularPAC();
@@ -476,7 +481,7 @@ public class frmVentas extends javax.swing.JFrame {
             //Imprimir
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
-            UsoTicket.datosTicket(sucursal,venta.getFecha(),"Factura");
+            UsoTicket.datosTicket(sucursal,fecha,"Factura");
             
             
             UsoTicket.datosVentaFactura(detalles,total,filas);
@@ -487,7 +492,7 @@ public class frmVentas extends javax.swing.JFrame {
             //Imprimir
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
-            UsoTicket.datosTicket(sucursal,venta.getFecha(),"Credito Fiscal");
+            UsoTicket.datosTicket(sucursal,fecha,"Credito Fiscal");
             UsoTicket.datosVentaCreditoFiscal(detalles,subtotal,iva,total,filas);
             UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();

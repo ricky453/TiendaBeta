@@ -2,6 +2,7 @@
 package ticket;
 
 import clases.Venta;
+import java.text.DecimalFormat;
 import java.util.Date;
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -14,7 +15,9 @@ import javax.print.attribute.standard.PrinterName;
 
 public class UsoTicket {
     
+    
     private static PrinterOptions p = new PrinterOptions();
+    private static DecimalFormat decimal=new DecimalFormat("#.##");
     
     public static void imprimir() {
         
@@ -42,9 +45,8 @@ public class UsoTicket {
         p.newLine();
     }
     
-    public static void datosTicket(Object sucursal, Date fecha,String tipoVenta){
+    public static void datosTicket(Object sucursal, String fecha,String tipoVenta){
         p.alignLeft();
-        p.setText("Num. Ticket:" + "1");
         p.newLine();
         p.setText("Sucursal "+sucursal);
         p.newLine();
@@ -58,7 +60,7 @@ public class UsoTicket {
     
     public static void datosVentaFactura(String venta[][],String total,int filas){
         
-        p.setText("Descripcion\tCantidad   Precio");
+        p.setText("Descripcion\tCantidad   Precio+Iva");
         p.newLine();
         
         for (int i = 0; i < filas; i++) {
@@ -79,7 +81,9 @@ public class UsoTicket {
                     venta[i][1]=venta[i][1]+" ";
                 }
                 
-                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
+                String precioIva=decimal.format(Double.parseDouble(venta[i][2])*1.13);
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+precioIva);
                 p.newLine();
                 
                 
