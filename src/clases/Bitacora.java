@@ -16,6 +16,9 @@ public class Bitacora {
     private Date Fecha;
     private String Accion; 
 
+    public Bitacora() {
+    }
+    
     public Bitacora(int IdUsuario, Date Fecha, String Accion) {
         this.IdUsuario = IdUsuario;
         this.Fecha = Fecha;

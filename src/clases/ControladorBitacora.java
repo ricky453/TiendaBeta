@@ -20,7 +20,8 @@ public class ControladorBitacora {
         try {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(bitacora.getFecha());
-            cn.st.executeUpdate("INSERT INTO bitacora VALUES('"+bitacora.getIdUsuario()+"', '"+bitacora.getFecha()+"', '"+bitacora.getAccion()+"');");
+            System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
+            cn.st.executeUpdate("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorBitacora/Agregar", e.getMessage());
         }

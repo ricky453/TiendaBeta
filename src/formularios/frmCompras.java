@@ -8,7 +8,9 @@ package formularios;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import AppPackage.AnimationClass;
+import clases.Bitacora;
 import clases.Compra;
+import clases.ControladorBitacora;
 import clases.ControladorCompra;
 import clases.ControladorProducto;
 import clases.ControladorProveedor;
@@ -1164,6 +1166,12 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
+                Bitacora bitacora = new Bitacora();
+                bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+                bitacora.setFecha(dtcFecha.getDate());
+                bitacora.setAccion("Compra");
+                ControladorBitacora.Agregar(bitacora);
+                
                 mensajeNotificacion("Compra Agregada", "Ok");
                 
                 }
