@@ -65,7 +65,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         ventas = tblVentas.getTableHeader();
         CargarSucursales();
         CargarVentasBorrador("TODAS",0);
-        //obtenerUsuario();
+        obtenerUsuario();
         
     }
     
@@ -357,7 +357,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         frmConsolidar.setAlwaysOnTop(true);
-        frmConsolidar.setMaximumSize(new java.awt.Dimension(300, 250));
         frmConsolidar.setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         frmConsolidar.setUndecorated(true);
         frmConsolidar.setResizable(false);
@@ -411,7 +410,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         frmDatosFinales.setTitle("Terminando");
         frmDatosFinales.setAlwaysOnTop(true);
-        frmDatosFinales.setMaximumSize(new java.awt.Dimension(540, 285));
         frmDatosFinales.setUndecorated(true);
         frmDatosFinales.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
