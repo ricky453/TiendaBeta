@@ -505,6 +505,7 @@ public class frmVentas extends javax.swing.JFrame {
             
             UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();
+            
         }else{
             //Imprimir
             UsoTicket.borradoInicializacion();

@@ -20,7 +20,7 @@ public class UsoTicket {
     private static DecimalFormat decimal=new DecimalFormat("#.##");
     
     public static void imprimir() {
-        
+        p.openDrawer(); //metodo para abrir caja de dinero
         //metodo para imprimir
         feedPrinter(p.finalCommandSet().getBytes());
 
