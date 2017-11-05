@@ -66,7 +66,7 @@ public class Venta {
     
     public void CalcularPAC(){
         double pac;
-        pac=Double.parseDouble(decf.format(this.TotalGravado*0.0175));
+        pac=Double.parseDouble(decf.format(this.Total*(1.75/100)));
         this.PAC= pac;
     }
 

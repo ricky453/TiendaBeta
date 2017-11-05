@@ -56,11 +56,11 @@ public class frmVentas extends javax.swing.JFrame {
     Iterator<Sucursal> Iterador;
     Object miSucursal[][],misPrecios[][] ;
     DecimalFormat decimal =new DecimalFormat("#.##");
-    double subTotales,utilidad,CostoGravado;
+    double subTotales=0,utilidad=0,CostoGravado=0;
     String rol, password;
     ControladorVenta cv;
     ControladorProducto cp;
-    Producto miProducto;
+    Producto miProducto,miProductoCosto;
     Venta venta = new Venta();
     DetalleVenta dv = new DetalleVenta();
     ControladorTipoPrecio precios;
@@ -246,6 +246,20 @@ public class frmVentas extends javax.swing.JFrame {
             
         }
     }
+    public void ObtenerCostoProducto(String codBarra){
+        try {
+            
+            
+            int idSucursal = Integer.valueOf(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0]));
+            miProductoCosto = ControladorProducto.Obtener(codBarra,idSucursal);
+            CostoGravado-=miProductoCosto.getCosto()*Double.parseDouble((modeloVentas.getValueAt(tblProductosVender.getSelectedRow(), 2)).toString());
+            System.err.println("Costo Gravado "+CostoGravado);
+            
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     //CARGAR PRODUCTO EN LA TABLA
     public void cargarTabla() throws ErrorTienda{
         
@@ -277,13 +291,13 @@ public class frmVentas extends javax.swing.JFrame {
         }
         dv.setPrecioUnitario(costoUnitario);
         dv.setCantidad(Double.parseDouble(txtCantidadVender.getText()));
-        totalDetalle=dv.CalcularPrecioDetalle();
+        //totalDetalle=dv.CalcularPrecioDetalle();
         double subTot=costoUnitario*Double.parseDouble(txtCantidadVender.getText());
-        if(cmbTipoVenta.getSelectedIndex()==0){
-            modeloVentas.setValueAt(decimal.format(subTot*1.13),fila, 4);
-        }else{
+        CostoGravado+=(miProducto.getCosto()*Double.parseDouble(txtCantidadVender.getText()));
+        
+            System.err.println("Costo Gravado "+CostoGravado);
             modeloVentas.setValueAt(decimal.format(subTot),fila, 4);
-        }
+        
         
         
         if(cmbTipoVenta.getSelectedIndex()==1){
@@ -310,6 +324,9 @@ public class frmVentas extends javax.swing.JFrame {
         subTotales=0;
         for(int i=0;i<filas;i++){
             subTotales+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(i, 4)));
+        }
+        if(cmbTipoVenta.getSelectedIndex()==1){
+            subTotales=subTotales/1.13;
         }
         
     }
@@ -453,7 +470,7 @@ public class frmVentas extends javax.swing.JFrame {
         venta.setCliente(txtClienteVenta.getText().toUpperCase());
         venta.setDireccion(txtDireccionVenta.getText().toUpperCase());
         venta.CalcularPAC();
-        
+        CostoGravado=0;
         
         Object sucursal=cmbSucursalVenta.getSelectedItem();
         
@@ -526,6 +543,7 @@ public class frmVentas extends javax.swing.JFrame {
             this.CostoGravado+=CostoProducto*ProductoCantidad;
             
         }
+        CostoGravado=CostoGravado/1.13;
         
         
     }
@@ -560,6 +578,8 @@ public class frmVentas extends javax.swing.JFrame {
         txtSumas.setText("$"+subTotales);
         txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
                }
+               CostoGravado+=(miProducto.getCosto()*Double.parseDouble(txtCantidadVender.getText()));
+               System.err.println("Costo Gravado "+CostoGravado);
                return true;
            }
        }
@@ -1004,11 +1024,11 @@ public class frmVentas extends javax.swing.JFrame {
         getContentPane().add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 130, -1));
 
         txtClienteVenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtClienteVentaKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtClienteVentaKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClienteVentaKeyPressed(evt);
             }
         });
         getContentPane().add(txtClienteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 330, 30));
@@ -1085,8 +1105,8 @@ public class frmVentas extends javax.swing.JFrame {
         getContentPane().add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 650, 110, 30));
 
         lblSumas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSumas.setText("Sumas");
-        getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, -1, -1));
+        lblSumas.setText("Sub Total");
+        getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 600, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Tipo de Precio");
@@ -1642,6 +1662,7 @@ public class frmVentas extends javax.swing.JFrame {
     private void tblProductosVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProductosVenderKeyPressed
         char c = evt.getKeyChar();
         if(c == (char) KeyEvent.VK_DELETE){
+            ObtenerCostoProducto((modeloVentas.getValueAt(tblProductosVender.getSelectedRow(), 0).toString()));
             EliminarProducto();
              if(cmbTipoVenta.getSelectedIndex()==0){
                    SumarSubTotales();
@@ -1654,7 +1675,7 @@ public class frmVentas extends javax.swing.JFrame {
         venta.CalcularTotal();
         
         txtIVA.setText("$ "+decimal.format(venta.getIVA()));
-        txtSumas.setText("$"+subTotales);
+        txtSumas.setText("$"+decimal.format(subTotales));
         txtTotalventa.setText("$ "+decimal.format(venta.getTotal()));
                }
              txtCodigoBarraVender.requestFocus();
@@ -1674,7 +1695,7 @@ public class frmVentas extends javax.swing.JFrame {
         try {
             System.err.println("Tipo venta "+cmbTipoVenta.getSelectedIndex());
             if(validar(cmbTipoVenta.getSelectedIndex())){
-                CalcularCostoGravado();
+                //CalcularCostoGravado();
                 guardar();
                
                frmCalcularCambio cc = new frmCalcularCambio();
@@ -1743,6 +1764,7 @@ public class frmVentas extends javax.swing.JFrame {
     private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
         colorLabels();
         limpiar("todo");
+        CostoGravado=0;
         cmbSucursalVenta.setSelectedIndex(0);
         cmbTipoVenta.setSelectedIndex(0);
         cmbTipoPrecio.setSelectedIndex(1);

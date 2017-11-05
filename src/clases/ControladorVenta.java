@@ -161,16 +161,20 @@ public class ControladorVenta {
         System.out.println("DENDTRO DE CONTROLADOR");
         if(filtro.equals("TODAS")){
             System.out.println("DENTRO DE TODAS LAS OPCIONES DE BUSQUEDA DENDTRO DE CONTROLADOR");
-            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B';"));
+            rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total FROM venta WHERE TipoVenta='B' ORDER BY IdSucursal ASC;"));
         }else{
-            rs= (cn.st.executeQuery("SELECT IdVenta,Fecha,Total FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
+            rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total,Utilidad FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
         }
-        int fila=0;
+        
         while(rs.next()){
             
             ventasBorrador.add(rs.getString(1));
             ventasBorrador.add(rs.getString(2));
             ventasBorrador.add(rs.getString(3));
+            ventasBorrador.add(rs.getString(4));
+            if(!filtro.equals("TODAS")){
+                ventasBorrador.add(rs.getString(5));
+            }
         }
         
         return ventasBorrador;

@@ -27,7 +27,7 @@ public class DetalleVenta {
     public double CalcularPrecio(double utilidad){  //Para un producto:jabones
         //La utilidad es respecto al tipo precio
         double nuevoPrecio=0;
-        nuevoPrecio=((this.PrecioUnitario))/utilidad; //precio de venta
+        nuevoPrecio=(((this.PrecioUnitario))/utilidad)*1.13; //precio de venta
         
         return Double.parseDouble(decimal.format(nuevoPrecio));
     }
