@@ -119,7 +119,7 @@ public class ControladorUsuario {
         int id=0;
         try {
             rs = null;
-            rs = cn.st.executeQuery("SELECT IdUsuario FROM Usuario WHERE Login="+"'"+Login+"';");
+            rs = cn.st.executeQuery("SELECT IdUsuario FROM usuario WHERE Login="+"'"+Login+"';");
             while (rs.next()) {
                 id = rs.getInt(1);
             }
