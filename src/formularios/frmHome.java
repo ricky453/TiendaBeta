@@ -12,6 +12,7 @@ import clases.ErrorTienda;
 import clases.Usuario;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
+import formulariosReportes.frmComprasReportes;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -1539,7 +1540,9 @@ public final class frmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        frmComprasReportes cr = new frmComprasReportes();
+        cr.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnBitacorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseClicked

@@ -67,13 +67,13 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         cmbCargo = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         pnl_overlay = new javax.swing.JPanel();
+        btnAtras = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
-        btnAtras = new javax.swing.JButton();
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -254,7 +254,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                                 .addComponent(jSeparator4)
                                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,6 +311,20 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnAtras.setBackground(new java.awt.Color(102, 0, 0));
+        btnAtras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(102, 0, 0));
+        btnAtras.setText("¡Volver atrás!");
+        btnAtras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 0)));
+        btnAtras.setContentAreaFilled(false);
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.setFocusPainted(false);
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -349,20 +363,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         lblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsuario.setText("Usuario recomendado:");
 
-        btnAtras.setBackground(new java.awt.Color(102, 0, 0));
-        btnAtras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAtras.setForeground(new java.awt.Color(102, 0, 0));
-        btnAtras.setText("¡Volver atrás!");
-        btnAtras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 0)));
-        btnAtras.setContentAreaFilled(false);
-        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAtras.setFocusPainted(false);
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnl_overlayLayout = new javax.swing.GroupLayout(pnl_overlay);
         pnl_overlay.setLayout(pnl_overlayLayout);
         pnl_overlayLayout.setHorizontalGroup(
@@ -371,8 +371,8 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnl_overlayLayout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addGroup(pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(121, Short.MAX_VALUE)
+                .addGroup(pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,7 +380,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 109, Short.MAX_VALUE))
+                .addGap(0, 114, Short.MAX_VALUE))
         );
         pnl_overlayLayout.setVerticalGroup(
             pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,11 +394,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
-                .addGap(433, 433, 433)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(195, 195, 195)
                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addGap(198, 198, 198)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(pnl_overlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 490, 650));
@@ -407,11 +407,11 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -751,6 +751,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgSexo;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnAtras1;
     private javax.swing.JComboBox<String> cmbCargo;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel10;
