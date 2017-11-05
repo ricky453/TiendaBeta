@@ -1347,6 +1347,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                         if (tblVentas.getValueAt(seleccion, 0).equals(fila[0])) {
                             txtIdVenta.setText(tblVentas.getValueAt(seleccion, 0).toString());
                             txtFecha2.setText((tblVentas.getValueAt(seleccion, 4).toString()));
+                            txtCliente.setText(tblVentas.getValueAt(seleccion, 2).toString());
                             txtSucursal.setText((tblVentas.getValueAt(seleccion, 1).toString()));
                             txtTipoVenta.setText("Crédito Fiscal");
                             txtPac.setText(fila[5].toString());
