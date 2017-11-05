@@ -62,6 +62,13 @@ public class PrinterOptions {
         commandSet += s;
         return s;
     }
+    
+    public String openDrawer(){
+    final byte[] openCD={27,112,0,60,120};
+    String s=new String(openCD);
+    commandSet+=s;
+    return s;
+    }
 
     public String alignLeft() {
         final byte[] AlignLeft = {27,97,48};

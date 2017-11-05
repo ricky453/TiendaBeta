@@ -505,6 +505,7 @@ public class frmVentas extends javax.swing.JFrame {
             
             UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();
+            
         }else{
             //Imprimir
             UsoTicket.borradoInicializacion();
@@ -1298,9 +1299,6 @@ public class frmVentas extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVentasMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVentasMouseEntered(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVentasMouseEntered(evt);
