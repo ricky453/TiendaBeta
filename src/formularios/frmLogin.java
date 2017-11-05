@@ -8,6 +8,7 @@ package formularios;
 import clases.ControladorUsuario;
 import clases.ErrorTienda;
 import facadeshop.Diseño;
+import formulariosReportes.frmComprasReportes;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -330,6 +331,11 @@ public class frmLogin extends javax.swing.JFrame {
                     }
                 
             }else if(rol.equals("E")){
+                Diseño.user = txtUser.getText();
+                frmComprasReportes cr = new frmComprasReportes();
+                cr.show();
+                mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
+                dispose();
                 
             }
               

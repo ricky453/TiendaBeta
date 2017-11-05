@@ -226,10 +226,10 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         tblTipoPrecio = new javax.swing.JTable();
-        jpnPass1 = new javax.swing.JPanel();
+        jpnPass = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        pwdAntigua = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        pwdAntigua1 = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
         pwdNueva = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         pwdNueva2 = new javax.swing.JPasswordField();
@@ -302,10 +302,10 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
             }
         });
         tblTipoPrecio.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblTipoPrecioInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblTipoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -322,31 +322,31 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpnPass1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
-        jpnPass1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
+        jpnPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel3.setText("Repita nueva contraseña:");
+        jpnPass.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
+
+        pwdAntigua.setBackground(new java.awt.Color(240, 240, 240));
+        pwdAntigua.setBorder(null);
+        pwdAntigua.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdAntiguaFocusGained(evt);
+            }
+        });
+        pwdAntigua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdAntiguaActionPerformed(evt);
+            }
+        });
+        jpnPass.add(pwdAntigua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 190, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel4.setText("Repita nueva contraseña:");
-        jpnPass1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
-
-        pwdAntigua1.setBackground(new java.awt.Color(240, 240, 240));
-        pwdAntigua1.setBorder(null);
-        pwdAntigua1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                pwdAntigua1FocusGained(evt);
-            }
-        });
-        pwdAntigua1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pwdAntigua1ActionPerformed(evt);
-            }
-        });
-        jpnPass1.add(pwdAntigua1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 190, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel5.setText("Contraseña antigua:");
-        jpnPass1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
+        jLabel4.setText("Contraseña antigua:");
+        jpnPass.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
 
         pwdNueva.setBackground(new java.awt.Color(240, 240, 240));
         pwdNueva.setBorder(null);
@@ -360,12 +360,12 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
                 pwdNuevaActionPerformed(evt);
             }
         });
-        jpnPass1.add(pwdNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 85, 190, -1));
+        jpnPass.add(pwdNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 85, 190, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 0, 0));
         jLabel7.setText("Nueva contraseña:");
-        jpnPass1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+        jpnPass.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
 
         pwdNueva2.setBackground(new java.awt.Color(240, 240, 240));
         pwdNueva2.setBorder(null);
@@ -374,7 +374,7 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
                 pwdNueva2FocusGained(evt);
             }
         });
-        jpnPass1.add(pwdNueva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 135, 190, -1));
+        jpnPass.add(pwdNueva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 135, 190, -1));
 
         btnAtrasPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras2.png"))); // NOI18N
         btnAtrasPwd.setToolTipText("Volver atrás.");
@@ -384,7 +384,7 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
                 btnAtrasPwdMouseClicked(evt);
             }
         });
-        jpnPass1.add(btnAtrasPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 155, 30, 30));
+        jpnPass.add(btnAtrasPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 155, 30, 30));
 
         btnCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Aceptar.png"))); // NOI18N
         btnCambiarPwd.setToolTipText("Cambiar Contraseña.");
@@ -394,21 +394,21 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
                 btnCambiarPwdMouseClicked(evt);
             }
         });
-        jpnPass1.add(btnCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, 30, 30));
+        jpnPass.add(btnCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, 30, 30));
 
         jSeparator1.setBackground(new java.awt.Color(102, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(102, 0, 0));
-        jpnPass1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 190, 10));
+        jpnPass.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 190, 10));
 
         jSeparator2.setBackground(new java.awt.Color(102, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(102, 0, 0));
-        jpnPass1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 190, 10));
+        jpnPass.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 190, 10));
 
         jSeparator4.setBackground(new java.awt.Color(102, 0, 0));
         jSeparator4.setForeground(new java.awt.Color(102, 0, 0));
-        jpnPass1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 10));
+        jpnPass.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 10));
 
-        getContentPane().add(jpnPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, -195, 230, 190));
+        getContentPane().add(jpnPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, -195, 230, 190));
 
         jpnUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
         jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1114,13 +1114,31 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jpnBarraMenuPropertyChange
 
-    private void pwdAntigua1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdAntigua1FocusGained
-        pwdAntigua.selectAll();
-    }//GEN-LAST:event_pwdAntigua1FocusGained
+    private void lblCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarPwdMouseClicked
+        jpnPass.setVisible(true);
+        Animacion.Animacion.bajar(-195, 55, 1, 2, jpnPass);
+        pwdAntigua.requestFocus();
+    }//GEN-LAST:event_lblCambiarPwdMouseClicked
 
-    private void pwdAntigua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdAntigua1ActionPerformed
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        frmLogin lg = new frmLogin();
+        lg.setVisible(true);
+        this.setVisible(false);
+        mensajeNotificacion("¡Has cerrado sesión!", "Error");
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
+
+    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
+        //jpnUser.setVisible(false);
+        //jpnWhite.setVisible(false);
+    }//GEN-LAST:event_jpnUserMouseExited
+
+    private void pwdAntiguaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdAntiguaFocusGained
+        pwdAntigua.selectAll();
+    }//GEN-LAST:event_pwdAntiguaFocusGained
+
+    private void pwdAntiguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdAntiguaActionPerformed
         pwdNueva.requestFocus();
-    }//GEN-LAST:event_pwdAntigua1ActionPerformed
+    }//GEN-LAST:event_pwdAntiguaActionPerformed
 
     private void pwdNuevaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdNuevaFocusGained
         pwdNueva.selectAll();
@@ -1141,24 +1159,6 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     private void btnCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCambiarPwdMouseClicked
         comprobarPass();
     }//GEN-LAST:event_btnCambiarPwdMouseClicked
-
-    private void lblCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarPwdMouseClicked
-        jpnPass.setVisible(true);
-        Animacion.Animacion.bajar(-195, 55, 1, 2, jpnPass);
-        pwdAntigua.requestFocus();
-    }//GEN-LAST:event_lblCambiarPwdMouseClicked
-
-    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
-        frmLogin lg = new frmLogin();
-        lg.setVisible(true);
-        this.setVisible(false);
-        mensajeNotificacion("¡Has cerrado sesión!", "Error");
-    }//GEN-LAST:event_lblCerrarSesionMouseClicked
-
-    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
-        //jpnUser.setVisible(false);
-        //jpnWhite.setVisible(false);
-    }//GEN-LAST:event_jpnUserMouseExited
 
     /**
      * @param args the command line arguments
@@ -1230,7 +1230,6 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1241,7 +1240,6 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     private javax.swing.JPanel jpnBarraMenu;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnPass;
-    private javax.swing.JPanel jpnPass1;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
@@ -1256,7 +1254,6 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
     public static javax.swing.JLabel lblUser;
     public static javax.swing.JLabel lblUser1;
     private javax.swing.JPasswordField pwdAntigua;
-    private javax.swing.JPasswordField pwdAntigua1;
     private javax.swing.JPasswordField pwdNueva;
     private javax.swing.JPasswordField pwdNueva2;
     public javax.swing.JTable tblTipoPrecio;
