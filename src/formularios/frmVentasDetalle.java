@@ -86,7 +86,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 fila[2]=iterador.next();
                 fila[3]=iterador.next();
                  if ((tblVentas.getValueAt(seleccion, 3).toString()).equals("Factura")) {
-                     fila[4]=formateo.format((Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString()))*1.13);
+                     fila[4]=formateo.format((Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString())));
                  }else{
                      fila[4]=formateo.format(Integer.parseInt(fila[2].toString())*Double.parseDouble(fila[3].toString()));
                  }

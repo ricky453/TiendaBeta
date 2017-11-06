@@ -14,23 +14,23 @@ import java.util.Date;
  * @author jose
  */
 public class Venta {
-    private int IdVenta;
+    private int IdVenta;//
     
-    private int IdSucursal;
-    private int IdPrecio;
-    private Date Fecha;
-    private double IVA=0;
-    private double TotalGravado=0;
-    private double Total=0;
-    private double PAC=0;
-    private double utilidad;
-    private String Cliente="";
-    private String Direccion="";
-    private String Giro="";
-    private String NIT="";
-    private int NRC;
-    private int NomDocumento;
-    private char IdTipoVenta;
+    private int IdSucursal;//
+    private int IdPrecio;//
+    private Date Fecha;//
+    private double IVA=0;//
+    private double TotalGravado=0;//
+    private double Total=0;//
+    private double PAC=0;//
+    private double utilidad;//
+    private String Cliente="";//
+    private String Direccion="";//
+    private String Giro="";//
+    private String NIT="";//
+    private int NRC;//
+    private int NomDocumento;//
+    private char IdTipoVenta;//
     
     private ArrayList<Object> Articulos = new ArrayList<>();
     DecimalFormat decf = new DecimalFormat("0.0000");

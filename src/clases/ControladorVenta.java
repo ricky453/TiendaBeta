@@ -25,7 +25,7 @@ public class ControladorVenta {
     
     
     
-    public boolean Agregar(Venta venta,Object[][] detalles) throws ErrorTienda{
+    public boolean Agregar(Venta venta,Object[][] detalles,String TipoVenta) throws ErrorTienda{
        cn = new Conexion();
         try {
             System.err.println("Detalles ventas "+venta.getArticulos().size());
@@ -40,7 +40,10 @@ public class ControladorVenta {
                                             + "'"+venta.getNIT()+"',"+venta.getNRC()+","+venta.getNomDocumento()+","+venta.getPAC()+","+venta.getUtilidad()+")");
         
             cn.conexion.close();
-            ActualizarInventario(detalles, venta.getIdSucursal());
+            if(TipoVenta.equals("VENTA")){
+                ActualizarInventario(detalles, venta.getIdSucursal());
+            }
+            
             cn = new Conexion();
             try {
                 for(int x=0;x<detalles.length;x++){
@@ -109,7 +112,7 @@ public class ControladorVenta {
         try {
             cn=new Conexion();
        rs=null;
-        rs = cn.st.executeQuery("SELECT count(IdVenta) FROM venta");
+        rs = cn.st.executeQuery("SELECT MAX(IdVenta) FROM venta");
         
         while(rs.next()){
             IdVenta = rs.getInt(1);
@@ -155,29 +158,52 @@ public class ControladorVenta {
         ArrayList<Venta> miventas=(ArrayList) ventas;
         return miventas; 
     }
-    public ArrayList<Object> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda, SQLException{
+    public ArrayList<Object> VentasBorrador(String filtro,int idSucursal) throws ErrorTienda {
         ArrayList<Object> ventasBorrador=new ArrayList<Object>();
-        cn=new Conexion();
-        System.out.println("DENDTRO DE CONTROLADOR");
-        if(filtro.equals("TODAS")){
-            System.out.println("DENTRO DE TODAS LAS OPCIONES DE BUSQUEDA DENDTRO DE CONTROLADOR");
-            rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total FROM venta WHERE TipoVenta='B' ORDER BY IdSucursal ASC;"));
-        }else{
-            rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total,Utilidad FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
-        }
-        
-        while(rs.next()){
+        try {
             
-            ventasBorrador.add(rs.getString(1));
-            ventasBorrador.add(rs.getString(2));
-            ventasBorrador.add(rs.getString(3));
-            ventasBorrador.add(rs.getString(4));
-            if(!filtro.equals("TODAS")){
-                ventasBorrador.add(rs.getString(5));
+            cn=new Conexion();
+            
+            if(filtro.equals("TODAS")){
+                
+                rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total FROM venta WHERE TipoVenta='B' ORDER BY IdSucursal ASC;"));
+            }else{
+                rs= (cn.st.executeQuery("SELECT IdVenta,IdSucursal,Fecha,Total,Utilidad FROM venta WHERE TipoVenta='B' AND IdSucursal = '"+idSucursal+"';"));
             }
+            
+            while(rs.next()){
+                
+                ventasBorrador.add(rs.getString(1));
+                ventasBorrador.add(rs.getString(2));
+                ventasBorrador.add(rs.getString(3));
+                ventasBorrador.add(rs.getString(4));
+                if(!filtro.equals("TODAS")){
+                    ventasBorrador.add(rs.getString(5));
+                }
+            }
+            
+            
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Class ControladorVenta/VentasBorrador",ex.getMessage());
         }
-        
         return ventasBorrador;
+    }
+    public boolean EliminarVentasBorrador(String idVenta) throws ErrorTienda {
+        try {
+            cn=new Conexion();
+            
+            cn.st.executeUpdate("DELETE FROM detalleventa WHERE IdVenta="+idVenta+";");
+            cn.st.executeUpdate("DELETE FROM venta WHERE IdVenta="+idVenta+"; ");
+            
+            return true;
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Class ControladorVenta/EliminandoVentasBorrador",ex.getMessage());
+        }
+        return false;
     }
     
     

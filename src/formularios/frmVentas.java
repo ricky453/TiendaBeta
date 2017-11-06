@@ -527,7 +527,7 @@ public class frmVentas extends javax.swing.JFrame {
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
         }
         
-        if(cv.Agregar(venta,DetallesVenta)){
+        if(cv.Agregar(venta,DetallesVenta,"VENTA")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
             
             
@@ -719,7 +719,6 @@ public class frmVentas extends javax.swing.JFrame {
         lblNIT = new javax.swing.JLabel();
         cmbTipoPrecio = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        lblMasIva = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         jpnWhite = new javax.swing.JPanel();
         lblUser1 = new javax.swing.JLabel();
@@ -881,7 +880,7 @@ public class frmVentas extends javax.swing.JFrame {
         });
         jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
 
-        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
+        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, 230, 110));
 
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1176,11 +1175,6 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Código de Barra");
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
-
-        lblMasIva.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        lblMasIva.setForeground(new java.awt.Color(255, 0, 0));
-        lblMasIva.setText("+ IVA");
-        getContentPane().add(lblMasIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 370, -1, 20));
 
         jpnBarraSuperior.setBackground(new java.awt.Color(0, 0, 0));
         jpnBarraSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1724,7 +1718,7 @@ public class frmVentas extends javax.swing.JFrame {
        {
            tipoVentaSeleccion(false);
            limpiar("todo");
-           lblMasIva.setVisible(true);
+           
            txtClienteVenta.setVisible(!false);
            txtDireccionVenta.setVisible(!false);
            lblCliente.setVisible(!false);
@@ -1738,13 +1732,13 @@ public class frmVentas extends javax.swing.JFrame {
            txtDireccionVenta.setVisible(!false);
            lblCliente.setVisible(!false);
            lblDireccion.setVisible(!false);
-           lblMasIva.setVisible(false);
+           
            cmbTipoPrecio.setSelectedIndex(1);
        }
        else{
            tipoVentaSeleccion(false);
            limpiar("todo");
-           lblMasIva.setVisible(true);
+           
            txtClienteVenta.setVisible(false);
            txtDireccionVenta.setVisible(false);
            lblCliente.setVisible(false);
@@ -1954,7 +1948,11 @@ public class frmVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jpnWhiteMouseClicked
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
-        System.exit(0);
+        if(modeloVentas.getRowCount()!=0){
+            mensajeNotificacion("Hay acciones sin terminar", "Adv");
+        }else{
+            System.exit(0);
+        }
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
     private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
@@ -2364,7 +2362,6 @@ public class frmVentas extends javax.swing.JFrame {
     private javax.swing.JLabel lblIDVenta;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblMasIva;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblNIT;
     private javax.swing.JLabel lblNRC;
