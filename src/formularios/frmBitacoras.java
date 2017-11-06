@@ -57,7 +57,7 @@ public class frmBitacoras extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         obtenerUsuario();
         java.util.Date date = new Date();
-        dctBuscarFecha.setDate(date);
+        //dctBuscarFecha.setDate(date);
 
     }
     public void obtenerUsuario(){
@@ -165,7 +165,6 @@ public class frmBitacoras extends javax.swing.JFrame {
         lblRolUsuario = new javax.swing.JLabel();
         lblCambiarPwd = new javax.swing.JLabel();
         lblCerrarSesion = new javax.swing.JLabel();
-        dctBuscarFecha = new com.toedter.calendar.JDateChooser();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBitacoras = new javax.swing.JTable();
@@ -193,6 +192,7 @@ public class frmBitacoras extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        txtconsulta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
@@ -327,15 +327,8 @@ public class frmBitacoras extends javax.swing.JFrame {
 
         getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
 
-        dctBuscarFecha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                dctBuscarFechaFocusLost(evt);
-            }
-        });
-        getContentPane().add(dctBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 175, 150, 30));
-
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Buscar por fecha:");
+        jLabel17.setText("Buscar por Login:");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, 40));
 
         tblBitacoras.setModel(new javax.swing.table.DefaultTableModel(
@@ -670,29 +663,38 @@ public class frmBitacoras extends javax.swing.JFrame {
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
+        txtconsulta.setToolTipText("");
+        txtconsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtconsultaActionPerformed(evt);
+            }
+        });
+        txtconsulta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtconsultaKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtconsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 180, 20));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dctBuscarFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dctBuscarFechaFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dctBuscarFechaFocusLost
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-        String fecha = sdf.format(dctBuscarFecha.getDate());
+        String consulta= txtconsulta.getText();
         DefaultTableModel modeloBitacoras = new DefaultTableModel();
         ArrayList<Bitacora> bitacora = new ArrayList();
         Object[] fila = new Object[4];
-        if (fecha.equals("")) {
+        if (consulta.equals("")) {
             JOptionPane.showInputDialog("no ha selecionado una fecha");
         } else {
             String[] campos = {"IdUsurario", "Login", "Fecha", "Accion"};
             modeloBitacoras.setColumnIdentifiers(campos);
             try {
                 Object i;
-                bitacora = ControladorBitacora.ObenterBitacoras(fecha);
+                bitacora = ControladorBitacora.ObenterBitacoras(consulta);
                 Iterator iterador = bitacora.iterator();
                 while (iterador.hasNext()) {
                     fila[0] = iterador.next();
@@ -947,6 +949,27 @@ public class frmBitacoras extends javax.swing.JFrame {
         comprobarPass();
     }//GEN-LAST:event_btnCambiarPwdMouseClicked
 
+    private void txtconsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtconsultaActionPerformed
+
+    private void txtconsultaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtconsultaKeyTyped
+        // TODO add your handling code here:
+        int c=(int) evt.getKeyChar();
+        char mayu=evt.getKeyChar();
+        if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c >=48 && c<=57) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+            if (Character.isLowerCase(mayu)) {
+                String cadena=(""+mayu).toUpperCase();
+                mayu=cadena.charAt(0);
+                evt.setKeyChar(mayu);
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtconsultaKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -999,7 +1022,6 @@ public class frmBitacoras extends javax.swing.JFrame {
     private javax.swing.JButton btnSucursales;
     private javax.swing.JButton btnTipoPrecio;
     private javax.swing.JButton btnVentas;
-    private com.toedter.calendar.JDateChooser dctBuscarFecha;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1028,5 +1050,6 @@ public class frmBitacoras extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwdNueva;
     private javax.swing.JPasswordField pwdNueva2;
     private javax.swing.JTable tblBitacoras;
+    private javax.swing.JTextField txtconsulta;
     // End of variables declaration//GEN-END:variables
 }

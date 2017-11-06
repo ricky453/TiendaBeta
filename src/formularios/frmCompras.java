@@ -453,6 +453,11 @@ public class frmCompras extends javax.swing.JFrame {
         getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 630, 30, 40));
 
         txtNomProd.setEditable(false);
+        txtNomProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomProdActionPerformed(evt);
+            }
+        });
         txtNomProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNomProdKeyTyped(evt);
@@ -1787,6 +1792,10 @@ public class frmCompras extends javax.swing.JFrame {
         //jpnUser.setVisible(false);
         //jpnWhite.setVisible(false);
     }//GEN-LAST:event_jpnUserMouseExited
+
+    private void txtNomProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomProdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomProdActionPerformed
 
     /**
      * @param args the command line arguments

@@ -33,7 +33,7 @@ public class ControladorBitacora {
         cn = new Conexion();
         try {
 
-            rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion` FROM `bitacora` LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n WHERE ((`bitacora`.`IdUsuario` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
+            rs = cn.st.executeQuery("SELECT `bitacora`.`IdUsuario`, `usuario`.`Login`, `bitacora`.`Fecha`, `bitacora`.`Accion` FROM `bitacora` LEFT JOIN `usuario` ON `bitacora`.`IdUsuario` = `usuario`.`IdUsuario`\n WHERE ((`usuario`.`Login` ='"+consulta+"') OR (`bitacora`.`Fecha` ='"+consulta+"'))");
             
             while (rs.next()) {
                 bitacora.add(rs.getString(1));
