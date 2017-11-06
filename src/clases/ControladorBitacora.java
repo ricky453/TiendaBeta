@@ -19,10 +19,10 @@ public class ControladorBitacora {
     public static void Agregar(Bitacora bitacora) throws ErrorTienda{
         cn = new Conexion();
         try {
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String Fecha = sdf.format(bitacora.getFecha());
-            //System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
-            cn.st.executeUpdate("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+Fecha+"', '"+bitacora.getAccion()+"');");
+            //java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //String Fecha = sdf.format(bitacora.getFecha());
+            //System.out.println("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+bitacora.getFecha()+"', '"+bitacora.getAccion()+"');");
+            cn.st.executeUpdate("INSERT INTO `bitacora`(`IdUsuario`, `Fecha`, `Accion`) VALUES ('"+bitacora.getIdUsuario()+"', '"+bitacora.getFecha()+"', '"+bitacora.getAccion()+"');");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorBitacora/Agregar", e.getMessage());
         }

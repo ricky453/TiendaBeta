@@ -5,6 +5,7 @@
  */
 package clases;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -13,13 +14,13 @@ import java.util.Date;
  */
 public class Bitacora {
     private int IdUsuario;
-    private Date Fecha;
+    private String Fecha;
     private String Accion; 
 
     public Bitacora() {
     }
     
-    public Bitacora(int IdUsuario, Date Fecha, String Accion) {
+    public Bitacora(int IdUsuario, String Fecha, String Accion) {
         this.IdUsuario = IdUsuario;
         this.Fecha = Fecha;
         this.Accion = Accion;
@@ -33,11 +34,11 @@ public class Bitacora {
         this.IdUsuario = IdUsuario;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
 

@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class frmCompras extends javax.swing.JFrame {
     JTableHeader tHeadVentas;
     double percepcio =0;
     String rol, password;
+    Date date = new Date();
     
     public frmCompras() {
         initComponents();
@@ -1220,7 +1222,8 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
                 Bitacora bitacora = new Bitacora();
                 bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
-                bitacora.setFecha(dtcFecha.getDate());
+                DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                bitacora.setFecha(formato.format(date));
                 bitacora.setAccion("Compra");
                 ControladorBitacora.Agregar(bitacora);
                 
