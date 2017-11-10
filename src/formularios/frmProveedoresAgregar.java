@@ -26,7 +26,9 @@ import static formularios.frmLogin.txtUser;
 import static formularios.frmProductos.lblUser;
 import static formularios.frmProductos.lblUser1;
 import formularios.frmProveedores;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +42,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
     boolean encontradoProv;
     DefaultTableModel modeloProveedores= new DefaultTableModel();
     String rol, password;
+    int lele;
     
     public frmProveedoresAgregar() {
         initComponents();
@@ -186,6 +189,16 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         
          }
     }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
     public void guardarDatos(){
         Proveedor agregado=new Proveedor();
         int idProv;
@@ -202,6 +215,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
             else{
             try {
                 idProv = ControladorProveedor.ObtenerIdProveedor();
+                lele = idProv;
                 agregado.setIdProveedor(idProv+1);
             } catch (ErrorTienda ex) {
                 Logger.getLogger(frmProveedoresAgregar.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,6 +238,7 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
               try {
               ControladorProveedor.Agregar(agregado);
               mensajeNotificacion("¡Proveedor agregado exitosamente!", "Ok");
+              AgregarBitacora("Agregó un proveedor con ID de: "+(lele+1));
               limpiandoTxtProveedor();
               //tblProveedores.removeAll();
              //actualizarTablaProveedor();

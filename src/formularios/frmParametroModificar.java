@@ -22,8 +22,10 @@ import formularios.frmProductos;
 import formularios.frmProveedores;
 import formularios.frmSucursales;
 import formularios.frmVentas;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -110,6 +112,16 @@ public class frmParametroModificar extends javax.swing.JFrame {
         
          }
     }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    } 
 
             //CAMBIAR CONTRASEÑA DEL USUARIO
     public void comprobarPass(){
@@ -834,10 +846,11 @@ public class frmParametroModificar extends javax.swing.JFrame {
             if(encontrado == false){
         try {
             pa.setIdParametro(Integer.parseInt(txtIDParametro.getText()));
-            pa.setNombre(txtNombre.getText());
+            pa.setNombre(txtNombre.getText());            
             pa.setValor(txtValorParametro.getText());
             ControladorParametro.Modificar(pa);
             mensajeNotificacion("Parametro modificado con exito","Ok");
+            AgregarBitacora("Modificó el parámetro que tiene como ID: "+txtIDParametro.getText());
             txtIDParametro.setText("");
             txtNombre.setText("");
             txtValorParametro.setText("");

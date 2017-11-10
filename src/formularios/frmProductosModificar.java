@@ -10,8 +10,10 @@ import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProductosAgregar.lblUser;
 import static formularios.frmProductosAgregar.lblUser1;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -130,6 +132,16 @@ public class frmProductosModificar extends javax.swing.JFrame {
             Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
     }
     
     //--------------llenandoComboxSucuarsal-----------------------
@@ -777,7 +789,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
             Producto producto = new Producto();
             String[] sucus=new String[4];
             Object[] produ=new Object[5];
-            
+            String codb = txtNuevoCodBarraProducto.getText();
             producto.setCodBarra(txtNuevoCodBarraProducto.getText());
             producto.setNombre(txtNuevoNombreProducto.getText());
             producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
@@ -828,6 +840,7 @@ public class frmProductosModificar extends javax.swing.JFrame {
                 ControladorProducto.Modificar(producto);
                 modeloProductos.setRowCount(0);
                 formu.txtProductosBuscar.setText("");
+                AgregarBitacora("Modificó el producto que tiene como código de barra: "+codb);
                 mensajeNotificacion("¡Producto modificado exitosamente!", "Ok");
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());

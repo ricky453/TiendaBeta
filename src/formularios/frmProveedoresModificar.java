@@ -16,8 +16,10 @@ import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProveedoresAgregar.lblUser;
 import static formularios.frmProveedoresAgregar.lblUser1;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -133,6 +135,16 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
         }
 
     }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
     public void Atras(){
         frmProveedores pv = new frmProveedores();
         pv.setVisible(true);
@@ -192,6 +204,7 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
             }
             if(encontradoProv == false){
             Proveedor proveedor = new Proveedor();
+            String idProv=txtIDProveedor.getText();
             proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor.getText()));
             proveedor.setNombre(txtNuevoNombreProveedor.getText());
             proveedor.setTelefono(txtNuevoTelefono.getText());
@@ -202,6 +215,7 @@ public class frmProveedoresModificar extends javax.swing.JFrame {
             try{
                 ControladorProveedor.Modificar(proveedor);
                 mensajeNotificacion("¡Datos modificados exitosamente!", "Ok");
+                AgregarBitacora("Modificó el proveedor que tiene como ID: "+(idProv));
             } catch(ErrorTienda ex){
                 JOptionPane.showMessageDialog(null, ex.getMessage());
 

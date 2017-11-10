@@ -457,6 +457,7 @@ public class frmVentas extends javax.swing.JFrame {
         }
         
         venta.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
+        int idV = Integer.parseInt(txtIdVenta.getText());
         venta.setIdPrecio(Integer.parseInt(String.valueOf(misPrecios[cmbTipoPrecio.getSelectedIndex()][0])));
         venta.setIdTipoVenta(idTipoVenta);
         venta.setIdSucursal(Integer.parseInt(String.valueOf(miSucursal[cmbSucursalVenta.getSelectedIndex()][0])));
@@ -541,7 +542,7 @@ public class frmVentas extends javax.swing.JFrame {
             DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
         }
-        AgregarBitacora("Realizó una venta.");
+        AgregarBitacora("Realizó la venta que tiene como ID: "+idV);
         
         if(cv.Agregar(venta,DetallesVenta,"VENTA")){
             mensajeNotificacion("¡Venta realizada!", "Ok");

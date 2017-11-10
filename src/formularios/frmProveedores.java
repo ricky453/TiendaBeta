@@ -24,9 +24,11 @@ import clases.ControladorUsuario;
 import clases.Usuario;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -149,6 +151,16 @@ public class frmProveedores extends javax.swing.JFrame {
         }
 
     }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
    //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
             modeloProveedores.setRowCount(0);
@@ -227,6 +239,7 @@ public class frmProveedores extends javax.swing.JFrame {
                     modeloProveedores.removeRow(fila);
                     txtProveedoresBuscar.setText("");
                     mensajeNotificacion("¡Proveedor eliminado exitosamente!", "Ok");
+                    AgregarBitacora("Eliminó el proveedor que tenía como ID: "+idProve);
                 }
                 
                 

@@ -5,13 +5,18 @@
  */
 package formularios;
 
+import clases.Bitacora;
+import clases.ControladorBitacora;
 import clases.ControladorProveedor;
 import clases.ControladorUsuario;
 import clases.ErrorTienda;
 import clases.Proveedor;
 import clases.Usuario;
+import facadeshop.Diseño;
+import static formularios.frmVentas.lblUser1;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +35,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     String a, n, num, user;
     boolean encontrado;
     DefaultTableModel modeloUsuario = new DefaultTableModel();
+    int idU;
     
     public frmRegistrarUsuario() {
         initComponents();
@@ -429,6 +435,16 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         txtUsuario.setText("");
         lblUsuario.setText("Usuario recomendado: ");
     }
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(Diseño.user));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
     
     public void comprobarUsuario(){
             modeloUsuario.setRowCount(0);
@@ -515,6 +531,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
             try {
                 idUsuario = ControladorUsuario.ObtenerIdUsuario();
                 agregado.setIdUsuario(idUsuario+1);
+                
             } catch (ErrorTienda ex) {
                 Logger.getLogger(frmRegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
               }
@@ -543,6 +560,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
               try {
               ControladorUsuario.Agregar(agregado);
               mensajeNotificacion("¡Usuario agregado exitosamente!", "Ok");
+              AgregarBitacora("Agregó un nuevo usuario: "+txtUsuario.getText());
               limpiarDatos();
               
               } catch (ErrorTienda e) {      

@@ -10,8 +10,10 @@ import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProductos.lblUser;
 import static formularios.frmProductos.lblUser1;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -198,7 +200,16 @@ public class frmProductosAgregar extends javax.swing.JFrame {
             
             }
         
-    
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
      //-----------------limpiando cajas de texto-------------------------
     public void limpiandoTxtProducto(){
         txtCodBarraProductos.setText("");
@@ -982,6 +993,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                     ControladorProducto.Agregar(agregado);
 
                     mensajeNotificacion("¡Producto agregado exitosamente!", "Ok");
+                    AgregarBitacora("Agregó un producto con código de barra de: "+txtCodBarraProductos.getText());
                     limpiandoTxtProducto();
                 } catch (ErrorTienda e) {
 

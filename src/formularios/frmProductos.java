@@ -11,10 +11,12 @@ import static formularios.frmComprasDetalle.lblUser;
 import static formularios.frmComprasDetalle.lblUser1;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProveedores.tblProveedores;
+import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -190,7 +192,16 @@ public class frmProductos extends javax.swing.JFrame {
             }
         }
     }
-    
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
     
     //------------------------Extrayendo datos para comboboxSucursal-------------------
     public void llenandoComboboxSucursal(){
@@ -491,11 +502,11 @@ public class frmProductos extends javax.swing.JFrame {
         btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/eliminar.png"))); // NOI18N
         btnEliminarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminarProductoMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnEliminarProductoMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminarProductoMouseEntered(evt);
             }
         });
         btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -940,6 +951,7 @@ public class frmProductos extends javax.swing.JFrame {
                 }else{
                     modeloProductos.removeRow(fila);
                     txtProductosBuscar.setText("");
+                    AgregarBitacora("Eliminó el producto que tenía como código de barra: "+codBarra);
                     mensajeNotificacion("¡Producto eliminado exitosamente!", "Ok");
                 }
                 
