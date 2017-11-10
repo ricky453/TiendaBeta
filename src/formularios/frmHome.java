@@ -168,7 +168,6 @@ public final class frmHome extends javax.swing.JFrame {
         jpnBarraSuperior = new javax.swing.JPanel();
         jpnWhite = new javax.swing.JPanel();
         lblUser1 = new javax.swing.JLabel();
-        lblBotonCerrar = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblAgregarUsuario = new javax.swing.JLabel();
@@ -292,6 +291,7 @@ public final class frmHome extends javax.swing.JFrame {
         lbl50 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Home");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setUndecorated(true);
         setResizable(false);
@@ -333,20 +333,6 @@ public final class frmHome extends javax.swing.JFrame {
         jpnWhite.add(lblUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
         jpnBarraSuperior.add(jpnWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 60));
-
-        lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
-        lblBotonCerrar.setToolTipText("Salir");
-        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBotonCerrarMouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
 
         lblUser.setBackground(new java.awt.Color(222, 222, 222));
         lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -1237,10 +1223,6 @@ public final class frmHome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lblBotonCerrarMouseClicked
-
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_jpnBarraSuperiorMouseDragged
@@ -1739,7 +1721,6 @@ public final class frmHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbl7;
     private javax.swing.JLabel lbl8;
     private javax.swing.JLabel lblAgregarUsuario;
-    public static javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblLogo;

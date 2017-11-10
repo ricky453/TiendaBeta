@@ -60,11 +60,14 @@ public class frmProductos extends javax.swing.JFrame {
             rol = ControladorUsuario.obtenerRol(txtUser.getText());
             if(rol.equals("A")){
                 lblRolUsuario.setText("ADMINISTRADOR");
+                lblAgregarUsuario.setVisible(true);
             }
             else if(rol.equals("V")){
-                lblRolUsuario.setText("VENDEDOR");}
+                lblRolUsuario.setText("VENDEDOR");
+                lblAgregarUsuario.setVisible(false);}
             else if(rol.equals("C")){
                 lblRolUsuario.setText("COMPRADOR");
+                lblAgregarUsuario.setVisible(false);
 
             }
             
@@ -246,9 +249,9 @@ public class frmProductos extends javax.swing.JFrame {
         jpnBarraSuperior = new javax.swing.JPanel();
         jpnWhite = new javax.swing.JPanel();
         lblUser1 = new javax.swing.JLabel();
-        lblBotonCerrar = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        lblAgregarUsuario = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         lblListaProductos = new javax.swing.JLabel();
         lblAgregarProductos = new javax.swing.JLabel();
@@ -269,6 +272,7 @@ public class frmProductos extends javax.swing.JFrame {
         btnHome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Productos");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
@@ -431,10 +435,10 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -554,20 +558,6 @@ public class frmProductos extends javax.swing.JFrame {
 
         jpnBarraSuperior.add(jpnWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 60));
 
-        lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
-        lblBotonCerrar.setToolTipText("Salir");
-        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBotonCerrarMouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
-
         lblUser.setBackground(new java.awt.Color(222, 222, 222));
         lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(204, 204, 204));
@@ -589,6 +579,17 @@ public class frmProductos extends javax.swing.JFrame {
         lblLogo.setText("iShop 3.0");
         lblLogo.setToolTipText("");
         jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 50));
+
+        lblAgregarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAgregarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/agus.png"))); // NOI18N
+        lblAgregarUsuario.setToolTipText("Agregar Usuario");
+        lblAgregarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAgregarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAgregarUsuarioMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(lblAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 60, 50));
 
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
@@ -989,10 +990,6 @@ public class frmProductos extends javax.swing.JFrame {
         jpnUser.setVisible(false);
     }//GEN-LAST:event_jpnWhiteMouseClicked
 
-    private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lblBotonCerrarMouseClicked
-
     private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
         obtenerRol();
         if(jpnUser.isVisible()){
@@ -1228,6 +1225,12 @@ public class frmProductos extends javax.swing.JFrame {
         //jpnWhite.setVisible(false);
     }//GEN-LAST:event_jpnUserMouseExited
 
+    private void lblAgregarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarUsuarioMouseClicked
+        frmRegistrarUsuario ru = new frmRegistrarUsuario();
+        ru.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1298,7 +1301,7 @@ public class frmProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
     private javax.swing.JLabel lblAgregarProductos;
-    public static javax.swing.JLabel lblBotonCerrar;
+    private javax.swing.JLabel lblAgregarUsuario;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblListaProductos;

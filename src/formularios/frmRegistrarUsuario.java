@@ -72,7 +72,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        exit = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -348,18 +347,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         jLabel9.setText("Datos de Usuario:");
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        exit.setBackground(new java.awt.Color(102, 0, 0));
-        exit.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        exit.setForeground(new java.awt.Color(102, 0, 0));
-        exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exit.setText("X");
-        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitMouseClicked(evt);
-            }
-        });
-
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -369,9 +356,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         pnl_overlay.setLayout(pnl_overlayLayout);
         pnl_overlayLayout.setHorizontalGroup(
             pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_overlayLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnl_overlayLayout.createSequentialGroup()
                 .addContainerGap(121, Short.MAX_VALUE)
                 .addGroup(pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -387,8 +371,7 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
         pnl_overlayLayout.setVerticalGroup(
             pnl_overlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_overlayLayout.createSequentialGroup()
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(78, 78, 78)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
@@ -492,11 +475,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
           
         
     }//GEN-LAST:event_pnl_overlayMousePressed
-
-    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_exitMouseClicked
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         // TODO add your handling code here:
@@ -754,7 +732,6 @@ public class frmRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;
     private javax.swing.JComboBox<String> cmbCargo;
-    private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;

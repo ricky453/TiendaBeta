@@ -240,7 +240,7 @@ public class UsoTicket {
     
     private static boolean feedPrinter(byte[] b) {
         try {
-            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName("3nstar", null)); //EPSON TM-U220 ReceiptE4
+            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName("3nStar", null)); //EPSON TM-U220 ReceiptE4
 
             DocPrintJob job = PrintServiceLookup.lookupPrintServices(null, attrSet)[0].createPrintJob();
          

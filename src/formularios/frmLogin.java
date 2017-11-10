@@ -45,7 +45,6 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnLogin = new java.awt.Button();
         lbl_close = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtPwd = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         loader = new javax.swing.JPanel();
@@ -53,6 +52,7 @@ public class frmLogin extends javax.swing.JFrame {
         lbl_loader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -119,15 +119,13 @@ public class frmLogin extends javax.swing.JFrame {
         lbl_close.setForeground(new java.awt.Color(51, 51, 51));
         lbl_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_close.setText("X");
+        lbl_close.setToolTipText("Salir del programa.");
         lbl_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lbl_closeMousePressed(evt);
             }
         });
-
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("¿Olvidó su contraseña?");
 
         txtPwd.setForeground(new java.awt.Color(102, 102, 102));
         txtPwd.setText("jPasswordField1");
@@ -155,7 +153,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lbl_close, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -163,10 +161,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(loginLayout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
@@ -176,10 +171,10 @@ public class frmLogin extends javax.swing.JFrame {
         loginLayout.setVerticalGroup(
             loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginLayout.createSequentialGroup()
-                .addComponent(lbl_close)
-                .addGap(44, 44, 44)
+                .addComponent(lbl_close, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginLayout.createSequentialGroup()
                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,11 +189,7 @@ public class frmLogin extends javax.swing.JFrame {
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addGroup(loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(loginLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel5)))
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
 
@@ -439,7 +430,6 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel img_loader;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
