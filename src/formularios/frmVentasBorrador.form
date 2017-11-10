@@ -109,9 +109,6 @@
       <Properties>
         <Property name="title" type="java.lang.String" value="Terminando"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[540, 285]"/>
-        </Property>
         <Property name="undecorated" type="boolean" value="true"/>
       </Properties>
 

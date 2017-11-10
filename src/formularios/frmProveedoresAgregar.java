@@ -5,6 +5,8 @@
  */
 package formularios;
 
+import clases.Bitacora;
+import clases.ControladorBitacora;
 import clases.ControladorProveedor;
 import clases.ErrorTienda;
 import java.awt.event.KeyEvent;
@@ -25,6 +27,8 @@ import static formularios.frmProductos.lblUser;
 import static formularios.frmProductos.lblUser1;
 import formularios.frmProveedores;
 import formulariosReportes.frmComprasReportes;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -664,7 +668,6 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         getContentPane().add(lblListaProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 50));
 
         lblAgregarProveedores.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblAgregarProveedores.setForeground(new java.awt.Color(51, 51, 51));
         lblAgregarProveedores.setText("Agregar Proveedores");
         lblAgregarProveedores.setToolTipText("");
         lblAgregarProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1254,6 +1257,17 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         frmLogin lg = new frmLogin();
         lg.setVisible(true);
         this.setVisible(false);
+        Bitacora bitacora = new Bitacora();
+        Date date = new Date();
+        SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setAccion("Cerrar Sesion");
+        bitacora.setFecha(hora.format(date));
+        try {
+            bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+            ControladorBitacora.Agregar(bitacora);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mensajeNotificacion("¡Has cerrado sesión!", "Error");
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 

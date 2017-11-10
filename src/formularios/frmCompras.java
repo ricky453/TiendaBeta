@@ -1036,6 +1036,16 @@ public class frmCompras extends javax.swing.JFrame {
         tablaModel.setColumnIdentifiers(headers);
         tblCompra.setModel(tablaModel);
     }
+    
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    
+    }
     public void AgregarProductoCompras() throws ErrorTienda{
         Producto pr = new Producto();
         pr.setCodBarra(txtCodBarraProd1.getText());
@@ -1225,12 +1235,7 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
-                Bitacora bitacora = new Bitacora();
-                bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
-                DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                bitacora.setFecha(formato.format(date));
-                bitacora.setAccion("Compra");
-                ControladorBitacora.Agregar(bitacora);
+                AgregarBitacora("Compra");
                 
                 mensajeNotificacion("Compra Agregada", "Ok");
                 
@@ -1785,6 +1790,11 @@ public class frmCompras extends javax.swing.JFrame {
         frmLogin lg = new frmLogin();
         lg.setVisible(true);
         this.setVisible(false);
+        try {
+            AgregarBitacora("Cerrar Sesion");
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmCompras.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mensajeNotificacion("¡Has cerrado sesión!", "Error");
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 

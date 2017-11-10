@@ -5,10 +5,14 @@
  */
 package formularios;
 
+import clases.Bitacora;
+import clases.ControladorBitacora;
 import clases.ControladorUsuario;
 import clases.ErrorTienda;
 import facadeshop.Diseño;
 import formulariosReportes.frmComprasReportes;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -274,7 +278,21 @@ public class frmLogin extends javax.swing.JFrame {
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
         }
     }
+    //Agregar Bitacora
+    public void AgregarBitacora(){
+        Bitacora bitacora = new Bitacora();
+        Date date = new Date();
+        SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setAccion("Iniciar Sesion");
+        bitacora.setFecha(hora.format(date));
+        try {
+            bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(txtUser.getText()));
+            ControladorBitacora.Agregar(bitacora);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
+    }
     // ---- INICIAR LOGIN ----
     public void iniciar(){
         try {
@@ -341,6 +359,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         iniciar();
+        AgregarBitacora();
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

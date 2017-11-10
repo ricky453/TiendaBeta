@@ -5,6 +5,8 @@
  */
 package formularios;
 
+import clases.Bitacora;
+import clases.ControladorBitacora;
 import clases.ControladorProducto;
 import clases.ControladorSucursal;
 import clases.ControladorTipoPrecio;
@@ -19,14 +21,13 @@ import clases.TipoPrecio;
 import clases.Usuario;
 import clases.Venta;
 import facadeshop.Diseño;
-import static formularios.frmComprasDetalle.lblUser;
-import static formularios.frmComprasDetalle.lblUser1;
 import static formularios.frmLogin.txtUser;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -318,6 +319,17 @@ public class frmVentas extends javax.swing.JFrame {
         
         limpiar("p");
     }
+    //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
+    
     //CALCULAR SUMA DE SUB TOTALES
     public void SumarSubTotales(){
         int filas = modeloVentas.getRowCount();
@@ -526,6 +538,7 @@ public class frmVentas extends javax.swing.JFrame {
             DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
         }
+        AgregarBitacora("Venta");
         
         if(cv.Agregar(venta,DetallesVenta,"VENTA")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
@@ -2244,6 +2257,11 @@ public class frmVentas extends javax.swing.JFrame {
         frmLogin lg = new frmLogin();
         lg.setVisible(true);
         this.setVisible(false);
+        try {
+            AgregarBitacora("Cerrar Sesion");
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mensajeNotificacion("¡Has cerrado sesión!", "Error");
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
