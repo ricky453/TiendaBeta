@@ -762,6 +762,7 @@ public class frmVentas extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ventas");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1200, 700));

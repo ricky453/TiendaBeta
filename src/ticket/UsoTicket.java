@@ -81,11 +81,29 @@ public class UsoTicket {
                     venta[i][1]=venta[i][1]+" ";
                 }
                 
-                String precioIva=decimal.format(Double.parseDouble(venta[i][2])*1.13);
                 
-                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+precioIva);
+                
+                
+                p.setText(venta[i][0]+"\t  "+venta[i][1]+"   "+venta[i][2]);
                 p.newLine();
                 
+                
+            }else if(venta[i][0].length()>30){
+                String tempo1,tempo2,tempo3;
+                int largoCantidad=venta[i][1].length();
+                tempo1=venta[i][0].substring(0, 14);
+                tempo2=venta[i][0].substring(14,29);
+                tempo3=venta[i][0].substring(29);
+                
+                
+                for (int j = tempo3.length(); j <= 30; j++) {
+                    tempo2=tempo3+" ";
+                }
+                venta[i][0]=tempo1+"\n"+tempo2+"\n"+tempo3;
+                
+                for (int j = largoCantidad; j <=5; j++) {
+                    venta[i][1]=venta[i][1]+" ";
+                }
                 
             }else{
                 int largo=venta[i][0].length();

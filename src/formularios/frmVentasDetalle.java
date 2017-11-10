@@ -43,7 +43,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     public int seleccion;
     public int id;
     String rol;
-    DefaultTableModel modeloDetalle;
+    DefaultTableModel modeloDetalle,modelo;
     double subTotales;
     DateFormat df=DateFormat.getDateInstance();
     DecimalFormat formateo=new DecimalFormat("#.##");
@@ -56,6 +56,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         modeloDetalle=(DefaultTableModel) tblVentasDetalladas.getModel();
+        modelo = (DefaultTableModel) tblVentas.getModel();
         jdcFecha.setDateFormatString("dd-MM-yyyy");
         jdcFecha.setDate(fdate);
         
@@ -66,6 +67,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         tHeadVentas.setFont(fuente);
         obtenerUsuario();
         jpnSubMenu1.setVisible(false);
+        lblMensajito.setVisible(false);
     }
     
     
@@ -264,6 +266,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblVentasBorrador = new javax.swing.JLabel();
         lblDetallesVentas = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
+        lblMensajito = new javax.swing.JLabel();
 
         frmVentasDetalladas2.setMinimumSize(new java.awt.Dimension(1200, 700));
         frmVentasDetalladas2.setUndecorated(true);
@@ -748,6 +751,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         frmVentasDetalladas2.getContentPane().add(txtUtilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 270, 90, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Detalles Ventas");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
@@ -1217,6 +1221,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 117, 1020, 10));
 
+        lblMensajito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblMensajito.setForeground(new java.awt.Color(255, 51, 0));
+        lblMensajito.setText("No se encontraron resultados");
+        getContentPane().add(lblMensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 250, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1225,10 +1234,10 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         
         
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
-                
+                modelo.setRowCount(0);
         String fecha=sd.format(jdcFecha.getDate());
         
-        DefaultTableModel modeloDetalles = new DefaultTableModel();
+        
         ArrayList<Venta> ventas = new ArrayList();
         Object[] fila = new Object[5];
         datosFaltantes=new Object[2];
@@ -1237,12 +1246,14 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         if (fecha.equals("")) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado una fecha");
         }else{
+            
             String[] campos = {"IdVenta", "Sucursal", "Cliente", "Tipo de Venta","Fecha"};
-            modeloDetalles.setColumnIdentifiers(campos);
+            modelo.setColumnIdentifiers(campos);
             try {
                 
                 
                 ventas=ControladorVenta.obteniendoVentas(fecha);
+                
                 Object x;
                 Iterator iterador=ventas.iterator();
                 while (iterador.hasNext()) {
@@ -1263,8 +1274,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                     datosFaltantes[0]=iterador.next();
                     datosFaltantes[1]=iterador.next();
                     
-                    modeloDetalles.addRow(fila);
-                    tblVentas.setModel(modeloDetalles);
+                    modelo.addRow(fila);
+                    tblVentas.setModel(modelo);
                 }
                 
             } catch (ErrorTienda ex) {
@@ -1273,6 +1284,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         
         
         
+        }
+        if(modelo.getRowCount()==0){
+            lblMensajito.setVisible(true);
+        }else{
+            lblMensajito.setVisible(false);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -1359,11 +1375,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                             estableciendoDatos(Integer.parseInt(tblVentas.getValueAt(seleccion, 0).toString()));
                             SumarSubTotales();
 
-                            txtSumas.setText(""+formateo.format(subTotales));
+                            txtSumas.setText(""+formateo.format(subTotales/1.13));
 
-                            double total=subTotales*1.13;
+                            double total=subTotales;
                             txtTotalventa.setText(""+formateo.format(total));
-                            double iva=total-subTotales;
+                            double iva=total-(subTotales/1.13);
                             txtIVA.setText(""+formateo.format(iva));
                         }
                       }
@@ -1377,7 +1393,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             
             
         }else{
-            JOptionPane.showMessageDialog(null, "No ha seleccionado en la tabla");
+            mensajeNotificacion("Debe seleccionar una venta de la tabla", "Adv");
         }
     }//GEN-LAST:event_btnDetalle1ActionPerformed
 
@@ -2038,6 +2054,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogo2;
+    private javax.swing.JLabel lblMensajito;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMenu1;
     private javax.swing.JLabel lblRolUsuario;

@@ -44,6 +44,7 @@ public class frmNotificacion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMaximumSize(new java.awt.Dimension(409, 59));
         setMinimumSize(new java.awt.Dimension(409, 59));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
