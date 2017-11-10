@@ -1003,6 +1003,7 @@ public class frmCompras extends javax.swing.JFrame {
     }
     
     public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
         Bitacora bitacora = new Bitacora();
         bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
         DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -1132,7 +1133,10 @@ public class frmCompras extends javax.swing.JFrame {
                     detalleCompra.setCostoUnitario(Double.parseDouble(decimal.format(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()))));
                     detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
                     detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString(),idSucursal));
-                    subtotal = subtotal +(double) tblCompra.getValueAt(i, 4);
+                    System.out.println("PENDEJADA");
+                    //System.out.println("pendejada"+subtotal +(double) tblCompra.getValueAt(i, 4));
+                    
+                    subtotal = subtotal +Double.parseDouble(tblCompra.getValueAt(i, 4).toString());
                     Articulos.add(detalleCompra);
                 }
                 while (prov.hasNext()) {
