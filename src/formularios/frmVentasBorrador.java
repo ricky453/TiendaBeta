@@ -65,23 +65,29 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         modeloDetalles = (DefaultTableModel) tblDetallesVenta.getModel();
         modeloConsolidar=(DefaultTableModel) tblConsolidar.getModel();
         ventas = tblVentas.getTableHeader();
+        detalles=tblDetallesVenta.getTableHeader();
         CargarSucursales();
         CargarVentasBorrador("TODAS",0);
-        tblVentas.setSelectionBackground(Color.BLACK);
+        tblVentas.setSelectionBackground(Color.DARK_GRAY);
         tblVentas.setSelectionForeground(Color.WHITE);
         dtcFecha.setDateFormatString("dd-MM-yyyy");
         dtcFecha.setDate(fecha);
         obtenerUsuario();
-        JOptionPane.showMessageDialog(null, "Para poder consolidar una venta es necesario seleccionar una sucursal especifica","AVISO",JOptionPane.INFORMATION_MESSAGE);
-        
+        //JOptionPane.showMessageDialog(null, "Para poder consolidar una venta es necesario seleccionar una sucursal especifica","AVISO",JOptionPane.INFORMATION_MESSAGE);
+        CabeceraTablas();
     }
     
     public void CabeceraTablas(){
         
-        detalles = tblDetallesVenta.getTableHeader();
+        
         
         Font fuente = new Font("Tahoma", Font.BOLD, 12);
-        ventas.setBackground(Color.red);
+        ventas.setBackground(Color.BLACK);
+        ventas.setForeground(Color.WHITE);
+        ventas.setFont(fuente);
+        detalles.setBackground(Color.BLACK);
+        detalles.setForeground(Color.WHITE);
+        detalles.setFont(fuente);
     }
     
     public void CargarVentasBorrador(String criterio, int idSucursal) throws ErrorTienda, SQLException{
@@ -525,7 +531,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtSumas = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         frmConsolidar.setAlwaysOnTop(true);
         frmConsolidar.setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
@@ -573,7 +578,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         frmDatosFinales.setTitle("Terminando");
         frmDatosFinales.setAlwaysOnTop(true);
-        frmDatosFinales.setMaximumSize(new java.awt.Dimension(540, 285));
         frmDatosFinales.setUndecorated(true);
         frmDatosFinales.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -678,6 +682,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         frmDatosFinales.getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 540, 240));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ventas Borrador");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setMaximumSize(new java.awt.Dimension(1200, 700));
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setUndecorated(true);
@@ -1383,14 +1389,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 430, 120));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, -1, -1));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1493,12 +1491,12 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             
             if(evt.getClickCount()==2){
                 
-             if(!frmConsolidar.isVisible()){
-                //frmConsolidar.setSize(300, 250);
-                //frmConsolidar.setVisible(true);
-                 Estado(false);//Habilita los demas componentes de la interfas, en este caso los bloquea con false
-                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
-             }
+//             if(!frmConsolidar.isVisible()){
+//                //frmConsolidar.setSize(300, 250);
+//                //frmConsolidar.setVisible(true);
+//                 Estado(false);//Habilita los demas componentes de la interfas, en este caso los bloquea con false
+//                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
+//             }
                 
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
                 if(!valorActual.substring(0, 1).equals("ↂ")){
@@ -2108,10 +2106,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dtcFechaFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        EliminarVentasBorrador();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -2177,7 +2171,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JFrame frmConsolidar;
     private javax.swing.JFrame frmDatosFinales;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
