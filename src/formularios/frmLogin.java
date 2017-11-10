@@ -283,7 +283,7 @@ public class frmLogin extends javax.swing.JFrame {
         Bitacora bitacora = new Bitacora();
         Date date = new Date();
         SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        bitacora.setAccion("Iniciar Sesion");
+        bitacora.setAccion("Inició sesión.");
         bitacora.setFecha(hora.format(date));
         try {
             bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(txtUser.getText()));
@@ -321,11 +321,13 @@ public class frmLogin extends javax.swing.JFrame {
                     frmHome m = new frmHome();
                     m.show();
                     mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
+                    AgregarBitacora();
                     dispose();
                 }else if(rol.equals("C")){
                    Diseño.user = txtUser.getText();
                    frmCompras co = new frmCompras();
                    co.show();
+                   AgregarBitacora();
                    mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
                    dispose();
             }else if(rol.equals("V")){
@@ -334,6 +336,7 @@ public class frmLogin extends javax.swing.JFrame {
                         frmVentas ve = new frmVentas();
                         ve.show();
                         mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
+                        AgregarBitacora();
                         dispose();
                     } catch (ErrorTienda ex) {
                         Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -344,6 +347,7 @@ public class frmLogin extends javax.swing.JFrame {
                 frmComprasReportes cr = new frmComprasReportes();
                 cr.show();
                 mensajeNotificacion("¡Bienvenido "+txtUser.getText()+"!", "Ok");
+                AgregarBitacora();
                 dispose();
                 
             }
@@ -359,7 +363,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         iniciar();
-        AgregarBitacora();
+
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
