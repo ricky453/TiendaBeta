@@ -518,7 +518,7 @@ public class frmVentas extends javax.swing.JFrame {
             UsoTicket.datosVendedor(id,login,rol);
             UsoTicket.imprimir();
             
-        }else{
+        }else if(idTipoVenta=='C'){
             //Imprimir
             UsoTicket.borradoInicializacion();
             UsoTicket.cabecera();
