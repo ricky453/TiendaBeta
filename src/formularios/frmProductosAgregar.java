@@ -1329,7 +1329,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
         Bitacora bitacora = new Bitacora();
         Date date = new Date();
         SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        bitacora.setAccion("Cerrar Sesion");
+        bitacora.setAccion("Cerró sesión.");
         bitacora.setFecha(hora.format(date));
         try {
             bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
