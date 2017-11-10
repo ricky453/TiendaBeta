@@ -25,7 +25,7 @@ import formularios.frmProveedores;
 import formularios.frmRegistrarUsuario;
 import formularios.frmSucursales;
 import formularios.frmTipoPrecio;
-import static formularios.frmTipoPrecioModificar.lblUser1;
+//import static formularios.frmTipoPrecioModificar.lblUser1;
 import formularios.frmVentas;
 import formularios.frmVentasDetalle;
 import static formulariosReportes.frmReporteInventarios.lblUser;
@@ -377,7 +377,6 @@ public class frmReporteVentas extends javax.swing.JFrame {
         getContentPane().add(lblReporteCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, 70));
 
         lblReporteVenta.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblReporteVenta.setForeground(new java.awt.Color(51, 51, 51));
         lblReporteVenta.setText("Reporte de Venta");
         lblReporteVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblReporteVenta.addMouseListener(new java.awt.event.MouseAdapter() {
