@@ -5,7 +5,9 @@
  */
 package formulariosReportes;
 
+import clases.Bitacora;
 import clases.Conexion;
+import clases.ControladorBitacora;
 import clases.ControladorSucursal;
 import clases.ControladorUsuario;
 import clases.ErrorTienda;
@@ -25,11 +27,14 @@ import formularios.frmProveedores;
 import formularios.frmRegistrarUsuario;
 import formularios.frmSucursales;
 import formularios.frmTipoPrecio;
+import static formularios.frmTipoPrecioModificar.lblUser1;
 import formularios.frmVentas;
 import formularios.frmVentasDetalle;
 import static formulariosReportes.frmComprasReportes.lblUser;
 import static formulariosReportes.frmComprasReportes.lblUser1;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -992,6 +997,17 @@ public class frmReporteInventarios extends javax.swing.JFrame {
         frmLogin lg = new frmLogin();
         lg.setVisible(true);
         this.setVisible(false);
+        Bitacora bitacora = new Bitacora();
+        Date date = new Date();
+        SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setAccion("Cerró sesión.");
+        bitacora.setFecha(hora.format(date));
+        try {
+            bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+            ControladorBitacora.Agregar(bitacora);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         mensajeNotificacion("¡Has cerrado sesión!", "Error");
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
