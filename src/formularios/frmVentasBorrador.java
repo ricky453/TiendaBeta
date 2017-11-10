@@ -17,6 +17,7 @@ import clases.Usuario;
 import clases.Venta;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
+import static formularios.frmVentas.lblUser1;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -27,12 +28,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import ticket.UsoTicket;
 
 /**
  *
@@ -390,6 +393,54 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             DetallesVenta[y][1]=modeloDetalles.getValueAt(y, 0);
             DetallesVenta[y][2]=modeloDetalles.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloDetalles.getValueAt(y, 3);
+        }
+        
+        //mi parte
+        SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yy HH:mm:ss",Locale.getDefault());
+        Object sucursal=cmbSucursales.getSelectedItem();
+        String fecha=formato.format(dtcFecha.getDate());
+        
+        String totalT=decimal.format(total);
+        String subtotalT=decimal.format(subTotal);
+        String ivaT=decimal.format(iva);
+        int filas=modeloDetalles.getRowCount();
+        
+        String detalles[][] = new String[modeloDetalles.getRowCount()][4];
+        
+            for(int y=0; y<modeloDetalles.getRowCount();y++){
+                detalles[y][0]=modeloDetalles.getValueAt(y, 1).toString();
+                detalles[y][1]=modeloDetalles.getValueAt(y, 2).toString();
+                detalles[y][2]=modeloDetalles.getValueAt(y, 3).toString();
+                double cantidad=Double.parseDouble(modeloDetalles.getValueAt(y, 2).toString());
+                double precio=Double.parseDouble(modeloDetalles.getValueAt(y, 2).toString());
+                detalles[y][3]=decimal.format(cantidad*precio);
+            
+            }
+            
+            String login=lblUser1.getText();
+            String rol=lblRolUsuario.getText();
+            int id=ControladorUsuario.ObtenerIdUsuario();
+        
+        if (idTipoVenta=='F') { 
+            //Imprimir
+            UsoTicket.borradoInicializacion();
+            UsoTicket.cabecera();
+            UsoTicket.datosTicket(sucursal,fecha,"Factura");
+            
+            
+            UsoTicket.datosVentaFactura(detalles,totalT,filas);
+            
+            UsoTicket.datosVendedor(id,login,rol);
+            UsoTicket.imprimir();
+            
+        }else{
+            //Imprimir
+            UsoTicket.borradoInicializacion();
+            UsoTicket.cabecera();
+            UsoTicket.datosTicket(sucursal,fecha,"Credito Fiscal");
+            UsoTicket.datosVentaCreditoFiscal(detalles,subtotalT,ivaT,totalT,filas);
+            UsoTicket.datosVendedor(id,login,rol);
+            UsoTicket.imprimir();
         }
         
         if(cv.Agregar(venta,DetallesVenta,"BORRADOR")){
@@ -1498,7 +1549,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 //                //frmConsolidar.setSize(300, 250);
 //                //frmConsolidar.setVisible(true);
 //                 Estado(false);//Habilita los demas componentes de la interfas, en este caso los bloquea con false
-//                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
+                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
 //             }
                 
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
