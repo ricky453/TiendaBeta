@@ -331,6 +331,7 @@ public class frmComprasReportes extends javax.swing.JFrame {
         getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
 
         btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/generar.png"))); // NOI18N
+        btnGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGenerarReporteMouseEntered(evt);

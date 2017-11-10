@@ -344,6 +344,7 @@ public class frmReporteVentas extends javax.swing.JFrame {
         getContentPane().add(rbtnVC, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, -1, -1));
 
         btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/generar.png"))); // NOI18N
+        btnGenerarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGenerarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGenerarReporteMouseEntered(evt);
