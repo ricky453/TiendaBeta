@@ -1127,10 +1127,12 @@ public class frmCompras extends javax.swing.JFrame {
             if (tblCompra.getRowCount()>0) {
                String IDprov=IdProveedor.toString();
                int idSucursal = ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem());
+               double subtotal=0.0;
                 for (int i = 0; i < tblCompra.getRowCount(); i++) {
                     detalleCompra.setCostoUnitario(Double.parseDouble(decimal.format(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()))));
                     detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
                     detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString(),idSucursal));
+                    subtotal = subtotal +(double) tblCompra.getValueAt(i, 4);
                     Articulos.add(detalleCompra);
                 }
                 while (prov.hasNext()) {
@@ -1183,7 +1185,7 @@ public class frmCompras extends javax.swing.JFrame {
                     compra.setTotal(Double.parseDouble(decimal.format(Double.parseDouble(total))));
                 }
                 compra.setARTICULOS(Articulos);
-                compra.setSubTotal(Double.parseDouble(total));
+                compra.setSubTotal(subtotal);
                 compra.setNumDocumento(txtNumeroDoc.getText());
                 //System.out.println(txtNumeroDoc.getText());
                 Object [][] detallesCompra;

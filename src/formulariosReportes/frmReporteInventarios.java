@@ -27,7 +27,7 @@ import formularios.frmProveedores;
 import formularios.frmRegistrarUsuario;
 import formularios.frmSucursales;
 import formularios.frmTipoPrecio;
-import static formularios.frmTipoPrecioModificar.lblUser1;
+//import static formularios.frmTipoPrecioModificar.lblUser1;
 import formularios.frmVentas;
 import formularios.frmVentasDetalle;
 import static formulariosReportes.frmComprasReportes.lblUser;
@@ -408,7 +408,6 @@ public class frmReporteInventarios extends javax.swing.JFrame {
         getContentPane().add(lblReporteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, 70));
 
         lblReporteInventarios.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        lblReporteInventarios.setForeground(new java.awt.Color(51, 51, 51));
         lblReporteInventarios.setText("Reporte de Inventarios");
         lblReporteInventarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblReporteInventarios.addMouseListener(new java.awt.event.MouseAdapter() {
