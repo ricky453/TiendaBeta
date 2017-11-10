@@ -11,11 +11,13 @@ import clases.ControladorUsuario;
 import clases.ControladorVenta;
 import clases.ErrorTienda;
 import clases.Producto;
+import clases.Usuario;
 import clases.Venta;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmVentas.lblUser;
 import static formularios.frmVentas.lblUser1;
+import formulariosReportes.frmComprasReportes;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
@@ -42,7 +44,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     boolean estadoMenu;
     public int seleccion;
     public int id;
-    String rol;
+    String rol, password;
     DefaultTableModel modeloDetalle,modelo;
     double subTotales;
     DateFormat df=DateFormat.getDateInstance();
@@ -70,7 +72,47 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblMensajito.setVisible(false);
     }
     
+      //CAMBIAR CONTRASEÑA DEL USUARIO
+    public void comprobarPass(){
+        try {
+            password = ControladorUsuario.ObtenerPass(Diseño.user);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(password.equals(pwdAntigua.getText())){
+            comprobarNuevaPass();
+        }else{
+            pwdAntigua.requestFocus();
+            mensajeNotificacion("¡Contraseña actual errónea!", "Error");
+        }
+    }
     
+    public void comprobarNuevaPass(){
+        if(pwdNueva.getText().equals(pwdNueva2.getText())){
+            cambiarPassword();
+        }else{
+            pwdNueva.requestFocus();
+            mensajeNotificacion("¡Contraseñas no coinciden!", "Error");
+        }
+    }
+    
+    public void cambiarPassword(){
+        Usuario user = new Usuario();
+        user.setClave(pwdNueva.getText());
+        user.setUsuario(Diseño.user);
+        try {
+
+            ControladorUsuario.ModificarPass(user);
+            mensajeNotificacion("¡Contraseña cambiada correctamente!", "Ok");
+            pwdAntigua.setText("");
+            pwdNueva.setText("");
+            pwdNueva2.setText("");
+            Animacion.Animacion.subir(55, -195, 1, 2, jpnPass);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }  
    public void estableciendoDatos(int id){
         Object[] fila=new Object[5];
         
@@ -164,9 +206,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             rol = ControladorUsuario.obtenerRol(txtUser.getText());
             if(rol.equals("A")){
                 lblRolUsuario.setText("ADMINISTRADOR");
+                lblAgregarUsuario.setVisible(true);
             }
             else if(rol.equals("V")){
-                lblRolUsuario.setText("VENDEDOR");}
+                lblRolUsuario.setText("VENDEDOR");
+                            lblAgregarUsuario.setVisible(false);}
             else if(rol.equals("C")){
                 lblRolUsuario.setText("COMPRADOR");
 
@@ -207,7 +251,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblVender1 = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JSeparator();
         jpnBarraSuperior2 = new javax.swing.JPanel();
-        lblBotonCerrar1 = new javax.swing.JLabel();
         lblLogo2 = new javax.swing.JLabel();
         jpnBarraMenu1 = new javax.swing.JPanel();
         lblMenu1 = new javax.swing.JLabel();
@@ -230,6 +273,22 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         txtFecha2 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtUtilidad = new javax.swing.JTextField();
+        jpnPass = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        pwdAntigua = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        pwdNueva = new javax.swing.JPasswordField();
+        jLabel15 = new javax.swing.JLabel();
+        pwdNueva2 = new javax.swing.JPasswordField();
+        btnAtrasPwd = new javax.swing.JLabel();
+        btnCambiarPwd = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jpnUser = new javax.swing.JPanel();
+        lblRolUsuario = new javax.swing.JLabel();
+        lblCambiarPwd = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -237,17 +296,15 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jdcFecha = new com.toedter.calendar.JDateChooser();
         btnBuscar = new javax.swing.JButton();
         btnDetalle1 = new javax.swing.JButton();
-        jpnUser = new javax.swing.JPanel();
-        lblRolUsuario = new javax.swing.JLabel();
-        lblCambiarPwd = new javax.swing.JLabel();
-        lblCerrarSesion = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         jpnWhite = new javax.swing.JPanel();
         lblUser1 = new javax.swing.JLabel();
-        lblBotonCerrar = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
+        lblAgregarUsuario = new javax.swing.JLabel();
         jpnBarraMenu = new javax.swing.JPanel();
+        btnHome = new javax.swing.JLabel();
+        lblMenu = new javax.swing.JLabel();
         jpnSubMenu = new javax.swing.JPanel();
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
@@ -260,8 +317,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         btnDetalleVentas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnBitacoras = new javax.swing.JButton();
-        btnHome = new javax.swing.JLabel();
-        lblMenu = new javax.swing.JLabel();
         lblVender = new javax.swing.JLabel();
         lblVentasBorrador = new javax.swing.JLabel();
         lblDetallesVentas = new javax.swing.JLabel();
@@ -274,7 +329,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Id de la venta:");
-        frmVentasDetalladas2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 110, 30));
+        frmVentasDetalladas2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 30));
 
         txtIdVenta.setEditable(false);
         txtIdVenta.setText(" ");
@@ -283,7 +338,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtIdVentaActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 60, 30));
+        frmVentasDetalladas2.getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 60, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Fue una venta con:");
@@ -322,7 +377,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtClienteActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 250, 30));
+        frmVentasDetalladas2.getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 250, 30));
 
         tblVentasDetalladas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -439,20 +494,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             }
         });
         jpnBarraSuperior2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBotonCerrar1.setBackground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        lblBotonCerrar1.setForeground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBotonCerrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
-        lblBotonCerrar1.setToolTipText("Salir");
-        lblBotonCerrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBotonCerrar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBotonCerrar1MouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior2.add(lblBotonCerrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
 
         lblLogo2.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblLogo2.setForeground(new java.awt.Color(255, 255, 255));
@@ -713,7 +754,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Cliente:");
-        frmVentasDetalladas2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 70, 30));
+        frmVentasDetalladas2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 70, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Fecha:");
@@ -757,6 +798,133 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpnPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
+        jpnPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel3.setText("Repita nueva contraseña:");
+        jpnPass.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, -1));
+
+        pwdAntigua.setBackground(new java.awt.Color(240, 240, 240));
+        pwdAntigua.setBorder(null);
+        pwdAntigua.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdAntiguaFocusGained(evt);
+            }
+        });
+        pwdAntigua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdAntiguaActionPerformed(evt);
+            }
+        });
+        jpnPass.add(pwdAntigua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 35, 190, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel4.setText("Contraseña antigua:");
+        jpnPass.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
+
+        pwdNueva.setBackground(new java.awt.Color(240, 240, 240));
+        pwdNueva.setBorder(null);
+        pwdNueva.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdNuevaFocusGained(evt);
+            }
+        });
+        pwdNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdNuevaActionPerformed(evt);
+            }
+        });
+        jpnPass.add(pwdNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 85, 190, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel15.setText("Nueva contraseña:");
+        jpnPass.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+
+        pwdNueva2.setBackground(new java.awt.Color(240, 240, 240));
+        pwdNueva2.setBorder(null);
+        pwdNueva2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdNueva2FocusGained(evt);
+            }
+        });
+        jpnPass.add(pwdNueva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 135, 190, -1));
+
+        btnAtrasPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atras2.png"))); // NOI18N
+        btnAtrasPwd.setToolTipText("Volver atrás.");
+        btnAtrasPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtrasPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasPwdMouseClicked(evt);
+            }
+        });
+        jpnPass.add(btnAtrasPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 155, 30, 30));
+
+        btnCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Aceptar.png"))); // NOI18N
+        btnCambiarPwd.setToolTipText("Cambiar Contraseña.");
+        btnCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambiarPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCambiarPwdMouseClicked(evt);
+            }
+        });
+        jpnPass.add(btnCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 155, 30, 30));
+
+        jSeparator1.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 190, 10));
+
+        jSeparator2.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 190, 10));
+
+        jSeparator4.setBackground(new java.awt.Color(102, 0, 0));
+        jSeparator4.setForeground(new java.awt.Color(102, 0, 0));
+        jpnPass.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 10));
+
+        getContentPane().add(jpnPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, -195, 230, 190));
+
+        jpnUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
+        jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jpnUserMouseExited(evt);
+            }
+        });
+        jpnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblRolUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
+        lblRolUsuario.setForeground(new java.awt.Color(102, 0, 0));
+        lblRolUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRolUsuario.setText("Nombres + Apellidos");
+        jpnUser.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
+
+        lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
+        lblCambiarPwd.setText("Cambiar contraseña");
+        lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCambiarPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCambiarPwdMouseClicked(evt);
+            }
+        });
+        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 180, 20));
+
+        lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
+        lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/usuario.png"))); // NOI18N
+        lblCerrarSesion.setText("Cerrar sesión");
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseClicked(evt);
+            }
+        });
+        jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
+
+        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
 
         tblVentas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -818,39 +986,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         });
         getContentPane().add(btnDetalle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 640, 110, 30));
 
-        jpnUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jpnUserMouseExited(evt);
-            }
-        });
-        jpnUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblRolUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 11)); // NOI18N
-        lblRolUsuario.setForeground(new java.awt.Color(102, 0, 0));
-        lblRolUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRolUsuario.setText("Nombres + Apellidos");
-        jpnUser.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
-
-        lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
-        lblCambiarPwd.setText("Cambiar contraseña");
-        lblCambiarPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnUser.add(lblCambiarPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 75, 160, 20));
-
-        lblCerrarSesion.setBackground(new java.awt.Color(0, 0, 0));
-        lblCerrarSesion.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        lblCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/usuario.png"))); // NOI18N
-        lblCerrarSesion.setText("Cerrar sesión");
-        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCerrarSesionMouseClicked(evt);
-            }
-        });
-        jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
-
-        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
-
         jpnBarraSuperior.setBackground(new java.awt.Color(0, 0, 0));
         jpnBarraSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jpnBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -888,20 +1023,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jpnBarraSuperior.add(jpnWhite, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 130, 60));
 
-        lblBotonCerrar.setBackground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        lblBotonCerrar.setForeground(new java.awt.Color(102, 0, 0));
-        lblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBotonCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/exit32.png"))); // NOI18N
-        lblBotonCerrar.setToolTipText("Salir");
-        lblBotonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBotonCerrarMouseClicked(evt);
-            }
-        });
-        jpnBarraSuperior.add(lblBotonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 40, 50));
-
         lblUser.setBackground(new java.awt.Color(222, 222, 222));
         lblUser.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(204, 204, 204));
@@ -924,6 +1045,17 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblLogo.setToolTipText("");
         jpnBarraSuperior.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 50));
 
+        lblAgregarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAgregarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/agus.png"))); // NOI18N
+        lblAgregarUsuario.setToolTipText("Agregar Usuario");
+        lblAgregarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAgregarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAgregarUsuarioMouseClicked(evt);
+            }
+        });
+        jpnBarraSuperior.add(lblAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 60, 50));
+
         getContentPane().add(jpnBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 55));
 
         jpnBarraMenu.setBackground(new java.awt.Color(102, 0, 0));
@@ -933,233 +1065,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             }
         });
         jpnBarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
-        jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jpnSubMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/compras.png"))); // NOI18N
-        btnCompras.setBorderPainted(false);
-        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnComprasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnComprasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnComprasMouseExited(evt);
-            }
-        });
-        btnCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprasActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 10, 180, 40));
-
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/ventas.png"))); // NOI18N
-        btnVentas.setBorderPainted(false);
-        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVentasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVentasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVentasMouseExited(evt);
-            }
-        });
-        btnVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVentasActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 110, 180, 40));
-
-        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/productos.png"))); // NOI18N
-        btnProductos.setBorderPainted(false);
-        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProductosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnProductosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnProductosMouseExited(evt);
-            }
-        });
-        btnProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductosActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 210, 180, 40));
-
-        btnTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/tipoprecio.png"))); // NOI18N
-        btnTipoPrecio.setBorderPainted(false);
-        btnTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTipoPrecioMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnTipoPrecioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnTipoPrecioMouseExited(evt);
-            }
-        });
-        btnTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTipoPrecioActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 410, 180, 40));
-
-        btnParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/parametro.png"))); // NOI18N
-        btnParametro.setBorderPainted(false);
-        btnParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnParametro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnParametroMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnParametroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnParametroMouseExited(evt);
-            }
-        });
-        btnParametro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnParametroActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 360, 180, 40));
-
-        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/proveedores.png"))); // NOI18N
-        btnProveedores.setBorderPainted(false);
-        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProveedoresMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnProveedoresMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnProveedoresMouseExited(evt);
-            }
-        });
-        jpnSubMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 260, 180, 40));
-
-        btnSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/sucursales.png"))); // NOI18N
-        btnSucursales.setBorderPainted(false);
-        btnSucursales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSucursales.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSucursalesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSucursalesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSucursalesMouseExited(evt);
-            }
-        });
-        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 310, 180, 40));
-
-        btnDetalleCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.compras.png"))); // NOI18N
-        btnDetalleCompras.setBorderPainted(false);
-        btnDetalleCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDetalleCompras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDetalleComprasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetalleComprasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetalleComprasMouseExited(evt);
-            }
-        });
-        btnDetalleCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleComprasActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnDetalleCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 60, 180, 40));
-
-        btnDetalleVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.ventas.png"))); // NOI18N
-        btnDetalleVentas.setBorderPainted(false);
-        btnDetalleVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDetalleVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDetalleVentasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetalleVentasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetalleVentasMouseExited(evt);
-            }
-        });
-        btnDetalleVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleVentasActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnDetalleVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 160, 180, 40));
-
-        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/reportes.png"))); // NOI18N
-        btnReportes.setBorderPainted(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReportesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReportesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReportesMouseExited(evt);
-            }
-        });
-        btnReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReportesActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 460, 180, 40));
-
-        btnBitacoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/bitacoras.png"))); // NOI18N
-        btnBitacoras.setBorderPainted(false);
-        btnBitacoras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBitacoras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBitacorasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBitacorasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBitacorasMouseExited(evt);
-            }
-        });
-        btnBitacoras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBitacorasActionPerformed(evt);
-            }
-        });
-        jpnSubMenu.add(btnBitacoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 510, 180, 40));
-
-        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 560));
 
         btnHome.setToolTipText("Inicio");
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1179,6 +1084,197 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             }
         });
         jpnBarraMenu.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 15, 180, 50));
+
+        jpnSubMenu.setBackground(new java.awt.Color(102, 0, 0));
+        jpnSubMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpnSubMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/compras.png"))); // NOI18N
+        btnCompras.setBorderPainted(false);
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnComprasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnComprasMouseExited(evt);
+            }
+        });
+        btnCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprasActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 10, 180, 40));
+
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/ventas.png"))); // NOI18N
+        btnVentas.setBorderPainted(false);
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVentasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVentasMouseExited(evt);
+            }
+        });
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 110, 180, 40));
+
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/productos.png"))); // NOI18N
+        btnProductos.setBorderPainted(false);
+        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProductosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProductosMouseExited(evt);
+            }
+        });
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 210, 180, 40));
+
+        btnTipoPrecio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/tipoprecio.png"))); // NOI18N
+        btnTipoPrecio.setBorderPainted(false);
+        btnTipoPrecio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTipoPrecio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTipoPrecioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTipoPrecioMouseExited(evt);
+            }
+        });
+        btnTipoPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTipoPrecioActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnTipoPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 410, 180, 40));
+
+        btnParametro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/parametro.png"))); // NOI18N
+        btnParametro.setBorderPainted(false);
+        btnParametro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnParametro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnParametroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnParametroMouseExited(evt);
+            }
+        });
+        btnParametro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParametroActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnParametro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 360, 180, 40));
+
+        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/proveedores.png"))); // NOI18N
+        btnProveedores.setBorderPainted(false);
+        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProveedoresMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProveedoresMouseExited(evt);
+            }
+        });
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 260, 180, 40));
+
+        btnSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/sucursales.png"))); // NOI18N
+        btnSucursales.setBorderPainted(false);
+        btnSucursales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSucursales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSucursalesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSucursalesMouseExited(evt);
+            }
+        });
+        btnSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSucursalesActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 310, 180, 40));
+
+        btnDetalleCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.compras.png"))); // NOI18N
+        btnDetalleCompras.setBorderPainted(false);
+        btnDetalleCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetalleCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetalleComprasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetalleComprasMouseExited(evt);
+            }
+        });
+        btnDetalleCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleComprasActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnDetalleCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 60, 180, 40));
+
+        btnDetalleVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/det.ventas.png"))); // NOI18N
+        btnDetalleVentas.setBorderPainted(false);
+        btnDetalleVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpnSubMenu.add(btnDetalleVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 160, 180, 40));
+
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/reportes.png"))); // NOI18N
+        btnReportes.setBorderPainted(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportesMouseExited(evt);
+            }
+        });
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 460, 180, 40));
+
+        btnBitacoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/bitacoras.png"))); // NOI18N
+        btnBitacoras.setBorderPainted(false);
+        btnBitacoras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBitacoras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBitacorasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBitacorasMouseExited(evt);
+            }
+        });
+        btnBitacoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBitacorasActionPerformed(evt);
+            }
+        });
+        jpnSubMenu.add(btnBitacoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 510, 180, 40));
+
+        jpnBarraMenu.add(jpnSubMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 190, 560));
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 650));
 
@@ -1413,29 +1509,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClienteActionPerformed
 
-    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
-        frmLogin lg = new frmLogin();
-        lg.setVisible(true);
-        this.setVisible(false);
-        Bitacora bitacora = new Bitacora();
-        Date date = new Date();
-        SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        bitacora.setAccion("Cerrar Sesion");
-        bitacora.setFecha(hora.format(date));
-        try {
-            bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
-            ControladorBitacora.Agregar(bitacora);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        mensajeNotificacion("¡Has cerrado sesión!", "Error");
-    }//GEN-LAST:event_lblCerrarSesionMouseClicked
-
-    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
-        //jpnUser.setVisible(false);
-        //jpnWhite.setVisible(false);
-    }//GEN-LAST:event_jpnUserMouseExited
-
     private void lblUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUser1MouseClicked
         jpnWhite.setVisible(false);
         jpnUser.setVisible(false);
@@ -1445,10 +1518,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jpnWhite.setVisible(false);
         jpnUser.setVisible(false);
     }//GEN-LAST:event_jpnWhiteMouseClicked
-
-    private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
     private void lblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUserMouseClicked
         obtenerRol();
@@ -1469,201 +1538,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private void jpnBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMousePressed
 
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
-
-    private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
-        frmCompras cm = new frmCompras();
-        cm.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnComprasMouseClicked
-
-    private void btnComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseEntered
-        /*  ---- Animación compras, mover ----  */
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);
-    }//GEN-LAST:event_btnComprasMouseEntered
-
-    private void btnComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseExited
-        /*  ---- Animación compras, volver posición anterior ----  */
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnCompras);
-    }//GEN-LAST:event_btnComprasMouseExited
-
-    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-
-    }//GEN-LAST:event_btnComprasActionPerformed
-
-    private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
-        try {
-            frmVentas vt = new frmVentas();
-            vt.setVisible(true);
-            this.setVisible(false);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(frmHome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnVentasMouseClicked
-
-    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnVentas);
-    }//GEN-LAST:event_btnVentasMouseEntered
-
-    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnVentas);
-    }//GEN-LAST:event_btnVentasMouseExited
-
-    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-
-    }//GEN-LAST:event_btnVentasActionPerformed
-
-    private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        frmProductos pd = new frmProductos();
-        pd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnProductosMouseClicked
-
-    private void btnProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);
-    }//GEN-LAST:event_btnProductosMouseEntered
-
-    private void btnProductosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProductos);
-    }//GEN-LAST:event_btnProductosMouseExited
-
-    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-
-    }//GEN-LAST:event_btnProductosActionPerformed
-
-    private void btnTipoPrecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseClicked
-        frmTipoPrecio tp = new frmTipoPrecio();
-        tp.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnTipoPrecioMouseClicked
-
-    private void btnTipoPrecioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnTipoPrecio);
-    }//GEN-LAST:event_btnTipoPrecioMouseEntered
-
-    private void btnTipoPrecioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnTipoPrecio);
-    }//GEN-LAST:event_btnTipoPrecioMouseExited
-
-    private void btnTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTipoPrecioActionPerformed
-
-    private void btnParametroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParametroMouseClicked
-
-        frmParametro pr = new frmParametro();
-        pr.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnParametroMouseClicked
-
-    private void btnParametroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParametroMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnParametro);
-    }//GEN-LAST:event_btnParametroMouseEntered
-
-    private void btnParametroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParametroMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnParametro);
-    }//GEN-LAST:event_btnParametroMouseExited
-
-    private void btnParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParametroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnParametroActionPerformed
-
-    private void btnProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseClicked
-        frmProveedores pv = new frmProveedores();
-        pv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnProveedoresMouseClicked
-
-    private void btnProveedoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);
-    }//GEN-LAST:event_btnProveedoresMouseEntered
-
-    private void btnProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProveedores);
-    }//GEN-LAST:event_btnProveedoresMouseExited
-
-    private void btnSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseClicked
-        frmSucursales su = new frmSucursales();
-        su.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnSucursalesMouseClicked
-
-    private void btnSucursalesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnSucursales);
-    }//GEN-LAST:event_btnSucursalesMouseEntered
-
-    private void btnSucursalesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnSucursales);
-    }//GEN-LAST:event_btnSucursalesMouseExited
-
-    private void btnDetalleComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDetalleComprasMouseClicked
-
-    private void btnDetalleComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnDetalleCompras);
-    }//GEN-LAST:event_btnDetalleComprasMouseEntered
-
-    private void btnDetalleComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnDetalleCompras);
-    }//GEN-LAST:event_btnDetalleComprasMouseExited
-
-    private void btnDetalleComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleComprasActionPerformed
-        frmComprasDetalle cd = new frmComprasDetalle();
-        cd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnDetalleComprasActionPerformed
-
-    private void btnDetalleVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseClicked
-
-    }//GEN-LAST:event_btnDetalleVentasMouseClicked
-
-    private void btnDetalleVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnDetalleVentas);
-    }//GEN-LAST:event_btnDetalleVentasMouseEntered
-
-    private void btnDetalleVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleVentasMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnDetalleVentas);
-    }//GEN-LAST:event_btnDetalleVentasMouseExited
-
-    private void btnDetalleVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleVentasActionPerformed
-        frmVentasDetalle vd = new frmVentasDetalle();
-        vd.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnDetalleVentasActionPerformed
-
-    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportesMouseClicked
-
-    private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnReportes);
-    }//GEN-LAST:event_btnReportesMouseEntered
-
-    private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnReportes);
-    }//GEN-LAST:event_btnReportesMouseExited
-
-    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportesActionPerformed
-
-    private void btnBitacorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBitacorasMouseClicked
-
-    private void btnBitacorasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseEntered
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnBitacoras);
-    }//GEN-LAST:event_btnBitacorasMouseEntered
-
-    private void btnBitacorasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseExited
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnBitacoras);
-    }//GEN-LAST:event_btnBitacorasMouseExited
-
-    private void btnBitacorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBitacorasActionPerformed
-        frmBitacoras bi = new frmBitacoras();
-        bi.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnBitacorasActionPerformed
 
     private void jpnBarraMenuPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jpnBarraMenuPropertyChange
 
@@ -1728,10 +1602,6 @@ public class frmVentasDetalle extends javax.swing.JFrame {
             Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblVender1MouseClicked
-
-    private void lblBotonCerrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrar1MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lblBotonCerrar1MouseClicked
 
     private void jpnBarraSuperior2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperior2MouseDragged
 
@@ -1958,6 +1828,214 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUtilidadActionPerformed
 
+    private void btnComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);
+    }//GEN-LAST:event_btnComprasMouseEntered
+
+    private void btnComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseExited
+        /*  ---- Animación compras, volver posición anterior ----  */
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnCompras);
+    }//GEN-LAST:event_btnComprasMouseExited
+
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
+        frmCompras co = new frmCompras();
+        co.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnVentas);
+    }//GEN-LAST:event_btnVentasMouseEntered
+
+    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnVentas);
+    }//GEN-LAST:event_btnVentasMouseExited
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        try {
+            frmVentas ve = new frmVentas();
+            ve.setVisible(true);
+            this.setVisible(false);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmBitacoras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);
+    }//GEN-LAST:event_btnProductosMouseEntered
+
+    private void btnProductosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProductos);
+    }//GEN-LAST:event_btnProductosMouseExited
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        frmProductos pro = new frmProductos();
+        pro.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnTipoPrecioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnTipoPrecio);
+    }//GEN-LAST:event_btnTipoPrecioMouseEntered
+
+    private void btnTipoPrecioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTipoPrecioMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnTipoPrecio);
+    }//GEN-LAST:event_btnTipoPrecioMouseExited
+
+    private void btnTipoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoPrecioActionPerformed
+        frmTipoPrecio tp = new frmTipoPrecio();
+        tp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTipoPrecioActionPerformed
+
+    private void btnParametroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParametroMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnParametro);
+    }//GEN-LAST:event_btnParametroMouseEntered
+
+    private void btnParametroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParametroMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnParametro);
+    }//GEN-LAST:event_btnParametroMouseExited
+
+    private void btnParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParametroActionPerformed
+        frmParametro pa = new frmParametro();
+        pa.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnParametroActionPerformed
+
+    private void btnProveedoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);
+    }//GEN-LAST:event_btnProveedoresMouseEntered
+
+    private void btnProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProveedores);
+    }//GEN-LAST:event_btnProveedoresMouseExited
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        frmProveedores pr = new frmProveedores();
+        pr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnProveedoresActionPerformed
+
+    private void btnSucursalesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnSucursales);
+    }//GEN-LAST:event_btnSucursalesMouseEntered
+
+    private void btnSucursalesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSucursalesMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnSucursales);
+    }//GEN-LAST:event_btnSucursalesMouseExited
+
+    private void btnSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSucursalesActionPerformed
+        frmSucursales su = new frmSucursales();
+        su.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSucursalesActionPerformed
+
+    private void btnDetalleComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnDetalleCompras);
+    }//GEN-LAST:event_btnDetalleComprasMouseEntered
+
+    private void btnDetalleComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetalleComprasMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnDetalleCompras);
+    }//GEN-LAST:event_btnDetalleComprasMouseExited
+
+    private void btnDetalleComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleComprasActionPerformed
+        frmComprasDetalle cd = new frmComprasDetalle();
+        cd.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDetalleComprasActionPerformed
+
+    private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnReportes);
+    }//GEN-LAST:event_btnReportesMouseEntered
+
+    private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnReportes);
+    }//GEN-LAST:event_btnReportesMouseExited
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        frmComprasReportes cr = new frmComprasReportes();
+        cr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnBitacorasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseEntered
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnBitacoras);
+    }//GEN-LAST:event_btnBitacorasMouseEntered
+
+    private void btnBitacorasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBitacorasMouseExited
+        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnBitacoras);
+    }//GEN-LAST:event_btnBitacorasMouseExited
+
+    private void btnBitacorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBitacorasActionPerformed
+        frmBitacoras bi = new frmBitacoras();
+        bi.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBitacorasActionPerformed
+
+    private void pwdAntiguaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdAntiguaFocusGained
+        pwdAntigua.selectAll();
+    }//GEN-LAST:event_pwdAntiguaFocusGained
+
+    private void pwdAntiguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdAntiguaActionPerformed
+        pwdNueva.requestFocus();
+    }//GEN-LAST:event_pwdAntiguaActionPerformed
+
+    private void pwdNuevaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdNuevaFocusGained
+        pwdNueva.selectAll();
+    }//GEN-LAST:event_pwdNuevaFocusGained
+
+    private void pwdNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdNuevaActionPerformed
+        pwdNueva2.requestFocus();
+    }//GEN-LAST:event_pwdNuevaActionPerformed
+
+    private void pwdNueva2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdNueva2FocusGained
+        pwdNueva2.selectAll();
+    }//GEN-LAST:event_pwdNueva2FocusGained
+
+    private void btnAtrasPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasPwdMouseClicked
+        Animacion.Animacion.subir(55, -195, 1, 2, jpnPass);
+    }//GEN-LAST:event_btnAtrasPwdMouseClicked
+
+    private void btnCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCambiarPwdMouseClicked
+        comprobarPass();
+    }//GEN-LAST:event_btnCambiarPwdMouseClicked
+
+    private void lblCambiarPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambiarPwdMouseClicked
+        jpnPass.setVisible(true);
+        Animacion.Animacion.bajar(-195, 55, 1, 2, jpnPass);
+        pwdAntigua.requestFocus();
+    }//GEN-LAST:event_lblCambiarPwdMouseClicked
+
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        frmLogin lg = new frmLogin();
+        lg.setVisible(true);
+        this.setVisible(false);
+        Bitacora bitacora = new Bitacora();
+        Date date = new Date();
+        SimpleDateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setAccion("Cerró sesión.");
+        bitacora.setFecha(hora.format(date));
+        try {
+            bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+            ControladorBitacora.Agregar(bitacora);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mensajeNotificacion("¡Has cerrado sesión!", "Error");
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
+
+    private void jpnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnUserMouseExited
+        //jpnUser.setVisible(false);
+        //jpnWhite.setVisible(false);
+    }//GEN-LAST:event_jpnUserMouseExited
+
+    private void lblAgregarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarUsuarioMouseClicked
+        frmRegistrarUsuario ru = new frmRegistrarUsuario();
+        ru.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1995,9 +2073,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnAtrasPwd;
     private javax.swing.JButton btnBitacoras;
     private javax.swing.JButton btnBitacoras1;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JLabel btnCambiarPwd;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnCompras1;
     private javax.swing.JButton btnDetalle1;
@@ -2027,26 +2107,32 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator9;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JPanel jpnBarraMenu;
     private javax.swing.JPanel jpnBarraMenu1;
     private javax.swing.JPanel jpnBarraSuperior;
     private javax.swing.JPanel jpnBarraSuperior2;
+    private javax.swing.JPanel jpnPass;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnSubMenu1;
     private javax.swing.JPanel jpnUser;
     private javax.swing.JPanel jpnWhite;
-    public static javax.swing.JLabel lblBotonCerrar;
-    public static javax.swing.JLabel lblBotonCerrar1;
+    private javax.swing.JLabel lblAgregarUsuario;
     private javax.swing.JLabel lblCambiarPwd;
     private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblDetallesVentas;
@@ -2065,6 +2151,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblVender1;
     private javax.swing.JLabel lblVentasBorrador;
     private javax.swing.JLabel lblVentasBorrador1;
+    private javax.swing.JPasswordField pwdAntigua;
+    private javax.swing.JPasswordField pwdNueva;
+    private javax.swing.JPasswordField pwdNueva2;
     public javax.swing.JTable tblVentas;
     public javax.swing.JTable tblVentasDetalladas;
     public javax.swing.JTextField txtCliente;
