@@ -59,7 +59,7 @@ public class frmCompras extends javax.swing.JFrame {
     DefaultTableModel tablaModel= new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
     JTableHeader tHeadVentas;
-    double percepcio =0;
+    double percepcio =0, totalFinal;
     String rol, password;
     Date date = new Date();
     
@@ -1016,7 +1016,7 @@ public class frmCompras extends javax.swing.JFrame {
         Producto pr = new Producto();
         pr.setCodBarra(txtCodBarraProd1.getText());
         pr.setNombre(txtNomProd.getText());
-        pr.setInventario(Integer.parseInt(txtCantidad.getText()));
+        pr.setInventario(0);
         pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
         pr.setIdSucursal(ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
         
@@ -1090,12 +1090,12 @@ public class frmCompras extends javax.swing.JFrame {
             iteraciones++;
         }
         //System.out.println(total);
-        double totalFinal=Double.parseDouble(decimal.format(total));
+        totalFinal=Double.parseDouble(decimal.format(total));
         
         if (TipoCompra==0) {
             txtIVA.setText(decimal.format(totalFinal*0.13));
             percepcio = totalFinal*(Double.parseDouble(txtPercepcion.getText())/100);
-            txtTotal.setText(decimal.format(totalFinal+(totalFinal*0.13)-(totalFinal*(Double.parseDouble(txtPercepcion.getText())/100))));
+            txtTotal.setText(decimal.format(totalFinal+(totalFinal*0.13)+(percepcio)));
         }else{
             txtTotal.setText("$"+totalFinal);
         }
@@ -1133,7 +1133,7 @@ public class frmCompras extends javax.swing.JFrame {
                     detalleCompra.setCostoUnitario(Double.parseDouble(decimal.format(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()))));
                     detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
                     detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString(),idSucursal));
-                    System.out.println("PENDEJADA");
+                    //System.out.println("PENDEJADA");
                     //System.out.println("pendejada"+subtotal +(double) tblCompra.getValueAt(i, 4));
                     
                     subtotal = subtotal +Double.parseDouble(tblCompra.getValueAt(i, 4).toString());
@@ -1456,6 +1456,7 @@ public class frmCompras extends javax.swing.JFrame {
         if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
             getToolkit().beep();
             evt.consume();
+            txtTotal.setText(decimal.format(totalFinal+(totalFinal*0.13)+(percepcio)));
         }else if (s == KeyEvent.VK_PERIOD) {
             String cadena=txtPercepcion.getText();
             int tamanio=cadena.length();
@@ -1467,6 +1468,7 @@ public class frmCompras extends javax.swing.JFrame {
                 }
             }
         }
+        
         
     }//GEN-LAST:event_txtPercepcionKeyTyped
 

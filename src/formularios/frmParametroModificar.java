@@ -14,7 +14,6 @@ import clases.Parametro;
 import clases.Usuario;
 import facadeshop.Diseño;
 import static formularios.frmBitacoras.lblUser;
-import static formularios.frmBitacoras.lblUser1;
 import formularios.frmCompras;
 import formularios.frmHome;
 import static formularios.frmLogin.txtUser;

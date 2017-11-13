@@ -8,7 +8,6 @@ package formularios;
 import clases.*;
 import facadeshop.Diseño;
 import static formularios.frmComprasDetalle.lblUser;
-import static formularios.frmComprasDetalle.lblUser1;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProveedores.tblProveedores;
 import static formularios.frmVentas.lblUser1;

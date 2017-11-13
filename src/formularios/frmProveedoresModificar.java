@@ -15,7 +15,7 @@ import clases.Usuario;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProveedoresAgregar.lblUser;
-import static formularios.frmProveedoresAgregar.lblUser1;
+//import static formularios.frmProveedoresAgregar.lblUser1;
 import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;

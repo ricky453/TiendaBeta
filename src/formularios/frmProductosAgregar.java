@@ -9,7 +9,6 @@ import clases.*;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProductos.lblUser;
-import static formularios.frmProductos.lblUser1;
 import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;

@@ -24,7 +24,6 @@ import clases.Usuario;
 import facadeshop.Diseño;
 import static formularios.frmLogin.txtUser;
 import static formularios.frmProductos.lblUser;
-import static formularios.frmProductos.lblUser1;
 import formularios.frmProveedores;
 import static formularios.frmVentas.lblUser1;
 import formulariosReportes.frmComprasReportes;
@@ -539,11 +538,11 @@ public class frmProveedoresAgregar extends javax.swing.JFrame {
         btnGuardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarProveedorMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarProveedorMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarProveedorMouseEntered(evt);
             }
         });
         btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
