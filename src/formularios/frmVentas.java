@@ -873,7 +873,7 @@ public class frmVentas extends javax.swing.JFrame {
         lblRolUsuario.setForeground(new java.awt.Color(102, 0, 0));
         lblRolUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRolUsuario.setText("Nombres + Apellidos");
-        jpnUser.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 230, 30));
+        jpnUser.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 30));
 
         lblCambiarPwd.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         lblCambiarPwd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login/pin.png"))); // NOI18N
@@ -898,7 +898,7 @@ public class frmVentas extends javax.swing.JFrame {
         });
         jpnUser.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, 110, 20));
 
-        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
+        getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 60, 230, 110));
 
         jpnAgregarCompra.setBackground(new java.awt.Color(0, 0, 0));
         jpnAgregarCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1110,6 +1110,9 @@ public class frmVentas extends javax.swing.JFrame {
         btnVender.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVenderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVenderMouseExited(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVenderMouseExited(evt);
@@ -1722,7 +1725,7 @@ public class frmVentas extends javax.swing.JFrame {
            txtDireccionVenta.setVisible(false);
            lblCliente.setVisible(false);
            lblDireccion.setVisible(false);
-           cmbTipoPrecio.setSelectedIndex(0);
+           
        }
        colorLabels();
     }//GEN-LAST:event_cmbTipoVentaItemStateChanged
