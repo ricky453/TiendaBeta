@@ -22,7 +22,7 @@ public class PropiedadesVentas {
     
     public void CargarDatos(){
         try {
-            propiedades.load(new FileInputStream("src/Configuracion/Ventas.properties"));
+            propiedades.load(new FileInputStream("Ventas.properties"));
         } catch (IOException ex) {
             Logger.getLogger(PropiedadesVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -33,7 +33,7 @@ public class PropiedadesVentas {
     public void Modificar(String estado){
         try {
             propiedades.setProperty("frmCambio", estado);
-            propiedades.store(new FileOutputStream("src/Configuracion/Ventas.properties"), "");
+            propiedades.store(new FileOutputStream("Ventas.properties"), "");
         } catch (IOException ex) {
             Logger.getLogger(PropiedadesVentas.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 package formularios;
 
 import clases.ErrorTienda;
+import static formularios.frmVentas.txtCodigoBarraVender;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -66,6 +67,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -77,7 +79,6 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         txtCambio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtRecibido = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,7 +87,11 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setUndecorated(true);
         setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +107,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         jLabel5.setText("Calcular Cambio");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 140, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 60));
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 520, 60));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,20 +120,20 @@ public class frmCalcularCambio extends javax.swing.JFrame {
                 txtTotalaPagarActionPerformed(evt);
             }
         });
-        jPanel3.add(txtTotalaPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 140, 30));
+        jPanel3.add(txtTotalaPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 140, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Total a Pagar");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, 30));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 540, 80));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 520, 80));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Cambio $");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         txtCambio.setEditable(false);
         txtCambio.setBackground(new java.awt.Color(204, 204, 255));
@@ -147,15 +152,6 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         });
         jPanel2.add(txtRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 13, 240, 30));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
-
         btnTerminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnTerminar.setText("Terminar");
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +159,16 @@ public class frmCalcularCambio extends javax.swing.JFrame {
                 btnTerminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, -1));
+        btnTerminar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnTerminarKeyPressed(evt);
+            }
+        });
+        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 540, 270));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 520, 260));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 450));
 
         pack();
         setLocationRelativeTo(null);
@@ -175,17 +178,21 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnTerminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        calcular();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void txtTotalaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalaPagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalaPagarActionPerformed
 
     private void txtRecibidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRecibidoKeyTyped
         int c=(int) evt.getKeyChar();
-
+        char z=evt.getKeyChar();      
+         
+         
+         if (z == (char) KeyEvent.VK_ENTER) {
+           
+             calcular();
+             btnTerminar.requestFocus();
+           
+        }
         if ((c >=48 && c<=57)  || (c==46) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
             if (c==46) {
                 String cadena=txtRecibido.getText();
@@ -204,6 +211,16 @@ public class frmCalcularCambio extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtRecibidoKeyTyped
+
+    private void btnTerminarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTerminarKeyPressed
+        char c=evt.getKeyChar();      
+         
+         
+         if (c == (char) KeyEvent.VK_ENTER) {
+           this.dispose();
+           
+        }
+    }//GEN-LAST:event_btnTerminarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -242,7 +259,6 @@ public class frmCalcularCambio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTerminar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,6 +267,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtRecibido;
     public javax.swing.JTextField txtTotalaPagar;
