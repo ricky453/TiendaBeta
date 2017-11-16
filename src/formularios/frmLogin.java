@@ -60,6 +60,7 @@ public class frmLogin extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/home/lanzador.png")).getImage());
         setLocationByPlatform(true);
         setUndecorated(true);
+        setType(java.awt.Window.Type.UTILITY);
 
         pnl_bg.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -120,7 +121,6 @@ public class frmLogin extends javax.swing.JFrame {
         });
 
         lbl_close.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        lbl_close.setForeground(new java.awt.Color(51, 51, 51));
         lbl_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_close.setText("X");
         lbl_close.setToolTipText("Salir del programa.");
@@ -146,7 +146,6 @@ public class frmLogin extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Login");
 
         javax.swing.GroupLayout loginLayout = new javax.swing.GroupLayout(login);
