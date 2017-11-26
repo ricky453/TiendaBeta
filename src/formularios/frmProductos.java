@@ -447,10 +447,10 @@ public class frmProductos extends javax.swing.JFrame {
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -948,9 +948,9 @@ public class frmProductos extends javax.swing.JFrame {
                 if (ControladorProducto.isCambio()) {
                     mensajeNotificacion("¡Error! Producto con registros vigentes.", "Error");
                 }else{
+                    AgregarBitacora("Eliminó el producto: "+nombre+" (CodBarra:"+codBarra+")");
                     modeloProductos.removeRow(fila);
                     txtProductosBuscar.setText("");
-                    AgregarBitacora("Eliminó el producto que tenía como código de barra: "+codBarra);
                     mensajeNotificacion("¡Producto eliminado exitosamente!", "Ok");
                 }
                 

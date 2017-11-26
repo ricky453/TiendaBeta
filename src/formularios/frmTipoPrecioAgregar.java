@@ -18,6 +18,7 @@ import formularios.frmCompras;
 import formularios.frmHome;
 import static formularios.frmLogin.txtUser;
 import formularios.frmProductos;
+import static formularios.frmProductosAgregar.lblUser1;
 import formularios.frmProveedores;
 import static formularios.frmProveedores.lblUser;
 import static formularios.frmProveedores.lblUser1;
@@ -25,6 +26,7 @@ import formularios.frmSucursales;
 import formularios.frmVentas;
 import formulariosReportes.frmComprasReportes;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -159,6 +161,16 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
         not.lblIcono.setIcon(new ImageIcon(getClass().getResource("/iconos/Adv.png")));
         }       
     }
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
      
       public void buscarRepetidos(){
       modelotipoprecio.setRowCount(0);       
@@ -209,6 +221,7 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
             agregado.setUtilidad(Double.parseDouble(txtUtilidadTipoPrecio.getText()));
             ControladorTipoPrecio.AgregarTipoPrecio(agregado);
             mensajeNotificacion("Registro guardado con exito", "Ok");
+            AgregarBitacora("Agregó el tipo precio: "+txtNombreTipoPrecio+" (ID: "+(idTipoPrecio+1)+")");
             limpiando();
             frmTipoPrecio tp=new frmTipoPrecio();
             tp.setVisible(true);

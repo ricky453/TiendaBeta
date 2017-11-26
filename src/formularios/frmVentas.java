@@ -552,10 +552,10 @@ public class frmVentas extends javax.swing.JFrame {
             DetallesVenta[y][2]=modeloVentas.getValueAt(y, 2);
             DetallesVenta[y][3]=modeloVentas.getValueAt(y, 3);
         }
-        AgregarBitacora("Realizó la venta que tiene como ID: "+idV);
         
         if(cv.Agregar(venta,DetallesVenta,"VENTA")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
+            AgregarBitacora("Realizó la venta que tiene como ID: "+idV+" por $"+txtTotalventa.getText());
             
             
         }else{
