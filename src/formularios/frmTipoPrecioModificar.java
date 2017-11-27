@@ -18,7 +18,6 @@ import formularios.frmCompras;
 import formularios.frmHome;
 import static formularios.frmLogin.txtUser;
 import formularios.frmProductos;
-import static formularios.frmProductosAgregar.lblUser1;
 import formularios.frmProveedores;
 import static formularios.frmProveedores.lblUser;
 import static formularios.frmProveedores.lblUser1;
