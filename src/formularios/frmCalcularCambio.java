@@ -153,7 +153,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
         jPanel2.add(txtRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 13, 240, 30));
 
         btnTerminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnTerminar.setText("Terminar");
+        btnTerminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/terminar.png"))); // NOI18N
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarActionPerformed(evt);
@@ -164,7 +164,7 @@ public class frmCalcularCambio extends javax.swing.JFrame {
                 btnTerminarKeyPressed(evt);
             }
         });
-        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
+        jPanel2.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 100, 30));
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 520, 260));
 

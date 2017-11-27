@@ -50,8 +50,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     DateFormat df=DateFormat.getDateInstance();
     DecimalFormat formateo=new DecimalFormat("#.##");
     Date fdate=new Date();
-    JTableHeader tHeadVentas;
+    JTableHeader tHeadVentas,tHeadDetalles;
     Object datosFaltantes[];
+    SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
     
     public frmVentasDetalle() {
         initComponents();
@@ -63,13 +64,19 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         jdcFecha.setDate(fdate);
         
         tHeadVentas = tblVentas.getTableHeader();
+        tHeadDetalles = tblVentasDetalladas.getTableHeader();
         Font fuente = new Font("Tahoma", Font.BOLD, 12);
         tHeadVentas.setBackground(jpnBarraSuperior.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
+        tHeadDetalles.setBackground(jpnBarraSuperior.getBackground());
+        tHeadDetalles.setForeground(Color.WHITE);
+        tHeadDetalles.setFont(fuente);
         obtenerUsuario();
         jpnSubMenu1.setVisible(false);
         lblMensajito.setVisible(false);
+        ObtenerVentas(sd.format(fdate));
+        
     }
     
       //CAMBIAR CONTRASEÑA DEL USUARIO
@@ -220,6 +227,60 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    public void ObtenerVentas(String fecha){
+        ArrayList<Venta> ventas = new ArrayList();
+        Object[] fila = new Object[5];
+        datosFaltantes=new Object[2];
+        
+        
+        if (fecha.equals("")) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado una fecha");
+        }else{ 
+                       
+            String[] campos = {"IdVenta", "Sucursal", "Cliente", "Tipo de Venta","Fecha"};
+            modelo.setColumnIdentifiers(campos);
+            try {
+                
+                
+                ventas=ControladorVenta.obteniendoVentas(fecha);
+                
+                Object x;
+                Iterator iterador=ventas.iterator();
+                while (iterador.hasNext()) {
+                    
+                    
+                    fila[0]=iterador.next();
+                    fila[1]=iterador.next();
+                    fila[2]=iterador.next();
+                    x=iterador.next();
+                    if (x.equals("F")) {
+                        fila[3]="Factura";
+                    }else if(x.equals("C")){
+                        fila[3]="Credito Fiscal";
+                    }
+                    
+                    
+                    fila[4]=iterador.next();
+                    datosFaltantes[0]=iterador.next();
+                    datosFaltantes[1]=iterador.next();
+                    
+                    modelo.addRow(fila);
+                    tblVentas.setModel(modelo);
+                }
+                
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        
+        
+        
+        }
+        if(modelo.getRowCount()==0){
+            lblMensajito.setVisible(true);
+        }else{
+            lblMensajito.setVisible(false);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -322,6 +383,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblDetallesVentas = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         lblMensajito = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cmbBuscarPor = new javax.swing.JComboBox<>();
 
         frmVentasDetalladas2.setMinimumSize(new java.awt.Dimension(1200, 700));
         frmVentasDetalladas2.setUndecorated(true);
@@ -329,7 +392,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Id de la venta:");
-        frmVentasDetalladas2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 30));
+        frmVentasDetalladas2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 110, 30));
 
         txtIdVenta.setEditable(false);
         txtIdVenta.setText(" ");
@@ -338,11 +401,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtIdVentaActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 60, 30));
+        frmVentasDetalladas2.getContentPane().add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 60, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Fue una venta con:");
-        frmVentasDetalladas2.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 140, 30));
+        jLabel8.setText("Tipo Venta");
+        frmVentasDetalladas2.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 140, 30));
 
         txtTipoVenta.setEditable(false);
         txtTipoVenta.setText(" ");
@@ -351,11 +414,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtTipoVentaActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 170, 30));
+        frmVentasDetalladas2.getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 170, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Sucursal:");
-        frmVentasDetalladas2.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 70, 30));
+        jLabel9.setText("Sucursal");
+        frmVentasDetalladas2.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 70, 30));
 
         txtSucursal.setEditable(false);
         txtSucursal.setText(" ");
@@ -364,11 +427,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtSucursalActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 240, 30));
+        frmVentasDetalladas2.getContentPane().add(txtSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 360, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Pago a cuenta:");
-        frmVentasDetalladas2.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 240, 120, 30));
+        jLabel10.setText("Pago a cuenta");
+        frmVentasDetalladas2.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 240, 120, 30));
 
         txtCliente.setEditable(false);
         txtCliente.setText(" ");
@@ -377,7 +440,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtClienteActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 250, 30));
+        frmVentasDetalladas2.getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 250, 30));
 
         tblVentasDetalladas =new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -414,8 +477,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         frmVentasDetalladas2.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 960, 220));
 
         lblSumas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSumas.setText("Sumas");
-        frmVentasDetalladas2.getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 570, -1, 30));
+        lblSumas.setText("Sumas $");
+        frmVentasDetalladas2.getContentPane().add(lblSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 570, -1, 30));
 
         txtSumas.setEditable(false);
         txtSumas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -423,8 +486,8 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         frmVentasDetalladas2.getContentPane().add(txtSumas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 570, 120, 30));
 
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblIVA.setText("13% IVA");
-        frmVentasDetalladas2.getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 570, -1, 30));
+        lblIVA.setText("13% IVA $");
+        frmVentasDetalladas2.getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, 30));
 
         txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -433,7 +496,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 3, 0));
-        jLabel38.setText("Total");
+        jLabel38.setText("Total $");
         frmVentasDetalladas2.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 570, -1, 30));
 
         txtTotalventa.setEditable(false);
@@ -754,11 +817,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Cliente:");
-        frmVentasDetalladas2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 70, 30));
+        frmVentasDetalladas2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 70, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("Fecha:");
-        frmVentasDetalladas2.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 50, 30));
+        jLabel13.setText("Fecha");
+        frmVentasDetalladas2.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 50, 30));
 
         txtPac.setEditable(false);
         txtPac.setText(" ");
@@ -767,7 +830,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtPacActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtPac, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 270, 110, 30));
+        frmVentasDetalladas2.getContentPane().add(txtPac, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 270, 110, 30));
 
         txtFecha2.setEditable(false);
         txtFecha2.setText(" ");
@@ -776,11 +839,11 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtFecha2ActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, 150, 30));
+        frmVentasDetalladas2.getContentPane().add(txtFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 270, 150, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setText("Utilidad:");
-        frmVentasDetalladas2.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 240, 90, 30));
+        jLabel14.setText("Utilidad");
+        frmVentasDetalladas2.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 240, 90, 30));
 
         txtUtilidad.setEditable(false);
         txtUtilidad.setText(" ");
@@ -789,7 +852,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 txtUtilidadActionPerformed(evt);
             }
         });
-        frmVentasDetalladas2.getContentPane().add(txtUtilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 270, 90, 30));
+        frmVentasDetalladas2.getContentPane().add(txtUtilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 270, 90, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Detalles Ventas");
@@ -965,7 +1028,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Fecha:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, 30));
 
         jdcFecha.setDateFormatString("yyyy-dd-MM");
         getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 200, 30));
@@ -976,7 +1039,7 @@ public class frmVentasDetalle extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 110, 30));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 110, 30));
 
         btnDetalle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/detalles2.png"))); // NOI18N
         btnDetalle1.addActionListener(new java.awt.event.ActionListener() {
@@ -1320,7 +1383,25 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         lblMensajito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblMensajito.setForeground(new java.awt.Color(255, 51, 0));
         lblMensajito.setText("No se encontraron resultados");
-        getContentPane().add(lblMensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 250, -1));
+        getContentPane().add(lblMensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 250, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Mostrar por:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
+
+        cmbBuscarPor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cmbBuscarPor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia", "Mes", "Año" }));
+        cmbBuscarPor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbBuscarPorItemStateChanged(evt);
+            }
+        });
+        cmbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBuscarPorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbBuscarPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 110, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -1329,63 +1410,12 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
         
-        SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
-                modelo.setRowCount(0);
+        
+        modelo.setRowCount(0);
         String fecha=sd.format(jdcFecha.getDate());
         
+        ObtenerVentas(fecha);
         
-        ArrayList<Venta> ventas = new ArrayList();
-        Object[] fila = new Object[5];
-        datosFaltantes=new Object[2];
-        
-        
-        if (fecha.equals("")) {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado una fecha");
-        }else{
-            
-            String[] campos = {"IdVenta", "Sucursal", "Cliente", "Tipo de Venta","Fecha"};
-            modelo.setColumnIdentifiers(campos);
-            try {
-                
-                
-                ventas=ControladorVenta.obteniendoVentas(fecha);
-                
-                Object x;
-                Iterator iterador=ventas.iterator();
-                while (iterador.hasNext()) {
-                    
-                    
-                    fila[0]=iterador.next();
-                    fila[1]=iterador.next();
-                    fila[2]=iterador.next();
-                    x=iterador.next();
-                    if (x.equals("F")) {
-                        fila[3]="Factura";
-                    }else if(x.equals("C")){
-                        fila[3]="Credito Fiscal";
-                    }
-                    
-                    
-                    fila[4]=iterador.next();
-                    datosFaltantes[0]=iterador.next();
-                    datosFaltantes[1]=iterador.next();
-                    
-                    modelo.addRow(fila);
-                    tblVentas.setModel(modelo);
-                }
-                
-            } catch (ErrorTienda ex) {
-                Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        
-        
-        
-        }
-        if(modelo.getRowCount()==0){
-            lblMensajito.setVisible(true);
-        }else{
-            lblMensajito.setVisible(false);
-        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnDetalle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalle1ActionPerformed
@@ -2036,6 +2066,26 @@ public class frmVentasDetalle extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
 
+    private void cmbBuscarPorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbBuscarPorItemStateChanged
+
+        
+    }//GEN-LAST:event_cmbBuscarPorItemStateChanged
+
+    private void cmbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBuscarPorActionPerformed
+       String fecha=sd.format(jdcFecha.getDate());
+        modelo.setRowCount(0);
+        if(cmbBuscarPor.getSelectedIndex()==0){
+            System.err.println("Dia "+fecha);
+            ObtenerVentas(fecha);
+        }else if(cmbBuscarPor.getSelectedIndex()==1){
+            System.err.println("Mes "+fecha.substring(0,7));
+            ObtenerVentas(fecha.substring(0,7));
+        }else{
+            System.err.println("Año "+fecha.substring(0,4));
+            ObtenerVentas(fecha.substring(0,4));
+        }
+    }//GEN-LAST:event_cmbBuscarPorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2101,7 +2151,9 @@ public class frmVentasDetalle extends javax.swing.JFrame {
     private javax.swing.JButton btnTipoPrecio1;
     private javax.swing.JButton btnVentas;
     private javax.swing.JButton btnVentas1;
+    private javax.swing.JComboBox<String> cmbBuscarPor;
     private javax.swing.JFrame frmVentasDetalladas2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

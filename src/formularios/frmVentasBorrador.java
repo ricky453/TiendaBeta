@@ -316,13 +316,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         }
         
     }
-    public void Estado(boolean estado){
-        jpnSubMenu.setEnabled(estado);
-        lblVender.setEnabled(estado);
-        lblDetallesVentas.setEnabled(estado);
-        lblMenu.setEnabled(estado);
-        lblUser1.setEnabled(estado);
-    }
+    
     public void EliminarVentasBorrador(){
         
         for(int x =0;x<modeloVentas.getRowCount();x++){
@@ -338,8 +332,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         }
     }
     public void Cancelar(){
-        Estado(true);
-        frmConsolidar.setVisible(false);
+        
+        
         txtTotal.setText("");
         txtIVA.setText("");
         txtSumas.setText("");
@@ -492,11 +486,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        frmConsolidar = new javax.swing.JFrame();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsolidar = new javax.swing.JTable();
         frmDatosFinales = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -586,50 +575,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         chbMarcarTodas = new javax.swing.JCheckBox();
 
-        frmConsolidar.setAlwaysOnTop(true);
-        frmConsolidar.setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
-        frmConsolidar.setUndecorated(true);
-        frmConsolidar.setResizable(false);
-        frmConsolidar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Ventas borrador a consolidar");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 5, -1, 20));
-
-        tblConsolidar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Venta", "Fecha", "Total"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblConsolidar);
-        if (tblConsolidar.getColumnModel().getColumnCount() > 0) {
-            tblConsolidar.getColumnModel().getColumn(0).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tblConsolidar.getColumnModel().getColumn(1).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(1).setPreferredWidth(90);
-            tblConsolidar.getColumnModel().getColumn(2).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(2).setPreferredWidth(30);
-        }
-
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 180));
-
-        frmConsolidar.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 250));
-
         frmDatosFinales.setTitle("Terminando");
         frmDatosFinales.setAlwaysOnTop(true);
         frmDatosFinales.setUndecorated(true);
@@ -717,21 +662,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         lblNIT.setText("NIT:");
         jPanel5.add(lblNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
-        btnTerminar.setText("Terminar");
+        btnTerminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/terminar.png"))); // NOI18N
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarActionPerformed(evt);
             }
         });
-        jPanel5.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        jPanel5.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 100, 30));
 
-        btnVolver.setText("Volver");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/atras.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel5.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 100, -1));
+        jPanel5.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 100, 30));
 
         frmDatosFinales.getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 540, 240));
 
@@ -877,7 +822,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 1010, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 1010, 10));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Detalle de la nueva venta:");
@@ -966,21 +911,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         });
         jpnlConsolidarComo.add(jrbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, -1));
 
-        btnContinuar.setText("Continuar");
+        btnContinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/continuar.png"))); // NOI18N
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
             }
         });
-        jpnlConsolidarComo.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 30));
+        jpnlConsolidarComo.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 110, 30));
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/cancelar.png"))); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jpnlConsolidarComo.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jpnlConsolidarComo.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 110, 30));
 
         getContentPane().add(jpnlConsolidarComo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 550, 460, 130));
 
@@ -1367,7 +1312,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 10, 370));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 10, 380));
 
         jLabel1.setText("ID Venta");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 170, -1, -1));
@@ -1553,20 +1498,13 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_tblVentasMouseClicked
 
     private void lblVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseClicked
-        if(!frmConsolidar.isVisible()){
-            try {
-            frmVentas ve = new frmVentas();
-            ve.setVisible(true);
+        try {
+            frmVentas vn = new frmVentas();
+            vn.setVisible(true);
             this.setVisible(false);
-            lblVender.setForeground(java.awt.Color.black);
-            lblVentasBorrador.setForeground(java.awt.Color.lightGray);
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
-        
     }//GEN-LAST:event_lblVenderMouseClicked
 
     private void lblVentasBorradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasBorradorMouseClicked
@@ -1574,20 +1512,15 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVentasBorradorMouseClicked
 
     private void lblDetallesVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDetallesVentasMouseClicked
-        if(!frmConsolidar.isVisible()){
-            frmVentasDetalle vd = new frmVentasDetalle();
+        frmVentasDetalle vd = new frmVentasDetalle();
         vd.setVisible(true);
         this.setVisible(false);
-        }
         
         
     }//GEN-LAST:event_lblDetallesVentasMouseClicked
 
     private void lblUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUser1MouseClicked
-        if(!frmConsolidar.isVisible()){
-            jpnWhite.setVisible(false);
-        jpnUser.setVisible(false);
-        }
+        
         
     }//GEN-LAST:event_lblUser1MouseClicked
 
@@ -1818,11 +1751,11 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         
         
-        if(modeloDetalles.getRowCount()!=0){
+        if(modeloDetalles.getRowCount()>0){
             if(jrbCredito.isSelected()){
             tipoVentaSeleccion(true);
         }else{
-                mensajeNotificacion("No hay ventas seleccionadas", "Adv");
+               
             tipoVentaSeleccion(false);
                 
         }
@@ -1834,6 +1767,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             }
         
         
+        }else{
+             mensajeNotificacion("No hay ventas seleccionadas", "Adv");
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
     public void Bloqueo(boolean estado){
@@ -2205,11 +2140,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JCheckBox chbMarcarTodas;
     private javax.swing.JComboBox<String> cmbSucursales;
     private com.toedter.calendar.JDateChooser dtcFecha;
-    private javax.swing.JFrame frmConsolidar;
     private javax.swing.JFrame frmDatosFinales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -2223,10 +2156,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
@@ -2264,7 +2195,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwdAntigua;
     private javax.swing.JPasswordField pwdNueva;
     private javax.swing.JPasswordField pwdNueva2;
-    private javax.swing.JTable tblConsolidar;
     private javax.swing.JTable tblDetallesVenta;
     private javax.swing.JTable tblVentas;
     private javax.swing.JTextField txtClienteVenta;
