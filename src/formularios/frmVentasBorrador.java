@@ -48,7 +48,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
      * Creates new form frmVentasBorrador
      */
     JTableHeader ventas, detalles;
-    DefaultTableModel modeloVentas, modeloDetalles,modeloConsolidar;
+    DefaultTableModel modeloVentas, modeloDetalles;
     ArrayList<Sucursal> sucursales = new ArrayList();
     Object miSucursal[][];
     ResultSet rs = null;
@@ -70,7 +70,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         modeloVentas = (DefaultTableModel) tblVentas.getModel();
         modeloDetalles = (DefaultTableModel) tblDetallesVenta.getModel();
-        modeloConsolidar=(DefaultTableModel) tblConsolidar.getModel();
+        
         ventas = tblVentas.getTableHeader();
         detalles=tblDetallesVenta.getTableHeader();
         CargarSucursales();
@@ -80,7 +80,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         dtcFecha.setDateFormatString("dd-MM-yyyy");
         dtcFecha.setDate(fecha);
         obtenerUsuario();
-        //JOptionPane.showMessageDialog(null, "Para poder consolidar una venta es necesario seleccionar una sucursal especifica","AVISO",JOptionPane.INFORMATION_MESSAGE);
+        
         CabeceraTablas();
     }
     
@@ -196,6 +196,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             cmbSucursales.addItem(""+miSucursal[fila][1]);
             fila++;
         }
+        if(cmbSucursales.getItemCount()==2){
+            cmbSucursales.setSelectedIndex(1);
+        }
        
     }
         //CAMBIAR CONTRASEÑA DEL USUARIO
@@ -299,12 +302,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void Agregar(Object idVenta,Object Fecha,Object total){
-        modeloConsolidar.addRow(new Object[]{"","",""});
-        modeloConsolidar.setValueAt(idVenta, modeloConsolidar.getRowCount()-1, 0);
-        modeloConsolidar.setValueAt(Fecha, modeloConsolidar.getRowCount()-1, 1);
-        modeloConsolidar.setValueAt(total, modeloConsolidar.getRowCount()-1, 2);
-    }
+    
     public void CalcularIVA_SubTotal(){
         
         
@@ -356,7 +354,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         Utilidad=0;
         subTotal=0;
         total=0;
-        modeloConsolidar.setRowCount(0);
+        
         misDetalles.removeAll(misDetalles);
         txtIdVenta.setText("");
     }
@@ -370,7 +368,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             idTipoVenta='C';
         }
         venta.setIdVenta(idVenta);
-        venta.setIdPrecio(1);
+        venta.setIdPrecio(2);
         venta.setIdTipoVenta(idTipoVenta);
         venta.setIdSucursal(idSucursal);
         venta.setTotal(Double.parseDouble(decimal.format(total)));
@@ -454,11 +452,11 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         
     }
-    public void CalcularUtilidad(String operacion){
+    public void CalcularUtilidad(String operacion,int fila){
         if(operacion.equals("SUMA")){
-            Utilidad+=Double.parseDouble((Utilidades[tblVentas.getSelectedRow()]).toString());
+            Utilidad+=Double.parseDouble((Utilidades[fila]).toString());
         }else{
-            Utilidad-=Double.parseDouble((Utilidades[tblVentas.getSelectedRow()]).toString());
+            Utilidad-=Double.parseDouble((Utilidades[fila]).toString());
         }
     }
     public void ObtenerIdVenta() throws ErrorTienda {
@@ -586,6 +584,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtSumas = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        chbMarcarTodas = new javax.swing.JCheckBox();
 
         frmConsolidar.setAlwaysOnTop(true);
         frmConsolidar.setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
@@ -1405,6 +1404,15 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 430, 120));
 
+        chbMarcarTodas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chbMarcarTodas.setText("Marcar todas");
+        chbMarcarTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbMarcarTodasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(chbMarcarTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1464,6 +1472,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         txtTotal.setText("$");
         txtIVA.setText("$");
         txtSumas.setText("$");
+        chbMarcarTodas.setSelected(false);
         if(cmbSucursales.getSelectedIndex()==0){
             
             modeloDetalles.setRowCount(0);
@@ -1511,20 +1520,24 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 //                //frmConsolidar.setSize(300, 250);
 //                //frmConsolidar.setVisible(true);
 //                 Estado(false);//Habilita los demas componentes de la interfas, en este caso los bloquea con false
-                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
+                 
 //             }
                 
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
                 if(!valorActual.substring(0, 1).equals("ↂ")){
+                    idSucursal= Integer.parseInt(valorActual);
                     modeloVentas.setValueAt("ↂ "+valorActual,tblVentas.getSelectedRow(), 0);
                     //Agregar(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 2), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3));
                     total+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3)));
                     txtTotal.setText("$ "+decimal.format(total));
-                    CalcularUtilidad("SUMA");
+                    CalcularUtilidad("SUMA",tblVentas.getSelectedRow());
                     CalcularIVA_SubTotal();
                     //AgregarDetalles();
                     cargarDetalles(Integer.parseInt((tblVentas.getValueAt(tblVentas.getSelectedRow(), 1)).toString()));
+                }else{
+                    idSucursal= Integer.parseInt(valorActual.substring(2));
                 }
+                    
             
         }
             
@@ -1626,19 +1639,18 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         if(c == (char) KeyEvent.VK_DELETE){
             
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
-            System.err.println("no mames"+valorActual.substring(0, 1));
+            
                 if(valorActual.substring(0, 1).equals("ↂ")){
                     modeloVentas.setValueAt(valorActual.substring(2), tblVentas.getSelectedRow(), 0);
                     total-=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3)));
                     txtTotal.setText("$ "+decimal.format(total));
-                    for(int x=0 ; x<modeloConsolidar.getRowCount() ; x++){
-                        if(modeloConsolidar.getValueAt(x, 0).toString().equals(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1).toString())){
-                            modeloConsolidar.removeRow(x);
-                        }
-                    }
-                    CalcularUtilidad("RESTA");
+                    
+                    CalcularUtilidad("RESTA",tblVentas.getSelectedRow());
                 try {
                     EliminarDetalle(Integer.parseInt((tblVentas.getValueAt(tblVentas.getSelectedRow(), 1)).toString()));
+                    if(chbMarcarTodas.isSelected()){
+                        chbMarcarTodas.setSelected(false);
+                    }
                 } catch (ErrorTienda ex) {
                     Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1810,7 +1822,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             if(jrbCredito.isSelected()){
             tipoVentaSeleccion(true);
         }else{
+                mensajeNotificacion("No hay ventas seleccionadas", "Adv");
             tipoVentaSeleccion(false);
+                
         }
             if(!frmDatosFinales.isVisible()){
                 frmDatosFinales.setSize(540, 285);
@@ -2077,6 +2091,56 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
 
+    private void chbMarcarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbMarcarTodasActionPerformed
+        if(modeloVentas.getRowCount()==0||cmbSucursales.getSelectedIndex()==0){
+            chbMarcarTodas.setSelected(false);
+        }else{
+            if(chbMarcarTodas.isSelected()){
+        for(int x =0; x<modeloVentas.getRowCount();x++){
+            String valorActual = (modeloVentas.getValueAt(x, 0)).toString();
+                if(!valorActual.substring(0, 1).equals("ↂ")){
+                    idSucursal= Integer.parseInt(valorActual);
+                    modeloVentas.setValueAt("ↂ "+valorActual,x, 0);
+                    //Agregar(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 2), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3));
+                    total+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
+                    txtTotal.setText("$ "+decimal.format(total));
+                    CalcularUtilidad("SUMA",x);
+                    CalcularIVA_SubTotal();
+                    //AgregarDetalles();
+                    cargarDetalles(Integer.parseInt((tblVentas.getValueAt(x, 1)).toString()));
+                }else{
+                    idSucursal= Integer.parseInt(valorActual.substring(2));
+                }
+                    
+        }    
+        }
+        else{
+            for(int x=0;x<modeloVentas.getRowCount();x++){
+                String valorActual = (modeloVentas.getValueAt(x, 0)).toString();
+            
+                if(valorActual.substring(0, 1).equals("ↂ")){
+                    modeloVentas.setValueAt(valorActual.substring(2), x, 0);
+                    total-=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
+                    txtTotal.setText("$ "+decimal.format(total));
+                    
+                    CalcularUtilidad("RESTA",x);
+                try {
+                    EliminarDetalle(Integer.parseInt((tblVentas.getValueAt(x, 1)).toString()));
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    CalcularIVA_SubTotal();
+                }
+            }
+            
+            
+        }
+        }
+                
+        
+        
+    }//GEN-LAST:event_chbMarcarTodasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2138,6 +2202,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox chbMarcarTodas;
     private javax.swing.JComboBox<String> cmbSucursales;
     private com.toedter.calendar.JDateChooser dtcFecha;
     private javax.swing.JFrame frmConsolidar;
