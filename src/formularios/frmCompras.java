@@ -1198,7 +1198,7 @@ public class frmCompras extends javax.swing.JFrame {
                 ControladorCompra.Agregar(compra,detallesCompra);
                 ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                 ControladorCompra.ActualizarInventario(detallesCompra, ControladorSucursal.ObtenerIdSucursal(cmbSucursalCompra.getSelectedItem()));
-                AgregarBitacora("Realizó una compra.");
+                AgregarBitacora("Realizó la compra que tiene como ID: "+txtIdCompra.getText()+" de $"+txtTotal.getText());
                 
                 mensajeNotificacion("Compra Agregada", "Ok");
                 

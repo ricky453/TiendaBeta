@@ -236,10 +236,10 @@ public class frmProveedores extends javax.swing.JFrame {
                 if (ControladorProveedor.isCambio()) {
                     mensajeNotificacion("¡Error! Proveedor con registros vigentes.", "Error");
                 }else{
+                    AgregarBitacora("Eliminó el proveedor: "+tblProveedores.getValueAt(seleccion, 1).toString()+" (ID:"+idProve+")");
                     modeloProveedores.removeRow(fila);
                     txtProveedoresBuscar.setText("");
                     mensajeNotificacion("¡Proveedor eliminado exitosamente!", "Ok");
-                    AgregarBitacora("Eliminó el proveedor que tenía como ID: "+idProve);
                 }
                 
                 

@@ -992,7 +992,7 @@ public class frmProductosAgregar extends javax.swing.JFrame {
                     ControladorProducto.Agregar(agregado);
 
                     mensajeNotificacion("¡Producto agregado exitosamente!", "Ok");
-                    AgregarBitacora("Agregó un producto con código de barra de: "+txtCodBarraProductos.getText());
+                    AgregarBitacora("Agregó el producto: "+txtNombreProductos.getText()+" (Cod.Barra: "+txtCodBarraProductos.getText()+")");
                     limpiandoTxtProducto();
                 } catch (ErrorTienda e) {
 

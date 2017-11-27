@@ -17,6 +17,7 @@ import formularios.frmCompras;
 import formularios.frmHome;
 import static formularios.frmLogin.txtUser;
 import formularios.frmProductos;
+import static formularios.frmProductosAgregar.lblUser1;
 import formularios.frmProveedores;
 import static formularios.frmProveedores.lblUser;
 import static formularios.frmProveedores.lblUser1;
@@ -26,6 +27,7 @@ import formulariosReportes.frmComprasReportes;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -182,6 +184,15 @@ public class frmTipoPrecio extends javax.swing.JFrame {
                 Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -823,6 +834,7 @@ public class frmTipoPrecio extends javax.swing.JFrame {
             int seleccion;
             int id = Integer.parseInt(modelotipoprecio.getValueAt(tblTipoPrecio.getSelectedRow(), 0).toString()) ;
              try {
+            AgregarBitacora("Eliminó el tipo precio: "+modelotipoprecio.getValueAt(tblTipoPrecio.getSelectedRow(), 1)+ " (ID: "+id+")");
             ControladorTipoPrecio.EliminarTipoPrecio(id);
             mensajeNotificacion("Registro eliminado con exito","Ok");
             LlenarTabla();

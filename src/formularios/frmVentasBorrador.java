@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
      * Creates new form frmVentasBorrador
      */
     JTableHeader ventas, detalles;
-    DefaultTableModel modeloVentas, modeloDetalles,modeloConsolidar;
+    DefaultTableModel modeloVentas, modeloDetalles;
     ArrayList<Sucursal> sucursales = new ArrayList();
     Object miSucursal[][];
     ResultSet rs = null;
@@ -70,7 +71,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         modeloVentas = (DefaultTableModel) tblVentas.getModel();
         modeloDetalles = (DefaultTableModel) tblDetallesVenta.getModel();
-        modeloConsolidar=(DefaultTableModel) tblConsolidar.getModel();
+        
         ventas = tblVentas.getTableHeader();
         detalles=tblDetallesVenta.getTableHeader();
         CargarSucursales();
@@ -80,9 +81,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         dtcFecha.setDateFormatString("dd-MM-yyyy");
         dtcFecha.setDate(fecha);
         obtenerUsuario();
-        //JOptionPane.showMessageDialog(null, "Para poder consolidar una venta es necesario seleccionar una sucursal especifica","AVISO",JOptionPane.INFORMATION_MESSAGE);
+        
         CabeceraTablas();
     }
+    
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
+    
     
     public void CabeceraTablas(){
         
@@ -196,6 +209,9 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             cmbSucursales.addItem(""+miSucursal[fila][1]);
             fila++;
         }
+        if(cmbSucursales.getItemCount()==2){
+            cmbSucursales.setSelectedIndex(1);
+        }
        
     }
         //CAMBIAR CONTRASEÑA DEL USUARIO
@@ -299,12 +315,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void Agregar(Object idVenta,Object Fecha,Object total){
-        modeloConsolidar.addRow(new Object[]{"","",""});
-        modeloConsolidar.setValueAt(idVenta, modeloConsolidar.getRowCount()-1, 0);
-        modeloConsolidar.setValueAt(Fecha, modeloConsolidar.getRowCount()-1, 1);
-        modeloConsolidar.setValueAt(total, modeloConsolidar.getRowCount()-1, 2);
-    }
+    
     public void CalcularIVA_SubTotal(){
         
         
@@ -318,13 +329,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         }
         
     }
-    public void Estado(boolean estado){
-        jpnSubMenu.setEnabled(estado);
-        lblVender.setEnabled(estado);
-        lblDetallesVentas.setEnabled(estado);
-        lblMenu.setEnabled(estado);
-        lblUser1.setEnabled(estado);
-    }
+    
     public void EliminarVentasBorrador(){
         
         for(int x =0;x<modeloVentas.getRowCount();x++){
@@ -340,8 +345,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         }
     }
     public void Cancelar(){
-        Estado(true);
-        frmConsolidar.setVisible(false);
+        
+        
         txtTotal.setText("");
         txtIVA.setText("");
         txtSumas.setText("");
@@ -356,7 +361,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         Utilidad=0;
         subTotal=0;
         total=0;
-        modeloConsolidar.setRowCount(0);
+        
         misDetalles.removeAll(misDetalles);
         txtIdVenta.setText("");
     }
@@ -370,7 +375,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             idTipoVenta='C';
         }
         venta.setIdVenta(idVenta);
-        venta.setIdPrecio(1);
+        venta.setIdPrecio(2);
         venta.setIdTipoVenta(idTipoVenta);
         venta.setIdSucursal(idSucursal);
         venta.setTotal(Double.parseDouble(decimal.format(total)));
@@ -446,6 +451,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         if(cv.Agregar(venta,DetallesVenta,"BORRADOR")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
+            AgregarBitacora("Realizó la venta que tiene como ID: "+txtIdVenta.getText()+" por "+txtTotal.getText());
+            
             
             
         }else{
@@ -454,11 +461,11 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         
     }
-    public void CalcularUtilidad(String operacion){
+    public void CalcularUtilidad(String operacion,int fila){
         if(operacion.equals("SUMA")){
-            Utilidad+=Double.parseDouble((Utilidades[tblVentas.getSelectedRow()]).toString());
+            Utilidad+=Double.parseDouble((Utilidades[fila]).toString());
         }else{
-            Utilidad-=Double.parseDouble((Utilidades[tblVentas.getSelectedRow()]).toString());
+            Utilidad-=Double.parseDouble((Utilidades[fila]).toString());
         }
     }
     public void ObtenerIdVenta() throws ErrorTienda {
@@ -494,11 +501,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        frmConsolidar = new javax.swing.JFrame();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsolidar = new javax.swing.JTable();
         frmDatosFinales = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -586,50 +588,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtSumas = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-
-        frmConsolidar.setAlwaysOnTop(true);
-        frmConsolidar.setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
-        frmConsolidar.setUndecorated(true);
-        frmConsolidar.setResizable(false);
-        frmConsolidar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Ventas borrador a consolidar");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 5, -1, 20));
-
-        tblConsolidar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Venta", "Fecha", "Total"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblConsolidar);
-        if (tblConsolidar.getColumnModel().getColumnCount() > 0) {
-            tblConsolidar.getColumnModel().getColumn(0).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tblConsolidar.getColumnModel().getColumn(1).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(1).setPreferredWidth(90);
-            tblConsolidar.getColumnModel().getColumn(2).setResizable(false);
-            tblConsolidar.getColumnModel().getColumn(2).setPreferredWidth(30);
-        }
-
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 180));
-
-        frmConsolidar.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 250));
+        chbMarcarTodas = new javax.swing.JCheckBox();
 
         frmDatosFinales.setTitle("Terminando");
         frmDatosFinales.setAlwaysOnTop(true);
@@ -718,21 +677,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         lblNIT.setText("NIT:");
         jPanel5.add(lblNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
-        btnTerminar.setText("Terminar");
+        btnTerminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/terminar.png"))); // NOI18N
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarActionPerformed(evt);
             }
         });
-        jPanel5.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        jPanel5.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 100, 30));
 
-        btnVolver.setText("Volver");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/atras.png"))); // NOI18N
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel5.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 100, -1));
+        jPanel5.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 100, 30));
 
         frmDatosFinales.getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 540, 240));
 
@@ -878,7 +837,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 1010, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 1010, 10));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Detalle de la nueva venta:");
@@ -967,21 +926,21 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         });
         jpnlConsolidarComo.add(jrbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, -1));
 
-        btnContinuar.setText("Continuar");
+        btnContinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/continuar.png"))); // NOI18N
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
             }
         });
-        jpnlConsolidarComo.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 30));
+        jpnlConsolidarComo.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 110, 30));
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/cancelar.png"))); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jpnlConsolidarComo.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jpnlConsolidarComo.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 110, 30));
 
         getContentPane().add(jpnlConsolidarComo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 550, 460, 130));
 
@@ -1368,7 +1327,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 10, 370));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 10, 380));
 
         jLabel1.setText("ID Venta");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 170, -1, -1));
@@ -1404,6 +1363,15 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 430, 120));
+
+        chbMarcarTodas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chbMarcarTodas.setText("Marcar todas");
+        chbMarcarTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbMarcarTodasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(chbMarcarTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -1464,6 +1432,7 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         txtTotal.setText("$");
         txtIVA.setText("$");
         txtSumas.setText("$");
+        chbMarcarTodas.setSelected(false);
         if(cmbSucursales.getSelectedIndex()==0){
             
             modeloDetalles.setRowCount(0);
@@ -1511,20 +1480,24 @@ public class frmVentasBorrador extends javax.swing.JFrame {
 //                //frmConsolidar.setSize(300, 250);
 //                //frmConsolidar.setVisible(true);
 //                 Estado(false);//Habilita los demas componentes de la interfas, en este caso los bloquea con false
-                 idSucursal= Integer.parseInt(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0).toString());
+                 
 //             }
                 
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
                 if(!valorActual.substring(0, 1).equals("ↂ")){
+                    idSucursal= Integer.parseInt(valorActual);
                     modeloVentas.setValueAt("ↂ "+valorActual,tblVentas.getSelectedRow(), 0);
                     //Agregar(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 2), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3));
                     total+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3)));
                     txtTotal.setText("$ "+decimal.format(total));
-                    CalcularUtilidad("SUMA");
+                    CalcularUtilidad("SUMA",tblVentas.getSelectedRow());
                     CalcularIVA_SubTotal();
                     //AgregarDetalles();
                     cargarDetalles(Integer.parseInt((tblVentas.getValueAt(tblVentas.getSelectedRow(), 1)).toString()));
+                }else{
+                    idSucursal= Integer.parseInt(valorActual.substring(2));
                 }
+                    
             
         }
             
@@ -1540,20 +1513,13 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_tblVentasMouseClicked
 
     private void lblVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseClicked
-        if(!frmConsolidar.isVisible()){
-            try {
-            frmVentas ve = new frmVentas();
-            ve.setVisible(true);
+        try {
+            frmVentas vn = new frmVentas();
+            vn.setVisible(true);
             this.setVisible(false);
-            lblVender.setForeground(java.awt.Color.black);
-            lblVentasBorrador.setForeground(java.awt.Color.lightGray);
         } catch (ErrorTienda ex) {
-            Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
-        
     }//GEN-LAST:event_lblVenderMouseClicked
 
     private void lblVentasBorradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasBorradorMouseClicked
@@ -1561,20 +1527,15 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVentasBorradorMouseClicked
 
     private void lblDetallesVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDetallesVentasMouseClicked
-        if(!frmConsolidar.isVisible()){
-            frmVentasDetalle vd = new frmVentasDetalle();
+        frmVentasDetalle vd = new frmVentasDetalle();
         vd.setVisible(true);
         this.setVisible(false);
-        }
         
         
     }//GEN-LAST:event_lblDetallesVentasMouseClicked
 
     private void lblUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUser1MouseClicked
-        if(!frmConsolidar.isVisible()){
-            jpnWhite.setVisible(false);
-        jpnUser.setVisible(false);
-        }
+        
         
     }//GEN-LAST:event_lblUser1MouseClicked
 
@@ -1626,19 +1587,18 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         if(c == (char) KeyEvent.VK_DELETE){
             
             String valorActual = (modeloVentas.getValueAt(tblVentas.getSelectedRow(), 0)).toString();
-            System.err.println("no mames"+valorActual.substring(0, 1));
+            
                 if(valorActual.substring(0, 1).equals("ↂ")){
                     modeloVentas.setValueAt(valorActual.substring(2), tblVentas.getSelectedRow(), 0);
                     total-=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3)));
                     txtTotal.setText("$ "+decimal.format(total));
-                    for(int x=0 ; x<modeloConsolidar.getRowCount() ; x++){
-                        if(modeloConsolidar.getValueAt(x, 0).toString().equals(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1).toString())){
-                            modeloConsolidar.removeRow(x);
-                        }
-                    }
-                    CalcularUtilidad("RESTA");
+                    
+                    CalcularUtilidad("RESTA",tblVentas.getSelectedRow());
                 try {
                     EliminarDetalle(Integer.parseInt((tblVentas.getValueAt(tblVentas.getSelectedRow(), 1)).toString()));
+                    if(chbMarcarTodas.isSelected()){
+                        chbMarcarTodas.setSelected(false);
+                    }
                 } catch (ErrorTienda ex) {
                     Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1806,11 +1766,13 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         
         
-        if(modeloDetalles.getRowCount()!=0){
+        if(modeloDetalles.getRowCount()>0){
             if(jrbCredito.isSelected()){
             tipoVentaSeleccion(true);
         }else{
+               
             tipoVentaSeleccion(false);
+                
         }
             if(!frmDatosFinales.isVisible()){
                 frmDatosFinales.setSize(540, 285);
@@ -1820,6 +1782,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
             }
         
         
+        }else{
+             mensajeNotificacion("No hay ventas seleccionadas", "Adv");
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
     public void Bloqueo(boolean estado){
@@ -2077,6 +2041,56 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
 
+    private void chbMarcarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbMarcarTodasActionPerformed
+        if(modeloVentas.getRowCount()==0||cmbSucursales.getSelectedIndex()==0){
+            chbMarcarTodas.setSelected(false);
+        }else{
+            if(chbMarcarTodas.isSelected()){
+        for(int x =0; x<modeloVentas.getRowCount();x++){
+            String valorActual = (modeloVentas.getValueAt(x, 0)).toString();
+                if(!valorActual.substring(0, 1).equals("ↂ")){
+                    idSucursal= Integer.parseInt(valorActual);
+                    modeloVentas.setValueAt("ↂ "+valorActual,x, 0);
+                    //Agregar(modeloVentas.getValueAt(tblVentas.getSelectedRow(), 1), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 2), modeloVentas.getValueAt(tblVentas.getSelectedRow(), 3));
+                    total+=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
+                    txtTotal.setText("$ "+decimal.format(total));
+                    CalcularUtilidad("SUMA",x);
+                    CalcularIVA_SubTotal();
+                    //AgregarDetalles();
+                    cargarDetalles(Integer.parseInt((tblVentas.getValueAt(x, 1)).toString()));
+                }else{
+                    idSucursal= Integer.parseInt(valorActual.substring(2));
+                }
+                    
+        }    
+        }
+        else{
+            for(int x=0;x<modeloVentas.getRowCount();x++){
+                String valorActual = (modeloVentas.getValueAt(x, 0)).toString();
+            
+                if(valorActual.substring(0, 1).equals("ↂ")){
+                    modeloVentas.setValueAt(valorActual.substring(2), x, 0);
+                    total-=Double.parseDouble(String.valueOf(modeloVentas.getValueAt(x, 3)));
+                    txtTotal.setText("$ "+decimal.format(total));
+                    
+                    CalcularUtilidad("RESTA",x);
+                try {
+                    EliminarDetalle(Integer.parseInt((tblVentas.getValueAt(x, 1)).toString()));
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    CalcularIVA_SubTotal();
+                }
+            }
+            
+            
+        }
+        }
+                
+        
+        
+    }//GEN-LAST:event_chbMarcarTodasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2138,13 +2152,12 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox chbMarcarTodas;
     private javax.swing.JComboBox<String> cmbSucursales;
     private com.toedter.calendar.JDateChooser dtcFecha;
-    private javax.swing.JFrame frmConsolidar;
     private javax.swing.JFrame frmDatosFinales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -2158,10 +2171,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
@@ -2199,7 +2210,6 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwdAntigua;
     private javax.swing.JPasswordField pwdNueva;
     private javax.swing.JPasswordField pwdNueva2;
-    private javax.swing.JTable tblConsolidar;
     private javax.swing.JTable tblDetallesVenta;
     private javax.swing.JTable tblVentas;
     private javax.swing.JTextField txtClienteVenta;

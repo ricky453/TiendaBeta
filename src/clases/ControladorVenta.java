@@ -134,11 +134,9 @@ public class ControladorVenta {
         cn=new Conexion();
         try {
             
-                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha, venta.PAC, venta.Utilidad FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '"+fecha+"%' and TipoVenta!='B'");
+                rs=cn.st.executeQuery("SELECT venta.IdVenta, sucursal.Nombre, venta.Cliente, venta.TipoVenta, venta.Fecha, venta.PAC, venta.Utilidad FROM sucursal INNER JOIN venta  ON venta.IdSucursal=sucursal.IdSucursal WHERE venta.Fecha LIKE '%"+fecha+"%' and TipoVenta!='B'");
             
-                
-            
-            
+               
             
             while (rs.next()) {
                 ventas.add(rs.getString(1));

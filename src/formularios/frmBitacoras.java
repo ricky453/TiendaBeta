@@ -51,6 +51,7 @@ public class frmBitacoras extends javax.swing.JFrame {
     DefaultTableModel modeloBitacoras;
     frmProveedoresModificar pom = new frmProveedoresModificar();
     String rol, password;
+    JTableHeader tHeadBitacoras;
 
     
     
@@ -61,11 +62,17 @@ public class frmBitacoras extends javax.swing.JFrame {
         obtenerUsuario();
         java.util.Date date = new Date();
         txtconsulta.requestFocus();
+        tHeadBitacoras = tblBitacoras.getTableHeader();
+        Font fuente = new Font("Tahoma", Font.BOLD, 12);
+        tHeadBitacoras.setBackground(jpnBarraSuperior.getBackground());
+        tHeadBitacoras.setForeground(Color.WHITE);
+        tHeadBitacoras.setFont(fuente);
         modeloBitacoras = (DefaultTableModel) tblBitacoras.getModel();
         //modeloProveedores = (DefaultTableModel) tblBitacoras.getModel();
         //dctBuscarFecha.setDate(date);
 
     }
+    
     public void obtenerUsuario(){
         lblUser.setText(Diseño.user);
         lblUser1.setText(Diseño.user);
@@ -338,15 +345,15 @@ public class frmBitacoras extends javax.swing.JFrame {
         getContentPane().add(jpnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 55, 230, 110));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Buscar por Login:");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, 30));
+        jLabel17.setText("USUARIO:");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, 30));
 
         tblBitacoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "N°", "Usuario", "Descripción", "Fecha"
+                "ID USUARIO", "USUARIO", "FECHA", "ACCION"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -357,15 +364,16 @@ public class frmBitacoras extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblBitacoras.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblBitacoras);
         if (tblBitacoras.getColumnModel().getColumnCount() > 0) {
             tblBitacoras.getColumnModel().getColumn(0).setResizable(false);
             tblBitacoras.getColumnModel().getColumn(0).setPreferredWidth(15);
             tblBitacoras.getColumnModel().getColumn(1).setResizable(false);
             tblBitacoras.getColumnModel().getColumn(1).setPreferredWidth(30);
-            tblBitacoras.getColumnModel().getColumn(2).setPreferredWidth(400);
-            tblBitacoras.getColumnModel().getColumn(3).setPreferredWidth(75);
+            tblBitacoras.getColumnModel().getColumn(2).setResizable(false);
+            tblBitacoras.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tblBitacoras.getColumnModel().getColumn(3).setResizable(false);
+            tblBitacoras.getColumnModel().getColumn(3).setPreferredWidth(400);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 950, 400));
@@ -695,24 +703,24 @@ public class frmBitacoras extends javax.swing.JFrame {
                 txtconsultaKeyTyped(evt);
             }
         });
-        getContentPane().add(txtconsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 180, 30));
+        getContentPane().add(txtconsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, 30));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        
+        if(modeloBitacoras.getRowCount()==0){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
         String consulta= txtconsulta.getText();
         
         ArrayList<Bitacora> bitacora = new ArrayList();
         Object[] fila = new Object[4];
         if (consulta.equals("")) {
-            JOptionPane.showInputDialog("no ha selecionado una fecha");
+            mensajeNotificacion("Debe ingresar el nombre de usuario", "Adv");
         } else {
-            String[] campos = {"IdUsurario", "Login", "Fecha", "Accion"};
-            modeloBitacoras.setColumnIdentifiers(campos);
+
             try {
                 Object i;
                 bitacora = ControladorBitacora.ObenterBitacoras(consulta);
@@ -729,6 +737,8 @@ public class frmBitacoras extends javax.swing.JFrame {
                 Logger.getLogger(frmVentasDetalle.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void lblUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUser1MouseClicked
