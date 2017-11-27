@@ -555,7 +555,7 @@ public class frmVentas extends javax.swing.JFrame {
         
         if(cv.Agregar(venta,DetallesVenta,"VENTA")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
-            AgregarBitacora("Realizó la venta que tiene como ID: "+idV+" por $"+txtTotalventa.getText());
+            AgregarBitacora("Realizó la venta que tiene como ID: "+idV+" por "+txtTotalventa.getText());
             
             
         }else{

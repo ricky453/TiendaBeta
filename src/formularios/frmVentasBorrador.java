@@ -24,6 +24,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -83,6 +84,18 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         CabeceraTablas();
     }
+    
+        //agregar una bitacora
+    public void AgregarBitacora(String Accion) throws ErrorTienda{
+        Date date = new Date();
+        Bitacora bitacora = new Bitacora();
+        bitacora.setIdUsuario(ControladorUsuario.ObtenerIdUser(lblUser1.getText()));
+        DateFormat hora = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        bitacora.setFecha(hora.format(date));
+        bitacora.setAccion(Accion);
+        ControladorBitacora.Agregar(bitacora);
+    }
+    
     
     public void CabeceraTablas(){
         
@@ -438,6 +451,8 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         
         if(cv.Agregar(venta,DetallesVenta,"BORRADOR")){
             mensajeNotificacion("¡Venta realizada!", "Ok");
+            AgregarBitacora("Realizó la venta que tiene como ID: "+txtIdVenta.getText()+" por "+txtTotal.getText());
+            
             
             
         }else{
