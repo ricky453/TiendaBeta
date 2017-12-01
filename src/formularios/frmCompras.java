@@ -913,7 +913,12 @@ public class frmCompras extends javax.swing.JFrame {
             
         } catch (Exception e) {
         }
-        
+        if(cmbProveedor.getItemCount()<=0){
+            txtCodBarraProd1.setEnabled(false);
+        }
+        if(cmbSucursalCompra.getItemCount()<=0){
+            txtCodBarraProd1.setEnabled(false);
+        }
     } 
     public void eliminarCompras(){
         int fila = tblCompra.getSelectedRow();
@@ -1080,7 +1085,10 @@ public class frmCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarVentaMouseExited
 
     private void btnGuardarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVentaActionPerformed
-        ArrayList<Proveedor> Proveedor = new ArrayList();
+        if(tblCompra.getRowCount()<=0){
+            mensajeNotificacion("No hay productos en tabla", "Error");
+        }else{
+            ArrayList<Proveedor> Proveedor = new ArrayList();
         Object IdProveedor;
         Object[] llenarProveedor = new Object[6];
         ArrayList<DetalleCompra> Articulos = new ArrayList();
@@ -1201,6 +1209,8 @@ public class frmCompras extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             
         }
+        }
+        
         
     }//GEN-LAST:event_btnGuardarVentaActionPerformed
 
@@ -1341,6 +1351,8 @@ public class frmCompras extends javax.swing.JFrame {
         cmbProveedor.setEnabled(true);
         cmbSucursalCompra.setEnabled(true);
         cmbTipoCompra.setEnabled(true);
+        txtCodBarraProd1.setText("");
+        txtCodBarraProd1.requestFocus();
 
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
