@@ -301,7 +301,7 @@ public class frmLogin extends javax.swing.JFrame {
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pass=txtPwd.getText().toUpperCase();
+        pass=txtPwd.getText();
         
         if(password.equals(pass)){
             
