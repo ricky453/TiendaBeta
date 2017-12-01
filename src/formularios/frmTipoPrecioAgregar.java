@@ -220,7 +220,7 @@ public class frmTipoPrecioAgregar extends javax.swing.JFrame {
             agregado.setUtilidad(Double.parseDouble(txtUtilidadTipoPrecio.getText()));
             ControladorTipoPrecio.AgregarTipoPrecio(agregado);
             mensajeNotificacion("Registro guardado con exito", "Ok");
-            AgregarBitacora("Agregó el tipo precio: "+txtNombreTipoPrecio+" (ID: "+(idTipoPrecio+1)+")");
+            AgregarBitacora("Agregó el tipo precio: "+txtNombreTipoPrecio.getText()+" (ID: "+(idTipoPrecio+1)+")");
             limpiando();
             frmTipoPrecio tp=new frmTipoPrecio();
             tp.setVisible(true);

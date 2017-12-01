@@ -16,14 +16,12 @@ import java.sql.Statement;
 public class Conexion {
      public Connection conexion;
      public  Statement st;
-    
-        
-            
+           
    
     public  Conexion() throws ErrorTienda{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda", "root", "");  
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/tienda", "root", "1212");  
             st = conexion.createStatement();
             
         } catch (Exception e) {

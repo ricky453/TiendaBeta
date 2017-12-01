@@ -385,9 +385,15 @@ public class frmVentasBorrador extends javax.swing.JFrame {
         venta.setDireccion(txtDireccionVenta.getText());
         if(jrbCredito.isSelected()){
             venta.setGiro(txtGiro.getText());
-            venta.setNRC(Integer.parseInt(txtNRCVenta.getText()));
+            if(!txtNDocumento.getText().isEmpty()){
+                venta.setNomDocumento(Integer.parseInt(txtNDocumento.getText()));
+            }
+            if(!txtNRCVenta.getText().isEmpty()){
+                venta.setNRC(Integer.parseInt(txtNRCVenta.getText()));
+            }
+            
             venta.setNIT(txtNITVenta.getText());
-            venta.setNomDocumento(Integer.parseInt(txtNDocumento.getText()));
+            
         }
         venta.setUtilidad(Double.parseDouble(decimal.format(Utilidad)));
         venta.setFecha(dtcFecha.getDate());
@@ -1801,36 +1807,16 @@ public class frmVentasBorrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        if(jrbFactura.isSelected()){
-           if(txtClienteVenta.getText().isEmpty()||txtDireccionVenta.getText().isEmpty()){
-               mensajeNotificacion("Falta llenar campos", "Adv");
-           }else{
-               try {
-                   CrearNuevaVenta();
-                   EliminarVentasBorrador();
-                   frmDatosFinales.setVisible(false);
-                   Cancelar();
-                   Bloqueo(true);
-               } catch (ErrorTienda ex) {
-                   Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-        }else{
-            if(txtClienteVenta.getText().isEmpty()||txtDireccionVenta.getText().isEmpty()||txtGiro.getText().isEmpty()||txtNRCVenta.getText().isEmpty()
-                    || txtNITVenta.getText().isEmpty()||txtNDocumento.getText().isEmpty()){
-               mensajeNotificacion("Falta llenar campos", "Adv");
-           }else{
-               try {
-                   CrearNuevaVenta();
-                   EliminarVentasBorrador();
-                   frmDatosFinales.setVisible(false);
-                   Cancelar();
-                   Bloqueo(true);
-               } catch (ErrorTienda ex) {
-                   Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
+        try {
+            CrearNuevaVenta();
+            EliminarVentasBorrador();
+            frmDatosFinales.setVisible(false);
+            Cancelar();
+            Bloqueo(true);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentasBorrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void dtcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dtcFechaFocusLost
