@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
  */
 
 public class frmLogin extends javax.swing.JFrame {
-    String password, rol;
+    String password, rol,pass;
     frmHome home = new frmHome();
 
     
@@ -295,12 +295,15 @@ public class frmLogin extends javax.swing.JFrame {
     // ---- INICIAR LOGIN ----
     public void iniciar(){
         try {
+            
         password = ControladorUsuario.ObtenerPass(txtUser.getText());
 
         } catch (ErrorTienda ex) {
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(password.equals(txtPwd.getText())){
+        pass=txtPwd.getText().toUpperCase();
+        
+        if(password.equals(pass)){
             
         loader.show();
         login.hide();

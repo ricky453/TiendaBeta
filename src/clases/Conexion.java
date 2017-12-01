@@ -21,7 +21,7 @@ public class Conexion {
     public  Conexion() throws ErrorTienda{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tienda", "root", "12041377");  
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda", "root", "12041377");  
             st = conexion.createStatement();
             
         } catch (Exception e) {
