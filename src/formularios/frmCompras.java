@@ -498,12 +498,12 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblIVA.setText("IVA:");
-        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 530, 50, 40));
+        getContentPane().add(lblIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 570, 50, 40));
 
         txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 530, 100, 40));
+        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 570, 100, 40));
 
         txtCodBarraProd1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -840,7 +840,7 @@ public class frmCompras extends javax.swing.JFrame {
         lblNomProd3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNomProd3.setForeground(new java.awt.Color(124, 20, 20));
         lblNomProd3.setText("$");
-        getContentPane().add(lblNomProd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 530, 30, 40));
+        getContentPane().add(lblNomProd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 570, 30, 40));
 
         pack();
         setLocationRelativeTo(null);
@@ -875,7 +875,7 @@ public class frmCompras extends javax.swing.JFrame {
         try {
             ArrayList<Sucursal> sucursal = ControladorSucursal.obtener();
             cmbSucursalCompra.removeAllItems();
-            int idCompra;
+            int idCompra, i=0, j=0;
             idCompra = ControladorCompra.ObtenerIdCompra();
             txtIdCompra.setText(String.valueOf(idCompra+1));
             txtNumeroDoc.setText(String.valueOf(idCompra+1));
@@ -886,12 +886,20 @@ public class frmCompras extends javax.swing.JFrame {
             Object vector1[] = new Object[4];
             if (cmbSucursalCompra.getItemCount()==0) {
                 Iterator<Sucursal> iterador= sucursal.iterator();
+                
                 while(iterador.hasNext()){
                     vector1[0]=iterador.next();
                     vector1[1]=iterador.next();  
                     vector1[2]=iterador.next();
                     vector1[3]=iterador.next();
                     cmbSucursalCompra.addItem((String) vector1[1]);
+                    i++;
+                }
+                if (i==0) {
+                    mensajeNotificacion("NO HAY SUCURSALES GUARDADAS", "Error");
+                    cmbSucursalCompra.addItem("NO HAY SUCURSAL");
+                    cmbSucursalCompra.setEnabled(false);
+                    btnGuardarVenta.setEnabled(false);
                 }
             } 
             ArrayList<Proveedor> proveedor = ControladorProveedor.Obtener();
@@ -908,6 +916,13 @@ public class frmCompras extends javax.swing.JFrame {
                     vector[5] = pro.next();
                     vector[6] = pro.next();
                     cmbProveedor.addItem((String) vector[1]);
+                    j++;
+                }
+                if (j==0) {
+                    mensajeNotificacion("NO HAY PROVEEDORES", "Error");
+                    cmbProveedor.addItem("NO HAY PROVEEDORES");
+                    cmbProveedor.setEnabled(false);
+                    btnGuardarVenta.setEnabled(false);
                 }
             }
             
@@ -1069,10 +1084,10 @@ public class frmCompras extends javax.swing.JFrame {
         
         if (TipoCompra==0) {
             txtIVA.setText(decimal.format(totalFinal*0.13));
-            
-            txtTotal.setText(decimal.format(totalFinal+(totalFinal*0.13)+(percepcio)));
+            percepcio = 0.0;
+            txtTotal.setText(String.valueOf(totalFinal));
         }else{
-            txtTotal.setText("$"+totalFinal);
+            txtTotal.setText(String.valueOf(totalFinal));
         }
 }
     
