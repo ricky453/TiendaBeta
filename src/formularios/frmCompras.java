@@ -362,11 +362,11 @@ public class frmCompras extends javax.swing.JFrame {
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseExited(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -426,7 +426,7 @@ public class frmCompras extends javax.swing.JFrame {
         lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNomProd.setForeground(new java.awt.Color(124, 20, 20));
         lblNomProd.setText("$");
-        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 590, 30, 40));
+        getContentPane().add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, 30, 40));
 
         txtNomProd.setEditable(false);
         txtNomProd.addActionListener(new java.awt.event.ActionListener() {
@@ -489,12 +489,12 @@ public class frmCompras extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal1.setText("TOTAL:");
-        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 590, 50, 40));
+        getContentPane().add(lblTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 610, 50, 40));
 
         txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtTotal.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 590, 100, 40));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 620, 100, 30));
 
         lblIVA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblIVA.setText("IVA:");
@@ -503,7 +503,7 @@ public class frmCompras extends javax.swing.JFrame {
         txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtIVA.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 570, 100, 40));
+        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 570, 100, 30));
 
         txtCodBarraProd1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -900,6 +900,7 @@ public class frmCompras extends javax.swing.JFrame {
                     cmbSucursalCompra.addItem("NO HAY SUCURSAL");
                     cmbSucursalCompra.setEnabled(false);
                     btnGuardarVenta.setEnabled(false);
+                    txtCodBarraProd1.setEnabled(false);
                 }
             } 
             ArrayList<Proveedor> proveedor = ControladorProveedor.Obtener();
