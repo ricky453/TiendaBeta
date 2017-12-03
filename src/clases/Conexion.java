@@ -30,16 +30,5 @@ public class Conexion {
         }
     }
     
-    public Connection conectarBase() throws ErrorTienda {
-      if (conexion == null) {
-         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda", "root", "301997");
-         } catch (Exception ex) {
-            
-         }
-      }
-      return conexion;
-   }
-    
+        
 }

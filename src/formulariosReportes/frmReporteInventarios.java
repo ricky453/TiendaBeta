@@ -744,7 +744,7 @@ public class frmReporteInventarios extends javax.swing.JFrame {
             
             try {
                 Conexion cn = new Conexion();
-                JasperReport reporteinventarios = JasperCompileManager.compileReport("reporteInventarios.jrxml");
+                JasperReport reporteinventarios = JasperCompileManager.compileReport("Reportes/reporteInventarios.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reporteinventarios, null, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);
@@ -761,7 +761,7 @@ public class frmReporteInventarios extends javax.swing.JFrame {
                 cn = new Conexion();
                 Map parametrosucursal = new HashMap();
                 parametrosucursal.put("sucursales",cmbSucursalReporte.getSelectedItem() );
-                 JasperReport reporteinventario = JasperCompileManager.compileReport("reporteInventario.jrxml");
+                 JasperReport reporteinventario = JasperCompileManager.compileReport("Reportes/reporteInventario.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reporteinventario, parametrosucursal, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);

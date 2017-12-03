@@ -5,10 +5,8 @@
  */
 package clases;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,38 +14,52 @@ import java.util.logging.Logger;
  *
  * @author Jose
  */
+
 public class PropiedadesVentas {
-    Properties propiedades = new Properties();
+    ResultSet rs;
+    
+    
+    Conexion cn ;
+    
     private boolean estado;
     
-    public void CargarDatos(){
+    public void ObtenerEstado() throws ErrorTienda{
         try {
-            propiedades.load(new FileInputStream("Ventas.properties"));
-        } catch (IOException ex) {
-            Logger.getLogger(PropiedadesVentas.class.getName()).log(Level.SEVERE, null, ex);
+            
+            cn = new Conexion();
+            rs=cn.st.executeQuery("SELECT Propiedad FROM configuracion WHERE Atributo='frmCambio'");
+        } catch (SQLException ex) {
+           throw new ErrorTienda("Porpiedades Ventas Obtener estado)",ex.getMessage());
         }
-    }
-    public void Cambio(){
-        estado = Boolean.valueOf(propiedades.getProperty("frmCambio"));
-    }
-    public void Modificar(String estado){
         try {
-            propiedades.setProperty("frmCambio", estado);
-            propiedades.store(new FileOutputStream("Ventas.properties"), "");
-        } catch (IOException ex) {
-            Logger.getLogger(PropiedadesVentas.class.getName()).log(Level.SEVERE, null, ex);
+            while(rs.next()){
+                estado = (Boolean.valueOf(rs.getString(1)));
+            }
+            
+            cn.conexion.close();
+        } catch (SQLException ex) {
+           throw new ErrorTienda("Porpiedades Ventas Obtener estado conversion)",ex.getMessage());
         }
+        
+       
+    }
+    public void cambiarEstado() throws ErrorTienda{
+        try {
+            cn = new Conexion();
+            cn.st.executeUpdate("UPDATE configuracion SET Propiedad='"+estado+"' WHERE Atributo='frmCambio'");
+             cn.conexion.close();
+        } catch (SQLException ex) {
+            throw new ErrorTienda("Porpiedades Ventas Cambiar Estado)",ex.getMessage());
+        }
+       
     }
 
     public boolean isEstado() {
         return estado;
     }
 
-    
-
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
     
 }

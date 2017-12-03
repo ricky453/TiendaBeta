@@ -713,7 +713,7 @@ public class frmComprasReportes extends javax.swing.JFrame {
             try {
             // TODO add your handling code here:
             Conexion cn = new Conexion();
-            JasperReport reportecompras = JasperCompileManager.compileReport("comprasCredito.jrxml");
+            JasperReport reportecompras = JasperCompileManager.compileReport("Reportes/comprasCredito.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reportecompras, null, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);
@@ -727,7 +727,7 @@ public class frmComprasReportes extends javax.swing.JFrame {
         try {
             if (rbtnFactura.isSelected()) {
              Conexion cn = new Conexion();
-            JasperReport reportecomprasLF = JasperCompileManager.compileReport("comprasLF.jrxml");
+            JasperReport reportecomprasLF = JasperCompileManager.compileReport("Reportes/comprasLF.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reportecomprasLF, null, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);

@@ -702,7 +702,7 @@ public class frmReporteVentas extends javax.swing.JFrame {
         try {
              if (rbtnVC.isSelected()) {
                  Conexion cn = new Conexion();
-            JasperReport reporteventaC = JasperCompileManager.compileReport("ventaCredito.jrxml");
+            JasperReport reporteventaC = JasperCompileManager.compileReport("Reportes/ventaCredito.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reporteventaC, null, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);     
@@ -715,7 +715,7 @@ public class frmReporteVentas extends javax.swing.JFrame {
             Conexion cn;
             try {
                 cn = new Conexion();
-                JasperReport reporteventaF = JasperCompileManager.compileReport("ventaFactura.jrxml");
+                JasperReport reporteventaF = JasperCompileManager.compileReport("Reportes/ventaFactura.jrxml");
                 JasperPrint print = JasperFillManager.fillReport(reporteventaF, null, cn.conexion);
                 JasperViewer view = new JasperViewer (print,false);
                 view.setVisible(true);    

@@ -115,8 +115,12 @@ public class frmVentas extends javax.swing.JFrame {
     }
     public void HabilitarCalcularCambio(){
         PropiedadesVentas pv = new PropiedadesVentas();
-        pv.CargarDatos();
-        pv.Cambio();
+        try {
+            pv.ObtenerEstado();
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         calcularCambio=pv.isEstado();
         if(calcularCambio){
             rdbCalcularTotal.setSelected(true);
@@ -1976,12 +1980,18 @@ public class frmVentas extends javax.swing.JFrame {
     private void rdbCalcularTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCalcularTotalActionPerformed
         PropiedadesVentas pv = new PropiedadesVentas();
         if(rdbCalcularTotal.isSelected()){
-            pv.Modificar("true");
-            HabilitarCalcularCambio();
+            pv.setEstado(true);
+            
         }else{
-            pv.Modificar("false");
-            HabilitarCalcularCambio();
+            pv.setEstado(false);
+            
         }
+        try {
+                pv.cambiarEstado();
+                HabilitarCalcularCambio();
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(frmVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_rdbCalcularTotalActionPerformed
 
     private void btnComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseEntered
