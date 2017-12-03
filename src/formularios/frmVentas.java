@@ -645,6 +645,10 @@ public class frmVentas extends javax.swing.JFrame {
             mensajeNotificacion("No hay productos seleccionados", "Error");
             txtCodigoBarraVender.requestFocus();
             return false;
+        }else if(dtcFecha.getDate()==null){
+            mensajeNotificacion("No hay fecha de venta", "Error");
+            dtcFecha.requestFocus();
+            return false;
         }
         return true;
     }
