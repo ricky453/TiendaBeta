@@ -362,11 +362,11 @@ public class frmCompras extends javax.swing.JFrame {
         btnGuardarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/botones/guardarprov.png"))); // NOI18N
         btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarVentaMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarVentaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarVentaMouseEntered(evt);
             }
         });
         btnGuardarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -1103,6 +1103,8 @@ public class frmCompras extends javax.swing.JFrame {
     private void btnGuardarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVentaActionPerformed
         if(tblCompra.getRowCount()<=0){
             mensajeNotificacion("No hay productos en tabla", "Error");
+        }else if(dtcFecha.getDate()==null){
+            mensajeNotificacion("SELECCIONE UNA FECHA", "Error");
         }else{
             ArrayList<Proveedor> Proveedor = new ArrayList();
         Object IdProveedor;
